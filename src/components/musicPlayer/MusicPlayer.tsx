@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, Button } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import ReactAudioPlayer from "react-audio-player";
 
 const style = {
   position: "absolute",
@@ -52,7 +53,13 @@ const MusicPlayer: React.FC = () => {
           >
             Play
           </Button>
-          {playing && <audio src="./mp3/music.mp3" autoPlay loop />}
+          {playing && (
+            <ReactAudioPlayer
+              src="../../assets/mp3/music.mp3"
+              autoPlay
+              controls
+            />
+          )}
         </Box>
       </Modal>
     </>
