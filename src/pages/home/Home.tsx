@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Box } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
+// import ReactAudioPlayer from "react-audio-player";
 // import MusicPlayer from "../../components/musicPlayer/MusicPlayer";
 
 const Home: FC = () => {
@@ -13,7 +14,6 @@ const Home: FC = () => {
         }}
       >
         <LanguageModal />
-        {/* <MusicPlayer /> */}
       </Box>
     </div>
   );
