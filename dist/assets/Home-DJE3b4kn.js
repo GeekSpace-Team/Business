@@ -1,1 +1,0 @@
-import{j as s,G as o}from"./index-CY1K_mIL.js";import{L as r}from"./LanguageModal-BeRQ83ik.js";import"./useTranslation-DP8d7SY5.js";const t="/assets/music-GZ1emByC.mp3",i=()=>s.jsx("div",{children:s.jsxs(o,{sx:{background:"#E9E9E9",borderRadius:"8px"},children:[s.jsx(r,{}),s.jsx("audio",{src:t,controls:!0,autoPlay:!0})]})});export{i as default};

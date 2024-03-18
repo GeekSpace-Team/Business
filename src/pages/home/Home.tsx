@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Box } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
-import song from "../../assets/mp3/music.mp3";
+import song from "../../assets/mp3/music1.mp3";
 
 const Home: FC = () => {
   return (
