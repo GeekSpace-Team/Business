@@ -26,6 +26,7 @@ const MusicPlayer: React.FC = () => {
     setOpen(false);
   };
 
+  console.log(playing);
   return (
     <>
       <Modal
