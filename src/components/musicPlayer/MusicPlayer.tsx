@@ -48,6 +48,7 @@ const MusicPlayer: React.FC = () => {
           >
             Play
           </Button>
+          {playing && <audio src="./mp3/music.mp3.mp3" autoPlay loop />}
         </Box>
       </Modal>
     </>
