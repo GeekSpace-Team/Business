@@ -1,1 +1,0 @@
-import{j as r,G as o}from"./index-Dhgqoogw.js";import{L as s}from"./LanguageModal-CiCpSu4q.js";import"./useTranslation-Bnd_Clda.js";const x=()=>r.jsx("div",{children:r.jsx(o,{sx:{background:"#E9E9E9",borderRadius:"8px"},children:r.jsx(s,{})})});export{x as default};
