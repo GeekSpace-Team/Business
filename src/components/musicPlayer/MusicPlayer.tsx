@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import { Box, Button } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import song from "../../assets/mp3/music.mp3";
+import song from "../../assets/mp3/music1.mp3";
 
 const style = {
   position: "absolute",
@@ -20,7 +20,7 @@ const style = {
 
 const MusicPlayer: React.FC = () => {
   const [open, setOpen] = useState(true);
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true); // Set to true by default
 
   useEffect(() => {
     if (playing) {
@@ -53,7 +53,7 @@ const MusicPlayer: React.FC = () => {
           >
             Play
           </Button>
-          {playing && <audio src={song} controls autoPlay></audio>}
+          {playing && <audio src={song} controls autoPlay />}
         </Box>
       </Modal>
     </>
