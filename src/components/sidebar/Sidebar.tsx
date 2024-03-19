@@ -11,10 +11,33 @@ import Language from "../../assets/language/Language";
 import { useTranslation } from "react-i18next";
 
 const Sidebar: FC = () => {
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
+  // const [selectedIdx, setSelectedIdx] = useState(
+  //   window.location.pathname === "/about"
+  //     ? 0
+  //     : window.location.pathname === "/portfolio"
+  //     ? 1
+  //     : window.location.pathname === "/services"
+  //     ? 2
+  //     : 3 // Assuming 4 items, adjust for more
+  // );
+
+  // const handleItemClick = (idx: any) => {
+  //   setSelectedIdx(idx);
+  //   navigate(
+  //     idx === 0
+  //       ? "/about"
+  //       : idx === 1
+  //       ? "/portfolio"
+  //       : idx === 2
+  //       ? "/services"
+  //       : "/contact"
+  //   ); // Adjust paths for your items
+  // };
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,22 +53,28 @@ const Sidebar: FC = () => {
 
   return (
     <>
-      <Stack direction="row" spacing={5}>
+      <Stack direction="row" spacing={screenHeight >= 900 ? 5 : 2}>
         <Stack
+          sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
           alignItems="center"
-          height="90vh"
-          width="200px"
-          pt={3}
-          pb={5}
-          spacing={5}
+          height="auto"
+          width={"200px"}
+          pt={screenHeight >= 900 ? 3 : 0}
+          pb={screenHeight >= 900 ? 5 : 1}
+          spacing={screenHeight >= 900 ? 5 : 2}
         >
           <Logo />
 
-          <Stack height="100%" pl="20%" spacing={5}>
+          <Stack
+            height="100%"
+            pl={location.pathname === "/" ? "" : "20%"}
+            pr={location.pathname === "/" ? "6%" : ""}
+            spacing={screenHeight >= 900 ? 5 : 3}
+          >
             <Box
               sx={{
                 background: "#363636",
-                width: "134px",
+                width: screenHeight >= 900 ? "134px" : "100px",
                 height: screenHeight >= 900 ? "600px" : "auto",
                 borderRadius: "8px",
                 padding: 1,
@@ -64,8 +93,8 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "87px",
-                    gap: "10px",
+                    height: screenHeight >= 900 ? "117px" : "80px",
+                    gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
                     "&:hover": {
@@ -75,7 +104,9 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <PeopleAltOutlinedIcon />
-                  <Typography>{t("sidebar.about")}</Typography>
+                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                    {t("sidebar.about")}
+                  </Typography>
                 </Box>
                 <Box
                   onClick={() => navigate("/portfolio")}
@@ -92,8 +123,8 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "87px",
-                    gap: "10px",
+                    height: screenHeight >= 900 ? "117px" : "80px",
+                    gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
                     "&:hover": {
@@ -103,7 +134,9 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <WorkOutlineOutlinedIcon />
-                  <Typography>{t("sidebar.portfolio")}</Typography>
+                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                    {t("sidebar.portfolio")}
+                  </Typography>
                 </Box>
                 <Box
                   onClick={() => navigate("/services")}
@@ -116,8 +149,8 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "87px",
-                    gap: "10px",
+                    height: screenHeight >= 900 ? "117px" : "80px",
+                    gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
                     "&:hover": {
@@ -127,7 +160,9 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <SettingsIcon />
-                  <Typography>{t("sidebar.services")}</Typography>
+                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                    {t("sidebar.services")}
+                  </Typography>
                 </Box>
                 <Box
                   onClick={() => navigate("/contact")}
@@ -140,8 +175,8 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "87px",
-                    gap: "10px",
+                    height: screenHeight >= 900 ? "117px" : "80px",
+                    gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
                     "&:hover": {
@@ -151,7 +186,9 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <MailIcon />
-                  <Typography>{t("sidebar.contact")}</Typography>
+                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                    {t("sidebar.contact")}
+                  </Typography>
                 </Box>
                 <Language />
               </Stack>

@@ -56,8 +56,8 @@ const Language: FC = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            height: screenHeight >= 900 ? "115px" : "87px",
-            gap: "10px",
+            height: screenHeight >= 900 ? "115px" : "80px",
+            gap: screenHeight >= 900 ? "10px" : "3px",
             cursor: "pointer",
             color: "#B6B6B6",
             transition: "0.7s",
@@ -68,7 +68,9 @@ const Language: FC = () => {
           }}
         >
           <LanguageIcon />
-          <Typography>{getLanguageName(i18n.language)}</Typography>
+          <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+            {getLanguageName(i18n.language)}
+          </Typography>
         </Box>
         {drawerOpen && (
           <div
@@ -86,6 +88,7 @@ const Language: FC = () => {
                 background: "#363636",
                 width: "100%",
                 height: "30px",
+                fontSize: screenHeight >= 900 ? 16 : 14,
                 "&:hover": {
                   background: "#222222",
                   color: "#FFF083",
@@ -102,6 +105,7 @@ const Language: FC = () => {
                 background: "#363636",
                 width: "100%",
                 height: "30px",
+                fontSize: screenHeight >= 900 ? 16 : 14,
                 "&:hover": {
                   background: "#222222",
                   color: "#FFF083",
@@ -118,6 +122,7 @@ const Language: FC = () => {
                 background: "#363636",
                 width: "100%",
                 height: "30px",
+                fontSize: screenHeight >= 900 ? 16 : 14,
                 "&:hover": {
                   background: "#222222",
                   color: "#FFF083",

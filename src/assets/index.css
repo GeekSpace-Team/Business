@@ -1,14 +1,11 @@
 @font-face {
-    font-family: InterRegular;
-    src: url(./fonts/Inter-Regular.ttf);
+  font-family: InterRegular;
+  src: url(./fonts/Inter-Regular.ttf);
 }
 
-
-
-
 body {
-    font-family: InterRegular;
-    overflow-x: hidden;
-    /* background: #222222; */
-    padding: 10px;
+  font-family: InterRegular;
+  overflow-x: hidden;
+  /* background: #222222; */
+  /* padding: 10px; */
 }
