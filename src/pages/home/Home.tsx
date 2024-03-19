@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Box } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
-import song from "../../assets/mp3/music1.mp3";
+// import song from "../../assets/mp3/music1.mp3";
 
 const Home: FC = () => {
   return (
@@ -13,7 +13,7 @@ const Home: FC = () => {
         }}
       >
         <LanguageModal />
-        <audio src={song} controls autoPlay></audio>
+        {/* <audio src={song} controls autoPlay></audio> */}
       </Box>
     </div>
   );

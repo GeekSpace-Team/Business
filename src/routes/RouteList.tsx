@@ -1,6 +1,6 @@
 import React, { FC, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MusicPlayer from "../components/musicPlayer/MusicPlayer";
+// import MusicPlayer from "../components/musicPlayer/MusicPlayer";
 
 // Import lazy-loaded components
 const Sidebar = React.lazy(() => import("../components/sidebar/Sidebar"));
@@ -64,7 +64,7 @@ const RouteList: FC = () => {
           />
         </Route>
       </Routes>
-      <MusicPlayer />
+      {/* <MusicPlayer /> */}
     </BrowserRouter>
   );
 };

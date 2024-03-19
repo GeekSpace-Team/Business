@@ -1,1 +1,0 @@
-import{j as o,G as r,I as s}from"./index-BVJif4at.js";import{L as a}from"./LanguageModal-BB8lcEXB.js";import"./useTranslation-Bq-WF-MJ.js";const x=()=>o.jsx("div",{children:o.jsxs(r,{sx:{background:"#E9E9E9",borderRadius:"8px"},children:[o.jsx(a,{}),o.jsx("audio",{src:s,controls:!0,autoPlay:!0})]})});export{x as default};
