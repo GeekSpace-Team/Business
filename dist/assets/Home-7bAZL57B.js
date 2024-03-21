@@ -1,1 +1,0 @@
-import{j as r}from"./index-Db5-QXq9.js";import{L as o}from"./LanguageModal-coQnMo4m.js";import{S as s}from"./Stack-ChLSzVxj.js";import{B as t}from"./Box-DZVYAQG1.js";import"./Portal-C3s-p5Pz.js";const d=()=>r.jsx(r.Fragment,{children:r.jsx(s,{width:"100%",children:r.jsx(t,{sx:{background:"#E9E9E9",borderRadius:"8px"},children:r.jsx(o,{})})})});export{d as default};
