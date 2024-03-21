@@ -1,5 +1,6 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const Portfolio: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -16,7 +17,7 @@ const Portfolio: FC = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [activeIndex]);
 
   return (
     <>
@@ -45,6 +46,8 @@ const Portfolio: FC = () => {
             height: "85vh",
             display: "flex",
             alignItems: "center",
+            flexDirection: "column",
+            justifyContent: "space-between",
           }}
         >
           <Grid container spacing={2}>
@@ -94,6 +97,36 @@ const Portfolio: FC = () => {
               </Box>
             </Grid>
           </Grid>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+            spacing={2}
+          >
+            <Button
+              startIcon={
+                <ArrowRightAltIcon
+                  sx={{
+                    color: "#828282",
+                    transform: "rotate(180deg)",
+                    fontSize: "34px",
+                    width: "30px",
+                  }}
+                />
+              }
+              sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            >
+              Previous
+            </Button>
+
+            <Divider orientation="vertical" />
+            <Button
+              endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+              sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            >
+              Read more
+            </Button>
+          </Stack>
         </Box>
       </Stack>
     </>
