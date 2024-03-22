@@ -1,12 +1,31 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
 
 const Contact: FC = () => {
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Stack pt={3} width="100%">
-        <Stack direction="row" pb={4} spacing={1} justifyContent="center">
+        <Stack
+          direction="row"
+          pb={screenHeight >= 900 ? 14.5 : 4}
+          spacing={1}
+          justifyContent="center"
+        >
           <Typography
             sx={{ color: "#222222", fontSize: "36px", fontWeight: 700 }}
           >

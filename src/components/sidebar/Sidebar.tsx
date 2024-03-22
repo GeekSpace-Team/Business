@@ -67,7 +67,7 @@ const Sidebar: FC = () => {
 
           <Stack
             height="100%"
-            pl={location.pathname === "/" ? "" : "20%"}
+            pl={location.pathname === "/" ? "20%" : "20%"}
             pr={location.pathname === "/" ? "6%" : ""}
             spacing={screenHeight >= 900 ? 5 : 3}
           >
