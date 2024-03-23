@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -14,6 +14,20 @@ import Social from "../../components/bottom-social/Social";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const Home: FC = () => {
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenHeight(window.innerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <Stack width="100%" height="85vh">
@@ -26,10 +40,19 @@ const Home: FC = () => {
           <LanguageModal />
         </Box>
         <Grid container spacing={10} pt={2} alignItems="center">
+<<<<<<< HEAD
           <Grid item lg={7} md={7} sm={12} xs={12}>
             <Stack spacing={2}>
+=======
+          <Grid item lg={6} md={6} sm={12} xs={12}>
+            <Stack spacing={10}>
+>>>>>>> 36ca46afdebbf8f1fb9920724f80fb5a601a7c93
               <Typography
-                sx={{ color: "#222222", fontSize: "43px", fontWeight: 700 }}
+                sx={{
+                  color: "#222222",
+                  fontSize: screenHeight >= 900 ? "48px" : "43px",
+                  fontWeight: 700,
+                }}
               >
                 Role of Corporate Trainer in Educating the Workface
               </Typography>
@@ -39,6 +62,7 @@ const Home: FC = () => {
                   fontSize: "16px",
                   fontWeight: 600,
                   lineHeight: "20px",
+                  width: screenHeight >= 900 ? "60%" : "100%",
                 }}
               >
                 Identify new business opportunities in order to improve
@@ -122,27 +146,41 @@ const Home: FC = () => {
           </Grid>
         </Grid>
       </Stack>
-      <Stack width="100%" sx={{ position: "absolute", bottom: 5, left: -10 }}>
+      <Stack
+        width="auto"
+        p={1}
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          left: screenHeight >= 900 ? -40 : -10,
+          background: "#222222",
+          borderTopRightRadius: "8px",
+        }}
+      >
         <Stack direction="row" spacing={1}>
           <Box
             sx={{
               background: "#D9D9D9",
               p: 1,
               borderRadius: "8px",
-              width: "330px",
+              width: screenHeight >= 900 ? "450px" : "330px",
             }}
           >
             <Stack direction="row" spacing={1}>
               <img
-                style={{ width: "120px", height: "60px", borderRadius: "4px" }}
+                style={{
+                  width: "120px",
+                  height: screenHeight >= 900 ? "110px" : "60px",
+                  borderRadius: "4px",
+                }}
                 src="/images/Rectangle 6.png"
                 alt="Rectangle 6.png  "
               />
               <Stack sx={{ position: "relative", width: "100%" }}>
                 <IconButton
                   sx={{
-                    width: "30px",
-                    height: "30px",
+                    width: screenHeight >= 900 ? "40px" : "30px",
+                    height: screenHeight >= 900 ? "40px" : "30px",
                     position: "absolute",
                     top: 0,
                     right: 0,
@@ -152,18 +190,18 @@ const Home: FC = () => {
                     sx={{
                       color: "#828282",
                       transform: "rotate(320deg)",
-                      fontSize: "34px",
-                      width: "20px",
+                      fontSize: screenHeight >= 900 ? "40px" : "34px",
+                      width: screenHeight >= 900 ? "30px" : "20px",
                     }}
                   />
                 </IconButton>
                 <Typography
                   sx={{
                     color: "#222222",
-                    fontSize: "12px",
-                    lineHeight: "15px",
+                    fontSize: screenHeight >= 900 ? "18px" : "12px",
+                    lineHeight: "20px",
                     position: "absolute",
-                    bottom: 0,
+                    bottom: screenHeight >= 900 ? 5 : 0,
                   }}
                 >
                   Business trainer provides administrative, clerical and word
@@ -177,20 +215,24 @@ const Home: FC = () => {
               background: "#D9D9D9",
               p: 1,
               borderRadius: "8px",
-              width: "330px",
+              width: screenHeight >= 900 ? "450px" : "330px",
             }}
           >
             <Stack direction="row" spacing={1}>
               <img
-                style={{ width: "120px", height: "60px", borderRadius: "4px" }}
+                style={{
+                  width: "120px",
+                  height: screenHeight >= 900 ? "110px" : "60px",
+                  borderRadius: "4px",
+                }}
                 src="/images/Rectangle 6.png"
                 alt="Rectangle 6.png  "
               />
               <Stack sx={{ position: "relative", width: "100%" }}>
                 <IconButton
                   sx={{
-                    width: "30px",
-                    height: "30px",
+                    width: screenHeight >= 900 ? "40px" : "30px",
+                    height: screenHeight >= 900 ? "40px" : "30px",
                     position: "absolute",
                     top: 0,
                     right: 0,
@@ -200,18 +242,18 @@ const Home: FC = () => {
                     sx={{
                       color: "#828282",
                       transform: "rotate(320deg)",
-                      fontSize: "34px",
-                      width: "20px",
+                      fontSize: screenHeight >= 900 ? "40px" : "34px",
+                      width: screenHeight >= 900 ? "30px" : "20px",
                     }}
                   />
                 </IconButton>
                 <Typography
                   sx={{
                     color: "#222222",
-                    fontSize: "12px",
-                    lineHeight: "15px",
+                    fontSize: screenHeight >= 900 ? "18px" : "12px",
+                    lineHeight: "20px",
                     position: "absolute",
-                    bottom: 0,
+                    bottom: screenHeight >= 900 ? 5 : 0,
                   }}
                 >
                   Business trainer provides administrative, clerical and word
