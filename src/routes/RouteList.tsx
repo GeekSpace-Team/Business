@@ -1,5 +1,6 @@
 import React, { FC, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoadingComponent from "../components/loading/LoadingComponent";
 // import MusicPlayer from "../components/musicPlayer/MusicPlayer";
 
 // Import lazy-loaded components
@@ -17,7 +18,13 @@ const RouteList: FC = () => {
         <Route
           path="/"
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div>
+                  <LoadingComponent />
+                </div>
+              }
+            >
               <Sidebar />
             </Suspense>
           }
@@ -25,7 +32,13 @@ const RouteList: FC = () => {
           <Route
             index
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div>
+                    <LoadingComponent />
+                  </div>
+                }
+              >
                 <Home />
               </Suspense>
             }
@@ -33,7 +46,13 @@ const RouteList: FC = () => {
           <Route
             path="/about"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div>
+                    <LoadingComponent />
+                  </div>
+                }
+              >
                 <About />
               </Suspense>
             }
@@ -41,7 +60,13 @@ const RouteList: FC = () => {
           <Route
             path="/contact"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div>
+                    <LoadingComponent />
+                  </div>
+                }
+              >
                 <Contact />
               </Suspense>
             }
@@ -49,7 +74,13 @@ const RouteList: FC = () => {
           <Route
             path="/portfolio"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div>
+                    <LoadingComponent />
+                  </div>
+                }
+              >
                 <Portfolio />
               </Suspense>
             }
@@ -57,7 +88,13 @@ const RouteList: FC = () => {
           <Route
             path="/services"
             element={
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense
+                fallback={
+                  <div>
+                    <LoadingComponent />
+                  </div>
+                }
+              >
                 <Services />
               </Suspense>
             }

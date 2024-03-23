@@ -26,7 +26,7 @@ const Home: FC = () => {
           <LanguageModal />
         </Box>
         <Grid container spacing={10} pt={2} alignItems="center">
-          <Grid item lg={6} md={6} sm={12} xs={12}>
+          <Grid item lg={7} md={7} sm={12} xs={12}>
             <Stack spacing={2}>
               <Typography
                 sx={{ color: "#222222", fontSize: "43px", fontWeight: 700 }}
@@ -49,7 +49,7 @@ const Home: FC = () => {
               <Social />
             </Stack>
           </Grid>
-          <Grid item lg={6} pr="3%" md={6} sm={12} xs={12}>
+          <Grid item lg={5} pr="3%" md={5} sm={12} xs={12}>
             <Box
               sx={{
                 width: "100%",
