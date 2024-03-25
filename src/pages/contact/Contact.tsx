@@ -1,8 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import { bgColor, radius } from "../../common/style/commonStyle";
+import { radius } from "../../common/style/commonStyle";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
+import PhoneEnabledOutlinedIcon from "@mui/icons-material/PhoneEnabledOutlined";
 
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -24,7 +26,8 @@ const Contact: FC = () => {
       <Stack pt={3} width="100%">
         <Stack
           direction="row"
-          pb={screenHeight >= 900 ? 14.5 : 4}
+          pt={screenHeight >= 900 ? 3 : 0}
+          pb={screenHeight >= 900 ? 11 : 4}
           spacing={1}
           justifyContent="center"
         >
@@ -59,7 +62,7 @@ const Contact: FC = () => {
                     placeholder="Full Name"
                     style={{
                       background: "#DFDFDF",
-                      height: "40px",
+                      height: screenHeight >= 900 ? "55px" : "40px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -74,7 +77,7 @@ const Contact: FC = () => {
                     placeholder="Mail"
                     style={{
                       background: "#DFDFDF",
-                      height: "40px",
+                      height: screenHeight >= 900 ? "55px" : "40px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -96,20 +99,20 @@ const Contact: FC = () => {
                     }}
                     id=""
                     cols={30}
-                    rows={10}
+                    rows={screenHeight >= 900 ? 17 : 10}
                     placeholder="Message"
                     required
                   ></textarea>
                   <Button
                     sx={{
-                      background: bgColor,
+                      background: " #222222",
                       color: "#FFF083",
                       fontSize: "20px",
                       fontWeight: 600,
-                      height: "40px",
+                      height: screenHeight >= 900 ? "55px" : "40px",
                       borderRadius: radius,
                       textTransform: "none",
-                      "&:hover": { background: bgColor },
+                      "&:hover": { background: " #222222" },
                     }}
                     variant="contained"
                     type="submit"
@@ -121,21 +124,25 @@ const Contact: FC = () => {
             </Stack>
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Stack spacing={2} sx={{ height: "55vh" }}>
+            <Stack
+              spacing={2}
+              sx={{ height: screenHeight >= 900 ? "62vh" : "55vh" }}
+            >
               <Box
                 sx={{
                   background: "#828282",
                   borderRadius: radius,
-                  p: "15px 0px 15px 0px",
+                  // p: "15px 0px 15px 0px",
+                  alignItems: "center",
                   display: "flex",
                   justifyContent: "center",
                   height: "60%",
                 }}
               >
-                <Stack spacing={2} width="60%">
+                <Stack spacing={screenHeight >= 900 ? 4 : 2} width="60%">
                   <Stack spacing={1}>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                      <TelegramIcon sx={{ color: "#E9E9E9" }} />
+                      <LocationOnOutlinedIcon sx={{ color: "#E9E9E9" }} />
                       <Typography
                         sx={{
                           fontSize: "18px",
@@ -158,7 +165,7 @@ const Contact: FC = () => {
                   </Stack>
                   <Stack spacing={1}>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                      <TelegramIcon sx={{ color: "#E9E9E9" }} />
+                      <MailOutlineOutlinedIcon sx={{ color: "#E9E9E9" }} />
                       <Typography
                         sx={{
                           fontSize: "18px",
@@ -181,7 +188,7 @@ const Contact: FC = () => {
                   </Stack>
                   <Stack spacing={1}>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                      <TelegramIcon sx={{ color: "#E9E9E9" }} />
+                      <PhoneEnabledOutlinedIcon sx={{ color: "#E9E9E9" }} />
                       <Typography
                         sx={{
                           fontSize: "18px",

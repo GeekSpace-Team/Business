@@ -23,6 +23,11 @@ const About: FC = () => {
       title: "Text Three",
       description: `Description of the Third Level`,
     },
+    {
+      image: "./images/321467.jpg",
+      title: "Text Three",
+      description: `Description of the Third Level`,
+    },
   ];
 
   useEffect(() => {

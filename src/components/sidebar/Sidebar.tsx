@@ -16,7 +16,11 @@ const Sidebar: FC = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-  // const [showLanguage, setShowLanguage] = useState(false);
+  const [showLanguage, setShowLanguage] = useState(false);
+
+  const handleLanguageClick = () => {
+    setShowLanguage(!showLanguage);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,11 +36,20 @@ const Sidebar: FC = () => {
 
   return (
     <>
-      <Box sx={{ position: "absolute", bottom: "16%", left: "13%" }}>
-        <Box sx={{ position: "relative" }}>
-          <Language />
+      {showLanguage && (
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "16.3%",
+            left: "10%",
+            zIndex: 1000,
+          }}
+        >
+          <Box sx={{ position: "relative" }}>
+            <Language />
+          </Box>
         </Box>
-      </Box>
+      )}
       <Stack direction="row" spacing={screenHeight >= 900 ? 5 : 2}>
         <Stack
           sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
@@ -175,13 +188,12 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
-                  // onClick={() => navigate("/contact")}
+                  onClick={handleLanguageClick}
                   sx={{
-                    background:
-                      location.pathname === "/contact" ? "#222222" : "#3e3e3e",
-                    color:
-                      location.pathname === "/contact" ? "#FFF083" : "#B6B6B6",
+                    background: showLanguage ? "#222222" : "#3e3e3e",
+                    color: showLanguage ? "#FFF083" : "#B6B6B6",
                     display: "flex",
+                    borderRadius: "0px 0px 8px 8px",
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
