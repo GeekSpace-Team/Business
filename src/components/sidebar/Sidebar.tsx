@@ -9,35 +9,14 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import MailIcon from "@mui/icons-material/Mail";
 import Language from "../../assets/language/Language";
 import { useTranslation } from "react-i18next";
+import LanguageIcon from "@mui/icons-material/Language";
 
 const Sidebar: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-
-  // const [selectedIdx, setSelectedIdx] = useState(
-  //   window.location.pathname === "/about"
-  //     ? 0
-  //     : window.location.pathname === "/portfolio"
-  //     ? 1
-  //     : window.location.pathname === "/services"
-  //     ? 2
-  //     : 3 // Assuming 4 items, adjust for more
-  // );
-
-  // const handleItemClick = (idx: any) => {
-  //   setSelectedIdx(idx);
-  //   navigate(
-  //     idx === 0
-  //       ? "/about"
-  //       : idx === 1
-  //       ? "/portfolio"
-  //       : idx === 2
-  //       ? "/services"
-  //       : "/contact"
-  //   ); // Adjust paths for your items
-  // };
+  // const [showLanguage, setShowLanguage] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,6 +32,11 @@ const Sidebar: FC = () => {
 
   return (
     <>
+      <Box sx={{ position: "absolute", bottom: "16%", left: "13%" }}>
+        <Box sx={{ position: "relative" }}>
+          <Language />
+        </Box>
+      </Box>
       <Stack direction="row" spacing={screenHeight >= 900 ? 5 : 2}>
         <Stack
           sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
@@ -93,7 +77,7 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "80px",
+                    height: screenHeight >= 900 ? "117px" : "78px",
                     gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
@@ -123,7 +107,7 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "80px",
+                    height: screenHeight >= 900 ? "117px" : "78px",
                     gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
@@ -149,7 +133,7 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "80px",
+                    height: screenHeight >= 900 ? "117px" : "78px",
                     gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
@@ -175,7 +159,7 @@ const Sidebar: FC = () => {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "80px",
+                    height: screenHeight >= 900 ? "117px" : "78px",
                     gap: screenHeight >= 900 ? "10px" : "3px",
                     cursor: "pointer",
                     transition: "0.7s",
@@ -190,12 +174,39 @@ const Sidebar: FC = () => {
                     {t("sidebar.contact")}
                   </Typography>
                 </Box>
-                <Language />
+                <Box
+                  // onClick={() => navigate("/contact")}
+                  sx={{
+                    background:
+                      location.pathname === "/contact" ? "#222222" : "#3e3e3e",
+                    color:
+                      location.pathname === "/contact" ? "#FFF083" : "#B6B6B6",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: screenHeight >= 900 ? "117px" : "78px",
+                    gap: screenHeight >= 900 ? "10px" : "3px",
+                    cursor: "pointer",
+                    transition: "0.7s",
+                    "&:hover": {
+                      color: "#FFF083",
+                      background: "#222222",
+                    },
+                  }}
+                >
+                  <LanguageIcon />
+                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                    {t("sidebar.language")}
+                  </Typography>
+                </Box>
+                {/* <Language /> */}
               </Stack>
             </Box>
             {location.pathname === "/" ? null : <Social />}
           </Stack>
         </Stack>
+
         <Outlet />
       </Stack>
     </>

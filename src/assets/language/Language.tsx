@@ -56,7 +56,7 @@ const Language: FC = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            height: screenHeight >= 900 ? "115px" : "80px",
+            height: screenHeight >= 900 ? "115px" : "78px",
             gap: screenHeight >= 900 ? "10px" : "3px",
             cursor: "pointer",
             color: "#B6B6B6",

@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import { bgColor, radius } from "../../common/style/commonStyle";
 
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -37,7 +39,7 @@ const Contact: FC = () => {
             to strategize about your business
           </Typography>
         </Stack>
-        <Grid container spacing={7}>
+        <Grid container>
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Stack pl={5} pr={5}>
               <form action="contact">
@@ -45,7 +47,7 @@ const Contact: FC = () => {
                   sx={{
                     background: "#828282",
                     p: "35px 15px 35px 15px",
-                    borderRadius: "8px",
+                    borderRadius: radius,
                     display: "flex",
                     justifyContent: "space-between",
                     flexDirection: "column",
@@ -82,7 +84,7 @@ const Contact: FC = () => {
                     }}
                     required
                   />
-                  {/* <textarea
+                  <textarea
                     name="message"
                     style={{
                       borderRadius: "8px",
@@ -93,21 +95,21 @@ const Contact: FC = () => {
                       color: "#222222",
                     }}
                     id=""
-                    cols="30"
-                    rows="10"
+                    cols={30}
+                    rows={10}
                     placeholder="Message"
                     required
-                  ></textarea> */}
+                  ></textarea>
                   <Button
                     sx={{
-                      background: "#222222",
+                      background: bgColor,
                       color: "#FFF083",
                       fontSize: "20px",
                       fontWeight: 600,
                       height: "40px",
-                      borderRadius: "8px",
+                      borderRadius: radius,
                       textTransform: "none",
-                      "&:hover": { background: "#222222" },
+                      "&:hover": { background: bgColor },
                     }}
                     variant="contained"
                     type="submit"
@@ -119,24 +121,94 @@ const Contact: FC = () => {
             </Stack>
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Stack>
+            <Stack spacing={2} sx={{ height: "55vh" }}>
               <Box
                 sx={{
                   background: "#828282",
-                  borderRadius: "8px",
+                  borderRadius: radius,
                   p: "15px 0px 15px 0px",
                   display: "flex",
                   justifyContent: "center",
+                  height: "60%",
                 }}
               >
                 <Stack spacing={2} width="60%">
-                  <Stack>
-                    <Stack direction="row"></Stack>
+                  <Stack spacing={1}>
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                      <TelegramIcon sx={{ color: "#E9E9E9" }} />
+                      <Typography
+                        sx={{
+                          fontSize: "18px",
+                          fontWeight: 700,
+                          color: "#E9E9E9",
+                        }}
+                      >
+                        Our Address
+                      </Typography>
+                    </Stack>
+                    <Typography
+                      sx={{
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        color: "#E9E9E9",
+                      }}
+                    >
+                      123 Main Street, Anytown, USA 12345:
+                    </Typography>
                   </Stack>
-                  <Stack>1</Stack>
-                  <Stack>2</Stack>
+                  <Stack spacing={1}>
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                      <TelegramIcon sx={{ color: "#E9E9E9" }} />
+                      <Typography
+                        sx={{
+                          fontSize: "18px",
+                          fontWeight: 700,
+                          color: "#E9E9E9",
+                        }}
+                      >
+                        Mail
+                      </Typography>
+                    </Stack>
+                    <Typography
+                      sx={{
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        color: "#E9E9E9",
+                      }}
+                    >
+                      iskakerim@gmail.com
+                    </Typography>
+                  </Stack>
+                  <Stack spacing={1}>
+                    <Stack direction="row" alignItems="center" spacing={1}>
+                      <TelegramIcon sx={{ color: "#E9E9E9" }} />
+                      <Typography
+                        sx={{
+                          fontSize: "18px",
+                          fontWeight: 700,
+                          color: "#E9E9E9",
+                        }}
+                      >
+                        Our Phone Number
+                      </Typography>
+                    </Stack>
+                    <Typography
+                      sx={{
+                        fontSize: "15px",
+                        fontWeight: 500,
+                        color: "#E9E9E9",
+                      }}
+                    >
+                      +993 62 531104
+                    </Typography>
+                  </Stack>
                 </Stack>
               </Box>
+              <img
+                src="./images/Rectangle 17.png"
+                alt="Rectangle 17.png"
+                style={{ width: "100%", height: "48%", borderRadius: "8px" }}
+              />
             </Stack>
           </Grid>
         </Grid>

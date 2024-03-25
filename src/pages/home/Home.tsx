@@ -40,13 +40,8 @@ const Home: FC = () => {
           <LanguageModal />
         </Box>
         <Grid container spacing={10} pt={2} alignItems="center">
-<<<<<<< HEAD
           <Grid item lg={7} md={7} sm={12} xs={12}>
             <Stack spacing={2}>
-=======
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Stack spacing={10}>
->>>>>>> 36ca46afdebbf8f1fb9920724f80fb5a601a7c93
               <Typography
                 sx={{
                   color: "#222222",
@@ -152,7 +147,7 @@ const Home: FC = () => {
         sx={{
           position: "absolute",
           bottom: 0,
-          left: screenHeight >= 900 ? -40 : -10,
+          left: screenHeight >= 900 ? -40 : -17,
           background: "#222222",
           borderTopRightRadius: "8px",
         }}
