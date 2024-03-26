@@ -54,7 +54,7 @@ const Contact: FC = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     flexDirection: "column",
-                    height: "55vh",
+                    height: screenHeight >= 900 ? "55vh" : "54.5vh",
                   }}
                 >
                   <input
@@ -126,7 +126,7 @@ const Contact: FC = () => {
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Stack
               spacing={2}
-              sx={{ height: screenHeight >= 900 ? "62vh" : "55vh" }}
+              sx={{ height: screenHeight >= 900 ? "62vh" : "65vh" }}
             >
               <Box
                 sx={{
@@ -139,14 +139,14 @@ const Contact: FC = () => {
                   height: "60%",
                 }}
               >
-                <Stack spacing={screenHeight >= 900 ? 4 : 2} width="60%">
+                <Stack spacing={screenHeight >= 900 ? 4 : 1} width="60%">
                   <Stack spacing={1}>
                     <Stack direction="row" alignItems="center" spacing={1}>
                       <LocationOnOutlinedIcon sx={{ color: "#E9E9E9" }} />
                       <Typography
                         sx={{
-                          fontSize: "18px",
-                          fontWeight: 700,
+                          fontSize: screenHeight >= 900 ? "18px" : "16px",
+                          fontWeight: screenHeight >= 900 ? 700 : 600,
                           color: "#E9E9E9",
                         }}
                       >
@@ -168,8 +168,8 @@ const Contact: FC = () => {
                       <MailOutlineOutlinedIcon sx={{ color: "#E9E9E9" }} />
                       <Typography
                         sx={{
-                          fontSize: "18px",
-                          fontWeight: 700,
+                          fontSize: screenHeight >= 900 ? "18px" : "16px",
+                          fontWeight: screenHeight >= 900 ? 700 : 600,
                           color: "#E9E9E9",
                         }}
                       >
@@ -191,8 +191,8 @@ const Contact: FC = () => {
                       <PhoneEnabledOutlinedIcon sx={{ color: "#E9E9E9" }} />
                       <Typography
                         sx={{
-                          fontSize: "18px",
-                          fontWeight: 700,
+                          fontSize: screenHeight >= 900 ? "18px" : "16px",
+                          fontWeight: screenHeight >= 900 ? 700 : 600,
                           color: "#E9E9E9",
                         }}
                       >

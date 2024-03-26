@@ -1,10 +1,14 @@
 import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { useNavigate } from "react-router-dom";
 
 const About: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [currentContent, setCurrentContent] = useState(0);
+  const navigate = useNavigate();
+
+  console.log(setCurrentContent);
 
   const contentData = [
     // Define your content for each section here
@@ -41,22 +45,6 @@ const About: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const handlePrevious = () => {
-    setCurrentContent((prevContent) =>
-      prevContent === 0 ? contentData.length - 1 : prevContent - 1
-    );
-  };
-
-  // setTimeout(() => {
-  //   handleReadMore();
-  // }, 3000);
-
-  const handleReadMore = () => {
-    setCurrentContent((prevContent) =>
-      prevContent === contentData.length - 1 ? 0 : prevContent + 1
-    );
-  };
 
   return (
     <>
@@ -197,7 +185,7 @@ const About: FC = () => {
           mt={7}
         >
           <Button
-            onClick={() => handlePrevious()}
+            onClick={() => navigate("/")}
             startIcon={
               <ArrowRightAltIcon
                 sx={{
@@ -215,7 +203,7 @@ const About: FC = () => {
 
           <Divider orientation="vertical" />
           <Button
-            onClick={() => handleReadMore()}
+            onClick={() => navigate("/portfolio")}
             endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
             sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
           >

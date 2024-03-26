@@ -41,7 +41,7 @@ const Sidebar: FC = () => {
           sx={{
             position: "absolute",
             bottom: "16.3%",
-            left: "10%",
+            left: screenHeight >= 900 ? "10%" : "12%",
             zIndex: 1000,
           }}
         >
@@ -64,9 +64,9 @@ const Sidebar: FC = () => {
 
           <Stack
             height="100%"
-            pl={location.pathname === "/" ? "20%" : "20%"}
+            pl={location.pathname === "/" ? "0%" : "20%"}
             pr={location.pathname === "/" ? "6%" : ""}
-            spacing={screenHeight >= 900 ? 5 : 3}
+            spacing={screenHeight >= 900 ? 13 : 7}
           >
             <Box
               sx={{
