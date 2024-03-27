@@ -169,7 +169,7 @@ const Services: FC = () => {
               >
                 <img
                   src="/images/Rectangle 14.png"
-                  style={{ ...imgWidth[width] }}
+                  style={{ ...imgWidth[width], zIndex: 110 }}
                   alt="Rectangle 14"
                 />
               </Stack>
