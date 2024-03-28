@@ -10,6 +10,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import Language from "../../assets/language/Language";
 import { useTranslation } from "react-i18next";
 import LanguageIcon from "@mui/icons-material/Language";
+import MiniSidebar from "./MiniSidebar";
 
 const Sidebar: FC = () => {
   const location = useLocation();
@@ -50,7 +51,10 @@ const Sidebar: FC = () => {
           </Box>
         </Box>
       )}
-      <Stack direction="row" spacing={screenHeight >= 900 ? 5 : 2}>
+      <Stack
+        direction={{ lg: "row", md: "row", sm: "column", xs: "column" }}
+        spacing={screenHeight >= 900 ? 5 : 2}
+      >
         <Stack
           sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
           alignItems="center"
@@ -218,7 +222,14 @@ const Sidebar: FC = () => {
             {location.pathname === "/" ? null : <Social />}
           </Stack>
         </Stack>
-
+        {/* sm and xs ui */}
+        <Stack
+          pr={3}
+          pl={3}
+          sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
+        >
+          <MiniSidebar />
+        </Stack>
         <Outlet />
       </Stack>
     </>
