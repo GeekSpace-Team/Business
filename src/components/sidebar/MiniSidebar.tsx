@@ -22,7 +22,7 @@ const MiniSidebar: FC = () => {
         direction="row"
         alignItems="center"
         justifyContent="space-between"
-        mt={-3}
+        mt={3}
       >
         <img
           onClick={() => navigate("/")}

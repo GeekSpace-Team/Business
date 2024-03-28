@@ -12,6 +12,7 @@ import {
 import LanguageModal from "../../assets/language/LanguageModal";
 import Social from "../../components/bottom-social/Social";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import HomeXS from "./HomeXS";
 
 const Home: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -30,10 +31,12 @@ const Home: FC = () => {
 
   return (
     <>
-      <Stack width="100%" height="85vh">
-        <Box
-          sx={{ display: { lg: "block", md: "block", sm: "none", xs: "none" } }}
-        >
+      <Stack
+        width="100%"
+        height="85vh"
+        sx={{ display: { lg: "block", md: "block", sm: "none", xs: "none" } }}
+      >
+        <Box>
           <Box
             sx={{
               background: "#E9E9E9",
@@ -264,6 +267,15 @@ const Home: FC = () => {
           </Box>
         </Stack>
       </Stack>
+      <Box
+        sx={{
+          display: { md: "none", lg: "none", sm: "flex", xs: "flex" },
+          flexDirection: "column",
+          p: 3,
+        }}
+      >
+        <HomeXS />
+      </Box>
     </>
   );
 };
