@@ -226,7 +226,8 @@ const ServiceCards: FC = () => {
             display: "flex",
             mt: screenHeight >= 900 ? 24 : 15.3,
             alignItems: "center",
-            ml: screenHeight >= 900 ? -14.5 : -12.2,
+            ml: -0.5,
+            justifyContent: "center",
           }}
         >
           <img

@@ -3,6 +3,9 @@ import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
 import ServiceCards from "../../components/service/ServiceCards";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 interface SizeMap {
   [key: string]: {
@@ -106,79 +109,262 @@ const Services: FC = () => {
   return (
     <>
       <Stack width="100%">
-        <Box
-          sx={{
-            height: screenHeight >= 900 ? "80vh" : "83vh",
-            width: "100%",
-            pt: screenHeight >= 900 ? 7 : 4,
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView={1}
+          autoplay={{
+            delay: 3000,
+            pauseOnMouseEnter: true,
           }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log("slide change")}
+          style={{
+            width: "100%",
+          }}
+          speed={5000}
+          loop={true}
         >
-          <Stack sx={{ height: "100%", pr: 5 }}>
+          <SwiperSlide>
             <Box
               sx={{
+                height: screenHeight >= 900 ? "80vh" : "83vh",
                 width: "100%",
-                height: "40%",
-                position: "relative",
+                pt: screenHeight >= 900 ? 7 : 4,
               }}
             >
-              <img
-                src="/images/Group 73.png"
-                style={{ width: "100%", height: "100%" }}
-                alt="screenHeight >= 900 ?"
-              />
-              <Box sx={{ position: "absolute", top: 10, width: "100%" }}>
-                <Stack alignItems="center" width="100%" justifyContent="center">
-                  <Typography
-                    sx={{
-                      color: "#E9E9E9",
-                      ...sizeTitle[title],
-                    }}
-                  >
-                    Our services
-                  </Typography>
+              <Stack sx={{ height: "100%", pr: 5 }}>
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "40%",
+                    position: "relative",
+                  }}
+                >
+                  <img
+                    src="/images/Group 73.png"
+                    style={{ width: "100%", height: "100%" }}
+                    alt="screenHeight >= 900 ?"
+                  />
+                  <Box sx={{ position: "absolute", top: 10, width: "100%" }}>
+                    <Stack
+                      alignItems="center"
+                      width="100%"
+                      justifyContent="center"
+                    >
+                      <Typography
+                        sx={{
+                          color: "#E9E9E9",
+                          ...sizeTitle[title],
+                        }}
+                      >
+                        Our services
+                      </Typography>
+                      <Stack
+                        sx={{
+                          pr: { lg: 15, md: 5, sm: 2 },
+                          pl: { lg: 15, md: 5, sm: 2 },
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            textAlign: "start",
+                            color: "#E9E9E9",
+                            ...sizeMap[size],
+                          }}
+                        >
+                          "Choose from either the Strategic Coach® Signature
+                          Program or the 10x Ambition Program™ with Dan
+                          Sullivan. Both offer the opportunity to strategize
+                          about what’s most important to your business at the
+                          moment and leave with concrete next steps and action
+                          plans to
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </Box>
                   <Stack
                     sx={{
-                      pr: { lg: 15, md: 5, sm: 2 },
-                      pl: { lg: 15, md: 5, sm: 2 },
+                      position: "absolute",
+                      width: "100%",
+                      display: "flex",
+                      mt: { lg: -4, md: -4, sm: -3, xs: -2 },
+                      alignItems: "center",
                     }}
                   >
-                    <Typography
-                      sx={{
-                        textAlign: "start",
-                        color: "#E9E9E9",
-                        ...sizeMap[size],
-                      }}
-                    >
-                      "Choose from either the Strategic Coach® Signature Program
-                      or the 10x Ambition Program™ with Dan Sullivan. Both offer
-                      the opportunity to strategize about what’s most important
-                      to your business at the moment and leave with concrete
-                      next steps and action plans to
-                    </Typography>
+                    <img
+                      src="/images/Rectangle 14.png"
+                      style={{ ...imgWidth[width], zIndex: 110 }}
+                      alt="Rectangle 14"
+                    />
                   </Stack>
-                </Stack>
-              </Box>
-              <Stack
-                sx={{
-                  position: "relative",
-                  width: "100%",
-                  display: "flex",
-                  mt: { lg: -4, md: -4, sm: -3, xs: -2 },
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src="/images/Rectangle 14.png"
-                  style={{ ...imgWidth[width], zIndex: 110 }}
-                  alt="Rectangle 14"
-                />
+                </Box>
+                <Box sx={{ height: "55%", mt: 1 }}>
+                  <ServiceCards />
+                </Box>
               </Stack>
             </Box>
-            <Box sx={{ height: "55%", mt: 1 }}>
-              <ServiceCards />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Box
+              sx={{
+                height: screenHeight >= 900 ? "80vh" : "83vh",
+                width: "100%",
+                pt: screenHeight >= 900 ? 7 : 4,
+              }}
+            >
+              <Stack sx={{ height: "100%", pr: 5 }}>
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "40%",
+                    position: "relative",
+                  }}
+                >
+                  <img
+                    src="/images/Group 73.png"
+                    style={{ width: "100%", height: "100%" }}
+                    alt="screenHeight >= 900 ?"
+                  />
+                  <Box sx={{ position: "absolute", top: 10, width: "100%" }}>
+                    <Stack
+                      alignItems="center"
+                      width="100%"
+                      justifyContent="center"
+                    >
+                      <Typography
+                        sx={{
+                          color: "#E9E9E9",
+                          ...sizeTitle[title],
+                        }}
+                      >
+                        Our services
+                      </Typography>
+                      <Stack
+                        sx={{
+                          pr: { lg: 15, md: 5, sm: 2 },
+                          pl: { lg: 15, md: 5, sm: 2 },
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            textAlign: "start",
+                            color: "#E9E9E9",
+                            ...sizeMap[size],
+                          }}
+                        >
+                          "Choose from either the Strategic Coach® Signature
+                          Program or the 10x Ambition Program™ with Dan
+                          Sullivan. Both offer the opportunity to strategize
+                          about what’s most important to your business at the
+                          moment and leave with concrete next steps and action
+                          plans to
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </Box>
+                  <Stack
+                    sx={{
+                      position: "absolute",
+                      width: "100%",
+                      display: "flex",
+                      mt: { lg: -4, md: -4, sm: -3, xs: -2 },
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src="/images/Rectangle 14.png"
+                      style={{ ...imgWidth[width], zIndex: 110 }}
+                      alt="Rectangle 14"
+                    />
+                  </Stack>
+                </Box>
+                <Box sx={{ height: "55%", mt: 1 }}>
+                  <ServiceCards />
+                </Box>
+              </Stack>
             </Box>
-          </Stack>
-        </Box>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Box
+              sx={{
+                height: screenHeight >= 900 ? "80vh" : "83vh",
+                width: "100%",
+                pt: screenHeight >= 900 ? 7 : 4,
+              }}
+            >
+              <Stack sx={{ height: "100%", pr: 5 }}>
+                <Box
+                  sx={{
+                    width: "100%",
+                    height: "40%",
+                    position: "relative",
+                  }}
+                >
+                  <img
+                    src="/images/Group 73.png"
+                    style={{ width: "100%", height: "100%" }}
+                    alt="screenHeight >= 900 ?"
+                  />
+                  <Box sx={{ position: "absolute", top: 10, width: "100%" }}>
+                    <Stack
+                      alignItems="center"
+                      width="100%"
+                      justifyContent="center"
+                    >
+                      <Typography
+                        sx={{
+                          color: "#E9E9E9",
+                          ...sizeTitle[title],
+                        }}
+                      >
+                        Our services
+                      </Typography>
+                      <Stack
+                        sx={{
+                          pr: { lg: 15, md: 5, sm: 2 },
+                          pl: { lg: 15, md: 5, sm: 2 },
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            textAlign: "start",
+                            color: "#E9E9E9",
+                            ...sizeMap[size],
+                          }}
+                        >
+                          "Choose from either the Strategic Coach® Signature
+                          Program or the 10x Ambition Program™ with Dan
+                          Sullivan. Both offer the opportunity to strategize
+                          about what’s most important to your business at the
+                          moment and leave with concrete next steps and action
+                          plans to
+                        </Typography>
+                      </Stack>
+                    </Stack>
+                  </Box>
+                  <Stack
+                    sx={{
+                      position: "absolute",
+                      width: "100%",
+                      display: "flex",
+                      mt: { lg: -4, md: -4, sm: -3, xs: -2 },
+                      alignItems: "center",
+                    }}
+                  >
+                    <img
+                      src="/images/Rectangle 14.png"
+                      style={{ ...imgWidth[width], zIndex: 110 }}
+                      alt="Rectangle 14"
+                    />
+                  </Stack>
+                </Box>
+                <Box sx={{ height: "55%", mt: 1 }}>
+                  <ServiceCards />
+                </Box>
+              </Stack>
+            </Box>
+          </SwiperSlide>
+        </Swiper>
         <Stack
           direction="row"
           alignItems="center"

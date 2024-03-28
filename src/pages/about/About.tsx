@@ -2,6 +2,9 @@ import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
 
 const About: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -67,116 +70,247 @@ const About: FC = () => {
             who we are
           </Typography>
         </Box>
-        <Box
-          sx={{
-            background: "#222222",
-            p: screenHeight >= 900 ? 4 : 2,
-            width: "100%",
-            height: "auto",
-            borderRadius: "8px 0px 0px 8px",
-            mt: screenHeight >= 900 ? 5 : 2,
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView={1}
+          autoplay={{
+            delay: 3000,
+            pauseOnMouseEnter: true,
           }}
+          onSwiper={(swiper) => console.log(swiper)}
+          onSlideChange={() => console.log("slide change")}
+          style={{
+            width: "100%",
+          }}
+          speed={5000}
+          loop={true}
         >
-          <Grid container spacing={1}>
-            <Grid item lg={2} md={4} sm={6} xs={12}>
-              <img
-                src={contentData[currentContent].image}
-                style={{
-                  width: "90%",
-                  borderRadius: "8px",
-                  height: screenHeight >= 900 ? "260px" : "180px",
-                }}
-                alt="Rectangle"
-              />
-            </Grid>
-            <Grid item lg={9} md={8} sm={6} xs={12}>
-              <Typography
-                sx={{
-                  fontSize: screenHeight >= 900 ? "32px" : "24px",
-                  fontWeight: 700,
-                  lineHeight: screenHeight >= 900 ? "39px" : "30px",
-                  color: "#E7EAFF",
-                  width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
-                  textAlign: {
-                    lg: "start",
-                    md: "start",
-                    sm: "center",
-                    xs: "center",
-                  },
-                }}
-              >
-                {contentData[currentContent].title}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: screenHeight >= 900 ? "20px" : "16px",
-                  fontWeight: 600,
-                  lineHeight: screenHeight >= 900 ? "25px" : "20px",
-                  color: "#E7EAFF",
-                  width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
-                  textAlign: {
-                    lg: "start",
-                    md: "start",
-                    sm: "center",
-                    xs: "center",
-                  },
-                }}
-              >
-                {contentData[currentContent].description}
-              </Typography>
-            </Grid>
-          </Grid>
-        </Box>
+          <SwiperSlide>
+            <Box
+              sx={{
+                background: "#222222",
+                p: screenHeight >= 900 ? 4 : 2,
+                width: "100%",
+                height: "auto",
+                borderRadius: "8px 0px 0px 8px",
+                mt: screenHeight >= 900 ? 5 : 2,
+              }}
+            >
+              <Grid container spacing={1}>
+                <Grid item lg={2} md={4} sm={6} xs={12}>
+                  <img
+                    src={contentData[currentContent].image}
+                    style={{
+                      width: "90%",
+                      borderRadius: "8px",
+                      height: screenHeight >= 900 ? "260px" : "180px",
+                    }}
+                    alt="Rectangle"
+                  />
+                </Grid>
+                <Grid item lg={9} md={8} sm={6} xs={12}>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? "32px" : "24px",
+                      fontWeight: 700,
+                      lineHeight: screenHeight >= 900 ? "39px" : "30px",
+                      color: "#E7EAFF",
+                      width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
+                      textAlign: {
+                        lg: "start",
+                        md: "start",
+                        sm: "center",
+                        xs: "center",
+                      },
+                    }}
+                  >
+                    {contentData[currentContent].title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? "20px" : "16px",
+                      fontWeight: 600,
+                      lineHeight: screenHeight >= 900 ? "25px" : "20px",
+                      color: "#E7EAFF",
+                      width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
+                      textAlign: {
+                        lg: "start",
+                        md: "start",
+                        sm: "center",
+                        xs: "center",
+                      },
+                    }}
+                  >
+                    {contentData[currentContent].description}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Box>
 
-        <Grid container spacing={1} mt={screenHeight >= 900 ? 5 : 2}>
-          <Grid item lg={9} md={8} sm={6} xs={12}>
-            <Typography
+            <Grid container spacing={1} mt={screenHeight >= 900 ? 5 : 2}>
+              <Grid item lg={9} md={8} sm={6} xs={12}>
+                <Typography
+                  sx={{
+                    fontSize: screenHeight >= 900 ? "32px" : "26px",
+                    fontWeight: 700,
+                    lineHeight: screenHeight >= 900 ? "39px" : "30px",
+                    color: "#626262",
+                    width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
+                    textAlign: {
+                      lg: "start",
+                      md: "start",
+                      sm: "center",
+                      xs: "center",
+                    },
+                  }}
+                >
+                  {contentData[currentContent].title}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: screenHeight >= 900 ? "20px" : "17px",
+                    fontWeight: 600,
+                    lineHeight: screenHeight >= 900 ? "25px" : "20px",
+                    color: "#626262",
+                    width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
+                    textAlign: {
+                      lg: "start",
+                      md: "start",
+                      sm: "center",
+                      xs: "center",
+                    },
+                  }}
+                >
+                  {contentData[currentContent].description}
+                </Typography>
+              </Grid>
+              <Grid item lg={2} md={4} sm={6} xs={12}>
+                <img
+                  src={contentData[currentContent].image}
+                  style={{
+                    width: "90%",
+                    borderRadius: "8px",
+                    height: screenHeight >= 900 ? "260px" : "180px",
+                  }}
+                  alt="Rectangle"
+                />
+              </Grid>
+            </Grid>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Box
               sx={{
-                fontSize: screenHeight >= 900 ? "32px" : "26px",
-                fontWeight: 700,
-                lineHeight: screenHeight >= 900 ? "39px" : "30px",
-                color: "#626262",
-                width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
-                textAlign: {
-                  lg: "start",
-                  md: "start",
-                  sm: "center",
-                  xs: "center",
-                },
+                background: "#222222",
+                p: screenHeight >= 900 ? 4 : 2,
+                width: "100%",
+                height: "auto",
+                borderRadius: "8px 0px 0px 8px",
+                mt: screenHeight >= 900 ? 5 : 2,
               }}
             >
-              {contentData[currentContent].title}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: screenHeight >= 900 ? "20px" : "17px",
-                fontWeight: 600,
-                lineHeight: screenHeight >= 900 ? "25px" : "20px",
-                color: "#626262",
-                width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
-                textAlign: {
-                  lg: "start",
-                  md: "start",
-                  sm: "center",
-                  xs: "center",
-                },
-              }}
-            >
-              {contentData[currentContent].description}
-            </Typography>
-          </Grid>
-          <Grid item lg={2} md={4} sm={6} xs={12}>
-            <img
-              src={contentData[currentContent].image}
-              style={{
-                width: "90%",
-                borderRadius: "8px",
-                height: screenHeight >= 900 ? "260px" : "180px",
-              }}
-              alt="Rectangle"
-            />
-          </Grid>
-        </Grid>
+              <Grid container spacing={1}>
+                <Grid item lg={2} md={4} sm={6} xs={12}>
+                  <img
+                    src={contentData[currentContent].image}
+                    style={{
+                      width: "90%",
+                      borderRadius: "8px",
+                      height: screenHeight >= 900 ? "260px" : "180px",
+                    }}
+                    alt="Rectangle"
+                  />
+                </Grid>
+                <Grid item lg={9} md={8} sm={6} xs={12}>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? "32px" : "24px",
+                      fontWeight: 700,
+                      lineHeight: screenHeight >= 900 ? "39px" : "30px",
+                      color: "#E7EAFF",
+                      width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
+                      textAlign: {
+                        lg: "start",
+                        md: "start",
+                        sm: "center",
+                        xs: "center",
+                      },
+                    }}
+                  >
+                    {contentData[currentContent].title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? "20px" : "16px",
+                      fontWeight: 600,
+                      lineHeight: screenHeight >= 900 ? "25px" : "20px",
+                      color: "#E7EAFF",
+                      width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
+                      textAlign: {
+                        lg: "start",
+                        md: "start",
+                        sm: "center",
+                        xs: "center",
+                      },
+                    }}
+                  >
+                    {contentData[currentContent].description}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Box>
+
+            <Grid container spacing={1} mt={screenHeight >= 900 ? 5 : 2}>
+              <Grid item lg={9} md={8} sm={6} xs={12}>
+                <Typography
+                  sx={{
+                    fontSize: screenHeight >= 900 ? "32px" : "26px",
+                    fontWeight: 700,
+                    lineHeight: screenHeight >= 900 ? "39px" : "30px",
+                    color: "#626262",
+                    width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
+                    textAlign: {
+                      lg: "start",
+                      md: "start",
+                      sm: "center",
+                      xs: "center",
+                    },
+                  }}
+                >
+                  {contentData[currentContent].title}
+                </Typography>
+                <Typography
+                  sx={{
+                    fontSize: screenHeight >= 900 ? "20px" : "17px",
+                    fontWeight: 600,
+                    lineHeight: screenHeight >= 900 ? "25px" : "20px",
+                    color: "#626262",
+                    width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
+                    textAlign: {
+                      lg: "start",
+                      md: "start",
+                      sm: "center",
+                      xs: "center",
+                    },
+                  }}
+                >
+                  {contentData[currentContent].description}
+                </Typography>
+              </Grid>
+              <Grid item lg={2} md={4} sm={6} xs={12}>
+                <img
+                  src={contentData[currentContent].image}
+                  style={{
+                    width: "90%",
+                    borderRadius: "8px",
+                    height: screenHeight >= 900 ? "260px" : "180px",
+                  }}
+                  alt="Rectangle"
+                />
+              </Grid>
+            </Grid>
+          </SwiperSlide>
+        </Swiper>
+
         <Stack
           direction="row"
           alignItems="center"
