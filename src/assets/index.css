@@ -14,22 +14,3 @@ body {
   padding: 0;
   margin: 0;
 }
-
-#diamond {
-  width: 0;
-  height: 0;
-  border: 50px solid transparent;
-  border-bottom-color: #e9e9e9;
-  position: relative;
-  top: -50px;
-}
-#diamond:after {
-  content: "";
-  position: absolute;
-  left: -50px;
-  top: 50px;
-  width: 0;
-  height: 0;
-  border: 50px solid transparent;
-  border-top-color: #e9e9e9;
-}

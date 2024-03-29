@@ -108,7 +108,7 @@ const Services: FC = () => {
 
   return (
     <>
-      <Stack width="100%">
+      <Stack width="86%" mr={3}>
         <Swiper
           modules={[Autoplay]}
           slidesPerView={1}

@@ -23,7 +23,7 @@ const Contact: FC = () => {
 
   return (
     <>
-      <Stack pt={3} width="100%">
+      <Stack pt={3} width="80%">
         <Stack
           direction="row"
           pt={screenHeight >= 900 ? 3 : 0}

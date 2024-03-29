@@ -37,7 +37,7 @@ const Portfolio: FC = () => {
   }, []);
 
   return (
-    <Stack width="100%">
+    <Stack width="80%">
       <Stack pt={5} mb={-7}>
         <Typography
           sx={{

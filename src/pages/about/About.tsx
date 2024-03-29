@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import AboutMini from "./AboutMini";
 
 const About: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -51,7 +52,13 @@ const About: FC = () => {
 
   return (
     <>
-      <Stack sx={{ width: "100%", height: "auto" }}>
+      <Stack
+        sx={{
+          width: "100%",
+          height: "auto",
+          display: { lg: "block", md: "block", sm: "none", xs: "none" },
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -147,7 +154,12 @@ const About: FC = () => {
               </Grid>
             </Box>
 
-            <Grid container spacing={1} mt={screenHeight >= 900 ? 5 : 2}>
+            <Grid
+              container
+              spacing={1}
+              mt={screenHeight >= 900 ? 5 : 2}
+              width="94%"
+            >
               <Grid item lg={9} md={8} sm={6} xs={12}>
                 <Typography
                   sx={{
@@ -259,7 +271,12 @@ const About: FC = () => {
               </Grid>
             </Box>
 
-            <Grid container spacing={1} mt={screenHeight >= 900 ? 5 : 2}>
+            <Grid
+              container
+              spacing={1}
+              mt={screenHeight >= 900 ? 5 : 2}
+              width="94%"
+            >
               <Grid item lg={9} md={8} sm={6} xs={12}>
                 <Typography
                   sx={{
@@ -345,6 +362,7 @@ const About: FC = () => {
           </Button>
         </Stack>
       </Stack>
+      <AboutMini />
     </>
   );
 };
