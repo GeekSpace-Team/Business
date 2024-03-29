@@ -35,6 +35,9 @@ const MiniSidebar: FC = () => {
             background: "#363636",
             color: "#B6B6B6",
             borderRadius: "4px",
+            "&:hover": {
+              background: "#363636",
+            },
           }}
         >
           {!showNavbar ? <MenuIcon /> : <CloseIcon sx={{ color: "#FFF083" }} />}
