@@ -20,6 +20,16 @@ const AboutMini: FC = () => {
 
   return (
     <>
+      <Typography
+        sx={{
+          textAlign: "center",
+          color: "#222222",
+          fontSize: "24px",
+          fontWeight: 700,
+        }}
+      >
+        WHO WE ARE
+      </Typography>
       <Swiper
         modules={[Autoplay]}
         slidesPerView={1}
