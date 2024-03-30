@@ -23,33 +23,113 @@ body {
   float: right;
 }
 
-#octagon {
-  width: 100%;
-  height: 100px;
-  background: red;
+.octagon {
+  display: inline-block;
+  width: 80% !important; /* Increased width to 80px */
+  min-height: 60px; /* Increased height to 40px */
+  /* background: #3498db; Assuming you want to keep the background color */
   position: relative;
+  /* -webkit-box-shadow: 6px 6px 19px 2px rgba(0, 0, 0, 0.62); */
+  /* -moz-box-shadow: 6px 6px 19px 2px rgba(0, 0, 0, 0.62); */
+  /* box-shadow: 6px 6px 19px 2px rgba(0, 0, 0, 0.62); */
+  /* text-shadow: black 0.1em 0.1em 0.2em; */
 }
 
-#octagon:before {
+.octagon:before {
   content: "";
-  width: 100%;
-  height: 0;
   position: absolute;
-  top: 0;
-  left: 0;
-  border-bottom: 29px solid red;
-  border-left: 29px solid #eee;
-  border-right: 29px solid red;
+  top: -20px; /* Adjusted top position based on increased height */
+  left: 0px;
+  width: 90%; /* Increased width to match height for better shape */
+  height: 0px;
+  border-bottom: 20px solid; /* Increased border size proportionally */
+  border-bottom-color: inherit;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  z-index: 1;
 }
 
-#octagon:after {
+.octagon:after {
   content: "";
-  width: 100%;
-  height: 0;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  border-top: 29px solid red;
-  border-left: 29px solid #eee;
-  border-right: 29px solid red;
+  bottom: -20px; /* Adjusted bottom position based on increased height */
+  right: 0px;
+  width: 90%; /* Increased width to match height for better shape */
+  height: 0px;
+  border-top: 20px solid; /* Increased border size proportionally */
+  border-top-color: inherit;
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent;
+  z-index: 1;
 }
+
+.o-color.green {
+  background-color: #828282;
+  border-top-color: #828282;
+  border-bottom-color: #828282;
+}
+
+/* .outter {
+  position: fixed;
+  top: 100px;
+  left: 45%;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.outter:before,
+.outter:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+
+  height: 86px;
+  margin-top: -41px;
+  z-index: 1;
+}
+
+.outter:after {
+  left: auto;
+  right: 0;
+  margin-top: -45px;
+  height: 92px;
+}
+
+.inner {
+  position: absolute;
+  top: 0px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.25);
+  border-width: 2px;
+  border-style: solid;
+  -webkit-transform: rotate(45deg);
+}
+
+.inner:before,
+.inner:after {
+  -webkit-transform: rotate(45deg);
+  content: "";
+  position: absolute;
+  width: 2px;
+
+  height: 85px;
+  margin-top: -41px;
+  z-index: 1;
+  right: auto;
+  left: 27px;
+  bottom: auto;
+  top: 27px;
+}
+
+.inner:after {
+  height: 90px;
+  right: 30px;
+  left: auto;
+  bottom: -13px;
+  top: auto;
+} */

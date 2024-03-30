@@ -1,15 +1,21 @@
-import { Box } from "@mui/material";
+import { Stack } from "@mui/material";
 import { FC } from "react";
 
 const ServiceSx: FC = () => {
   return (
-    <Box
-      pr={13}
-      pl={5}
-      sx={{ display: { md: "none", lg: "none", xs: "flex", sm: "flex" } }}
-    >
-      <Box id="octagon"></Box>
-    </Box>
+    <>
+      <Stack width={"100%"} direction="row" pl={5} pr={5} pt={5}>
+        <span
+          style={{ background: "#828282" }}
+          className="octagon o-color green"
+        >
+          hiii
+        </span>
+      </Stack>
+      {/* <div className="outter">
+        <div className="inner"></div>
+      </div> */}
+    </>
   );
 };
 
