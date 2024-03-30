@@ -6,6 +6,7 @@ import ServiceCards from "../../components/service/ServiceCards";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import ServiceSx from "./ServiceSx";
 
 interface SizeMap {
   [key: string]: {
@@ -108,7 +109,11 @@ const Services: FC = () => {
 
   return (
     <>
-      <Stack width="86%" mr={3}>
+      <Stack
+        width="86%"
+        mr={3}
+        sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
+      >
         <Swiper
           modules={[Autoplay]}
           slidesPerView={1}
@@ -399,6 +404,7 @@ const Services: FC = () => {
           </Button>
         </Stack>
       </Stack>
+      <ServiceSx />
     </>
   );
 };
