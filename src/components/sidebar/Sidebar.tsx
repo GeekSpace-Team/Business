@@ -41,7 +41,7 @@ const Sidebar: FC = () => {
         <Box
           sx={{
             position: "absolute",
-            bottom: "16.3%",
+            bottom: "17.3%",
             left: screenHeight >= 900 ? "10%" : "12%",
             zIndex: 1000,
           }}
