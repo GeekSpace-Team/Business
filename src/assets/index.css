@@ -40,7 +40,7 @@ body {
   position: absolute;
   top: -20px; /* Adjusted top position based on increased height */
   left: 0px;
-  width: 90%; /* Increased width to match height for better shape */
+  width: 88%; /* Increased width to match height for better shape */
   height: 0px;
   border-bottom: 20px solid; /* Increased border size proportionally */
   border-bottom-color: inherit;
@@ -54,7 +54,7 @@ body {
   position: absolute;
   bottom: -20px; /* Adjusted bottom position based on increased height */
   right: 0px;
-  width: 90%; /* Increased width to match height for better shape */
+  width: 88%; /* Increased width to match height for better shape */
   height: 0px;
   border-top: 20px solid; /* Increased border size proportionally */
   border-top-color: inherit;
