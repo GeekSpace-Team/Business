@@ -16,6 +16,59 @@ import HomeXS from "./HomeXS";
 import { useQuery } from "react-query";
 import axios from "axios";
 
+// Define an interface for the image data object
+interface ImageData {
+  id: number;
+  attributes: {
+    title: string;
+    short_description: string | null;
+    type: string;
+    index: number;
+    description: string | null;
+    url: string;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
+    image: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          alternativeText: string | null;
+          caption: string | null;
+          width: number;
+          height: number;
+          formats: {
+            thumbnail: {
+              name: string;
+              hash: string;
+              ext: string;
+              mime: string;
+              path: string | null;
+              width: number;
+              height: number;
+              size: number;
+              url: string;
+            };
+          };
+          hash: string;
+          ext: string;
+          mime: string;
+          size: number;
+          url: string;
+          previewUrl: string | null;
+          provider: string;
+          provider_metadata: string;
+          createdAt: string;
+          updatedAt: string;
+          blurhash: string;
+        };
+      };
+    };
+  };
+}
+
 const Home: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
@@ -31,19 +84,33 @@ const Home: FC = () => {
     };
   }, []);
 
-  const { data, isLoading, isError } = useQuery("homeData", async () => {
+  const {
+    data: homeData,
+    isLoading: isHomeDataLoading,
+    isError: isHomeDataError,
+  } = useQuery("homeData", async () => {
     const response = await axios.get(
       "http://95.85.121.153:1337/api/title-texts"
     );
-    console.log(response.data);
+    return response.data;
+  });
+
+  const {
+    data: imageData,
+    isLoading: isImageDataLoading,
+    isError: isImageDataError,
+  } = useQuery("imageData", async () => {
+    const response = await axios.get(
+      "http://95.85.121.153:1337/api/banners?populate=image"
+    );
     return response.data;
   });
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
-      {isError && <div>Error fetching data</div>}
-      {data && (
+      {(isHomeDataLoading || isImageDataLoading) && <div>Loading...</div>}
+      {(isHomeDataError || isImageDataError) && <div>Error fetching data</div>}
+      {homeData && imageData && (
         <>
           <Stack
             width="100%"
@@ -71,7 +138,7 @@ const Home: FC = () => {
                         fontWeight: 700,
                       }}
                     >
-                      {data.data[0].attributes.title}
+                      {homeData.data[0].attributes.title}
                     </Typography>
                     <Typography
                       sx={{
@@ -82,17 +149,18 @@ const Home: FC = () => {
                         width: screenHeight >= 900 ? "60%" : "100%",
                       }}
                     >
-                      {data.data[0].attributes.short_description}
+                      {homeData.data[0].attributes.short_description}
                     </Typography>
                     <Social />
                   </Stack>
                 </Grid>
                 <Grid item lg={5} pr="3%" md={5} sm={12} xs={12}>
+                  {/* Render image from imageData */}
                   <Box
                     sx={{
                       width: "100%",
                       height: "85vh",
-                      background: "url(/images/321467.jpg)",
+                      background: `url(${imageData.data[0].attributes.image.url})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       borderRadius: "8px",
@@ -173,111 +241,62 @@ const Home: FC = () => {
               display: { lg: "block", md: "block", sm: "none", xs: "none" },
             }}
           >
+            {/* Render additional images from imageData */}
             <Stack direction="row" spacing={1}>
-              <Box
-                sx={{
-                  background: "#D9D9D9",
-                  p: 1,
-                  borderRadius: "8px",
-                  width: screenHeight >= 900 ? "450px" : "330px",
-                }}
-              >
-                <Stack direction="row" spacing={1}>
-                  <img
-                    style={{
-                      width: "120px",
-                      height: screenHeight >= 900 ? "110px" : "60px",
-                      borderRadius: "4px",
-                    }}
-                    src="/images/Rectangle 6.png"
-                    alt="Rectangle 6.png  "
-                  />
-                  <Stack sx={{ position: "relative", width: "100%" }}>
-                    <IconButton
-                      sx={{
-                        width: screenHeight >= 900 ? "40px" : "30px",
-                        height: screenHeight >= 900 ? "40px" : "30px",
-                        position: "absolute",
-                        top: 0,
-                        right: 0,
+              {imageData.data.slice(1).map((item: ImageData) => (
+                <Box
+                  key={item.id}
+                  sx={{
+                    background: "#D9D9D9",
+                    p: 1,
+                    borderRadius: "8px",
+                    width: screenHeight >= 900 ? "450px" : "330px",
+                  }}
+                >
+                  <Stack direction="row" spacing={1}>
+                    <img
+                      style={{
+                        width: "120px",
+                        height: screenHeight >= 900 ? "110px" : "60px",
+                        borderRadius: "4px",
                       }}
-                    >
-                      <ArrowRightAltIcon
+                      src={item.attributes.image.data.attributes.url}
+                      alt={item.attributes.title}
+                    />
+                    <Stack sx={{ position: "relative", width: "100%" }}>
+                      <IconButton
                         sx={{
-                          color: "#828282",
-                          transform: "rotate(320deg)",
-                          fontSize: screenHeight >= 900 ? "40px" : "34px",
-                          width: screenHeight >= 900 ? "30px" : "20px",
+                          width: screenHeight >= 900 ? "40px" : "30px",
+                          height: screenHeight >= 900 ? "40px" : "30px",
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
                         }}
-                      />
-                    </IconButton>
-                    <Typography
-                      sx={{
-                        color: "#222222",
-                        fontSize: screenHeight >= 900 ? "18px" : "12px",
-                        lineHeight: "20px",
-                        position: "absolute",
-                        bottom: screenHeight >= 900 ? 5 : 0,
-                      }}
-                    >
-                      Business trainer provides administrative, clerical and
-                      word processing support
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </Box>
-              <Box
-                sx={{
-                  background: "#D9D9D9",
-                  p: 1,
-                  borderRadius: "8px",
-                  width: screenHeight >= 900 ? "450px" : "330px",
-                }}
-              >
-                <Stack direction="row" spacing={1}>
-                  <img
-                    style={{
-                      width: "120px",
-                      height: screenHeight >= 900 ? "110px" : "60px",
-                      borderRadius: "4px",
-                    }}
-                    src="/images/Rectangle 6.png"
-                    alt="Rectangle 6.png  "
-                  />
-                  <Stack sx={{ position: "relative", width: "100%" }}>
-                    <IconButton
-                      sx={{
-                        width: screenHeight >= 900 ? "40px" : "30px",
-                        height: screenHeight >= 900 ? "40px" : "30px",
-                        position: "absolute",
-                        top: 0,
-                        right: 0,
-                      }}
-                    >
-                      <ArrowRightAltIcon
+                      >
+                        <ArrowRightAltIcon
+                          sx={{
+                            color: "#828282",
+                            transform: "rotate(320deg)",
+                            fontSize: screenHeight >= 900 ? "40px" : "34px",
+                            width: screenHeight >= 900 ? "30px" : "20px",
+                          }}
+                        />
+                      </IconButton>
+                      <Typography
                         sx={{
-                          color: "#828282",
-                          transform: "rotate(320deg)",
-                          fontSize: screenHeight >= 900 ? "40px" : "34px",
-                          width: screenHeight >= 900 ? "30px" : "20px",
+                          color: "#222222",
+                          fontSize: screenHeight >= 900 ? "18px" : "12px",
+                          lineHeight: "20px",
+                          position: "absolute",
+                          bottom: screenHeight >= 900 ? 5 : 0,
                         }}
-                      />
-                    </IconButton>
-                    <Typography
-                      sx={{
-                        color: "#222222",
-                        fontSize: screenHeight >= 900 ? "18px" : "12px",
-                        lineHeight: "20px",
-                        position: "absolute",
-                        bottom: screenHeight >= 900 ? 5 : 0,
-                      }}
-                    >
-                      Business trainer provides administrative, clerical and
-                      word processing support
-                    </Typography>
+                      >
+                        {item.attributes.title}
+                      </Typography>
+                    </Stack>
                   </Stack>
-                </Stack>
-              </Box>
+                </Box>
+              ))}
             </Stack>
           </Stack>
         </>
