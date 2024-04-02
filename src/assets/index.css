@@ -23,26 +23,29 @@ body {
   float: right;
 }
 
+/* .bottomOctagon {
+  display: inline-block;
+  width: 80% !important;
+  min-height: 60px;
+  position: absolute;
+  border-radius: 8px;
+} */
+
 .octagon {
   display: inline-block;
-  width: 80% !important; /* Increased width to 80px */
-  min-height: 60px; /* Increased height to 40px */
-  /* background: #3498db; Assuming you want to keep the background color */
+  width: 80% !important;
+  min-height: 60px;
   position: relative;
-  /* -webkit-box-shadow: 6px 6px 19px 2px rgba(0, 0, 0, 0.62); */
-  /* -moz-box-shadow: 6px 6px 19px 2px rgba(0, 0, 0, 0.62); */
-  /* box-shadow: 6px 6px 19px 2px rgba(0, 0, 0, 0.62); */
-  /* text-shadow: black 0.1em 0.1em 0.2em; */
 }
 
 .octagon:before {
   content: "";
   position: absolute;
-  top: -20px; /* Adjusted top position based on increased height */
+  top: -20px;
   left: 0px;
-  width: 88%; /* Increased width to match height for better shape */
+  min-width: 90%;
   height: 0px;
-  border-bottom: 20px solid; /* Increased border size proportionally */
+  border-bottom: 20px solid;
   border-bottom-color: inherit;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
@@ -52,15 +55,21 @@ body {
 .octagon:after {
   content: "";
   position: absolute;
-  bottom: -20px; /* Adjusted bottom position based on increased height */
+  bottom: -20px;
   right: 0px;
-  width: 88%; /* Increased width to match height for better shape */
+  min-width: 90%;
   height: 0px;
-  border-top: 20px solid; /* Increased border size proportionally */
+  border-top: 20px solid;
   border-top-color: inherit;
   border-right: 20px solid transparent;
   border-left: 20px solid transparent;
   z-index: 1;
+}
+
+.active-color .gray {
+  background-color: #3e3e3e;
+  border-top-color: #3e3e3e;
+  border-bottom-color: #3e3e3e;
 }
 
 .o-color.green {
@@ -69,67 +78,114 @@ body {
   border-bottom-color: #828282;
 }
 
-/* .outter {
-  position: fixed;
-  top: 100px;
-  left: 45%;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  z-index: 10;
+@media only screen and (max-width: 899px) {
+  .octagon {
+    width: 90%;
+  }
+  .octagon:before {
+    width: 94.5%;
+  }
+
+  .octagon:after {
+    width: 94.5%;
+  }
 }
 
-.outter:before,
-.outter:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 2px;
+@media only screen and (max-width: 880px) {
+  .octagon:before {
+    width: 94%;
+  }
 
-  height: 86px;
-  margin-top: -41px;
-  z-index: 1;
+  .octagon:after {
+    width: 94%;
+  }
 }
 
-.outter:after {
-  left: auto;
-  right: 0;
-  margin-top: -45px;
-  height: 92px;
+@media only screen and (max-width: 795px) {
+  .octagon:before {
+    width: 93.5%;
+  }
+
+  .octagon:after {
+    width: 93.5%;
+  }
 }
 
-.inner {
-  position: absolute;
-  top: 0px;
-  width: 200px;
-  height: 200px;
-  background: rgba(255, 255, 255, 0.25);
-  border-width: 2px;
-  border-style: solid;
-  -webkit-transform: rotate(45deg);
+@media only screen and (max-width: 730px) {
+  .octagon:before {
+    width: 93%;
+  }
+
+  .octagon:after {
+    width: 93%;
+  }
 }
 
-.inner:before,
-.inner:after {
-  -webkit-transform: rotate(45deg);
-  content: "";
-  position: absolute;
-  width: 2px;
+@media only screen and (max-width: 699px) {
+  .octagon:before {
+    width: 92.5%;
+  }
 
-  height: 85px;
-  margin-top: -41px;
-  z-index: 1;
-  right: auto;
-  left: 27px;
-  bottom: auto;
-  top: 27px;
+  .octagon:after {
+    width: 92.5%;
+  }
+}
+@media only screen and (max-width: 610px) {
+  .octagon:before {
+    width: 92%;
+  }
+
+  .octagon:after {
+    width: 92%;
+  }
 }
 
-.inner:after {
-  height: 90px;
-  right: 30px;
-  left: auto;
-  bottom: -13px;
-  top: auto;
-} */
+@media only screen and (max-width: 585px) {
+  .octagon:before {
+    width: 91.5%;
+  }
+
+  .octagon:after {
+    width: 91.5%;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .octagon:before {
+    width: 91%;
+  }
+
+  .octagon:after {
+    width: 91%;
+  }
+}
+
+@media only screen and (max-width: 515px) {
+  .octagon:before {
+    width: 90%;
+  }
+
+  .octagon:after {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 457px) {
+  .octagon:before {
+    width: 80.5%;
+  }
+
+  .octagon:after {
+    width: 80.5%;
+  }
+}
+
+@media only screen and (max-width: 415px) {
+  .octagon:before {
+    width: 180px;
+  }
+
+  .octagon:after {
+    width: 180px;
+  }
+}

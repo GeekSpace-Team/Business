@@ -5,6 +5,7 @@ import { radius } from "../../common/style/commonStyle";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import PhoneEnabledOutlinedIcon from "@mui/icons-material/PhoneEnabledOutlined";
+import Social from "../../components/bottom-social/Social";
 
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -23,7 +24,7 @@ const Contact: FC = () => {
 
   return (
     <>
-      <Stack pt={3} width="80%">
+      <Stack pt={3} width={{ md: "80%", lg: "80%", sm: "100%", xs: "100%" }}>
         <Stack
           direction="row"
           pt={screenHeight >= 900 ? 3 : 0}
@@ -32,19 +33,25 @@ const Contact: FC = () => {
           justifyContent="center"
         >
           <Typography
-            sx={{ color: "#222222", fontSize: "36px", fontWeight: 700 }}
+            sx={{
+              color: "#222222",
+              fontSize: { lg: "36px", md: "36px", sm: "30px", xs: "30px" },
+              fontWeight: 700,
+              textAlign: "center",
+            }}
           >
             Contact Us
-          </Typography>
-          <Typography
-            sx={{ color: "#828282", fontSize: "36px", fontWeight: 700 }}
-          >
-            to strategize about your business
+            <span style={{ color: "#828282", marginLeft: "10px" }}>
+              to strategize about your business
+            </span>
           </Typography>
         </Stack>
         <Grid container>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Stack pl={5} pr={5}>
+          <Grid item lg={6} md={6} sm={12} xs={12} mb={3}>
+            <Stack
+              pl={{ lg: 5, md: 5, sm: 3, xs: 3 }}
+              pr={{ lg: 5, md: 5, sm: 3, xs: 3 }}
+            >
               <form action="contact">
                 <Box
                   sx={{
@@ -126,20 +133,25 @@ const Contact: FC = () => {
           <Grid item lg={6} md={6} sm={12} xs={12}>
             <Stack
               spacing={2}
+              pl={{ lg: 0, md: 0, sm: 3, xs: 3 }}
+              pr={{ lg: 0, md: 0, sm: 3, xs: 3 }}
               sx={{ height: screenHeight >= 900 ? "62vh" : "65vh" }}
             >
               <Box
                 sx={{
                   background: "#828282",
                   borderRadius: radius,
-                  // p: "15px 0px 15px 0px",
+                  p: "15px 0px 15px 0px",
                   alignItems: "center",
                   display: "flex",
                   justifyContent: "center",
                   height: "60%",
                 }}
               >
-                <Stack spacing={screenHeight >= 900 ? 4 : 1} width="60%">
+                <Stack
+                  spacing={screenHeight >= 900 ? 4 : 1}
+                  width={{ lg: "60%", md: "60%", sm: "90%", xs: "90%" }}
+                >
                   <Stack spacing={1}>
                     <Stack direction="row" alignItems="center" spacing={1}>
                       <LocationOnOutlinedIcon sx={{ color: "#E9E9E9" }} />
@@ -210,6 +222,19 @@ const Contact: FC = () => {
                     </Typography>
                   </Stack>
                 </Stack>
+              </Box>
+              <Box
+                sx={{
+                  display: {
+                    lg: "none",
+                    md: "none",
+                    sm: "flex",
+                    xs: "flex",
+                    justifyContent: "center",
+                  },
+                }}
+              >
+                <Social />
               </Box>
               <img
                 src="./images/Rectangle 17.png"
