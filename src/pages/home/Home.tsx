@@ -15,59 +15,9 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import HomeXS from "./HomeXS";
 import { useQuery } from "react-query";
 import axios from "axios";
+import { ImageData } from "../../types/type";
 
 // Define an interface for the image data object
-interface ImageData {
-  id: number;
-  attributes: {
-    title: string;
-    short_description: string | null;
-    type: string;
-    index: number;
-    description: string | null;
-    url: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    locale: string;
-    image: {
-      data: {
-        id: number;
-        attributes: {
-          name: string;
-          alternativeText: string | null;
-          caption: string | null;
-          width: number;
-          height: number;
-          formats: {
-            thumbnail: {
-              name: string;
-              hash: string;
-              ext: string;
-              mime: string;
-              path: string | null;
-              width: number;
-              height: number;
-              size: number;
-              url: string;
-            };
-          };
-          hash: string;
-          ext: string;
-          mime: string;
-          size: number;
-          url: string;
-          previewUrl: string | null;
-          provider: string;
-          provider_metadata: string;
-          createdAt: string;
-          updatedAt: string;
-          blurhash: string;
-        };
-      };
-    };
-  };
-}
 
 const Home: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -254,15 +204,33 @@ const Home: FC = () => {
                   }}
                 >
                   <Stack direction="row" spacing={1}>
-                    <img
+                    {item.attributes.image.data.attributes.formats.thumbnail
+                      .url && (
+                      <img
+                        style={{
+                          width: "120px",
+                          height: screenHeight >= 900 ? "110px" : "60px",
+                          borderRadius: "4px",
+                        }}
+                        src={
+                          item.attributes.image.data.attributes.formats
+                            .thumbnail.url
+                        }
+                      />
+                    )}
+
+                    {/* <img
                       style={{
                         width: "120px",
                         height: screenHeight >= 900 ? "110px" : "60px",
                         borderRadius: "4px",
                       }}
-                      src={item.attributes.image.data.attributes.url}
+                      src={
+                        item.attributes.image.data.attributes.formats.thumbnail
+                          .url
+                      }
                       alt={item.attributes.title}
-                    />
+                    /> */}
                     <Stack sx={{ position: "relative", width: "100%" }}>
                       <IconButton
                         sx={{
