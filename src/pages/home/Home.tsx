@@ -16,8 +16,7 @@ import HomeXS from "./HomeXS";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { ImageData } from "../../types/type";
-
-// Define an interface for the image data object
+import LoadingComponent from "../../components/loading/LoadingComponent";
 
 const Home: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -58,7 +57,7 @@ const Home: FC = () => {
 
   return (
     <>
-      {(isHomeDataLoading || isImageDataLoading) && <div>Loading...</div>}
+      {(isHomeDataLoading || isImageDataLoading) && <LoadingComponent />}
       {(isHomeDataError || isImageDataError) && <div>Error fetching data</div>}
       {homeData && imageData && (
         <>
