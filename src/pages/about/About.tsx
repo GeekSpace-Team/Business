@@ -146,17 +146,19 @@ const About: FC = () => {
                       }}
                       alt="Rectangle"
                     /> */}
-                    {item.attributes.image && (
-                      <img
-                        style={{
-                          width: "90%",
-                          borderRadius: "8px",
-                          height: screenHeight >= 900 ? "260px" : "180px",
-                        }}
-                        src={item.attributes.image.data.url}
-                        alt={item.attributes.image.data.name}
-                      />
-                    )}
+                    {item.attributes.image &&
+                      item.attributes.image.data &&
+                      item.attributes.image.data.url && (
+                        <img
+                          style={{
+                            width: "90%",
+                            borderRadius: "8px",
+                            height: screenHeight >= 900 ? "260px" : "180px",
+                          }}
+                          src={item.attributes.image.data.url}
+                          alt={item.attributes.image.data.name}
+                        />
+                      )}
                   </Grid>
                   <Grid item lg={9} md={8} sm={6} xs={12}>
                     <Typography
@@ -240,17 +242,19 @@ const About: FC = () => {
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={6} xs={12}>
-                  {item.attributes.image && (
-                    <img
-                      style={{
-                        width: "90%",
-                        borderRadius: "8px",
-                        height: screenHeight >= 900 ? "260px" : "180px",
-                      }}
-                      src={item.attributes.image.data.url}
-                      alt={item.attributes.image.data.name}
-                    />
-                  )}
+                  {item.attributes.image &&
+                    item.attributes.image.data &&
+                    item.attributes.image.data.url && (
+                      <img
+                        style={{
+                          width: "90%",
+                          borderRadius: "8px",
+                          height: screenHeight >= 900 ? "260px" : "180px",
+                        }}
+                        src={item.attributes.image.data.url}
+                        alt={item.attributes.image.data.name}
+                      />
+                    )}
                 </Grid>
               </Grid>
             </SwiperSlide>

@@ -10,7 +10,7 @@ const LoadingComponent: FC = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <div className="loader"></div>;
+        <div className="loader"></div>
       </Stack>
     </>
   );

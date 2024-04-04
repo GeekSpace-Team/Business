@@ -21,7 +21,12 @@ const PortfolioMini: FC = () => {
 
   return (
     <>
-      <Stack direction="row" alignItems="center" justifyContent="center">
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
+      >
         <Typography
           sx={{
             textAlign: "center",
@@ -34,7 +39,10 @@ const PortfolioMini: FC = () => {
           Prominent works of my business coaching
         </Typography>
       </Stack>
-      <Stack p={5}>
+      <Stack
+        p={5}
+        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
+      >
         <Swiper
           modules={[Autoplay]}
           slidesPerView={1}
@@ -57,6 +65,8 @@ const PortfolioMini: FC = () => {
                   background: activeIndex === index ? "#222222" : "#828282",
                   borderRadius: "8px",
                   p: 3,
+                  width: "90%",
+                  mr: 5,
                 }}
               >
                 <img
@@ -121,6 +131,7 @@ const PortfolioMini: FC = () => {
         alignItems="center"
         justifyContent="center"
         spacing={2}
+        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
       >
         <Button
           onClick={() => navigate("/about")}

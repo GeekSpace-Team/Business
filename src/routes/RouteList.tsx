@@ -34,7 +34,14 @@ const RouteList: FC = () => {
             element={
               <Suspense
                 fallback={
-                  <div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "90vh",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <LoadingComponent />
                   </div>
                 }
@@ -48,7 +55,14 @@ const RouteList: FC = () => {
             element={
               <Suspense
                 fallback={
-                  <div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "90vh",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <LoadingComponent />
                   </div>
                 }
@@ -62,7 +76,14 @@ const RouteList: FC = () => {
             element={
               <Suspense
                 fallback={
-                  <div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "90vh",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <LoadingComponent />
                   </div>
                 }
@@ -76,7 +97,14 @@ const RouteList: FC = () => {
             element={
               <Suspense
                 fallback={
-                  <div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "90vh",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <LoadingComponent />
                   </div>
                 }
@@ -90,7 +118,14 @@ const RouteList: FC = () => {
             element={
               <Suspense
                 fallback={
-                  <div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "90vh",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
                     <LoadingComponent />
                   </div>
                 }
