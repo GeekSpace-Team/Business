@@ -39,7 +39,14 @@ const LoadingHome: FC = () => {
           </Stack>
         </Grid>
         <Grid item lg={6} md={6} sm={12} xs={12}>
-          <Skeleton width="70%" height="100vh" animation="wave" />
+          <Stack direction="row" justifyContent="flex-end" width="90%">
+            <Skeleton
+              width="70%"
+              height="100vh"
+              animation="wave"
+              sx={{ borderRadius: "8px", height: "100vh" }}
+            />
+          </Stack>
         </Grid>
       </Grid>
     </>
