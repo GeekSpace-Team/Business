@@ -16,29 +16,39 @@ import HomeXS from "./HomeXS";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { ImageData } from "../../types/type";
-import LoadingComponent from "../../components/loading/LoadingComponent";
+import LoadingHome from "../../components/loading/LoadingHome";
 
 const Home: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-   const [backgroundImageUrl, setBackgroundImageUrl] = useState('');
+  const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://95.85.121.153:1337/api/banners?populate=*');
-        const data = response.data.data; 
-        const homeBanner = data.find((e: { attributes: { type: string; image: { data: { attributes: { url: string; }; }; }; }; }) => e.attributes.type === "home_banner");
+        const response = await axios.get(
+          "http://95.85.121.153:1337/api/banners?populate=*"
+        );
+        const data = response.data.data;
+        const homeBanner = data.find(
+          (e: {
+            attributes: {
+              type: string;
+              image: { data: { attributes: { url: string } } };
+            };
+          }) => e.attributes.type === "home_banner"
+        );
         if (homeBanner && homeBanner.attributes.image.data.attributes.url) {
-          setBackgroundImageUrl(`http://95.85.121.153:1337${homeBanner.attributes.image.data.attributes.url}`);
+          setBackgroundImageUrl(
+            `http://95.85.121.153:1337${homeBanner.attributes.image.data.attributes.url}`
+          );
         }
       } catch (error) {
-        console.error('Error fetching background image:', error);
+        console.error("Error fetching background image:", error);
       }
     };
 
     fetchData();
   }, []);
-  
 
   useEffect(() => {
     const handleResize = () => {
@@ -74,10 +84,9 @@ const Home: FC = () => {
     return response.data;
   });
 
-
   return (
     <>
-      {(isHomeDataLoading || isImageDataLoading) && <LoadingComponent />}
+      {(isHomeDataLoading || isImageDataLoading) && <LoadingHome />}
       {(isHomeDataError || isImageDataError) && <div>Error fetching data</div>}
       {homeData && imageData && (
         <>
@@ -128,7 +137,7 @@ const Home: FC = () => {
                     sx={{
                       width: "100%",
                       height: "85vh",
-                       backgroundImage: `url(${backgroundImageUrl})`,
+                      backgroundImage: `url(${backgroundImageUrl})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       borderRadius: "8px",
@@ -221,7 +230,8 @@ const Home: FC = () => {
                   }}
                 >
                   <Stack direction="row" spacing={1}>
-                    {item.attributes.image.data.attributes.formats.thumbnail.url && (
+                    {item.attributes.image.data.attributes.formats.thumbnail
+                      .url && (
                       <img
                         style={{
                           width: "120px",

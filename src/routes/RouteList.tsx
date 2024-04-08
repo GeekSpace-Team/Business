@@ -1,6 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoadingComponent from "../components/loading/LoadingComponent";
+import LoadingHome from "../components/loading/LoadingHome";
 // import MusicPlayer from "../components/musicPlayer/MusicPlayer";
 
 // Import lazy-loaded components
@@ -42,7 +43,7 @@ const RouteList: FC = () => {
                       alignItems: "center",
                     }}
                   >
-                    <LoadingComponent />
+                    <LoadingHome />
                   </div>
                 }
               >
