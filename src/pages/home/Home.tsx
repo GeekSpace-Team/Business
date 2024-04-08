@@ -20,6 +20,25 @@ import LoadingComponent from "../../components/loading/LoadingComponent";
 
 const Home: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+   const [backgroundImageUrl, setBackgroundImageUrl] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://95.85.121.153:1337/api/banners?populate=*');
+        const data = response.data.data; 
+        const homeBanner = data.find((e: { attributes: { type: string; image: { data: { attributes: { url: string; }; }; }; }; }) => e.attributes.type === "home_banner");
+        if (homeBanner && homeBanner.attributes.image.data.attributes.url) {
+          setBackgroundImageUrl(`http://95.85.121.153:1337${homeBanner.attributes.image.data.attributes.url}`);
+        }
+      } catch (error) {
+        console.error('Error fetching background image:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,6 +73,7 @@ const Home: FC = () => {
     );
     return response.data;
   });
+
 
   return (
     <>
@@ -104,12 +124,11 @@ const Home: FC = () => {
                   </Stack>
                 </Grid>
                 <Grid item lg={5} pr="3%" md={5} sm={12} xs={12}>
-                  {/* Render image from imageData */}
                   <Box
                     sx={{
                       width: "100%",
                       height: "85vh",
-                      background: `url(${imageData.data[0].attributes.image.url})`,
+                       backgroundImage: `url(${backgroundImageUrl})`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                       borderRadius: "8px",
@@ -190,7 +209,6 @@ const Home: FC = () => {
               display: { lg: "block", md: "block", sm: "none", xs: "none" },
             }}
           >
-            {/* Render additional images from imageData */}
             <Stack direction="row" spacing={1}>
               {imageData.data.slice(1).map((item: ImageData) => (
                 <Box
@@ -203,33 +221,16 @@ const Home: FC = () => {
                   }}
                 >
                   <Stack direction="row" spacing={1}>
-                    {item.attributes.image.data.attributes.formats.thumbnail
-                      .url && (
+                    {item.attributes.image.data.attributes.formats.thumbnail.url && (
                       <img
                         style={{
                           width: "120px",
                           height: screenHeight >= 900 ? "110px" : "60px",
                           borderRadius: "4px",
                         }}
-                        src={
-                          item.attributes.image.data.attributes.formats
-                            .thumbnail.url
-                        }
+                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
                       />
                     )}
-
-                    {/* <img
-                      style={{
-                        width: "120px",
-                        height: screenHeight >= 900 ? "110px" : "60px",
-                        borderRadius: "4px",
-                      }}
-                      src={
-                        item.attributes.image.data.attributes.formats.thumbnail
-                          .url
-                      }
-                      alt={item.attributes.title}
-                    /> */}
                     <Stack sx={{ position: "relative", width: "100%" }}>
                       <IconButton
                         sx={{
