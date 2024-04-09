@@ -47,7 +47,7 @@ const Sidebar: FC = () => {
           }}
         >
           <Box sx={{ position: "relative" }}>
-            <Language />
+            <Language setShowLanguage={setShowLanguage}  />
           </Box>
         </Box>
       )}
@@ -216,7 +216,6 @@ const Sidebar: FC = () => {
                     {t("sidebar.language")}
                   </Typography>
                 </Box>
-                {/* <Language /> */}
               </Stack>
             </Box>
             {location.pathname === "/" ? null : <Social />}

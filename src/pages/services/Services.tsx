@@ -74,6 +74,7 @@ const Services: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const handleResize = () => {
       setScreenHeight(window.innerHeight);

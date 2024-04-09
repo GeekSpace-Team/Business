@@ -9,20 +9,18 @@ import {
 } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
-import { portfolioItems } from "./portfolioItems";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import PortfolioMini from "./PortfolioMini";
+import { useQuery } from "react-query";
+import axios from "axios";
+import LoadingHome from "../../components/loading/LoadingHome";
 
 const Portfolio: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
-
-  const toggleActive = (index: number) => {
-    setActiveIndex(index === activeIndex ? null : index);
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,6 +33,18 @@ const Portfolio: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const { data: portfolioItems, isLoading, isError } = useQuery("portfolioItems", async () => {
+    const response = await axios.get('http://95.85.121.153:1337/api/portfolios?populate=image&locale=en');
+    return response.data.data;
+  });
+
+  const toggleActive = (index: number) => {
+    setActiveIndex(index === activeIndex ? null : index);
+  };
+
+  if (isLoading) return <div><LoadingHome/></div>;
+  if (isError) return <div>Error fetching data</div>;
 
   return (
     <>
@@ -71,7 +81,7 @@ const Portfolio: FC = () => {
             speed={5000}
             loop={true}
           >
-            {portfolioItems.map((item, index) => (
+            {portfolioItems.map((item: any, index: any) => (
               <SwiperSlide key={`portfolio_items_key${index}`}>
                 <Card
                   sx={{
@@ -82,10 +92,10 @@ const Portfolio: FC = () => {
                 >
                   <CardActionArea>
                     <Stack p={3}>
-                      <CardMedia
+                     <CardMedia
                         component="img"
                         height={screenHeight >= 900 ? "350px" : "160px"}
-                        image={item.image}
+                        image={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
                         alt="green iguana"
                       />
                     </Stack>
@@ -99,7 +109,7 @@ const Portfolio: FC = () => {
                           width: "90%",
                         }}
                       >
-                        {item.title}
+                        {item.attributes.title}
                       </Typography>
                       {activeIndex === index && (
                         <Typography
@@ -110,7 +120,7 @@ const Portfolio: FC = () => {
                             fontWeight: 600,
                           }}
                         >
-                          {item.description}
+                          {item.attributes.short_description}
                         </Typography>
                       )}
                     </Stack>
