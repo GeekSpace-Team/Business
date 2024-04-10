@@ -15,7 +15,7 @@ import "swiper/css";
 import PortfolioMini from "./PortfolioMini";
 import { useQuery } from "react-query";
 import axios from "axios";
-import LoadingHome from "../../components/loading/LoadingHome";
+import PortfolioLoading from "../../components/loading/PortfolioLoading";
 
 const Portfolio: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -34,8 +34,14 @@ const Portfolio: FC = () => {
     };
   }, []);
 
-  const { data: portfolioItems, isLoading, isError } = useQuery("portfolioItems", async () => {
-    const response = await axios.get('http://95.85.121.153:1337/api/portfolios?populate=image&locale=en');
+  const {
+    data: portfolioItems,
+    isLoading,
+    isError,
+  } = useQuery("portfolioItems", async () => {
+    const response = await axios.get(
+      "http://95.85.121.153:1337/api/portfolios?populate=image&locale=en"
+    );
     return response.data.data;
   });
 
@@ -43,7 +49,12 @@ const Portfolio: FC = () => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
-  if (isLoading) return <div><LoadingHome/></div>;
+  if (isLoading)
+    return (
+      <div style={{ width: "100%", height: "100vh" }}>
+        <PortfolioLoading />
+      </div>
+    );
   if (isError) return <div>Error fetching data</div>;
 
   return (
@@ -92,7 +103,7 @@ const Portfolio: FC = () => {
                 >
                   <CardActionArea>
                     <Stack p={3}>
-                     <CardMedia
+                      <CardMedia
                         component="img"
                         height={screenHeight >= 900 ? "350px" : "160px"}
                         image={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
