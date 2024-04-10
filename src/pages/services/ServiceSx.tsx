@@ -26,6 +26,7 @@ const ServiceSx: FC = () => {
           pr={5}
           pt={5}
           key="service_key"
+          sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
         >
           <span
             style={{ background: activeIndex ? "#3E3E3E" : "#828282" }}
@@ -96,6 +97,7 @@ const ServiceSx: FC = () => {
         spacing={2}
         mt={3}
         mb={3}
+        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
       >
         <Button
           onClick={() => navigate("/portfolio")}

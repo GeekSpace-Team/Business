@@ -10,3 +10,11 @@ export const fetchTitleTexts = async () => {
     throw new Error("Failed to fetch title texts");
   }
 };
+
+const API_URL = "http://95.85.121.153:1337";
+
+const api = axios.create({
+  baseURL: API_URL,
+});
+
+export default api;
