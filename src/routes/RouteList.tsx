@@ -13,6 +13,7 @@ const Portfolio = React.lazy(() => import("../pages/portfolio/Portfolio"));
 const Services = React.lazy(() => import("../pages/services/Services"));
 
 const RouteList: FC = () => {
+  console.clear();
   return (
     <BrowserRouter>
       <Routes>

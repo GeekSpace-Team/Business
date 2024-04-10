@@ -34,8 +34,14 @@ const Portfolio: FC = () => {
     };
   }, []);
 
-  const { data: portfolioItems, isLoading, isError } = useQuery("portfolioItems", async () => {
-    const response = await axios.get('http://95.85.121.153:1337/api/portfolios?populate=image&locale=en');
+  const {
+    data: portfolioItems,
+    isLoading,
+    isError,
+  } = useQuery("portfolioItems", async () => {
+    const response = await axios.get(
+      "http://95.85.121.153:1337/api/portfolios?populate=image&locale=en"
+    );
     return response.data.data;
   });
 
@@ -43,7 +49,12 @@ const Portfolio: FC = () => {
     setActiveIndex(index === activeIndex ? null : index);
   };
 
-  if (isLoading) return <div><LoadingHome/></div>;
+  if (isLoading)
+    return (
+      <div style={{ width: "100%" }}>
+        <LoadingHome />
+      </div>
+    );
   if (isError) return <div>Error fetching data</div>;
 
   return (
@@ -81,18 +92,19 @@ const Portfolio: FC = () => {
             speed={5000}
             loop={true}
           >
-            {portfolioItems.map((item: any, index: any) => (
+            {portfolioItems.map((item: any, index: number) => (
               <SwiperSlide key={`portfolio_items_key${index}`}>
                 <Card
                   sx={{
                     background: activeIndex === index ? "#222222" : "#828282",
                     borderRadius: "8px",
+                    height: "100%",
                   }}
                   onClick={() => toggleActive(index)}
                 >
                   <CardActionArea>
                     <Stack p={3}>
-                     <CardMedia
+                      <CardMedia
                         component="img"
                         height={screenHeight >= 900 ? "350px" : "160px"}
                         image={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}

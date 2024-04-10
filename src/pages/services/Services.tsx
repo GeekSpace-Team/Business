@@ -233,7 +233,7 @@ const Services: FC = () => {
           speed={5000}
           loop={true}
         >
-          {data && serviceCards({ data: data })}
+          {data && serviceCards(data)}
         </Swiper>
         <Stack
           direction="row"

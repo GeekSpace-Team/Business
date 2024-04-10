@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from "react";
 import { Box, Grid, Typography, Stack } from "@mui/material";
-import useServices from "../../hooks/useServices";
 
 interface SizeMap {
   [key: string]: {
@@ -49,7 +48,6 @@ type ServiceCardsProps = {
   data2: ServiceData;
   data3: ServiceData;
   data4: ServiceData;
-  // other properties...
 };
 
 const imgWidth: SizeMap = {
@@ -79,9 +77,6 @@ const ServiceCards: FC<ServiceCardsProps> = ({
   const [isSecondCardVisible, setIsSecondCardVisible] = useState(true);
   const [isThirdCardVisible, setIsThirdCardVisible] = useState(true);
   const [isFourthCardVisible, setIsFourthCardVisible] = useState(true);
-  const { data, isLoading, isError } = useServices();
-
-  console.log(data);
 
   useEffect(() => {
     const handleResize = () => {
@@ -94,9 +89,6 @@ const ServiceCards: FC<ServiceCardsProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching data</div>;
 
   let width;
   if (screenHeight >= 900) {
@@ -145,7 +137,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="firstCard"
                   sx={{
-                    background: "#828282",
+                    background: isSecondCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -212,7 +204,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="secondCard"
                   sx={{
-                    background: "#828282",
+                    background: isFirstCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -297,7 +289,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="thirdCard"
                   sx={{
-                    background: "#828282",
+                    background: isFourthCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -306,6 +298,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     cursor: "pointer",
                     gap: 3,
                     zIndex: isFourthCardVisible ? 0 : 1000,
+                    // height: "100%",
                   }}
                   onClick={() => handleCardClick("thirdCard")}
                 >
@@ -360,7 +353,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="fourthCard"
                   sx={{
-                    background: "#828282",
+                    background: isThirdCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
