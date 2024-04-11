@@ -25,7 +25,10 @@ const MiniSidebar: FC = () => {
         mt={3}
       >
         <img
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            setShowNavbar(false);
+          }}
           src="/images/logo.png"
           style={{ width: "95px", height: "64px" }}
         />
@@ -56,7 +59,10 @@ const MiniSidebar: FC = () => {
           }}
         >
           <Box
-            onClick={() => navigate("/about")}
+            onClick={() => {
+              navigate("/about");
+              setShowNavbar(false);
+            }}
             sx={{
               background:
                 location.pathname === "/about" ? "#222222" : "#3e3e3e",
@@ -68,19 +74,16 @@ const MiniSidebar: FC = () => {
               justifyContent: "center",
               height: "78px",
               gap: "3px",
-              cursor: "pointer",
-              transition: "0.7s",
-              "&:hover": {
-                color: "#FFF083",
-                background: "#222222",
-              },
             }}
           >
             <PeopleAltOutlinedIcon />
             <Typography>{t("sidebar.about")}</Typography>
           </Box>
           <Box
-            onClick={() => navigate("/portfolio")}
+            onClick={() => {
+              navigate("/portfolio");
+              setShowNavbar(false);
+            }}
             sx={{
               background:
                 location.pathname === "/portfolio" ? "#222222" : "#3e3e3e",
@@ -91,19 +94,16 @@ const MiniSidebar: FC = () => {
               justifyContent: "center",
               height: "78px",
               gap: "3px",
-              cursor: "pointer",
-              transition: "0.7s",
-              "&:hover": {
-                color: "#FFF083",
-                background: "#222222",
-              },
             }}
           >
             <WorkOutlineOutlinedIcon />
             <Typography>{t("sidebar.portfolio")}</Typography>
           </Box>
           <Box
-            onClick={() => navigate("/services")}
+            onClick={() => {
+              navigate("/services");
+              setShowNavbar(false);
+            }}
             sx={{
               background:
                 location.pathname === "/services" ? "#222222" : "#3e3e3e",
@@ -114,19 +114,16 @@ const MiniSidebar: FC = () => {
               justifyContent: "center",
               height: "78px",
               gap: "3px",
-              cursor: "pointer",
-              transition: "0.7s",
-              "&:hover": {
-                color: "#FFF083",
-                background: "#222222",
-              },
             }}
           >
             <SettingsIcon />
             <Typography>{t("sidebar.services")}</Typography>
           </Box>
           <Box
-            onClick={() => navigate("/contact")}
+            onClick={() => {
+              navigate("/contact");
+              setShowNavbar(false);
+            }}
             sx={{
               background:
                 location.pathname === "/contact" ? "#222222" : "#3e3e3e",
@@ -137,17 +134,28 @@ const MiniSidebar: FC = () => {
               justifyContent: "center",
               height: "78px",
               gap: "3px",
-              cursor: "pointer",
-              transition: "0.7s",
-              "&:hover": {
-                color: "#FFF083",
-                background: "#222222",
-              },
             }}
           >
             <MailIcon />
             <Typography>{t("sidebar.contact")}</Typography>
           </Box>
+          <Box
+            // onClick={() => {
+            //   navigate("/contact");
+            //   setShowNavbar(false);
+            // }}
+            sx={{
+              background:
+                location.pathname === "/contact" ? "#222222" : "#3e3e3e",
+              color: location.pathname === "/contact" ? "#FFF083" : "#B6B6B6",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "78px",
+              gap: "3px",
+            }}
+          ></Box>
         </Box>
       )}
     </>
