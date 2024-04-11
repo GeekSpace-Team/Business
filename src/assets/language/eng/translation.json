@@ -5,5 +5,17 @@
     "services": "Our Service",
     "contact": "Contact us",
     "language": "Language"
+  },
+
+  "contact": {
+    "name": "Full Name",
+    "mail": "Mail",
+    "message": "Message",
+    "send": "Send",
+    "address": "Our Address",
+    "addressC": "123 Main Street, Anytown, USA 12345:",
+    "phone": "Our Phone Number",
+    "contact": "Contact us",
+    "contactC": "to strategize about your business"
   }
 }

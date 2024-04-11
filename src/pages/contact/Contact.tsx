@@ -6,9 +6,11 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import PhoneEnabledOutlinedIcon from "@mui/icons-material/PhoneEnabledOutlined";
 import Social from "../../components/bottom-social/Social";
+import { useTranslation } from "react-i18next";
 
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,9 +42,9 @@ const Contact: FC = () => {
               textAlign: "center",
             }}
           >
-            Contact Us
+            {t("contact.contact")}
             <span style={{ color: "#828282", marginLeft: "10px" }}>
-              to strategize about your business
+              {t("contact.contactC")}
             </span>
           </Typography>
         </Stack>
@@ -66,7 +68,7 @@ const Contact: FC = () => {
                 >
                   <input
                     type="text"
-                    placeholder="Full Name"
+                    placeholder={t("contact.name")}
                     style={{
                       background: "#DFDFDF",
                       height: screenHeight >= 900 ? "55px" : "40px",
@@ -81,7 +83,7 @@ const Contact: FC = () => {
                   />
                   <input
                     type="email"
-                    placeholder="Mail"
+                    placeholder={t("contact.mail")}
                     style={{
                       background: "#DFDFDF",
                       height: screenHeight >= 900 ? "55px" : "40px",
@@ -107,7 +109,7 @@ const Contact: FC = () => {
                     id=""
                     cols={30}
                     rows={screenHeight >= 900 ? 17 : 10}
-                    placeholder="Message"
+                    placeholder={t("contact.message")}
                     required
                   ></textarea>
                   <Button
@@ -124,7 +126,7 @@ const Contact: FC = () => {
                     variant="contained"
                     type="submit"
                   >
-                    Send
+                    {t("contact.send")}
                   </Button>
                 </Box>
               </form>
@@ -162,7 +164,7 @@ const Contact: FC = () => {
                           color: "#E9E9E9",
                         }}
                       >
-                        Our Address
+                        {t("contact.address")}
                       </Typography>
                     </Stack>
                     <Typography
@@ -172,7 +174,7 @@ const Contact: FC = () => {
                         color: "#E9E9E9",
                       }}
                     >
-                      123 Main Street, Anytown, USA 12345:
+                      {t("contact.addressC")}
                     </Typography>
                   </Stack>
                   <Stack spacing={1}>
@@ -185,7 +187,7 @@ const Contact: FC = () => {
                           color: "#E9E9E9",
                         }}
                       >
-                        Mail
+                        {t("contact.mail")}
                       </Typography>
                     </Stack>
                     <Typography
@@ -208,7 +210,7 @@ const Contact: FC = () => {
                           color: "#E9E9E9",
                         }}
                       >
-                        Our Phone Number
+                        {t("contact.phone")}
                       </Typography>
                     </Stack>
                     <Typography

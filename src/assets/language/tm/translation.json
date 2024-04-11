@@ -5,5 +5,17 @@
     "services": "Hyzmatlarymyz",
     "contact": "Habarlaşmak",
     "language": "Dil"
+  },
+
+  "contact": {
+    "name": "Doly Ady",
+    "mail": "Poçta",
+    "message": "Hat",
+    "send": "Ugratmak",
+    "address": "Biziň Salgymyz",
+    "addressC": "123 Main Street, Anytown, USA 12345:",
+    "phone": "Biziň Telefon Belgimiz",
+    "contact": "Işiňiz barada",
+    "contactC": "strategiýa düzmek üçin bize ýüz tutuň"
   }
 }
