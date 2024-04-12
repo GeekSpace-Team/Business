@@ -6,26 +6,43 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FC, useState } from "react";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
-import { serviceItems } from "./serviceItems";
+import { ServiceData } from "../../components/service/ServiceCards";
+import axios from "axios";
+import { useQuery } from "react-query";
 
 const ServiceSx: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const navigate = useNavigate();
 
+  const {
+    data: ourserviceItems,
+    isLoading,
+    isError,
+  } = useQuery("ourserviceItems", async () => {
+    const response = await axios.get(
+      "http://95.85.121.153:1337/api/our-services?populate=icon&locale=en"
+    );
+    return response.data.data;
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data</div>;
+
   const handleAccordionClick = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+
   return (
     <>
-      {/* <span className="bottomOctagon">www</span> */}
-      {serviceItems.map((item, index) => (
+      {ourserviceItems.map((item: ServiceData, index: number) => (
         <Stack
           width={"100%"}
           direction="row"
           pl={5}
           pr={5}
           pt={5}
-          key="service_key"
+          key={`service_sx_key_${index}`}
+          sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
         >
           <span
             style={{ background: activeIndex ? "#3E3E3E" : "#828282" }}
@@ -67,7 +84,7 @@ const ServiceSx: FC = () => {
                       fontWeight: 700,
                     }}
                   >
-                    {item.title}
+                    {item.attributes.title}
                   </Typography>
                 </Stack>
               </AccordionSummary>
@@ -81,14 +98,13 @@ const ServiceSx: FC = () => {
                     textAlign: "center",
                   }}
                 >
-                  {item.description}
+                  {item.attributes.short_description}
                 </Typography>
               </AccordionDetails>
             </Accordion>
           </span>
         </Stack>
       ))}
-
       <Stack
         direction="row"
         alignItems="center"
@@ -96,6 +112,7 @@ const ServiceSx: FC = () => {
         spacing={2}
         mt={3}
         mb={3}
+        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
       >
         <Button
           onClick={() => navigate("/portfolio")}

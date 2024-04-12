@@ -15,7 +15,7 @@ import "swiper/css";
 import PortfolioMini from "./PortfolioMini";
 import { useQuery } from "react-query";
 import axios from "axios";
-import PortfolioLoading from "../../components/loading/PortfolioLoading";
+import LoadingHome from "../../components/loading/LoadingHome";
 
 const Portfolio: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -51,8 +51,8 @@ const Portfolio: FC = () => {
 
   if (isLoading)
     return (
-      <div style={{ width: "100%", height: "100vh" }}>
-        <PortfolioLoading />
+      <div style={{ width: "100%" }}>
+        <LoadingHome />
       </div>
     );
   if (isError) return <div>Error fetching data</div>;
@@ -92,12 +92,13 @@ const Portfolio: FC = () => {
             speed={5000}
             loop={true}
           >
-            {portfolioItems.map((item: any, index: any) => (
+            {portfolioItems.map((item: any, index: number) => (
               <SwiperSlide key={`portfolio_items_key${index}`}>
                 <Card
                   sx={{
                     background: activeIndex === index ? "#222222" : "#828282",
                     borderRadius: "8px",
+                    height: "100%",
                   }}
                   onClick={() => toggleActive(index)}
                 >

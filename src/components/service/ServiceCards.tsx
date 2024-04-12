@@ -7,6 +7,49 @@ interface SizeMap {
   };
 }
 
+export type ServiceData = {
+  id: number;
+  attributes: {
+    title: string;
+    short_description: string;
+    description: string | null;
+    index: number;
+    url: string | null;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
+    icon: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          alternativeText: string | null;
+          caption: string | null;
+          width: number;
+          height: number;
+          provider_metadata: Record<string, unknown>;
+          hash: string;
+          ext: string;
+          mime: string;
+          size: number;
+          url: string;
+          previewUrl: string | null;
+          provider: string;
+          blurhash: string;
+        };
+      };
+    };
+  };
+};
+
+type ServiceCardsProps = {
+  data1: ServiceData;
+  data2: ServiceData;
+  data3: ServiceData;
+  data4: ServiceData;
+};
+
 const imgWidth: SizeMap = {
   lg: {
     width: "60px",
@@ -23,7 +66,12 @@ const imgWidth: SizeMap = {
   },
 };
 
-const ServiceCards: FC = () => {
+const ServiceCards: FC<ServiceCardsProps> = ({
+  data1,
+  data2,
+  data3,
+  data4,
+}) => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [isFirstCardVisible, setIsFirstCardVisible] = useState(true);
   const [isSecondCardVisible, setIsSecondCardVisible] = useState(true);
@@ -89,7 +137,7 @@ const ServiceCards: FC = () => {
                 <Box
                   id="firstCard"
                   sx={{
-                    background: "#828282",
+                    background: isSecondCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -108,11 +156,12 @@ const ServiceCards: FC = () => {
                     alignItems="center"
                   >
                     <img
-                      src={
-                        isSecondCardVisible
-                          ? "/images/Frame 80.png"
-                          : "/images/Frame 81.png"
-                      }
+                      // src={
+                      //   isSecondCardVisible
+                      //     ? `http://95.85.121.153:1337${data1.attributes.icon?.data?.attributes?.url}`
+                      //     : "/images/Frame 81.png"
+                      // }
+                      src="images/Frame 81.png"
                       style={{
                         width: screenHeight >= 900 ? "167px" : "98px",
                       }}
@@ -125,7 +174,7 @@ const ServiceCards: FC = () => {
                         fontWeight: 700,
                       }}
                     >
-                      Strategic coach 1
+                      {data1.attributes.title}
                     </Typography>
                   </Stack>
                   {isSecondCardVisible ? null : (
@@ -137,16 +186,13 @@ const ServiceCards: FC = () => {
                         fontWeight: 500,
                       }}
                     >
-                      "Choose from either the Strategic Coach® Signature Program
-                      or the 10x Ambition Program™ with Dan Sullivan. Both offer
-                      the opportunity to strategize about what’s most important
-                      to your business at the
+                      {data1.attributes.short_description}
                     </Typography>
                   )}
                 </Box>
               </Grid>
             )}
-            {isSecondCardVisible && (
+            {data2 && isSecondCardVisible && (
               <Grid
                 sx={{ zIndex: isFirstCardVisible ? 0 : 100 }}
                 item
@@ -158,7 +204,7 @@ const ServiceCards: FC = () => {
                 <Box
                   id="secondCard"
                   sx={{
-                    background: "#828282",
+                    background: isFirstCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -178,11 +224,7 @@ const ServiceCards: FC = () => {
                     alignItems="center"
                   >
                     <img
-                      src={
-                        isFirstCardVisible
-                          ? "/images/Frame 80.png"
-                          : "/images/Frame 81.png"
-                      }
+                      src="/images/Frame 81.png"
                       style={{
                         width: screenHeight >= 900 ? "167px" : "98px",
                       }}
@@ -195,7 +237,7 @@ const ServiceCards: FC = () => {
                         fontWeight: 700,
                       }}
                     >
-                      Strategic coach 2
+                      {data2.attributes.title}
                     </Typography>
                   </Stack>
                   {isFirstCardVisible ? null : (
@@ -207,10 +249,7 @@ const ServiceCards: FC = () => {
                         fontWeight: 500,
                       }}
                     >
-                      "Choose from either the Strategic Coach® Signature Program
-                      or the 10x Ambition Program™ with Dan Sullivan. Both offer
-                      the opportunity to strategize about what’s most important
-                      to your business at the
+                      {data2.attributes.short_description}
                     </Typography>
                   )}
                 </Box>
@@ -238,7 +277,7 @@ const ServiceCards: FC = () => {
         </Stack>
         <Grid item lg={6} md={6} sm={12} xs={12}>
           <Grid container spacing={2}>
-            {isThirdCardVisible && (
+            {isThirdCardVisible && data3 && (
               <Grid
                 sx={{ zIndex: isFourthCardVisible ? 0 : 100 }}
                 item
@@ -250,7 +289,7 @@ const ServiceCards: FC = () => {
                 <Box
                   id="thirdCard"
                   sx={{
-                    background: "#828282",
+                    background: isFourthCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -259,6 +298,7 @@ const ServiceCards: FC = () => {
                     cursor: "pointer",
                     gap: 3,
                     zIndex: isFourthCardVisible ? 0 : 1000,
+                    // height: "100%",
                   }}
                   onClick={() => handleCardClick("thirdCard")}
                 >
@@ -270,11 +310,7 @@ const ServiceCards: FC = () => {
                     alignItems="center"
                   >
                     <img
-                      src={
-                        isFourthCardVisible
-                          ? "/images/Frame 80.png"
-                          : "/images/Frame 81.png"
-                      }
+                      src="/images/Frame 81.png"
                       style={{
                         width: screenHeight >= 900 ? "167px" : "98px",
                       }}
@@ -287,7 +323,7 @@ const ServiceCards: FC = () => {
                         fontWeight: 700,
                       }}
                     >
-                      Strategic coach 3
+                      {data3.attributes.title}
                     </Typography>
                   </Stack>
                   {isFourthCardVisible ? null : (
@@ -299,16 +335,13 @@ const ServiceCards: FC = () => {
                         fontWeight: 500,
                       }}
                     >
-                      "Choose from either the Strategic Coach® Signature Program
-                      or the 10x Ambition Program™ with Dan Sullivan. Both offer
-                      the opportunity to strategize about what’s most important
-                      to your business at the
+                      {data3.attributes.short_description}
                     </Typography>
                   )}
                 </Box>
               </Grid>
             )}
-            {isFourthCardVisible && (
+            {isFourthCardVisible && data4 && (
               <Grid
                 sx={{ zIndex: isThirdCardVisible ? 0 : 100 }}
                 item
@@ -320,7 +353,7 @@ const ServiceCards: FC = () => {
                 <Box
                   id="fourthCard"
                   sx={{
-                    background: "#828282",
+                    background: isThirdCardVisible ? "#828282" : "#3E3E3E",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -340,11 +373,7 @@ const ServiceCards: FC = () => {
                     alignItems="center"
                   >
                     <img
-                      src={
-                        isThirdCardVisible
-                          ? "/images/Frame 80.png"
-                          : "/images/Frame 81.png"
-                      }
+                      src="/images/Frame 81.png"
                       style={{
                         width: screenHeight >= 900 ? "167px" : "98px",
                       }}
@@ -357,7 +386,7 @@ const ServiceCards: FC = () => {
                         fontWeight: 700,
                       }}
                     >
-                      Strategic coach 4
+                      {data4.attributes.title}
                     </Typography>
                   </Stack>
                   {isThirdCardVisible ? null : (
@@ -369,10 +398,7 @@ const ServiceCards: FC = () => {
                         fontWeight: 500,
                       }}
                     >
-                      "Choose from either the Strategic Coach® Signature Program
-                      or the 10x Ambition Program™ with Dan Sullivan. Both offer
-                      the opportunity to strategize about what’s most important
-                      to your business at the
+                      {data4.attributes.short_description}
                     </Typography>
                   )}
                 </Box>
