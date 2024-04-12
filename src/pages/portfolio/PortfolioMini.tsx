@@ -45,6 +45,7 @@ const PortfolioMini: FC = () => {
       >
         <Swiper
           modules={[Autoplay]}
+          spaceBetween={10}
           slidesPerView={1}
           autoplay={{
             delay: 3000,
@@ -65,7 +66,7 @@ const PortfolioMini: FC = () => {
                   background: activeIndex === index ? "#222222" : "#828282",
                   borderRadius: "8px",
                   p: 3,
-                  width: "90%",
+                  width: "80%",
                   mr: 5,
                 }}
               >

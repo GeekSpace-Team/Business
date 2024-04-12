@@ -6,12 +6,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import AboutMini from "./AboutMini";
-import axios from "axios";
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
 import LoadingComponent from "../../components/loading/LoadingComponent";
+import api from "../../api/api";
 
-
-interface ContentData {
+export interface ContentData {
   id: number;
   attributes: {
     title: string;
@@ -89,16 +88,15 @@ const About: FC = () => {
   const navigate = useNavigate();
 
   const fetchContentData = async () => {
-    const { data } = await axios.get(
-      "http://95.85.121.153:1337/api/title-texts?locale=en&populate=image"
-    );
+    const { data } = await api.get("/api/title-texts?locale=en&populate=image");
     return data.data;
   };
 
-  const { data: contentData, error, isLoading } = useQuery<ContentData[], Error>(
-    'contentData',
-    fetchContentData
-  );
+  const {
+    data: contentData,
+    error,
+    isLoading,
+  } = useQuery<ContentData[], Error>("contentData", fetchContentData);
 
   useEffect(() => {
     const handleResize = () => {
@@ -112,11 +110,20 @@ const About: FC = () => {
     };
   }, []);
 
-  if (isLoading) return <div style={{width:"100%", display:"flex", alignItems:"center", justifyContent:"center"}}><LoadingComponent/></div>;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <LoadingComponent />
+      </div>
+    );
   if (error) return <div>An error occurred: {error.message}</div>;
-
-
- 
 
   return (
     <>
@@ -148,13 +155,13 @@ const About: FC = () => {
         <Swiper
           modules={[Autoplay]}
           slidesPerView={1}
-          spaceBetween={30} 
+          spaceBetween={30}
           autoplay={{
             delay: 3000,
             pauseOnMouseEnter: true,
           }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
           style={{
             width: "100%",
           }}
@@ -175,17 +182,21 @@ const About: FC = () => {
               >
                 <Grid container spacing={1}>
                   <Grid item lg={2} md={4} sm={6} xs={12}>
-                    {item.attributes.image?.data?.attributes?.formats?.medium?.url ? (
-                        <img
-                          style={{
-                            width: "90%",
-                            borderRadius: "8px",
-                            height: screenHeight >= 900 ? "260px" : "180px",
-                          }}
-                          src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
-                          alt={item.attributes.image.data.attributes.alternativeText || 'Image'}
-                        />
-                      ) : null}
+                    {item.attributes.image?.data?.attributes?.formats?.medium
+                      ?.url ? (
+                      <img
+                        style={{
+                          width: "90%",
+                          borderRadius: "8px",
+                          height: screenHeight >= 900 ? "260px" : "180px",
+                        }}
+                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
+                        alt={
+                          item.attributes.image.data.attributes
+                            .alternativeText || "Image"
+                        }
+                      />
+                    ) : null}
                   </Grid>
                   <Grid item lg={9} md={8} sm={6} xs={12}>
                     <Typography
@@ -269,23 +280,25 @@ const About: FC = () => {
                   </Typography>
                 </Grid>
                 <Grid item lg={2} md={4} sm={6} xs={12}>
-                  {item.attributes.image?.data?.attributes?.formats?.medium?.url ? (
-                      <img
-                        style={{
-                          width: "90%",
-                          borderRadius: "8px",
-                          height: screenHeight >= 900 ? "260px" : "180px",
-                        }}
-                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
-                        alt={item.attributes.image.data.attributes.alternativeText || 'Image'}
-                      />
-                    ) : null}
+                  {item.attributes.image?.data?.attributes?.formats?.medium
+                    ?.url ? (
+                    <img
+                      style={{
+                        width: "90%",
+                        borderRadius: "8px",
+                        height: screenHeight >= 900 ? "260px" : "180px",
+                      }}
+                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
+                      alt={
+                        item.attributes.image.data.attributes.alternativeText ||
+                        "Image"
+                      }
+                    />
+                  ) : null}
                 </Grid>
               </Grid>
             </SwiperSlide>
           ))}
-
-      
         </Swiper>
 
         <Stack

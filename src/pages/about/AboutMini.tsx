@@ -7,16 +7,39 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
+import api from "../../api/api";
+import { useQuery } from "react-query";
+import { ContentData } from "./About";
+import LoadingComponent from "../../components/loading/LoadingComponent";
 
 const AboutMini: FC = () => {
   const navigate = useNavigate();
-  const imageUrl = "/images/321467.jpg";
-  const text =
-    "The reason a coaching business is such a great business model if you're in your 9-5 is that it doesn't require huge investments and you don't have to work 24/7. The reason a coaching business is such a great business model if you're in your 9-5 is that it doesn't require huge investments and you don't have to work 24/7.";
 
-  // const maxLength = 182;
-  // const textInsideStack = text.slice(0, maxLength);
-  // const textOutsideStack = text.slice(maxLength);
+  const fetchContentData = async () => {
+    const { data } = await api.get("/api/title-texts?locale=en&populate=image");
+    return data.data;
+  };
+
+  const {
+    data: contentData,
+    error,
+    isLoading,
+  } = useQuery<ContentData[], Error>("contentData", fetchContentData);
+
+  if (isLoading)
+    return (
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <LoadingComponent />
+      </div>
+    );
+  if (error) return <div>An error occurred: {error.message}</div>;
 
   return (
     <>
@@ -40,362 +63,137 @@ const AboutMini: FC = () => {
             delay: 3000,
             pauseOnMouseEnter: true,
           }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
           style={{
             width: "100%",
           }}
           speed={5000}
           loop={true}
         >
-          <SwiperSlide>
-            <Stack direction="row" width="100%" justifyContent="flex-end">
-              <Box
-                sx={{
-                  background: "#222222",
-                  p: 1,
-                  width: "92%",
-                  borderRadius: "8px 0px 0px 8px",
-                  color: "#E7EAFF",
-                }}
-              >
-                <img
-                  className="aboutImage"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginRight: 10,
-                  }}
-                />
-                <Typography
+          {contentData?.map((item) => (
+            <SwiperSlide>
+              <Stack direction="row" width="100%" justifyContent="flex-end">
+                <Box
                   sx={{
-                    color: "#fff",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "80%",
+                    background: "#222222",
+                    p: 1,
+                    width: "92%",
+                    borderRadius: "8px 0px 0px 8px",
+                    color: "#E7EAFF",
                   }}
                 >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
+                  {/* <img
+                    className="aboutImage"
+                    src={imageUrl}
+                    alt="Image description"
+                    style={{
+                      width: "140px",
+                      height: "160px",
+                      borderRadius: "8px",
+                      marginRight: 10,
+                    }}
+                  /> */}
+                  {item.attributes.image?.data?.attributes?.formats?.medium
+                    ?.url ? (
+                    <img
+                      className="aboutImage"
+                      style={{
+                        width: "140px",
+                        height: "160px",
+                        borderRadius: "8px",
+                        marginRight: 10,
+                      }}
+                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
+                      alt={
+                        item.attributes.image.data.attributes.alternativeText ||
+                        "Image"
+                      }
+                    />
+                  ) : null}
+                  <Typography
+                    sx={{
+                      color: "#fff",
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      lineHeight: "30px",
+                      width: "80%",
+                    }}
+                  >
+                    {item.attributes.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#fff",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      lineHeight: "25px",
+                    }}
+                  >
+                    {item.attributes.description}
+                  </Typography>
+                </Box>
+              </Stack>
+              <Stack p={2}>
+                <Box
                   sx={{
-                    color: "#fff",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
+                    p: 1,
+                    width: "92%",
                   }}
                 >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-            <Stack p={2}>
-              <Box
-                sx={{
-                  p: 1,
-                  width: "92%",
-                }}
-              >
-                <img
-                  className="aboutImageRight"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginLeft: 10,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "50%",
-                  }}
-                >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Stack direction="row" width="100%" justifyContent="flex-end">
-              <Box
-                sx={{
-                  background: "#222222",
-                  p: 1,
-                  width: "92%",
-                  borderRadius: "8px 0px 0px 8px",
-                  color: "#E7EAFF",
-                }}
-              >
-                <img
-                  className="aboutImage"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginRight: 10,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#fff",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "80%",
-                  }}
-                >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#fff",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-            <Stack p={2}>
-              <Box
-                sx={{
-                  p: 1,
-                  width: "92%",
-                }}
-              >
-                <img
-                  className="aboutImageRight"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginLeft: 10,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "50%",
-                  }}
-                >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Stack direction="row" width="100%" justifyContent="flex-end">
-              <Box
-                sx={{
-                  background: "#222222",
-                  p: 1,
-                  width: "92%",
-                  borderRadius: "8px 0px 0px 8px",
-                  color: "#E7EAFF",
-                }}
-              >
-                <img
-                  className="aboutImage"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginRight: 10,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#fff",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "80%",
-                  }}
-                >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#fff",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-            <Stack p={2}>
-              <Box
-                sx={{
-                  p: 1,
-                  width: "92%",
-                }}
-              >
-                <img
-                  className="aboutImageRight"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginLeft: 10,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "50%",
-                  }}
-                >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-          </SwiperSlide>
-          <SwiperSlide>
-            <Stack direction="row" width="100%" justifyContent="flex-end">
-              <Box
-                sx={{
-                  background: "#222222",
-                  p: 1,
-                  width: "92%",
-                  borderRadius: "8px 0px 0px 8px",
-                  color: "#E7EAFF",
-                }}
-              >
-                <img
-                  className="aboutImage"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginRight: 10,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#fff",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "80%",
-                  }}
-                >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#fff",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-            <Stack p={2}>
-              <Box
-                sx={{
-                  p: 1,
-                  width: "92%",
-                }}
-              >
-                <img
-                  className="aboutImageRight"
-                  src={imageUrl}
-                  alt="Image description"
-                  style={{
-                    width: "140px",
-                    height: "160px",
-                    borderRadius: "8px",
-                    marginLeft: 10,
-                  }}
-                />
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "20px",
-                    fontWeight: 700,
-                    lineHeight: "30px",
-                    width: "50%",
-                  }}
-                >
-                  Role of Corporate Trainer
-                </Typography>
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    lineHeight: "25px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Box>
-            </Stack>
-          </SwiperSlide>
+                  {/* <img
+                    className="aboutImageRight"
+                    src={imageUrl}
+                    alt="Image description"
+                    style={{
+                      width: "140px",
+                      height: "160px",
+                      borderRadius: "8px",
+                      marginLeft: 10,
+                    }}
+                  /> */}
+                  {item.attributes.image?.data?.attributes?.formats?.medium
+                    ?.url ? (
+                    <img
+                      className="aboutImageRight"
+                      style={{
+                        width: "140px",
+                        height: "160px",
+                        borderRadius: "8px",
+                        marginLeft: 10,
+                      }}
+                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
+                      alt={
+                        item.attributes.image.data.attributes.alternativeText ||
+                        "Image"
+                      }
+                    />
+                  ) : null}
+                  <Typography
+                    sx={{
+                      color: "#222222",
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      lineHeight: "30px",
+                      width: "50%",
+                    }}
+                  >
+                    {item.attributes.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#222222",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      lineHeight: "25px",
+                    }}
+                  >
+                    {item.attributes.description}
+                  </Typography>
+                </Box>
+              </Stack>
+            </SwiperSlide>
+          ))}
         </Swiper>
 
         <Stack
