@@ -6,13 +6,15 @@ import enFlag from "/images/Group 79 2.png";
 import tmFlag from "/images/Flag_of_Turkmenistan 2.png";
 import { useTranslation } from "react-i18next";
 
-const Language: FC<{ setShowLanguage: (show: boolean) => void }> = ({ setShowLanguage }) => {
+const Language: FC<{ setShowLanguage: (show: boolean) => void }> = ({
+  setShowLanguage,
+}) => {
   const { t, i18n } = useTranslation();
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
 
   const handleLanguageSelect = (selectedLanguage: string) => {
     setShowLanguage(false);
-    console.log(selectedLanguage)
+    console.log(selectedLanguage);
   };
 
   useEffect(() => {
@@ -27,9 +29,9 @@ const Language: FC<{ setShowLanguage: (show: boolean) => void }> = ({ setShowLan
     };
   }, []);
 
-  const changeLanguage = (lng: string, selectedLanguage:string) => {
+  const changeLanguage = (lng: string, selectedLanguage: string) => {
     i18n.changeLanguage(lng);
-    handleLanguageSelect(selectedLanguage)
+    handleLanguageSelect(selectedLanguage);
   };
 
   return (
@@ -45,7 +47,7 @@ const Language: FC<{ setShowLanguage: (show: boolean) => void }> = ({ setShowLan
           <Stack
             spacing={screenHeight >= 900 ? 2 : 1}
             sx={{ cursor: "pointer" }}
-            onClick={() => changeLanguage("tm" , "Trukmenistan")}
+            onClick={() => changeLanguage("tm", "Trukmenistan")}
           >
             <img
               src={tmFlag}
