@@ -4,9 +4,6 @@ import Typography from "@mui/material/Typography";
 import { Box, Button, Divider } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 import api from "../../api/api";
 import { useQuery } from "react-query";
 import { ContentData } from "./About";
@@ -56,84 +53,63 @@ const AboutMini: FC = () => {
         >
           WHO WE ARE
         </Typography>
-        <Swiper
-          modules={[Autoplay]}
-          slidesPerView={1}
-          autoplay={{
-            delay: 3000,
-            pauseOnMouseEnter: true,
-          }}
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
-          style={{
-            width: "100%",
-          }}
-          speed={5000}
-          loop={true}
-        >
-          {contentData?.map((item) => (
-            <SwiperSlide>
-              <Stack direction="row" width="100%" justifyContent="flex-end">
-                <Box
-                  sx={{
-                    background: "#222222",
-                    p: 1,
-                    width: "92%",
-                    borderRadius: "8px 0px 0px 8px",
-                    color: "#E7EAFF",
-                  }}
-                >
-                  {/* <img
-                    className="aboutImage"
-                    src={imageUrl}
-                    alt="Image description"
-                    style={{
-                      width: "140px",
-                      height: "160px",
-                      borderRadius: "8px",
-                      marginRight: 10,
+        {contentData?.map((item) => (
+          <>
+            {item.attributes.type === "about_us_title" && (
+              <>
+                <Stack direction="row" width="100%" justifyContent="flex-end">
+                  <Box
+                    sx={{
+                      background: "#222222",
+                      p: 1,
+                      width: "92%",
+                      borderRadius: "8px 0px 0px 8px",
+                      color: "#E7EAFF",
                     }}
-                  /> */}
-                  {item.attributes.image?.data?.attributes?.formats?.medium
-                    ?.url ? (
-                    <img
-                      className="aboutImage"
-                      style={{
-                        width: "140px",
-                        height: "160px",
-                        borderRadius: "8px",
-                        marginRight: 10,
+                  >
+                    {item.attributes.image?.data?.attributes?.formats?.medium
+                      ?.url ? (
+                      <img
+                        className="aboutImage"
+                        style={{
+                          width: "140px",
+                          height: "160px",
+                          borderRadius: "8px",
+                          marginRight: 10,
+                        }}
+                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
+                        alt={
+                          item.attributes.image.data.attributes
+                            .alternativeText || "Image"
+                        }
+                      />
+                    ) : null}
+                    <Typography
+                      sx={{
+                        color: "#fff",
+                        fontSize: "20px",
+                        fontWeight: 700,
+                        lineHeight: "30px",
+                        width: "80%",
                       }}
-                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
-                      alt={
-                        item.attributes.image.data.attributes.alternativeText ||
-                        "Image"
-                      }
-                    />
-                  ) : null}
-                  <Typography
-                    sx={{
-                      color: "#fff",
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      lineHeight: "30px",
-                      width: "80%",
-                    }}
-                  >
-                    {item.attributes.title}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "#fff",
-                      fontSize: "16px",
-                      fontWeight: 600,
-                      lineHeight: "25px",
-                    }}
-                  >
-                    {item.attributes.description}
-                  </Typography>
-                </Box>
-              </Stack>
+                    >
+                      {item.attributes.title}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: "#fff",
+                        fontSize: "16px",
+                        fontWeight: 600,
+                        lineHeight: "25px",
+                      }}
+                    >
+                      {item.attributes.description}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </>
+            )}
+            {item.attributes.type === "about_us_description" && (
               <Stack p={2}>
                 <Box
                   sx={{
@@ -141,17 +117,6 @@ const AboutMini: FC = () => {
                     width: "92%",
                   }}
                 >
-                  {/* <img
-                    className="aboutImageRight"
-                    src={imageUrl}
-                    alt="Image description"
-                    style={{
-                      width: "140px",
-                      height: "160px",
-                      borderRadius: "8px",
-                      marginLeft: 10,
-                    }}
-                  /> */}
                   {item.attributes.image?.data?.attributes?.formats?.medium
                     ?.url ? (
                     <img
@@ -188,13 +153,13 @@ const AboutMini: FC = () => {
                       lineHeight: "25px",
                     }}
                   >
-                    {item.attributes.description}
+                    {item.attributes.short_description}
                   </Typography>
                 </Box>
               </Stack>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            )}
+          </>
+        ))}
 
         <Stack
           direction="row"
