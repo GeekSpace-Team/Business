@@ -41,7 +41,10 @@ const AboutMini: FC = () => {
   return (
     <>
       <Stack
-        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
+        sx={{
+          display: { lg: "none", md: "none", sm: "flex", xs: "flex" },
+          height: "auto",
+        }}
       >
         <Typography
           sx={{

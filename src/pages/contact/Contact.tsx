@@ -9,6 +9,7 @@ import Social from "../../components/bottom-social/Social";
 import { useTranslation } from "react-i18next";
 import i18n from "../../assets/language/i18n";
 import axios from "axios";
+import { showError, showSuccess } from "../../components/alert/Alert";
 
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -51,6 +52,7 @@ const Contact: FC = () => {
         ...formData,
       });
       console.log("Message sent successfully:", response.data);
+      showSuccess(t("contact.success"));
       setFormData({
         username: "",
         email: "",
@@ -58,6 +60,7 @@ const Contact: FC = () => {
       });
     } catch (error) {
       console.error("Error sending message:", error);
+      showError(t("contact.error"));
     }
   };
 

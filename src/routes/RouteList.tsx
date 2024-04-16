@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoadingComponent from "../components/loading/LoadingComponent";
 import LoadingHome from "../components/loading/LoadingHome";
 import { LanguageProvider } from "../hooks/LanguageContext";
+import { ToastContainer } from "react-toastify";
+
 // import MusicPlayer from "../components/musicPlayer/MusicPlayer";
 
 // Import lazy-loaded components
@@ -140,6 +142,7 @@ const RouteList: FC = () => {
             />
           </Route>
         </Routes>
+        <ToastContainer />
       </LanguageProvider>
       {/* <MusicPlayer /> */}
     </BrowserRouter>
