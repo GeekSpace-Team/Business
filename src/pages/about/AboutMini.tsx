@@ -60,7 +60,12 @@ const AboutMini: FC = () => {
           <>
             {item.attributes.type === "about_us_title" && (
               <>
-                <Stack direction="row" width="100%" justifyContent="flex-end">
+                <Stack
+                  direction="row"
+                  key={`about_mini`}
+                  width="100%"
+                  justifyContent="flex-end"
+                >
                   <Box
                     sx={{
                       background: "#222222",
