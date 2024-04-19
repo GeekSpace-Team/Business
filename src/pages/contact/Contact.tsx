@@ -7,6 +7,9 @@ import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import PhoneEnabledOutlinedIcon from "@mui/icons-material/PhoneEnabledOutlined";
 import Social from "../../components/bottom-social/Social";
 import { useTranslation } from "react-i18next";
+import i18n from "../../assets/language/i18n";
+import axios from "axios";
+import { showError, showSuccess } from "../../components/alert/Alert";
 
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -24,6 +27,43 @@ const Contact: FC = () => {
     };
   }, []);
 
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    text: "",
+  });
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post("http://95.85.121.153:6426/send-mail", {
+        to_mail: "microsoft7779@gmail.com",
+        ...formData,
+      });
+      console.log("Message sent successfully:", response.data);
+      showSuccess(t("contact.success"));
+      setFormData({
+        username: "",
+        email: "",
+        text: "",
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      showError(t("contact.error"));
+    }
+  };
+
   return (
     <>
       <Stack pt={3} width={{ md: "80%", lg: "80%", sm: "100%", xs: "100%" }}>
@@ -37,7 +77,12 @@ const Contact: FC = () => {
           <Typography
             sx={{
               color: "#222222",
-              fontSize: { lg: "36px", md: "36px", sm: "30px", xs: "30px" },
+              fontSize: {
+                lg: i18n.language === "ru" ? "33px" : "36px",
+                md: i18n.language === "ru" ? "33px" : "36px",
+                sm: "30px",
+                xs: "30px",
+              },
               fontWeight: 700,
               textAlign: "center",
             }}
@@ -54,7 +99,7 @@ const Contact: FC = () => {
               pl={{ lg: 5, md: 5, sm: 3, xs: 3 }}
               pr={{ lg: 5, md: 5, sm: 3, xs: 3 }}
             >
-              <form action="contact">
+              <form onSubmit={handleSubmit}>
                 <Box
                   sx={{
                     background: "#828282",
@@ -68,6 +113,9 @@ const Contact: FC = () => {
                 >
                   <input
                     type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
                     placeholder={t("contact.name")}
                     style={{
                       background: "#DFDFDF",
@@ -83,6 +131,9 @@ const Contact: FC = () => {
                   />
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder={t("contact.mail")}
                     style={{
                       background: "#DFDFDF",
@@ -97,7 +148,9 @@ const Contact: FC = () => {
                     required
                   />
                   <textarea
-                    name="message"
+                    name="text"
+                    value={formData.text}
+                    onChange={handleChange}
                     style={{
                       borderRadius: "8px",
                       padding: "15px",

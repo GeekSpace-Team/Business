@@ -2,9 +2,6 @@ import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 import AboutMini from "./AboutMini";
 import { useQuery } from "react-query";
 import LoadingComponent from "../../components/loading/LoadingComponent";
@@ -16,8 +13,8 @@ export interface ContentData {
     title: string;
     description: string | null;
     short_description: string;
-    index: number;
     is_active: boolean;
+    type: "about_us_title" | "about_us_description"; // Updated with new type attribute
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
@@ -88,8 +85,22 @@ const About: FC = () => {
   const navigate = useNavigate();
 
   const fetchContentData = async () => {
-    const { data } = await api.get("/api/title-texts?locale=en&populate=image");
-    return data.data;
+    try {
+      const { data } = await api.get(
+        "/api/title-texts?locale=en&populate=image"
+      );
+
+      const filteredData = data.data.filter(
+        (item: ContentData) =>
+          item.attributes &&
+          (item.attributes.type === "about_us_title" ||
+            item.attributes.type === "about_us_description")
+      );
+
+      return filteredData;
+    } catch (error: any) {
+      throw new Error(`Failed to fetch content data: ${error.message}`);
+    }
   };
 
   const {
@@ -152,59 +163,103 @@ const About: FC = () => {
             who we are
           </Typography>
         </Box>
-        <Swiper
-          modules={[Autoplay]}
-          slidesPerView={1}
-          spaceBetween={30}
-          autoplay={{
-            delay: 3000,
-            pauseOnMouseEnter: true,
-          }}
-          // onSwiper={(swiper) => console.log(swiper)}
-          // onSlideChange={() => console.log("slide change")}
-          style={{
-            width: "100%",
-          }}
-          speed={5000}
-          loop={true}
-        >
+
+        <>
           {contentData?.map((item) => (
-            <SwiperSlide key={item.id}>
-              <Box
-                sx={{
-                  background: "#222222",
-                  p: screenHeight >= 900 ? 4 : 2,
-                  width: "90%",
-                  height: "auto",
-                  borderRadius: "8px 0px 0px 8px",
-                  mt: screenHeight >= 900 ? 5 : 2,
-                }}
-              >
-                <Grid container spacing={1}>
-                  <Grid item lg={2} md={4} sm={6} xs={12}>
-                    {item.attributes.image?.data?.attributes?.formats?.medium
-                      ?.url ? (
-                      <img
-                        style={{
-                          width: "90%",
-                          borderRadius: "8px",
-                          height: screenHeight >= 900 ? "260px" : "180px",
+            <>
+              {item.attributes.type === "about_us_title" && (
+                <Box
+                  key={item.id}
+                  sx={{
+                    background: "#222222",
+                    p: screenHeight >= 900 ? 4 : 2,
+                    width: "90%",
+                    height: "auto",
+                    borderRadius: "8px 0px 0px 8px",
+                    mt: screenHeight >= 900 ? 5 : 2,
+                  }}
+                >
+                  <Grid container spacing={1}>
+                    <Grid item lg={2} md={4} sm={6} xs={12}>
+                      {item.attributes.image?.data?.attributes?.formats?.medium
+                        ?.url ? (
+                        <img
+                          style={{
+                            width: "90%",
+                            borderRadius: "8px",
+                            height: screenHeight >= 900 ? "260px" : "180px",
+                          }}
+                          src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
+                          alt={
+                            item.attributes.image.data.attributes
+                              .alternativeText || "Image"
+                          }
+                        />
+                      ) : null}
+                    </Grid>
+                    <Grid item lg={9} md={8} sm={6} xs={12}>
+                      <Typography
+                        sx={{
+                          fontSize: screenHeight >= 900 ? "32px" : "24px",
+                          fontWeight: 700,
+                          lineHeight: screenHeight >= 900 ? "39px" : "30px",
+                          color: "#E7EAFF",
+                          width: {
+                            lg: "30%",
+                            md: "30%",
+                            sm: "100%",
+                            xs: "100%",
+                          },
+                          textAlign: {
+                            lg: "start",
+                            md: "start",
+                            sm: "center",
+                            xs: "center",
+                          },
                         }}
-                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
-                        alt={
-                          item.attributes.image.data.attributes
-                            .alternativeText || "Image"
-                        }
-                      />
-                    ) : null}
+                      >
+                        {item.attributes.title}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: screenHeight >= 900 ? "20px" : "16px",
+                          fontWeight: 600,
+                          lineHeight: screenHeight >= 900 ? "25px" : "20px",
+                          color: "#E7EAFF",
+                          width: {
+                            lg: "70%",
+                            md: "70%",
+                            sm: "100%",
+                            xs: "100%",
+                          },
+                          textAlign: {
+                            lg: "start",
+                            md: "start",
+                            sm: "center",
+                            xs: "center",
+                          },
+                        }}
+                      >
+                        {item.attributes.description}
+                      </Typography>
+                    </Grid>
                   </Grid>
+                </Box>
+              )}
+              {item.attributes.type === "about_us_description" && (
+                <Grid
+                  container
+                  spacing={1}
+                  mt={screenHeight >= 900 ? 5 : 2}
+                  width="94%"
+                >
                   <Grid item lg={9} md={8} sm={6} xs={12}>
                     <Typography
                       sx={{
-                        fontSize: screenHeight >= 900 ? "32px" : "24px",
+                        fontSize: screenHeight >= 900 ? "32px" : "26px",
                         fontWeight: 700,
                         lineHeight: screenHeight >= 900 ? "39px" : "30px",
-                        color: "#E7EAFF",
+                        color: "#626262",
                         width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
                         textAlign: {
                           lg: "start",
@@ -218,10 +273,10 @@ const About: FC = () => {
                     </Typography>
                     <Typography
                       sx={{
-                        fontSize: screenHeight >= 900 ? "20px" : "16px",
+                        fontSize: screenHeight >= 900 ? "20px" : "17px",
                         fontWeight: 600,
                         lineHeight: screenHeight >= 900 ? "25px" : "20px",
-                        color: "#E7EAFF",
+                        color: "#626262",
                         width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
                         textAlign: {
                           lg: "start",
@@ -231,75 +286,31 @@ const About: FC = () => {
                         },
                       }}
                     >
-                      {item.attributes.description}
+                      {item.attributes.short_description}
                     </Typography>
                   </Grid>
+                  <Grid item lg={2} md={4} sm={6} xs={12}>
+                    {item.attributes.image?.data?.attributes?.formats?.medium
+                      ?.url && (
+                      <img
+                        style={{
+                          width: "90%",
+                          borderRadius: "8px",
+                          height: screenHeight >= 900 ? "260px" : "180px",
+                        }}
+                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
+                        alt={
+                          item.attributes.image.data.attributes
+                            .alternativeText || "Image"
+                        }
+                      />
+                    )}
+                  </Grid>
                 </Grid>
-              </Box>
-
-              <Grid
-                container
-                spacing={1}
-                mt={screenHeight >= 900 ? 5 : 2}
-                width="94%"
-              >
-                <Grid item lg={9} md={8} sm={6} xs={12}>
-                  <Typography
-                    sx={{
-                      fontSize: screenHeight >= 900 ? "32px" : "26px",
-                      fontWeight: 700,
-                      lineHeight: screenHeight >= 900 ? "39px" : "30px",
-                      color: "#626262",
-                      width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
-                      textAlign: {
-                        lg: "start",
-                        md: "start",
-                        sm: "center",
-                        xs: "center",
-                      },
-                    }}
-                  >
-                    {item.attributes.title}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: screenHeight >= 900 ? "20px" : "17px",
-                      fontWeight: 600,
-                      lineHeight: screenHeight >= 900 ? "25px" : "20px",
-                      color: "#626262",
-                      width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
-                      textAlign: {
-                        lg: "start",
-                        md: "start",
-                        sm: "center",
-                        xs: "center",
-                      },
-                    }}
-                  >
-                    {item.attributes.description}
-                  </Typography>
-                </Grid>
-                <Grid item lg={2} md={4} sm={6} xs={12}>
-                  {item.attributes.image?.data?.attributes?.formats?.medium
-                    ?.url ? (
-                    <img
-                      style={{
-                        width: "90%",
-                        borderRadius: "8px",
-                        height: screenHeight >= 900 ? "260px" : "180px",
-                      }}
-                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
-                      alt={
-                        item.attributes.image.data.attributes.alternativeText ||
-                        "Image"
-                      }
-                    />
-                  ) : null}
-                </Grid>
-              </Grid>
-            </SwiperSlide>
+              )}
+            </>
           ))}
-        </Swiper>
+        </>
 
         <Stack
           direction="row"

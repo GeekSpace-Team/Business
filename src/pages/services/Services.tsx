@@ -11,10 +11,6 @@ import "swiper/css";
 import ServiceSx from "./ServiceSx";
 import useServices from "../../hooks/useServices";
 
-type Data = {
-  data: unknown[];
-};
-
 interface SizeMap {
   [key: string]: {
     fontSize?: string;
@@ -115,7 +111,7 @@ const Services: FC = () => {
     width = "xs";
   }
 
-  const serviceCards = (data: Data) => {
+  const serviceCards = (data: any) => {
     const newData = data?.data
       ? [...data.data, ...data.data, data.data[0]]
       : [];

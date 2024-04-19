@@ -16,6 +16,8 @@
     "addressC": "123 Main Street, Anytown, USA 12345:",
     "phone": "Biziň Telefon Belgimiz",
     "contact": "Işiňiz barada",
-    "contactC": "strategiýa düzmek üçin bize ýüz tutuň"
+    "contactC": "strategiýa düzmek üçin bize ýüz tutuň",
+    "success": "Hat üstünlikli ugradyldy",
+    "error": "Hat ugratmakda ýalňyşlyk ýüze çykdy"
   }
 }

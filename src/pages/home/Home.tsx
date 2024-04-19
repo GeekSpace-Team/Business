@@ -14,9 +14,9 @@ import Social from "../../components/bottom-social/Social";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import HomeXS from "./HomeXS";
 import { useQuery } from "react-query";
-import axios from "axios";
 import { ImageData } from "../../types/type";
 import LoadingHome from "../../components/loading/LoadingHome";
+import api from "../../api/api";
 
 const Home: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -25,9 +25,7 @@ const Home: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://95.85.121.153:1337/api/banners?populate=*"
-        );
+        const response = await api.get("/api/banners?populate=*");
         const data = response.data.data;
         const homeBanner = data.find(
           (e: {
@@ -67,9 +65,7 @@ const Home: FC = () => {
     isLoading: isHomeDataLoading,
     isError: isHomeDataError,
   } = useQuery("homeData", async () => {
-    const response = await axios.get(
-      "http://95.85.121.153:1337/api/title-texts"
-    );
+    const response = await api.get("/api/title-texts");
     return response.data;
   });
 
@@ -78,9 +74,7 @@ const Home: FC = () => {
     isLoading: isImageDataLoading,
     isError: isImageDataError,
   } = useQuery("imageData", async () => {
-    const response = await axios.get(
-      "http://95.85.121.153:1337/api/banners?populate=image"
-    );
+    const response = await api.get("/api/banners?populate=image");
     return response.data;
   });
 

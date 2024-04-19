@@ -298,7 +298,6 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     cursor: "pointer",
                     gap: 3,
                     zIndex: isFourthCardVisible ? 0 : 1000,
-                    // height: "100%",
                   }}
                   onClick={() => handleCardClick("thirdCard")}
                 >
