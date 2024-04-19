@@ -22,10 +22,10 @@ const Social: FC = () => {
   const { data, isLoading, error } = useQuery<SocialMediaData[]>(
     "socialMediaData",
     async () => {
-      const response = await axios.get<SocialMediaData[]>(
+      const response = await axios.get(
         "http://95.85.121.153:1337/api/social-medias?populate=icon"
       );
-      return response.data;
+      return response.data.data;
     }
   );
 

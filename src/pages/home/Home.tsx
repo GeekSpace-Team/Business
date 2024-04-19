@@ -17,15 +17,20 @@ import { useQuery } from "react-query";
 import { ImageData } from "../../types/type";
 import LoadingHome from "../../components/loading/LoadingHome";
 import api from "../../api/api";
+import { useTranslation } from "react-i18next";
 
 const Home: FC = () => {
+  const { i18n } = useTranslation();
+
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/api/banners?populate=*");
+        const response = await api.get(
+          `/api/banners?populate=*&locale=${i18n.language}`
+        );
         const data = response.data.data;
         const homeBanner = data.find(
           (e: {
@@ -46,7 +51,7 @@ const Home: FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [i18n.language]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -61,22 +66,31 @@ const Home: FC = () => {
   }, []);
 
   const {
+    refetch: fetchTexts,
     data: homeData,
     isLoading: isHomeDataLoading,
     isError: isHomeDataError,
   } = useQuery("homeData", async () => {
-    const response = await api.get("/api/title-texts");
+    const response = await api.get(`/api/title-texts?locale=${i18n.language}`);
     return response.data;
   });
 
   const {
+    refetch: fetchBanners,
     data: imageData,
     isLoading: isImageDataLoading,
     isError: isImageDataError,
   } = useQuery("imageData", async () => {
-    const response = await api.get("/api/banners?populate=image");
+    const response = await api.get(
+      `/api/banners?populate=image&locale=${i18n.language}`
+    );
     return response.data;
   });
+
+  useEffect(() => {
+    fetchBanners();
+    fetchTexts();
+  }, [i18n.language]);
 
   return (
     <>
