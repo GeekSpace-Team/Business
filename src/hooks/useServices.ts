@@ -13,7 +13,7 @@ interface Service {
 }
 
 const useServices = (): UseQueryResult<Service[], Error> => {
-  const { i18n } = useTranslation(); // Move inside the custom hook
+  const { i18n } = useTranslation();
   const fetchServices = async (): Promise<Service[]> => {
     const response = await api.get(
       `/api/our-services?populate=icon&locale=${i18n.language}`

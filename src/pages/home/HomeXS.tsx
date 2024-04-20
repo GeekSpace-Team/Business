@@ -13,14 +13,19 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import api from "../../api/api";
 import { useQuery } from "react-query";
 import LoadingHome from "../../components/loading/LoadingHome";
+import { useTranslation } from "react-i18next";
 
 const HomeXS: FC = () => {
+  const { i18n } = useTranslation();
+
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await api.get("/api/banners?populate=*");
+        const response = await api.get(
+          `/api/banners?populate=*&locale=${i18n.language}`
+        );
         const data = response.data.data;
         const homeBanner = data.find(
           (e: {
@@ -41,9 +46,10 @@ const HomeXS: FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [i18n.language]);
 
   const {
+    refetch: fetchTexts,
     data: homeData,
     isLoading: isHomeDataLoading,
     isError: isHomeDataError,
@@ -57,9 +63,15 @@ const HomeXS: FC = () => {
     isLoading: isImageDataLoading,
     isError: isImageDataError,
   } = useQuery("imageData", async () => {
-    const response = await api.get("/api/banners?populate=image");
+    const response = await api.get(
+      `/api/banners?populate=image&locale=${i18n.language}`
+    );
     return response.data;
   });
+
+  useEffect(() => {
+    fetchTexts();
+  }, [i18n.language]);
 
   return (
     <>

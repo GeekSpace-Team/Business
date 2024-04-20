@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Box, Button, Divider } from "@mui/material";
@@ -8,20 +8,29 @@ import api from "../../api/api";
 import { useQuery } from "react-query";
 import { ContentData } from "./About";
 import LoadingComponent from "../../components/loading/LoadingComponent";
+import { useTranslation } from "react-i18next";
 
 const AboutMini: FC = () => {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   const fetchContentData = async () => {
-    const { data } = await api.get("/api/title-texts?locale=en&populate=image");
+    const { data } = await api.get(
+      `/api/title-texts?locale=${i18n.language}&populate=image`
+    );
     return data.data;
   };
 
   const {
+    refetch: fetchTexts,
     data: contentData,
     error,
     isLoading,
   } = useQuery<ContentData[], Error>("contentData", fetchContentData);
+
+  useEffect(() => {
+    fetchTexts();
+  }, [i18n.language]);
 
   if (isLoading)
     return (
@@ -43,7 +52,8 @@ const AboutMini: FC = () => {
       <Stack
         sx={{
           display: { lg: "none", md: "none", sm: "flex", xs: "flex" },
-          height: "auto",
+          minHeight: "100vh",
+          overflow: "auto",
         }}
       >
         <Typography
@@ -123,6 +133,7 @@ const AboutMini: FC = () => {
                   sx={{
                     p: 1,
                     width: "92%",
+                    height: "auto",
                   }}
                 >
                   {item.attributes.image?.data?.attributes?.formats?.medium
@@ -174,6 +185,7 @@ const AboutMini: FC = () => {
           alignItems="center"
           justifyContent="center"
           spacing={2}
+          mb={3}
         >
           <Button
             onClick={() => navigate("/")}

@@ -3,21 +3,49 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { portfolioItems } from "./portfolioItems";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { useTranslation } from "react-i18next";
+import api from "../../api/api";
+import { useQuery } from "react-query";
+import LoadingHome from "../../components/loading/LoadingHome";
 
 const PortfolioMini: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+
+  const {
+    refetch: fetchTexts,
+    data: portfolioItems,
+    isLoading,
+    isError,
+  } = useQuery("portfolioItems", async () => {
+    const response = await api.get(
+      `/api/portfolios?populate=image&locale=${i18n.language}`
+    );
+    return response.data.data;
+  });
 
   const handleAccordionClick = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+
+  useEffect(() => {
+    fetchTexts();
+  }, [i18n.language]);
+
+  if (isLoading)
+    return (
+      <div style={{ width: "100%" }}>
+        <LoadingHome />
+      </div>
+    );
+  if (isError) return <div>Error fetching data</div>;
 
   return (
     <>
@@ -59,7 +87,7 @@ const PortfolioMini: FC = () => {
           speed={5000}
           loop={true}
         >
-          {portfolioItems.map((item, index) => (
+          {portfolioItems.map((item: any, index: number) => (
             <SwiperSlide key={`portfolio_items_mini_key${index}`}>
               <Box
                 sx={{
@@ -71,7 +99,7 @@ const PortfolioMini: FC = () => {
                 }}
               >
                 <img
-                  src={item.image}
+                  src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
                   style={{
                     width: "100%",
                     height: "260px",
@@ -105,7 +133,7 @@ const PortfolioMini: FC = () => {
                         fontWeight: 700,
                       }}
                     >
-                      {item.title}
+                      {item.attributes.title}
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>
@@ -117,7 +145,7 @@ const PortfolioMini: FC = () => {
                         lineHeight: "30px",
                       }}
                     >
-                      {item.description}
+                      {item.attributes.short_description}
                     </Typography>
                   </AccordionDetails>
                 </Accordion>

@@ -8,15 +8,36 @@ import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
 import MailIcon from "@mui/icons-material/Mail";
 import CloseIcon from "@mui/icons-material/Close";
+import Language from "../../assets/language/Language";
+import LanguageIcon from "@mui/icons-material/Language";
 
 const MiniSidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useTranslation();
   const [showNavbar, setShowNavbar] = useState(false);
+  const [showLanguage, setShowLanguage] = useState(false);
+
+  const handleLanguageClick = () => {
+    setShowLanguage(!showLanguage);
+  };
 
   return (
     <>
+      {showLanguage && (
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "17.3%",
+            left: "12%",
+            zIndex: 1000,
+          }}
+        >
+          <Box sx={{ position: "relative" }}>
+            <Language setShowLanguage={setShowLanguage} />
+          </Box>
+        </Box>
+      )}
       <Stack
         width="100%"
         direction="row"
@@ -140,14 +161,10 @@ const MiniSidebar: FC = () => {
             <Typography>{t("sidebar.contact")}</Typography>
           </Box>
           <Box
-            // onClick={() => {
-            //   navigate("/contact");
-            //   setShowNavbar(false);
-            // }}
+            onClick={handleLanguageClick}
             sx={{
-              background:
-                location.pathname === "/contact" ? "#222222" : "#3e3e3e",
-              color: location.pathname === "/contact" ? "#FFF083" : "#B6B6B6",
+              background: showLanguage ? "#222222" : "#3e3e3e",
+              color: showLanguage ? "#FFF083" : "#B6B6B6",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -155,7 +172,10 @@ const MiniSidebar: FC = () => {
               height: "78px",
               gap: "3px",
             }}
-          ></Box>
+          >
+            <LanguageIcon />
+            {t("sidebar.language")}
+          </Box>
         </Box>
       )}
     </>
