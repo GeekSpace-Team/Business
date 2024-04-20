@@ -72,7 +72,6 @@ const ServiceSx: FC = () => {
               clipPath: "polygon(0 100%, 100% 100%, 100% 0)",
               zIndex: 1000,
               border: "none",
-              opacity: 0.9,
             }}
           ></Box>
           <Box
@@ -86,7 +85,6 @@ const ServiceSx: FC = () => {
               clipPath: "polygon(100% 0, 100% 100%, 0% 100%)",
               zIndex: 1000,
               border: "none",
-              opacity: 0.9,
             }}
           ></Box>
         </Box>
