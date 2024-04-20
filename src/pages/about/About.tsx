@@ -6,6 +6,7 @@ import AboutMini from "./AboutMini";
 import { useQuery } from "react-query";
 import LoadingComponent from "../../components/loading/LoadingComponent";
 import api from "../../api/api";
+import { useTranslation } from "react-i18next";
 
 export interface ContentData {
   id: number;
@@ -83,11 +84,12 @@ export interface ContentData {
 const About: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   const fetchContentData = async () => {
     try {
       const { data } = await api.get(
-        "/api/title-texts?locale=en&populate=image"
+        `/api/title-texts?locale=${i18n.language}&populate=image`
       );
 
       const filteredData = data.data.filter(
@@ -104,6 +106,7 @@ const About: FC = () => {
   };
 
   const {
+    refetch: fetchTexts,
     data: contentData,
     error,
     isLoading,
@@ -120,6 +123,10 @@ const About: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    fetchTexts();
+  }, [i18n.language]);
 
   if (isLoading)
     return (

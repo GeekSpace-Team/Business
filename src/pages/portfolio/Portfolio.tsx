@@ -14,13 +14,15 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import PortfolioMini from "./PortfolioMini";
 import { useQuery } from "react-query";
-import axios from "axios";
 import LoadingHome from "../../components/loading/LoadingHome";
+import { useTranslation } from "react-i18next";
+import api from "../../api/api";
 
 const Portfolio: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,12 +37,13 @@ const Portfolio: FC = () => {
   }, []);
 
   const {
+    refetch: fetchTexts,
     data: portfolioItems,
     isLoading,
     isError,
   } = useQuery("portfolioItems", async () => {
-    const response = await axios.get(
-      "http://95.85.121.153:1337/api/portfolios?populate=image&locale=en"
+    const response = await api.get(
+      `/api/portfolios?populate=image&locale=${i18n.language}`
     );
     return response.data.data;
   });
@@ -48,6 +51,10 @@ const Portfolio: FC = () => {
   const toggleActive = (index: number) => {
     setActiveIndex(index === activeIndex ? null : index);
   };
+
+  useEffect(() => {
+    fetchTexts();
+  }, [i18n.language]);
 
   if (isLoading)
     return (
