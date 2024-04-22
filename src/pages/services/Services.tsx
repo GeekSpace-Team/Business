@@ -76,7 +76,7 @@ const sizeTitle: SizeMap = {
 const Services: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
-  const {data}=useServices()
+  const { data } = useServices();
 
   useEffect(() => {
     const handleResize = () => {
@@ -212,7 +212,9 @@ const Services: FC = () => {
       <Stack
         width="86%"
         mr={3}
-        sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
+        sx={{
+          display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
+        }}
       >
         <Swiper
           modules={[Autoplay]}

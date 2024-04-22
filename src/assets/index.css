@@ -7,6 +7,7 @@ body {
   font-family: InterRegular;
   background: #e9e9e9;
   /* padding: 5px; */
+  overflow-x: hidden;
 }
 * {
   padding: 0;
