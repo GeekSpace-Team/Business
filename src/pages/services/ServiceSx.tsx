@@ -47,158 +47,230 @@ const ServiceSx: FC = () => {
 
   return (
     <>
-      <Stack spacing={5} direction="row" justifyContent="center">
-        <Stack width="90%" spacing={3}>
-          {ourserviceItems.map((item: ServiceData, index: number) => (
-            <Box
-              sx={{
-                position: "relative",
-                height: "auto",
-                width: "100%",
-                background: showDescription === index ? "#3e3e3e" : "#828282",
-                transition: "background-color 0.3s",
-                cursor: "pointer",
-              }}
+      <Box
+        sx={{
+          display: { lg: "none", md: "none", sm: "flex", xs: "flex" },
+          flexDirection: "column",
+        }}
+      >
+        <Stack direction="row" justifyContent="center">
+          <Box
+            sx={{
+              width: "90%",
+              height: "200px",
+              background: "url('./images/Group 73.png')",
+              backgroundSize: "100% 100%",
+              backgroundPosition: "cover",
+              mb: 2,
+              position: "relative",
+              borderRadius: "8px",
+            }}
+          >
+            <Typography
+              mt={3}
+              align="center"
+              fontSize="24px"
+              fontWeight={700}
+              color="#fff"
             >
+              Our Services
+            </Typography>
+            <Stack direction="row" justifyContent="center">
+              <Typography
+                align="center"
+                sx={{
+                  width: "80%",
+                  color: "#E9E9E9",
+                  lineHeight: "23px",
+                  fontWeight: 600,
+                }}
+              >
+                Identify new business opportunities in order to improve
+                profitability and help the business grow. Identify new business
+                profitability and help the business grow.
+              </Typography>
+            </Stack>
+            <img
+              src="./images/Rectangle 14.png"
+              style={{
+                position: "absolute",
+                width: "45px",
+                bottom: -28,
+                left: -28,
+              }}
+              alt=""
+            />
+
+            <img
+              src="./images/Rectangle 14.png"
+              style={{
+                position: "absolute",
+                width: "45px",
+                bottom: -28,
+                right: -28,
+              }}
+              alt=""
+            />
+          </Box>
+        </Stack>
+        <Stack spacing={5} direction="row" justifyContent="center">
+          <Stack width="90%" spacing={2}>
+            {ourserviceItems.map((item: ServiceData, index: number) => (
               <Box
                 sx={{
+                  position: "relative",
+                  height: "auto",
                   width: "100%",
+                  background: showDescription === index ? "#3e3e3e" : "#828282",
+                  transition: "background-color 0.3s",
+                  cursor: "pointer",
                 }}
-                onClick={() => handleClick(index)}
               >
-                <Stack
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  p={5}
+                <Box
+                  sx={{
+                    width: "100%",
+                  }}
+                  onClick={() => handleClick(index)}
                 >
-                  <IconButton>
+                  <Stack
+                    direction="row"
+                    spacing={3}
+                    justifyContent="space-between"
+                    alignItems="center"
+                    p={3}
+                  >
                     <img
-                      src={item.attributes.icon?.data?.attributes?.url}
+                      style={{ width: "56px" }}
+                      src="./images/Frame 81.png"
                       alt=""
                     />
-                  </IconButton>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      color: showDescription === index ? "#FFF083" : "#E9E9E9",
-                    }}
-                  >
-                    {item.attributes.title}
-                  </Typography>
-                  <IconButton>
-                    {showDescription === index ? (
-                      <ExpandLessIcon
-                        sx={{ color: showDescription ? "#FFF083" : "#E9E9E9" }}
-                      />
-                    ) : (
-                      <ExpandMoreIcon
-                        sx={{ color: showDescription ? "#FFF083" : "#E9E9E9" }}
-                      />
-                    )}
-                  </IconButton>
-                </Stack>
-                {showDescription === index && (
-                  <>
-                    <Stack direction="row" justifyContent="center">
-                      <Typography
-                        key={index}
-                        sx={{
-                          color: "#FFF083",
-                          fontSize: "20px",
-                          fontWeight: 600,
-                          lineHeight: "30px",
-                          textAlign: "center",
-                          mb: 3,
-                          width: "95%",
-                        }}
-                      >
-                        {item.attributes.short_description}
-                      </Typography>
-                    </Stack>
-                  </>
-                )}
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        color:
+                          showDescription === index ? "#FFF083" : "#E9E9E9",
+                      }}
+                    >
+                      {item.attributes.title}
+                    </Typography>
+                    <IconButton>
+                      {showDescription === index ? (
+                        <ExpandLessIcon
+                          sx={{
+                            color: showDescription ? "#FFF083" : "#E9E9E9",
+                          }}
+                        />
+                      ) : (
+                        <ExpandMoreIcon
+                          sx={{
+                            color: showDescription ? "#FFF083" : "#E9E9E9",
+                          }}
+                        />
+                      )}
+                    </IconButton>
+                  </Stack>
+                  {showDescription === index && (
+                    <>
+                      <Stack direction="row" justifyContent="center">
+                        <Typography
+                          key={index}
+                          sx={{
+                            color: "#FFF083",
+                            fontSize: "20px",
+                            fontWeight: 600,
+                            lineHeight: "30px",
+                            textAlign: "center",
+                            mb: 3,
+                            width: "95%",
+                          }}
+                        >
+                          {item.attributes.short_description}
+                        </Typography>
+                      </Stack>
+                    </>
+                  )}
+                </Box>
+                <img
+                  src="./images/Rectangle 14.png"
+                  style={{
+                    position: "absolute",
+                    width: "45px",
+                    top: -28,
+                    left: -28,
+                  }}
+                  alt=""
+                />
+
+                <img
+                  src="./images/Rectangle 14.png"
+                  style={{
+                    position: "absolute",
+                    width: "45px",
+                    bottom: -28,
+                    right: -28,
+                  }}
+                  alt=""
+                />
+                <img
+                  src="./images/Rectangle 14.png"
+                  style={{
+                    position: "absolute",
+                    width: "45px",
+                    bottom: -28,
+                    left: -28,
+                  }}
+                  alt=""
+                />
+                <img
+                  src="./images/Rectangle 14.png"
+                  style={{
+                    position: "absolute",
+                    width: "45px",
+                    top: -28,
+                    right: -28,
+                  }}
+                  alt=""
+                />
               </Box>
-              <img
-                src="./images/Rectangle 14.png"
-                style={{
-                  position: "absolute",
-                  width: "50px",
-                  top: -28,
-                  left: -28,
-                }}
-                alt=""
-              />
-
-              <img
-                src="./images/Rectangle 14.png"
-                style={{
-                  position: "absolute",
-                  width: "50px",
-                  bottom: -28,
-                  right: -28,
-                }}
-                alt=""
-              />
-              <img
-                src="./images/Rectangle 14.png"
-                style={{
-                  position: "absolute",
-                  width: "50px",
-                  bottom: -28,
-                  left: -28,
-                }}
-                alt=""
-              />
-              <img
-                src="./images/Rectangle 14.png"
-                style={{
-                  position: "absolute",
-                  width: "50px",
-                  top: -28,
-                  right: -28,
-                }}
-                alt=""
-              />
-            </Box>
-          ))}
+            ))}
+          </Stack>
         </Stack>
-      </Stack>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        spacing={2}
-        mt={3}
-        mb={3}
-        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
-      >
-        <Button
-          onClick={() => navigate("/portfolio")}
-          startIcon={
-            <ArrowRightAltIcon
-              sx={{
-                color: "#828282",
-                transform: "rotate(180deg)",
-                fontSize: "34px",
-                width: "30px",
-              }}
-            />
-          }
-          sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+          spacing={2}
+          mt={3}
+          mb={3}
+          sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
         >
-          Previous
-        </Button>
+          <Button
+            onClick={() => navigate("/portfolio")}
+            startIcon={
+              <ArrowRightAltIcon
+                sx={{
+                  color: "#828282",
+                  transform: "rotate(180deg)",
+                  fontSize: "34px",
+                  width: "30px",
+                }}
+              />
+            }
+            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+          >
+            Previous
+          </Button>
 
-        <Divider orientation="vertical" />
-        <Button
-          onClick={() => navigate("/contact")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-          sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
-        >
-          Read more
-        </Button>
-      </Stack>
+          <Divider orientation="vertical" />
+          <Button
+            onClick={() => navigate("/contact")}
+            endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+          >
+            Read more
+          </Button>
+        </Stack>
+      </Box>
     </>
   );
 };

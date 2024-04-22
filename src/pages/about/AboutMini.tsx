@@ -52,7 +52,7 @@ const AboutMini: FC = () => {
       <Stack
         sx={{
           display: { lg: "none", md: "none", sm: "flex", xs: "flex" },
-          minHeight: "100vh",
+          height: "100%",
           overflow: "auto",
         }}
       >
