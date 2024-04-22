@@ -1,7 +1,11 @@
-import { Box, Button, Divider, Stack, Typography } from "@mui/material";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,11 +17,16 @@ import { useTranslation } from "react-i18next";
 import api from "../../api/api";
 import { useQuery } from "react-query";
 import LoadingHome from "../../components/loading/LoadingHome";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 
 const PortfolioMini: FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const navigate = useNavigate();
   const { i18n } = useTranslation();
+  const [showDescription, setShowDescription] = useState<number | null>(null);
+
+  const handleShowDescription = (index: number) => {
+    setShowDescription(showDescription === index ? null : index);
+  };
 
   const {
     refetch: fetchTexts,
@@ -30,10 +39,6 @@ const PortfolioMini: FC = () => {
     );
     return response.data.data;
   });
-
-  const handleAccordionClick = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
 
   useEffect(() => {
     fetchTexts();
@@ -79,8 +84,6 @@ const PortfolioMini: FC = () => {
             delay: 3000,
             pauseOnMouseEnter: true,
           }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
           style={{
             width: "100%",
           }}
@@ -91,7 +94,7 @@ const PortfolioMini: FC = () => {
             <SwiperSlide key={`portfolio_items_mini_key${index}`}>
               <Box
                 sx={{
-                  background: activeIndex === index ? "#222222" : "#828282",
+                  background: showDescription === index ? "#222222" : "#828282",
                   borderRadius: "8px",
                   p: 3,
                   width: "80%",
@@ -107,7 +110,7 @@ const PortfolioMini: FC = () => {
                   }}
                   alt="321467.jpg"
                 />
-                <Accordion
+                {/* <Accordion
                   expanded={activeIndex === index}
                   onChange={() => handleAccordionClick(index)}
                   sx={{
@@ -148,7 +151,61 @@ const PortfolioMini: FC = () => {
                       {item.attributes.short_description}
                     </Typography>
                   </AccordionDetails>
-                </Accordion>
+                </Accordion> */}
+                <Stack
+                  onClick={() => handleShowDescription(index)}
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <Stack>
+                    <Stack
+                      direction="row"
+                      alignItems="center"
+                      justifyContent="space-between"
+                    >
+                      <Typography
+                        sx={{
+                          color:
+                            showDescription === index ? "#FFF083" : "#e9e9e9",
+                          fontSize: "20px",
+                          fontWeight: 700,
+                        }}
+                      >
+                        {item.attributes.title}
+                      </Typography>
+                      <IconButton>
+                        {showDescription === index ? (
+                          <ExpandLessIcon
+                            sx={{
+                              color: showDescription ? "#FFF083" : "#E9E9E9",
+                            }}
+                          />
+                        ) : (
+                          <ExpandMoreIcon
+                            sx={{
+                              color: showDescription ? "#FFF083" : "#E9E9E9",
+                            }}
+                          />
+                        )}
+                      </IconButton>
+                    </Stack>
+                    {showDescription && (
+                      <>
+                        <Typography
+                          sx={{
+                            color: "#E9E9E9",
+                            fontSize: "20px",
+                            fontWeight: 600,
+                            lineHeight: "30px",
+                          }}
+                        >
+                          {item.attributes.short_description}
+                        </Typography>
+                      </>
+                    )}
+                  </Stack>
+                </Stack>
               </Box>
             </SwiperSlide>
           ))}

@@ -91,8 +91,6 @@ const Portfolio: FC = () => {
               delay: 3000,
               pauseOnMouseEnter: true,
             }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
             style={{
               width: "100%",
             }}
