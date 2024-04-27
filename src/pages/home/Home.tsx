@@ -154,10 +154,17 @@ const Home: FC = () => {
                     <Social />
                   </Stack>
                 </Grid>
-                <Grid item lg={5} pr="3%" md={5} sm={12} xs={12}>
+                <Grid
+                  item
+                  lg={5}
+                  pr="3%"
+                  md={5}
+                  sm={12}
+                  xs={12}
+                  data-aos="fade-down"
+                  data-aos-delay={"400"}
+                >
                   <Box
-                    data-aos="fade-left"
-                    data-aos-delay={"400"}
                     sx={{
                       width: "100%",
                       height: "85vh",
