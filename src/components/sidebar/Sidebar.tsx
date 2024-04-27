@@ -47,7 +47,7 @@ const Sidebar: FC = () => {
           }}
         >
           <Box sx={{ position: "relative" }}>
-            <Language setShowLanguage={setShowLanguage}  />
+            <Language setShowLanguage={setShowLanguage} />
           </Box>
         </Box>
       )}
@@ -64,7 +64,7 @@ const Sidebar: FC = () => {
           pb={screenHeight >= 900 ? 5 : 1}
           spacing={screenHeight >= 900 ? 5 : 2}
         >
-          <Logo />
+          <Logo data-aos="fade-down" data-aos-delay={"500"} />
 
           <Stack
             height="100%"
@@ -83,6 +83,8 @@ const Sidebar: FC = () => {
             >
               <Stack spacing={0.5}>
                 <Box
+                  data-aos="fade-down"
+                  data-aos-delay={"400"}
                   onClick={() => navigate("/about")}
                   sx={{
                     background:
@@ -110,6 +112,8 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
+                  data-aos="fade-down"
+                  data-aos-delay={"500"}
                   onClick={() => navigate("/portfolio")}
                   sx={{
                     background:
@@ -140,6 +144,8 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
+                  data-aos="fade-down"
+                  data-aos-delay={"600"}
                   onClick={() => navigate("/services")}
                   sx={{
                     background:
@@ -166,6 +172,8 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
+                  data-aos="fade-up"
+                  data-aos-delay={"500"}
                   onClick={() => navigate("/contact")}
                   sx={{
                     background:
@@ -192,6 +200,8 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
+                  data-aos="fade-up"
+                  data-aos-delay={"600"}
                   onClick={handleLanguageClick}
                   sx={{
                     background: showLanguage ? "#222222" : "#3e3e3e",

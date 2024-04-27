@@ -161,6 +161,8 @@ const About: FC = () => {
           }}
         >
           <Typography
+            data-aos={`fade-down`}
+            data-aos-delay={"400"}
             sx={{
               textTransform: "uppercase",
               fontSize: screenHeight >= 900 ? "36px" : "30px",
@@ -176,6 +178,8 @@ const About: FC = () => {
             <>
               {item.attributes.type === "about_us_title" && (
                 <Box
+                  data-aos="fade-left"
+                  data-aos-delay={"500"}
                   key={item.id}
                   sx={{
                     background: "#222222",
@@ -259,6 +263,8 @@ const About: FC = () => {
                   spacing={1}
                   mt={screenHeight >= 900 ? 5 : 2}
                   width="94%"
+                  data-aos="fade-right"
+                  data-aos-delay={"500"}
                 >
                   <Grid item lg={9} md={8} sm={6} xs={12}>
                     <Typography
@@ -343,7 +349,7 @@ const About: FC = () => {
             Previous
           </Button>
 
-          <Divider orientation="vertical" />
+          <Divider orientation="vertical" flexItem />
           <Button
             onClick={() => navigate("/portfolio")}
             endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}

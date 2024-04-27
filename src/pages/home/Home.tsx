@@ -18,10 +18,11 @@ import { ImageData } from "../../types/type";
 import LoadingHome from "../../components/loading/LoadingHome";
 import api from "../../api/api";
 import { useTranslation } from "react-i18next";
+import { TypeAnimation } from "react-type-animation";
 
 const Home: FC = () => {
   const { i18n } = useTranslation();
-
+  const [animationKey, setAnimationKey] = useState(0);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
 
@@ -52,6 +53,13 @@ const Home: FC = () => {
 
     fetchData();
   }, [i18n.language]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimationKey((prevKey) => prevKey + 1);
+    }, 5000); // Change this to the duration of your animation
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -117,16 +125,22 @@ const Home: FC = () => {
               <Grid container spacing={10} pt={2} alignItems="center">
                 <Grid item lg={7} md={7} sm={12} xs={12}>
                   <Stack spacing={2}>
-                    <Typography
-                      sx={{
+                    <TypeAnimation
+                      key={animationKey}
+                      sequence={[`${homeData.data[0].attributes.title}`]}
+                      wrapper="span"
+                      speed={30}
+                      style={{
                         color: "#222222",
-                        fontSize: screenHeight >= 900 ? "48px" : "43px",
-                        fontWeight: 700,
+                        fontSize: "2.4em",
+                        fontWeight: 900,
+                        lineHeight: "2em",
+                        width: screenHeight >= 900 ? "60%" : "100%",
                       }}
-                    >
-                      {homeData.data[0].attributes.title}
-                    </Typography>
+                    />
                     <Typography
+                      data-aos="fade-up"
+                      data-aos-delay={"500"}
                       sx={{
                         color: "#6B6B6B",
                         fontSize: "16px",
@@ -142,6 +156,8 @@ const Home: FC = () => {
                 </Grid>
                 <Grid item lg={5} pr="3%" md={5} sm={12} xs={12}>
                   <Box
+                    data-aos="fade-left"
+                    data-aos-delay={"400"}
                     sx={{
                       width: "100%",
                       height: "85vh",
@@ -155,6 +171,8 @@ const Home: FC = () => {
                     }}
                   >
                     <Card
+                      data-aos="fade-left"
+                      data-aos-delay={"700"}
                       sx={{
                         width: "100%",
                         height: "auto",
@@ -217,6 +235,8 @@ const Home: FC = () => {
           <Stack
             width="auto"
             p={1}
+            data-aos={`fade-down`}
+            data-aos-delay={"400"}
             sx={{
               position: "absolute",
               bottom: 0,
@@ -229,6 +249,8 @@ const Home: FC = () => {
             <Stack direction="row" spacing={1}>
               {imageData.data.slice(1).map((item: ImageData) => (
                 <Box
+                  data-aos={`fade-down`}
+                  data-aos-delay={`${item.id * 200}`}
                   key={item.id}
                   sx={{
                     background: "#D9D9D9",

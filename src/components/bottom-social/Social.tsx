@@ -51,6 +51,8 @@ const Social: FC = () => {
               <Tooltip key={socialMedia.id} title={title}>
                 <IconButton href={url} target="_blank">
                   <img
+                    data-aos="fade-down"
+                    data-aos-delay={`${socialMedia.id * 200}`}
                     src={iconUrl}
                     alt={title}
                     style={{ width: 32, height: 32 }}

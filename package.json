@@ -16,7 +16,9 @@
     "@mui/material": "^5.15.12",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
     "antd": "^5.15.2",
+    "aos": "^2.3.4",
     "axios": "^1.6.7",
+    "framer-motion": "^4.1.17",
     "i18next": "^23.10.1",
     "react": "^18.2.0",
     "react-audio-player": "^0.17.0",
@@ -29,10 +31,13 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
+    "react-transition-group": "^4.4.5",
+    "react-type-animation": "^3.2.0",
     "styled-components": "^6.1.8",
     "swiper": "^11.0.7"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",

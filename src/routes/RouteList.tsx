@@ -1,5 +1,7 @@
-import React, { FC, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { FC, lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoadingComponent from "../components/loading/LoadingComponent";
 import LoadingHome from "../components/loading/LoadingHome";
 import { LanguageProvider } from "../hooks/LanguageContext";
@@ -8,15 +10,21 @@ import { ToastContainer } from "react-toastify";
 // import MusicPlayer from "../components/musicPlayer/MusicPlayer";
 
 // Import lazy-loaded components
-const Sidebar = React.lazy(() => import("../components/sidebar/Sidebar"));
-const Home = React.lazy(() => import("../pages/home/Home"));
-const About = React.lazy(() => import("../pages/about/About"));
-const Contact = React.lazy(() => import("../pages/contact/Contact"));
-const Portfolio = React.lazy(() => import("../pages/portfolio/Portfolio"));
-const Services = React.lazy(() => import("../pages/services/Services"));
+
+const Sidebar = lazy(() => import("../components/sidebar/Sidebar"));
+const Home = lazy(() => import("../pages/home/Home"));
+const About = lazy(() => import("../pages/about/About"));
+const Contact = lazy(() => import("../pages/contact/Contact"));
+const Portfolio = lazy(() => import("../pages/portfolio/Portfolio"));
+const Services = lazy(() => import("../pages/services/Services"));
 
 const RouteList: FC = () => {
   console.clear();
+
+  Aos.init({
+    duration: 1800,
+    offset: 0,
+  });
   return (
     <BrowserRouter>
       <LanguageProvider>

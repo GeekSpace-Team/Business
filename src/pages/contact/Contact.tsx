@@ -86,15 +86,30 @@ const Contact: FC = () => {
               fontWeight: 700,
               textAlign: "center",
             }}
+            data-aos="fade-right"
+            data-aos-delay={"500"}
           >
             {t("contact.contact")}
-            <span style={{ color: "#828282", marginLeft: "10px" }}>
+            <span
+              data-aos="fade-left"
+              data-aos-delay={"500"}
+              style={{ color: "#828282", marginLeft: "10px" }}
+            >
               {t("contact.contactC")}
             </span>
           </Typography>
         </Stack>
         <Grid container>
-          <Grid item lg={6} md={6} sm={12} xs={12} mb={3}>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            mb={3}
+            data-aos="fade-up"
+            data-aos-delay={"500"}
+          >
             <Stack
               pl={{ lg: 5, md: 5, sm: 3, xs: 3 }}
               pr={{ lg: 5, md: 5, sm: 3, xs: 3 }}
@@ -185,7 +200,15 @@ const Contact: FC = () => {
               </form>
             </Stack>
           </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            data-aos="fade-down"
+            data-aos-delay={"500"}
+          >
             <Stack
               spacing={2}
               pl={{ lg: 0, md: 0, sm: 3, xs: 3 }}
