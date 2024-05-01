@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import Logo from "../logo/Logo";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Social from "../bottom-social/Social";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
@@ -11,6 +11,8 @@ import Language from "../../assets/language/Language";
 import { useTranslation } from "react-i18next";
 import LanguageIcon from "@mui/icons-material/Language";
 import MiniSidebar from "./MiniSidebar";
+import "../../pages/home/home.css";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Sidebar: FC = () => {
   const location = useLocation();
@@ -18,6 +20,15 @@ const Sidebar: FC = () => {
   const { t } = useTranslation();
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [showLanguage, setShowLanguage] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSidebarVisible(false);
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [navigate]);
 
   const handleLanguageClick = () => {
     setShowLanguage(!showLanguage);
@@ -57,21 +68,40 @@ const Sidebar: FC = () => {
       >
         <Stack
           sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
-          alignItems="center"
+          // alignItems="center"
           height="auto"
           width={"200px"}
           pt={screenHeight >= 900 ? 3 : 0}
           pb={screenHeight >= 900 ? 5 : 1}
-          spacing={screenHeight >= 900 ? 5 : 2}
         >
-          <Logo data-aos="fade-down" data-aos-delay={"500"} />
-
+          {!sidebarVisible && (
+            <>
+              <Stack
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Tooltip title="Open Sidebar">
+                  <IconButton
+                    className="leftArrow"
+                    sx={{ width: "30px" }}
+                    onClick={() => setSidebarVisible(true)}
+                  >
+                    <ArrowForwardIosIcon />
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+            </>
+          )}
           <Stack
             height="100%"
-            pl={location.pathname === "/" ? "0%" : "20%"}
             pr={location.pathname === "/" ? "6%" : ""}
-            spacing={screenHeight >= 900 ? 13 : 7}
+            spacing={screenHeight >= 900 ? 13 : 1}
+            style={{ display: sidebarVisible ? "block" : "none" }}
           >
+            <Logo />
             <Box
               sx={{
                 background: "#363636",
@@ -80,11 +110,12 @@ const Sidebar: FC = () => {
                 borderRadius: "8px",
                 padding: 1,
               }}
+              data-aos="fade-down"
+              data-aos-delay={"600"}
             >
               <Stack spacing={0.5}>
                 <Box
-                  data-aos="fade-down"
-                  data-aos-delay={"400"}
+                  className="sidebar_first_item"
                   onClick={() => navigate("/about")}
                   sx={{
                     background:
@@ -112,8 +143,7 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
-                  data-aos="fade-down"
-                  data-aos-delay={"500"}
+                  className="sidebar_second_item"
                   onClick={() => navigate("/portfolio")}
                   sx={{
                     background:
@@ -144,8 +174,7 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
-                  data-aos="fade-down"
-                  data-aos-delay={"600"}
+                  className="sidebar_third_item"
                   onClick={() => navigate("/services")}
                   sx={{
                     background:
@@ -172,8 +201,7 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
-                  data-aos="fade-up"
-                  data-aos-delay={"500"}
+                  className="sidebar_fourth_item"
                   onClick={() => navigate("/contact")}
                   sx={{
                     background:
@@ -200,8 +228,7 @@ const Sidebar: FC = () => {
                   </Typography>
                 </Box>
                 <Box
-                  data-aos="fade-up"
-                  data-aos-delay={"600"}
+                  className="sidebar_fifth_item"
                   onClick={handleLanguageClick}
                   sx={{
                     background: showLanguage ? "#222222" : "#3e3e3e",

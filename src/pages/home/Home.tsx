@@ -19,6 +19,7 @@ import LoadingHome from "../../components/loading/LoadingHome";
 import api from "../../api/api";
 import { useTranslation } from "react-i18next";
 import { TypeAnimation } from "react-type-animation";
+import "./home.css";
 
 const Home: FC = () => {
   const { i18n } = useTranslation();
@@ -57,7 +58,7 @@ const Home: FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimationKey((prevKey) => prevKey + 1);
-    }, 5000); // Change this to the duration of your animation
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -107,7 +108,7 @@ const Home: FC = () => {
       {homeData && imageData && (
         <>
           <Stack
-            width="100%"
+            width="300%"
             height="85vh"
             sx={{
               display: { lg: "block", md: "block", sm: "none", xs: "none" },
@@ -154,17 +155,9 @@ const Home: FC = () => {
                     <Social />
                   </Stack>
                 </Grid>
-                <Grid
-                  item
-                  lg={5}
-                  pr="3%"
-                  md={5}
-                  sm={12}
-                  xs={12}
-                  data-aos="fade-down"
-                  data-aos-delay={"400"}
-                >
+                <Grid item lg={5} pr="3%" md={5} sm={12} xs={12}>
                   <Box
+                    className="bounce"
                     sx={{
                       width: "100%",
                       height: "85vh",
@@ -242,18 +235,27 @@ const Home: FC = () => {
           <Stack
             width="auto"
             p={1}
-            data-aos={`fade-down`}
-            data-aos-delay={"400"}
+            // data-aos={`fade-down`}
+            // data-aos-delay={"400"}
             sx={{
               position: "absolute",
               bottom: 0,
+              // left: "10%",
               left: screenHeight >= 900 ? -40 : -17,
               background: "#222222",
               borderTopRightRadius: "8px",
-              display: { lg: "block", md: "block", sm: "none", xs: "none" },
+              borderTopLeftRadius: "8px",
+              display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <Stack direction="row" spacing={1}>
+            <Stack
+              direction="row"
+              justifyContent={"center"}
+              width="100%"
+              spacing={1}
+            >
               {imageData.data.slice(1).map((item: ImageData) => (
                 <Box
                   data-aos={`fade-down`}

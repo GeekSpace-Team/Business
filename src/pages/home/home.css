@@ -1,0 +1,107 @@
+.bounce {
+  animation: bounce 5s ease-in-out;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.logoAnimation {
+  animation: slideInRotate 3.5s ease-in-out;
+  cursor: pointer;
+  height: 90px;
+  width: 150px;
+}
+
+@keyframes slideInRotate {
+  0% {
+    opacity: 0;
+    width: 50px;
+    height: 50px;
+    transform: translateX(300%);
+  }
+
+  100% {
+    opacity: 1;
+    width: 146px;
+    height: 90px;
+    transform: translateX(0);
+  }
+}
+
+.sidebar_first_item {
+  animation: sidebarItemRight 2s ease-in-out;
+}
+
+@keyframes sidebarItemRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sidebar_second_item {
+  animation: sidebarItemRight 2.5s ease-in-out;
+}
+
+@keyframes sidebarItemRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sidebar_third_item {
+  animation: sidebarItemRight 3s ease-in-out;
+}
+
+@keyframes sidebarItemRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sidebar_fourth_item {
+  animation: sidebarItemRight 3.5s ease-in-out;
+}
+
+@keyframes sidebarItemRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sidebar_fifth_item {
+  animation: sidebarItemRight 4s ease-in-out;
+}
+
+@keyframes sidebarItemRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

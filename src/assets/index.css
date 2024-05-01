@@ -21,3 +21,17 @@ body {
 .aboutImageRight {
   float: right;
 }
+
+.leftArrow {
+  animation: arrowMotion 3.5s infinite ease-in-out;
+}
+
+@keyframes arrowMotion {
+  0%,
+  100% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+}

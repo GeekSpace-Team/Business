@@ -67,7 +67,7 @@ const Portfolio: FC = () => {
   return (
     <>
       <Stack
-        width="80%"
+        width="100%"
         sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
       >
         <Stack pt={5} mb={-7}>

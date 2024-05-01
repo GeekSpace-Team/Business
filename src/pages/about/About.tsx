@@ -147,7 +147,7 @@ const About: FC = () => {
     <>
       <Stack
         sx={{
-          width: "100%",
+          width: "300%",
           height: "auto",
           display: { lg: "block", md: "block", sm: "none", xs: "none" },
         }}
