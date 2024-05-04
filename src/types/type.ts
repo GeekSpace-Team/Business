@@ -49,3 +49,22 @@ export interface ImageData {
     };
   };
 }
+
+export interface PortfolioItem {
+  id: string;
+  attributes: {
+    title: string;
+    short_description: string;
+    image: {
+      data: {
+        attributes: {
+          formats: {
+            thumbnail: {
+              url: string;
+            };
+          };
+        };
+      };
+    };
+  };
+}

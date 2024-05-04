@@ -26,6 +26,7 @@ const Home: FC = () => {
   const [animationKey, setAnimationKey] = useState(0);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
+  const [showIcon, setShowIcon] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -163,7 +164,8 @@ const Home: FC = () => {
                       height: "85vh",
                       backgroundImage: `url(${backgroundImageUrl})`,
                       backgroundSize: "cover",
-                      backgroundPosition: "center",
+                      backgroundPosition: "0 50px",
+                      backgroundRepeat: "no-repeat",
                       borderRadius: "8px",
                       p: 1,
                       display: "flex",
@@ -233,15 +235,13 @@ const Home: FC = () => {
             </Box>
           </Stack>
           <Stack
-            width="auto"
+            direction="row"
+            spacing={1}
             p={1}
-            // data-aos={`fade-down`}
-            // data-aos-delay={"400"}
             sx={{
               position: "absolute",
               bottom: 0,
-              // left: "10%",
-              left: screenHeight >= 900 ? -40 : -17,
+              left: screenHeight >= 900 ? 60 : 50,
               background: "#222222",
               borderTopRightRadius: "8px",
               borderTopLeftRadius: "8px",
@@ -250,71 +250,65 @@ const Home: FC = () => {
               justifyContent: "center",
             }}
           >
-            <Stack
-              direction="row"
-              justifyContent={"center"}
-              width="100%"
-              spacing={1}
-            >
-              {imageData.data.slice(1).map((item: ImageData) => (
-                <Box
-                  data-aos={`fade-down`}
-                  data-aos-delay={`${item.id * 200}`}
-                  key={item.id}
-                  sx={{
-                    background: "#D9D9D9",
-                    p: 1,
-                    borderRadius: "8px",
-                    width: screenHeight >= 900 ? "450px" : "330px",
-                  }}
-                >
-                  <Stack direction="row" spacing={1}>
-                    {item.attributes.image.data.attributes.formats.thumbnail
-                      .url && (
-                      <img
-                        style={{
-                          width: "120px",
-                          height: screenHeight >= 900 ? "110px" : "60px",
-                          borderRadius: "4px",
+            {imageData.data.slice(1).map((item: ImageData) => (
+              <Box
+                // data-aos={`fade-down`}
+                // data-aos-delay={`${item.id * 200}`}
+                onMouseEnter={() => setShowIcon(true)}
+                onMouseLeave={() => setShowIcon(false)}
+                key={item.id}
+                sx={{
+                  background: "#D9D9D9",
+                  p: 1,
+                  borderRadius: "8px",
+                  // width: "200px",
+                }}
+              >
+                <Stack direction="row" spacing={3}>
+                  {item.attributes.image.data.attributes.formats.thumbnail
+                    .url && (
+                    <img
+                      style={{
+                        width: "120px",
+                        height: screenHeight >= 900 ? "110px" : "60px",
+                        borderRadius: "4px",
+                      }}
+                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
+                    />
+                  )}
+                  <Typography
+                    sx={{
+                      color: "#222222",
+                      fontSize: screenHeight >= 900 ? "18px" : "12px",
+                      lineHeight: screenHeight >= 900 ? 2 : 1.5,
+                      bottom: screenHeight >= 900 ? 5 : 0,
+                      width: screenHeight >= 900 ? "250px" : "150px",
+                    }}
+                  >
+                    {item.attributes.title.slice(0, 61)}...
+                  </Typography>
+                  {showIcon && (
+                    <IconButton
+                      sx={{
+                        width: screenHeight >= 900 ? "40px" : "30px",
+                        height: screenHeight >= 900 ? "40px" : "30px",
+                        top: 0,
+                        right: 0,
+                      }}
+                    >
+                      <ArrowRightAltIcon
+                        sx={{
+                          color: "#828282",
+                          transform: "rotate(320deg)",
+                          fontSize: screenHeight >= 900 ? "40px" : "34px",
+                          width: screenHeight >= 900 ? "30px" : "20px",
                         }}
-                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
                       />
-                    )}
-                    <Stack sx={{ position: "relative", width: "100%" }}>
-                      <IconButton
-                        sx={{
-                          width: screenHeight >= 900 ? "40px" : "30px",
-                          height: screenHeight >= 900 ? "40px" : "30px",
-                          position: "absolute",
-                          top: 0,
-                          right: 0,
-                        }}
-                      >
-                        <ArrowRightAltIcon
-                          sx={{
-                            color: "#828282",
-                            transform: "rotate(320deg)",
-                            fontSize: screenHeight >= 900 ? "40px" : "34px",
-                            width: screenHeight >= 900 ? "30px" : "20px",
-                          }}
-                        />
-                      </IconButton>
-                      <Typography
-                        sx={{
-                          color: "#222222",
-                          fontSize: screenHeight >= 900 ? "18px" : "12px",
-                          lineHeight: "20px",
-                          position: "absolute",
-                          bottom: screenHeight >= 900 ? 5 : 0,
-                        }}
-                      >
-                        {item.attributes.title}
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </Box>
-              ))}
-            </Stack>
+                    </IconButton>
+                  )}
+                </Stack>
+              </Box>
+            ))}
           </Stack>
         </>
       )}

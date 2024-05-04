@@ -41,7 +41,7 @@ const Social: FC = () => {
 
   return (
     <>
-      <Stack direction="row" spacing={{ lg: 1, md: 1, sm: 4, xs: 4 }}>
+      <Stack direction="row" spacing={{ lg: 0, md: 0, sm: 2, xs: 2 }}>
         {data.map((socialMedia) => {
           const { title, url, icon } = socialMedia.attributes;
           // Corrected the iconUrl construction

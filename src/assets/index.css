@@ -35,3 +35,34 @@ body {
     transform: translateX(5px);
   }
 }
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 20px !important;
+  color: orange;
+  background-color: #222222;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 17px;
+  border-radius: 50%;
+}
+
+.swiper-button-next {
+  position: absolute;
+}
+
+.moreButton {
+  background: linear-gradient(270deg, #773f07, #330202, #a3a0a0);
+  background-size: 400% 400%;
+  animation: AnimationName 3s ease infinite;
+}
+
+@keyframes AnimationName {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}

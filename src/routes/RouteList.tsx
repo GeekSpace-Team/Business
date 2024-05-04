@@ -6,6 +6,7 @@ import LoadingComponent from "../components/loading/LoadingComponent";
 import LoadingHome from "../components/loading/LoadingHome";
 import { LanguageProvider } from "../hooks/LanguageContext";
 import { ToastContainer } from "react-toastify";
+import PortfolioDetail from "../pages/portfolio/PortfolioDetail";
 
 // import MusicPlayer from "../components/musicPlayer/MusicPlayer";
 
@@ -19,7 +20,7 @@ const Portfolio = lazy(() => import("../pages/portfolio/Portfolio"));
 const Services = lazy(() => import("../pages/services/Services"));
 
 const RouteList: FC = () => {
-  console.clear();
+  // console.clear();
 
   Aos.init({
     duration: 1800,
@@ -145,6 +146,27 @@ const RouteList: FC = () => {
                   }
                 >
                   <Services />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/portfolio/:id"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "90vh",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <LoadingComponent />
+                    </div>
+                  }
+                >
+                  <PortfolioDetail />
                 </Suspense>
               }
             />

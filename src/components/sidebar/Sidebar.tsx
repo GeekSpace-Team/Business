@@ -107,11 +107,11 @@ const Sidebar: FC = () => {
                 background: "#363636",
                 width: screenHeight >= 900 ? "134px" : "100px",
                 height: screenHeight >= 900 ? "600px" : "auto",
-                borderRadius: "8px",
+                borderRadius: "0px 8px 8px 0px",
                 padding: 1,
               }}
-              data-aos="fade-down"
-              data-aos-delay={"600"}
+              // data-aos="fade-down"
+              // data-aos-delay={"600"}
             >
               <Stack spacing={0.5}>
                 <Box
