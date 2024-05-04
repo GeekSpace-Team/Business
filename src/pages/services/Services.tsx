@@ -6,8 +6,10 @@ import ServiceCards, {
   ServiceData,
 } from "../../components/service/ServiceCards";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
+
 import ServiceSx from "./ServiceSx";
 import useServices from "../../hooks/useServices";
 
@@ -122,7 +124,7 @@ const Services: FC = () => {
           <Box
             sx={{
               height: screenHeight >= 900 ? "80vh" : "83vh",
-              width: "100%",
+              width: "90%",
               pt: screenHeight >= 900 ? 7 : 4,
             }}
           >
@@ -210,15 +212,16 @@ const Services: FC = () => {
   return (
     <>
       <Stack
-        width="86%"
+        width="90%"
         mr={3}
         sx={{
           display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
         }}
       >
         <Swiper
-          modules={[Autoplay]}
+          modules={[Autoplay, Navigation]}
           slidesPerView={1}
+          navigation
           autoplay={{
             delay: 3000,
             pauseOnMouseEnter: true,
@@ -232,6 +235,8 @@ const Services: FC = () => {
           loop={true}
         >
           {data && serviceCards(data)}
+          <div className="prev"></div>
+          <div className="next"></div>
         </Swiper>
         <Stack
           direction="row"

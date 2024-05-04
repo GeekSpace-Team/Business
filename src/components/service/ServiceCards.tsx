@@ -1,5 +1,7 @@
 import { FC, useState, useEffect } from "react";
-import { Box, Grid, Typography, Stack } from "@mui/material";
+import { Box, Grid, Typography, Stack, Button } from "@mui/material";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import { useNavigate } from "react-router-dom";
 
 interface SizeMap {
   [key: string]: {
@@ -77,6 +79,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
   const [isSecondCardVisible, setIsSecondCardVisible] = useState(true);
   const [isThirdCardVisible, setIsThirdCardVisible] = useState(true);
   const [isFourthCardVisible, setIsFourthCardVisible] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -118,6 +121,10 @@ const ServiceCards: FC<ServiceCardsProps> = ({
       default:
         break;
     }
+  };
+
+  const handleReadMore = (serviceId: number, serviceData: ServiceData) => {
+    navigate(`/services/${serviceId}`, { state: { serviceData } });
   };
 
   return (
@@ -178,16 +185,38 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     </Typography>
                   </Stack>
                   {isSecondCardVisible ? null : (
-                    <Typography
-                      sx={{
-                        color: "#FFF083",
-                        fontSize: screenHeight >= 900 ? "28px" : "18px",
-                        lineHeight: screenHeight >= 900 ? "48px" : "30px",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {data1.attributes.short_description}
-                    </Typography>
+                    <>
+                      <Typography
+                        sx={{
+                          color: "#FFF083",
+                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          lineHeight: screenHeight >= 900 ? "48px" : "30px",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {data1.attributes.short_description.slice(0, 50)}...
+                      </Typography>
+                      <Stack
+                        mt={2}
+                        direction="row"
+                        width="100%"
+                        justifyContent="flex-end"
+                      >
+                        <Button
+                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          className="moreButton"
+                          endIcon={
+                            <KeyboardDoubleArrowRightIcon className="leftArrow" />
+                          }
+                          // onClick={() =>
+                          //   handleReadMore(`${data1.id}`, { state: { data1 } })
+                          // }
+                          onClick={() => handleReadMore(data1.id, data1)}
+                        >
+                          Read More
+                        </Button>
+                      </Stack>
+                    </>
                   )}
                 </Box>
               </Grid>
@@ -241,16 +270,35 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     </Typography>
                   </Stack>
                   {isFirstCardVisible ? null : (
-                    <Typography
-                      sx={{
-                        color: "#FFF083",
-                        fontSize: screenHeight >= 900 ? "28px" : "18px",
-                        lineHeight: screenHeight >= 900 ? "48px" : "30px",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {data2.attributes.short_description}
-                    </Typography>
+                    <>
+                      <Typography
+                        sx={{
+                          color: "#FFF083",
+                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          lineHeight: screenHeight >= 900 ? "48px" : "30px",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {data2.attributes.short_description.slice(0, 50)}...
+                      </Typography>
+                      <Stack
+                        mt={2}
+                        direction="row"
+                        width="100%"
+                        justifyContent="flex-end"
+                      >
+                        <Button
+                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          className="moreButton"
+                          endIcon={
+                            <KeyboardDoubleArrowRightIcon className="leftArrow" />
+                          }
+                          onClick={() => handleReadMore(data2.id, data2)}
+                        >
+                          Read More
+                        </Button>
+                      </Stack>
+                    </>
                   )}
                 </Box>
               </Grid>
@@ -326,16 +374,35 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     </Typography>
                   </Stack>
                   {isFourthCardVisible ? null : (
-                    <Typography
-                      sx={{
-                        color: "#FFF083",
-                        fontSize: screenHeight >= 900 ? "28px" : "18px",
-                        lineHeight: screenHeight >= 900 ? "48px" : "30px",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {data3.attributes.short_description}
-                    </Typography>
+                    <>
+                      <Typography
+                        sx={{
+                          color: "#FFF083",
+                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          lineHeight: screenHeight >= 900 ? "48px" : "30px",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {data3.attributes.short_description.slice(0, 50)}...
+                      </Typography>
+                      <Stack
+                        mt={2}
+                        direction="row"
+                        width="100%"
+                        justifyContent="flex-end"
+                      >
+                        <Button
+                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          className="moreButton"
+                          endIcon={
+                            <KeyboardDoubleArrowRightIcon className="leftArrow" />
+                          }
+                          onClick={() => handleReadMore(data3.id, data3)}
+                        >
+                          Read More
+                        </Button>
+                      </Stack>
+                    </>
                   )}
                 </Box>
               </Grid>
@@ -389,16 +456,35 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     </Typography>
                   </Stack>
                   {isThirdCardVisible ? null : (
-                    <Typography
-                      sx={{
-                        color: "#FFF083",
-                        fontSize: screenHeight >= 900 ? "28px" : "18px",
-                        lineHeight: screenHeight >= 900 ? "48px" : "30px",
-                        fontWeight: 500,
-                      }}
-                    >
-                      {data4.attributes.short_description}
-                    </Typography>
+                    <>
+                      <Typography
+                        sx={{
+                          color: "#FFF083",
+                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          lineHeight: screenHeight >= 900 ? "48px" : "30px",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {data4.attributes.short_description.slice(0, 50)}...
+                      </Typography>
+                      <Stack
+                        mt={2}
+                        direction="row"
+                        width="100%"
+                        justifyContent="flex-end"
+                      >
+                        <Button
+                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          className="moreButton"
+                          endIcon={
+                            <KeyboardDoubleArrowRightIcon className="leftArrow" />
+                          }
+                          onClick={() => handleReadMore(data4.id, data4)}
+                        >
+                          Read More
+                        </Button>
+                      </Stack>
+                    </>
                   )}
                 </Box>
               </Grid>

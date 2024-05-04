@@ -167,14 +167,16 @@ const Portfolio: FC = () => {
                               <Button
                                 sx={{ color: "#fff", textTransform: "none" }}
                                 className="moreButton"
-                                endIcon={<KeyboardDoubleArrowRightIcon />}
+                                endIcon={
+                                  <KeyboardDoubleArrowRightIcon className="leftArrow" />
+                                }
                                 onClick={() =>
                                   navigate(`/portfolio/${item.id}`, {
                                     state: { item },
                                   })
                                 }
                               >
-                                More
+                                Read More
                               </Button>
                             </Stack>
                           </>

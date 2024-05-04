@@ -7,6 +7,7 @@ import LoadingHome from "../components/loading/LoadingHome";
 import { LanguageProvider } from "../hooks/LanguageContext";
 import { ToastContainer } from "react-toastify";
 import PortfolioDetail from "../pages/portfolio/PortfolioDetail";
+import ServiceCardDetail from "../components/service/ServiceCardDetail";
 
 // import MusicPlayer from "../components/musicPlayer/MusicPlayer";
 
@@ -167,6 +168,27 @@ const RouteList: FC = () => {
                   }
                 >
                   <PortfolioDetail />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/services/:serviceId"
+              element={
+                <Suspense
+                  fallback={
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "90vh",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <LoadingComponent />
+                    </div>
+                  }
+                >
+                  <ServiceCardDetail />
                 </Suspense>
               }
             />
