@@ -167,6 +167,7 @@ const About: FC = () => {
               textTransform: "uppercase",
               fontSize: screenHeight >= 900 ? "36px" : "30px",
               fontWeight: 700,
+              fontFamily: "Trebuchet MS, sans-serif",
             }}
           >
             who we are
@@ -214,6 +215,7 @@ const About: FC = () => {
                           fontSize: screenHeight >= 900 ? "32px" : "24px",
                           fontWeight: 700,
                           lineHeight: screenHeight >= 900 ? "39px" : "30px",
+                          fontFamily: "Trebuchet MS, sans-serif",
                           color: "#E7EAFF",
                           width: {
                             lg: "30%",
@@ -236,6 +238,7 @@ const About: FC = () => {
                           fontSize: screenHeight >= 900 ? "20px" : "16px",
                           fontWeight: 600,
                           lineHeight: screenHeight >= 900 ? "25px" : "20px",
+                          fontFamily: "Trebuchet MS, sans-serif",
                           color: "#E7EAFF",
                           width: {
                             lg: "70%",
@@ -274,6 +277,7 @@ const About: FC = () => {
                         lineHeight: screenHeight >= 900 ? "39px" : "30px",
                         color: "#626262",
                         width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
+                        fontFamily: "Trebuchet MS, sans-serif",
                         textAlign: {
                           lg: "start",
                           md: "start",
@@ -291,6 +295,7 @@ const About: FC = () => {
                         lineHeight: screenHeight >= 900 ? "25px" : "20px",
                         color: "#626262",
                         width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
+                        fontFamily: "Trebuchet MS, sans-serif",
                         textAlign: {
                           lg: "start",
                           md: "start",
@@ -344,18 +349,28 @@ const About: FC = () => {
                 }}
               />
             }
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Previous
+            Home
           </Button>
 
           <Divider orientation="vertical" flexItem />
           <Button
             onClick={() => navigate("/portfolio")}
             endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Read more
+            Portfolio
           </Button>
         </Stack>
       </Stack>

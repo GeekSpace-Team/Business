@@ -83,6 +83,7 @@ const Portfolio: FC = () => {
               fontSize: "36px",
               fontWeight: 700,
               textAlign: "center",
+              fontFamily: "Trebuchet MS, sans-serif",
             }}
           >
             Prominent works of my business coaching
@@ -114,9 +115,6 @@ const Portfolio: FC = () => {
                       borderRadius: "8px",
                       minHeight: screenHeight >= 900 ? "600px" : "360px",
                       width: "85%",
-                      "&:hover": {
-                        opacity: 0.8,
-                      },
                     }}
                     onClick={() => toggleActive(index)}
                   >
@@ -138,6 +136,7 @@ const Portfolio: FC = () => {
                             lineHeight: screenHeight >= 900 ? "50px" : "33px",
                             fontWeight: 700,
                             width: "90%",
+                            fontFamily: "Trebuchet MS, sans-serif",
                           }}
                         >
                           {activeIndex
@@ -154,6 +153,7 @@ const Portfolio: FC = () => {
                                 lineHeight:
                                   screenHeight >= 900 ? "40px" : "26px",
                                 fontWeight: 600,
+                                fontFamily: "Trebuchet MS, sans-serif",
                               }}
                             >
                               {item.attributes.short_description.slice(0, 50)}
@@ -165,7 +165,11 @@ const Portfolio: FC = () => {
                               justifyContent="flex-end"
                             >
                               <Button
-                                sx={{ color: "#fff", textTransform: "none" }}
+                                sx={{
+                                  color: "#fff",
+                                  textTransform: "none",
+                                  fontFamily: "Trebuchet MS, sans-serif",
+                                }}
                                 className="moreButton"
                                 endIcon={
                                   <KeyboardDoubleArrowRightIcon className="leftArrow" />
@@ -208,7 +212,12 @@ const Portfolio: FC = () => {
                 }}
               />
             }
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
             About Us
           </Button>
@@ -217,7 +226,12 @@ const Portfolio: FC = () => {
           <Button
             onClick={() => navigate("/services")}
             endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
             Our Service
           </Button>

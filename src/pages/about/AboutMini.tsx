@@ -62,6 +62,7 @@ const AboutMini: FC = () => {
             color: "#222222",
             fontSize: "24px",
             fontWeight: 700,
+            fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
           WHO WE ARE
@@ -109,6 +110,7 @@ const AboutMini: FC = () => {
                         fontWeight: 700,
                         lineHeight: "30px",
                         width: "80%",
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     >
                       {item.attributes.title}
@@ -119,6 +121,7 @@ const AboutMini: FC = () => {
                         fontSize: "16px",
                         fontWeight: 600,
                         lineHeight: "25px",
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     >
                       {item.attributes.description}
@@ -159,6 +162,7 @@ const AboutMini: FC = () => {
                       fontSize: "20px",
                       fontWeight: 700,
                       lineHeight: "30px",
+                      fontFamily: "Trebuchet MS, sans-serif",
                       width: "50%",
                     }}
                   >
@@ -170,6 +174,7 @@ const AboutMini: FC = () => {
                       fontSize: "16px",
                       fontWeight: 600,
                       lineHeight: "25px",
+                      fontFamily: "Trebuchet MS, sans-serif",
                     }}
                   >
                     {item.attributes.short_description}
@@ -199,18 +204,28 @@ const AboutMini: FC = () => {
                 }}
               />
             }
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Previous
+            Home
           </Button>
 
           <Divider orientation="vertical" />
           <Button
             onClick={() => navigate("/portfolio")}
             endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Read more
+            Portfolio
           </Button>
         </Stack>
       </Stack>

@@ -1,0 +1,1 @@
+.bounce{animation:bounce 5s ease-in-out}@keyframes bounce{0%,to{transform:translateY(0)}50%{transform:translateY(-10px)}}.logoAnimation{animation:slideInRotate 3s ease-in-out;cursor:pointer;height:90px;width:150px}@keyframes slideInRotate{0%{opacity:0;width:50px;height:50px}to{opacity:1;width:146px;height:90px}}

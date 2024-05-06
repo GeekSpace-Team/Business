@@ -177,8 +177,9 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <Typography
                       sx={{
                         color: isSecondCardVisible ? "#E9E9E9" : "#fff083",
-                        fontSize: "32px",
                         fontWeight: 700,
+                        fontSize: "29px",
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     >
                       {data1.attributes.title}
@@ -192,6 +193,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
+                          fontFamily: "Trebuchet MS, sans-serif",
                         }}
                       >
                         {data1.attributes.short_description.slice(0, 50)}...
@@ -203,7 +205,12 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                         justifyContent="flex-end"
                       >
                         <Button
-                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          sx={{
+                            color: "#fff",
+                            textTransform: "none",
+                            mb: 2,
+                            fontFamily: "Trebuchet MS, sans-serif",
+                          }}
                           className="moreButton"
                           endIcon={
                             <KeyboardDoubleArrowRightIcon className="leftArrow" />
@@ -262,8 +269,9 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <Typography
                       sx={{
                         color: isFirstCardVisible ? "#E9E9E9" : "#fff083",
-                        fontSize: "32px",
+                        fontSize: "29px",
                         fontWeight: 700,
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     >
                       {data2.attributes.title}
@@ -277,6 +285,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
+                          fontFamily: "Trebuchet MS, sans-serif",
                         }}
                       >
                         {data2.attributes.short_description.slice(0, 50)}...
@@ -288,7 +297,12 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                         justifyContent="flex-end"
                       >
                         <Button
-                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          sx={{
+                            color: "#fff",
+                            textTransform: "none",
+                            mb: 2,
+                            fontFamily: "Trebuchet MS, sans-serif",
+                          }}
                           className="moreButton"
                           endIcon={
                             <KeyboardDoubleArrowRightIcon className="leftArrow" />
@@ -309,7 +323,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
         <Stack
           sx={{
             position: "absolute",
-            width: "100%",
+            width: "90%",
             display: "flex",
             mt: screenHeight >= 900 ? 24 : 15.3,
             alignItems: "center",
@@ -366,8 +380,9 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <Typography
                       sx={{
                         color: isFourthCardVisible ? "#E9E9E9" : "#fff083",
-                        fontSize: "32px",
+                        fontSize: "29px",
                         fontWeight: 700,
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     >
                       {data3.attributes.title}
@@ -381,6 +396,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
+                          fontFamily: "Trebuchet MS, sans-serif",
                         }}
                       >
                         {data3.attributes.short_description.slice(0, 50)}...
@@ -392,7 +408,12 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                         justifyContent="flex-end"
                       >
                         <Button
-                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          sx={{
+                            color: "#fff",
+                            textTransform: "none",
+                            mb: 2,
+                            fontFamily: "Trebuchet MS, sans-serif",
+                          }}
                           className="moreButton"
                           endIcon={
                             <KeyboardDoubleArrowRightIcon className="leftArrow" />
@@ -448,7 +469,8 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <Typography
                       sx={{
                         color: isThirdCardVisible ? "#E9E9E9" : "#fff083",
-                        fontSize: "32px",
+                        fontSize: "29px",
+                        fontFamily: "Trebuchet MS, sans-serif",
                         fontWeight: 700,
                       }}
                     >
@@ -463,6 +485,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
+                          fontFamily: "Trebuchet MS, sans-serif",
                         }}
                       >
                         {data4.attributes.short_description.slice(0, 50)}...
@@ -474,7 +497,12 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                         justifyContent="flex-end"
                       >
                         <Button
-                          sx={{ color: "#fff", textTransform: "none", mb: 2 }}
+                          sx={{
+                            color: "#fff",
+                            textTransform: "none",
+                            mb: 2,
+                            fontFamily: "Trebuchet MS, sans-serif",
+                          }}
                           className="moreButton"
                           endIcon={
                             <KeyboardDoubleArrowRightIcon className="leftArrow" />

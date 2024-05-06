@@ -138,7 +138,12 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <PeopleAltOutlinedIcon />
-                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? 16 : 14,
+                      fontFamily: "Trebuchet MS, sans-serif",
+                    }}
+                  >
                     {t("sidebar.about")}
                   </Typography>
                 </Box>
@@ -169,7 +174,12 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <WorkOutlineOutlinedIcon />
-                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? 16 : 14,
+                      fontFamily: "Trebuchet MS, sans-serif",
+                    }}
+                  >
                     {t("sidebar.portfolio")}
                   </Typography>
                 </Box>
@@ -196,7 +206,12 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <SettingsIcon />
-                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? 16 : 14,
+                      fontFamily: "Trebuchet MS, sans-serif",
+                    }}
+                  >
                     {t("sidebar.services")}
                   </Typography>
                 </Box>
@@ -223,7 +238,12 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <MailIcon />
-                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? 16 : 14,
+                      fontFamily: "Trebuchet MS, sans-serif",
+                    }}
+                  >
                     {t("sidebar.contact")}
                   </Typography>
                 </Box>
@@ -249,7 +269,12 @@ const Sidebar: FC = () => {
                   }}
                 >
                   <LanguageIcon />
-                  <Typography sx={{ fontSize: screenHeight >= 900 ? 16 : 14 }}>
+                  <Typography
+                    sx={{
+                      fontSize: screenHeight >= 900 ? 16 : 14,
+                      fontFamily: "Trebuchet MS, sans-serif",
+                    }}
+                  >
                     {t("sidebar.language")}
                   </Typography>
                 </Box>

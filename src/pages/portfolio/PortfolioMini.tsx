@@ -67,6 +67,7 @@ const PortfolioMini: FC = () => {
             fontSize: "24px",
             fontWeight: 700,
             width: "70%",
+            fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
           Prominent works of my business coaching
@@ -110,48 +111,6 @@ const PortfolioMini: FC = () => {
                   }}
                   alt="321467.jpg"
                 />
-                {/* <Accordion
-                  expanded={activeIndex === index}
-                  onChange={() => handleAccordionClick(index)}
-                  sx={{
-                    background: activeIndex === index ? "#222222" : "#828282",
-                  }}
-                >
-                  <AccordionSummary
-                    expandIcon={
-                      <ExpandMoreIcon
-                        sx={{
-                          color: activeIndex === index ? "#FFF083" : "#e9e9e9",
-                          fontSize: "40px",
-                        }}
-                      />
-                    }
-                    aria-controls="panel1-content"
-                    id="panel1-header"
-                  >
-                    <Typography
-                      sx={{
-                        color: activeIndex === index ? "#FFF083" : "#e9e9e9",
-                        fontSize: "24px",
-                        fontWeight: 700,
-                      }}
-                    >
-                      {item.attributes.title}
-                    </Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography
-                      sx={{
-                        color: "#E9E9E9",
-                        fontSize: "20px",
-                        fontWeight: 600,
-                        lineHeight: "30px",
-                      }}
-                    >
-                      {item.attributes.short_description}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion> */}
                 <Stack
                   onClick={() => handleShowDescription(index)}
                   direction="row"
@@ -170,6 +129,7 @@ const PortfolioMini: FC = () => {
                             showDescription === index ? "#FFF083" : "#e9e9e9",
                           fontSize: "20px",
                           fontWeight: 700,
+                          fontFamily: "Trebuchet MS, sans-serif",
                         }}
                       >
                         {item.attributes.title}
@@ -231,18 +191,28 @@ const PortfolioMini: FC = () => {
               }}
             />
           }
-          sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
         >
-          Previous
+          About
         </Button>
 
         <Divider orientation="vertical" />
         <Button
           onClick={() => navigate("/services")}
           endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-          sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
         >
-          Read more
+          Services
         </Button>
       </Stack>
     </>

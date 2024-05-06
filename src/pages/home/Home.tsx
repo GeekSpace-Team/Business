@@ -110,7 +110,7 @@ const Home: FC = () => {
         <>
           <Stack
             width="300%"
-            height="85vh"
+            height="100vh"
             sx={{
               display: { lg: "block", md: "block", sm: "none", xs: "none" },
             }}
@@ -138,6 +138,7 @@ const Home: FC = () => {
                         fontWeight: 900,
                         lineHeight: "2em",
                         width: screenHeight >= 900 ? "60%" : "100%",
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     />
                     <Typography
@@ -149,6 +150,7 @@ const Home: FC = () => {
                         fontWeight: 600,
                         lineHeight: "20px",
                         width: screenHeight >= 900 ? "60%" : "100%",
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     >
                       {homeData.data[0].attributes.short_description}
@@ -196,6 +198,7 @@ const Home: FC = () => {
                                 fontSize: "20px",
                                 fontWeight: 700,
                                 lineHeight: "30px",
+                                fontFamily: "Trebuchet MS, sans-serif",
                               }}
                             >
                               Iskander <br /> Kerimov
@@ -209,6 +212,7 @@ const Home: FC = () => {
                                 position: "absolute",
                                 pl: "40%",
                                 pt: "2%",
+                                fontFamily: "Trebuchet MS, sans-serif",
                               }}
                             >
                               Business Couch <br /> with 7 years of experience
@@ -283,6 +287,7 @@ const Home: FC = () => {
                       lineHeight: screenHeight >= 900 ? 2 : 1.5,
                       bottom: screenHeight >= 900 ? 5 : 0,
                       width: screenHeight >= 900 ? "250px" : "150px",
+                      fontFamily: "Trebuchet MS, sans-serif",
                     }}
                   >
                     {item.attributes.title.slice(0, 61)}...

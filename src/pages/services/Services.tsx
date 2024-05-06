@@ -39,11 +39,11 @@ const imgWidth: SizeMap = {
 
 const sizeMap: SizeMap = {
   lg: {
-    fontSize: "36px",
+    fontSize: "26px",
     lineHeight: "40px",
   },
   md: {
-    fontSize: "24px",
+    fontSize: "20px",
     lineHeight: "28px",
   },
   sm: {
@@ -124,8 +124,9 @@ const Services: FC = () => {
           <Box
             sx={{
               height: screenHeight >= 900 ? "80vh" : "83vh",
-              width: "90%",
               pt: screenHeight >= 900 ? 7 : 4,
+              width: "90%",
+              pl: "7%",
             }}
           >
             <Stack sx={{ height: "100%", pr: 5 }}>
@@ -151,6 +152,7 @@ const Services: FC = () => {
                       sx={{
                         color: "#E9E9E9",
                         ...sizeTitle[title],
+                        fontFamily: "Trebuchet MS, sans-serif",
                       }}
                     >
                       Our services
@@ -166,6 +168,7 @@ const Services: FC = () => {
                           textAlign: "start",
                           color: "#E9E9E9",
                           ...sizeMap[size],
+                          fontFamily: "Trebuchet MS, sans-serif",
                         }}
                       >
                         "Choose from either the Strategic Coach® Signature
@@ -193,7 +196,7 @@ const Services: FC = () => {
                   />
                 </Stack>
               </Box>
-              <Box sx={{ height: "55%", mt: 1 }}>
+              <Box sx={{ height: "55%", mt: 1, width: "100%" }}>
                 <ServiceCards
                   data1={newData[i] as ServiceData}
                   data2={newData[i + 1] as ServiceData}
@@ -212,14 +215,14 @@ const Services: FC = () => {
   return (
     <>
       <Stack
-        width="90%"
+        width="100%"
         mr={3}
         sx={{
           display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
         }}
       >
         <Swiper
-          modules={[Autoplay, Navigation]}
+          modules={[Navigation, Autoplay]}
           slidesPerView={1}
           navigation
           autoplay={{
@@ -229,9 +232,9 @@ const Services: FC = () => {
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
           style={{
-            width: "100%",
+            width: "90%",
           }}
-          speed={5000}
+          speed={3000}
           loop={true}
         >
           {data && serviceCards(data)}
@@ -257,18 +260,28 @@ const Services: FC = () => {
                 }}
               />
             }
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Previous
+            Portfolio
           </Button>
 
           <Divider orientation="vertical" />
           <Button
             onClick={() => navigate("/contact")}
             endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Read more
+            Contact Us
           </Button>
         </Stack>
       </Stack>

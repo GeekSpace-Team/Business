@@ -4,18 +4,16 @@ import { useLocation } from "react-router-dom";
 
 const ServiceCardDetail: FC = () => {
   const location = useLocation();
-  const { serviceData } = location.state; // Assuming the state key is 'serviceData'
+  const { serviceData } = location.state;
 
-  console.log(serviceData.id);
   return (
     <div>
-      <h1>{serviceData.name}</h1>
-      <p>{serviceData.description}</p>
       <Typography
         sx={{
           color: "#222222",
           fontSize: "32px",
           fontWeight: 700,
+          fontFamily: "Trebuchet MS, sans-serif",
         }}
       >
         {serviceData.attributes.title}
@@ -27,7 +25,7 @@ const ServiceCardDetail: FC = () => {
           fontSize: "22px",
           lineHeight: "48px",
           fontWeight: 500,
-          fontFamily: "Snell Roundhand, cursive",
+          fontFamily: "Trebuchet MS, sans-serif",
         }}
       >
         {serviceData.attributes.short_description}
