@@ -126,7 +126,7 @@ const PortfolioMini: FC = () => {
                       <Typography
                         sx={{
                           color:
-                            showDescription === index ? "#FFF083" : "#e9e9e9",
+                            showDescription === index ? "orange" : "#e9e9e9",
                           fontSize: "20px",
                           fontWeight: 700,
                           fontFamily: "Trebuchet MS, sans-serif",
@@ -138,13 +138,13 @@ const PortfolioMini: FC = () => {
                         {showDescription === index ? (
                           <ExpandLessIcon
                             sx={{
-                              color: showDescription ? "#FFF083" : "#E9E9E9",
+                              color: showDescription ? "orange" : "#E9E9E9",
                             }}
                           />
                         ) : (
                           <ExpandMoreIcon
                             sx={{
-                              color: showDescription ? "#FFF083" : "#E9E9E9",
+                              color: showDescription ? "orange" : "#E9E9E9",
                             }}
                           />
                         )}

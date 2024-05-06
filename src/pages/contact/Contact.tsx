@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
 import { radius } from "../../common/style/commonStyle";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
@@ -10,10 +10,13 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../assets/language/i18n";
 import axios from "axios";
 import { showError, showSuccess } from "../../components/alert/Alert";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { useNavigate } from "react-router-dom";
 
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -66,7 +69,11 @@ const Contact: FC = () => {
 
   return (
     <>
-      <Stack pt={3} width={{ md: "80%", lg: "80%", sm: "100%", xs: "100%" }}>
+      <Stack
+        pt={3}
+        pr={5}
+        width={{ md: "100%", lg: "100%", sm: "100%", xs: "100%" }}
+      >
         <Stack
           direction="row"
           pt={screenHeight >= 900 ? 3 : 0}
@@ -183,7 +190,7 @@ const Contact: FC = () => {
                   <Button
                     sx={{
                       background: " #222222",
-                      color: "#FFF083",
+                      color: "orange",
                       fontSize: "20px",
                       fontWeight: 600,
                       height: screenHeight >= 900 ? "55px" : "40px",
@@ -322,6 +329,49 @@ const Contact: FC = () => {
             </Stack>
           </Grid>
         </Grid>
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
+        spacing={2}
+      >
+        <Button
+          onClick={() => navigate("/services")}
+          startIcon={
+            <ArrowRightAltIcon
+              sx={{
+                color: "#828282",
+                transform: "rotate(180deg)",
+                fontSize: "34px",
+                width: "30px",
+              }}
+            />
+          }
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
+        >
+          Our Service
+        </Button>
+
+        <Divider orientation="vertical" flexItem />
+        <Button
+          onClick={() => navigate("/")}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
+        >
+          Home
+        </Button>
       </Stack>
       <LanguageModal />
     </>

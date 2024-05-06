@@ -329,50 +329,49 @@ const About: FC = () => {
             </>
           ))}
         </>
-
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-          mt={7}
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
+        spacing={2}
+      >
+        <Button
+          onClick={() => navigate("/")}
+          startIcon={
+            <ArrowRightAltIcon
+              sx={{
+                color: "#828282",
+                transform: "rotate(180deg)",
+                fontSize: "34px",
+                width: "30px",
+              }}
+            />
+          }
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
         >
-          <Button
-            onClick={() => navigate("/")}
-            startIcon={
-              <ArrowRightAltIcon
-                sx={{
-                  color: "#828282",
-                  transform: "rotate(180deg)",
-                  fontSize: "34px",
-                  width: "30px",
-                }}
-              />
-            }
-            sx={{
-              textTransform: "none",
-              color: "#828282",
-              fontWeight: 600,
-              fontFamily: "Trebuchet MS, sans-serif",
-            }}
-          >
-            Home
-          </Button>
+          Home
+        </Button>
 
-          <Divider orientation="vertical" flexItem />
-          <Button
-            onClick={() => navigate("/portfolio")}
-            endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-            sx={{
-              textTransform: "none",
-              color: "#828282",
-              fontWeight: 600,
-              fontFamily: "Trebuchet MS, sans-serif",
-            }}
-          >
-            Portfolio
-          </Button>
-        </Stack>
+        <Divider orientation="vertical" flexItem />
+        <Button
+          onClick={() => navigate("/portfolio")}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
+        >
+          Portfolio
+        </Button>
       </Stack>
       <AboutMini />
     </>

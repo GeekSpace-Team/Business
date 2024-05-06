@@ -130,8 +130,7 @@ const Portfolio: FC = () => {
                       <Stack p={3}>
                         <Typography
                           sx={{
-                            color:
-                              activeIndex === index ? "#FFF083" : "#E9E9E9",
+                            color: activeIndex === index ? "orange" : "#E9E9E9",
                             fontSize: screenHeight >= 900 ? "40px" : "24px",
                             lineHeight: screenHeight >= 900 ? "50px" : "33px",
                             fontWeight: 700,
@@ -195,47 +194,62 @@ const Portfolio: FC = () => {
             <div className="next"></div>
           </Swiper>
         </Stack>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          sx={{ position: "absolute", bottom: "5%", width: "100%" }}
+      </Stack>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
+        spacing={2}
+      >
+        <Button
+          onClick={() => navigate("/about")}
+          startIcon={
+            <ArrowRightAltIcon
+              sx={{
+                color: "#828282",
+                transform: "rotate(180deg)",
+                fontSize: "34px",
+                width: "30px",
+              }}
+            />
+          }
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
         >
-          <Button
-            onClick={() => navigate("/about")}
-            startIcon={
-              <ArrowRightAltIcon
-                sx={{
-                  color: "#828282",
-                  transform: "rotate(180deg)",
-                  fontSize: "34px",
-                  width: "30px",
-                }}
-              />
-            }
-            sx={{
-              textTransform: "none",
-              color: "#828282",
-              fontWeight: 600,
-              fontFamily: "Trebuchet MS, sans-serif",
-            }}
-          >
-            About Us
-          </Button>
+          About Us
+        </Button>
 
-          <Divider orientation="vertical" flexItem />
-          <Button
-            onClick={() => navigate("/services")}
-            endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+        <Divider sx={{ width: "100px" }}>
+          <Typography
+            onClick={() => navigate("/")}
             sx={{
               textTransform: "none",
               color: "#828282",
               fontWeight: 600,
+              cursor: "pointer",
               fontFamily: "Trebuchet MS, sans-serif",
             }}
           >
-            Our Service
-          </Button>
-        </Stack>
+            Home
+          </Typography>
+        </Divider>
+        <Button
+          onClick={() => navigate("/services")}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
+        >
+          Our Service
+        </Button>
       </Stack>
       <PortfolioMini />
     </>

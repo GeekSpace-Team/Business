@@ -147,8 +147,7 @@ const ServiceSx: FC = () => {
                     <Typography
                       variant="h5"
                       sx={{
-                        color:
-                          showDescription === index ? "#FFF083" : "#E9E9E9",
+                        color: showDescription === index ? "orange" : "#E9E9E9",
                       }}
                     >
                       {item.attributes.title}
@@ -157,13 +156,13 @@ const ServiceSx: FC = () => {
                       {showDescription === index ? (
                         <ExpandLessIcon
                           sx={{
-                            color: showDescription ? "#FFF083" : "#E9E9E9",
+                            color: showDescription ? "orange" : "#E9E9E9",
                           }}
                         />
                       ) : (
                         <ExpandMoreIcon
                           sx={{
-                            color: showDescription ? "#FFF083" : "#E9E9E9",
+                            color: showDescription ? "orange" : "#E9E9E9",
                           }}
                         />
                       )}
@@ -175,7 +174,7 @@ const ServiceSx: FC = () => {
                         <Typography
                           key={index}
                           sx={{
-                            color: "#FFF083",
+                            color: "orange",
                             fontSize: "20px",
                             fontWeight: 600,
                             lineHeight: "30px",

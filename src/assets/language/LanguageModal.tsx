@@ -58,7 +58,7 @@ export default function LanguageModal() {
                 cursor: "pointer",
                 "&:hover": {
                   background: "#3e3e3e",
-                  color: "#FFF083",
+                  color: "orange",
                 },
               }}
               spacing={1}
@@ -82,7 +82,7 @@ export default function LanguageModal() {
                 cursor: "pointer",
                 "&:hover": {
                   background: "#3e3e3e",
-                  color: "#FFF083",
+                  color: "orange",
                 },
               }}
               spacing={1}
@@ -106,7 +106,7 @@ export default function LanguageModal() {
                 cursor: "pointer",
                 "&:hover": {
                   background: "#3e3e3e",
-                  color: "#FFF083",
+                  color: "orange",
                 },
               }}
               spacing={1}

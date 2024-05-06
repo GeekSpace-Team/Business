@@ -13,6 +13,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import MiniSidebar from "./MiniSidebar";
 import "../../pages/home/home.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 const Sidebar: FC = () => {
   const location = useLocation();
@@ -24,7 +25,7 @@ const Sidebar: FC = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setSidebarVisible(false);
+      setSidebarVisible(!sidebarVisible);
     }, 5000);
 
     return () => clearTimeout(timeout);
@@ -63,226 +64,291 @@ const Sidebar: FC = () => {
         </Box>
       )}
       <Stack
+        width="100%"
         direction={{ lg: "row", md: "row", sm: "column", xs: "column" }}
-        spacing={screenHeight >= 900 ? 5 : 2}
+        spacing={screenHeight >= 900 ? 5 : 0}
       >
-        <Stack
-          sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
-          // alignItems="center"
-          height="auto"
-          width={"200px"}
-          pt={screenHeight >= 900 ? 3 : 0}
-          pb={screenHeight >= 900 ? 5 : 1}
+        <Box
+          sx={{
+            width: sidebarVisible ? "150px" : "30px",
+            position: location.pathname === "/services" ? "relative" : "",
+          }}
         >
-          {!sidebarVisible && (
-            <>
-              <Stack
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Tooltip title="Open Sidebar">
-                  <IconButton
-                    className="leftArrow"
-                    sx={{ width: "30px" }}
-                    onClick={() => setSidebarVisible(true)}
-                  >
-                    <ArrowForwardIosIcon />
-                  </IconButton>
-                </Tooltip>
-              </Stack>
-            </>
-          )}
           <Stack
-            height="100%"
-            pr={location.pathname === "/" ? "6%" : ""}
-            spacing={screenHeight >= 900 ? 13 : 1}
-            style={{ display: sidebarVisible ? "block" : "none" }}
+            sx={{
+              display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
+              position: location.pathname === "/services" ? "absolute" : "",
+              width: "200px",
+            }}
+            // alignItems="center"
+            height="auto"
+            width={"200px"}
+            pt={screenHeight >= 900 ? 3 : 0}
+            pb={screenHeight >= 900 ? 5 : 1}
           >
-            <Logo />
-            <Box
-              sx={{
-                background: "#363636",
-                width: screenHeight >= 900 ? "134px" : "100px",
-                height: screenHeight >= 900 ? "600px" : "auto",
-                borderRadius: "0px 8px 8px 0px",
-                padding: 1,
+            {!sidebarVisible && (
+              <>
+                <Stack
+                  sx={{
+                    height: "100vh",
+                    display: "flex",
+                    justifyContent: "center",
+                    position: "absolute",
+                  }}
+                >
+                  <Tooltip title="Open Sidebar">
+                    <IconButton
+                      className="leftArrow"
+                      sx={{ width: "30px" }}
+                      onClick={() => setSidebarVisible(true)}
+                    >
+                      <ArrowForwardIosIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Stack>
+              </>
+            )}
+            <Stack
+              className="sidebar"
+              height="100%"
+              pr={location.pathname === "/" ? "6%" : ""}
+              spacing={screenHeight >= 900 ? 5 : 1}
+              style={{
+                transform: sidebarVisible
+                  ? "translateX(0)"
+                  : "translateX(-100%)",
               }}
-              // data-aos="fade-down"
-              // data-aos-delay={"600"}
             >
-              <Stack spacing={0.5}>
-                <Box
-                  className="sidebar_first_item"
-                  onClick={() => navigate("/about")}
-                  sx={{
-                    background:
-                      location.pathname === "/about" ? "#222222" : "#3e3e3e",
-                    color:
-                      location.pathname === "/about" ? "#FFF083" : "#B6B6B6",
-                    borderRadius: "8px 8px 0px 0px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "78px",
-                    gap: screenHeight >= 900 ? "10px" : "3px",
-                    cursor: "pointer",
-                    transition: "0.7s",
-                    "&:hover": {
-                      color: "#FFF083",
-                      background: "#222222",
-                    },
-                  }}
-                >
-                  <PeopleAltOutlinedIcon />
-                  <Typography
+              <>
+                <Logo />
+                {location.pathname === "/" ? null : (
+                  <Box
+                    sx={{ height: screenHeight >= 900 ? "0px" : "50px" }}
+                  ></Box>
+                )}
+              </>
+              <Box
+                sx={{
+                  background: "#363636",
+                  width: screenHeight >= 900 ? "134px" : "100px",
+                  height: screenHeight >= 900 ? "auto" : "auto",
+                  borderRadius: "0px 8px 8px 0px",
+                  padding: 1,
+                }}
+                // data-aos="fade-down"
+                // data-aos-delay={"600"}
+              >
+                <Stack spacing={0.5}>
+                  {location.pathname === "/" ? null : (
+                    <Box
+                      className="sidebar_first_item"
+                      onClick={() => navigate("/")}
+                      sx={{
+                        background: "#3e3e3e",
+                        color: "#B6B6B6",
+                        borderRadius: "8px 8px 0px 0px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: screenHeight >= 900 ? "117px" : "78px",
+                        gap: screenHeight >= 900 ? "10px" : "3px",
+                        cursor: "pointer",
+                        transition: "0.7s",
+                        "&:hover": {
+                          color: "orange",
+                          background: "#222222",
+                        },
+                      }}
+                    >
+                      <HomeOutlinedIcon />
+                      <Typography
+                        sx={{
+                          fontSize: screenHeight >= 900 ? 16 : 14,
+                          fontFamily: "Trebuchet MS, sans-serif",
+                        }}
+                      >
+                        {t("sidebar.home")}
+                      </Typography>
+                    </Box>
+                  )}
+                  <Box
+                    className="sidebar_first_item"
+                    onClick={() => navigate("/about")}
                     sx={{
-                      fontSize: screenHeight >= 900 ? 16 : 14,
-                      fontFamily: "Trebuchet MS, sans-serif",
+                      background:
+                        location.pathname === "/about" ? "#222222" : "#3e3e3e",
+                      color:
+                        location.pathname === "/about" ? "orange" : "#B6B6B6",
+                      borderRadius:
+                        location.pathname === "/" ? "8px 8px 0px 0px" : "",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: screenHeight >= 900 ? "117px" : "78px",
+                      gap: screenHeight >= 900 ? "10px" : "3px",
+                      cursor: "pointer",
+                      transition: "0.7s",
+                      "&:hover": {
+                        color: "orange",
+                        background: "#222222",
+                      },
                     }}
                   >
-                    {t("sidebar.about")}
-                  </Typography>
-                </Box>
-                <Box
-                  className="sidebar_second_item"
-                  onClick={() => navigate("/portfolio")}
-                  sx={{
-                    background:
-                      location.pathname === "/portfolio"
-                        ? "#222222"
-                        : "#3e3e3e",
-                    color:
-                      location.pathname === "/portfolio"
-                        ? "#FFF083"
-                        : "#B6B6B6",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "78px",
-                    gap: screenHeight >= 900 ? "10px" : "3px",
-                    cursor: "pointer",
-                    transition: "0.7s",
-                    "&:hover": {
-                      color: "#FFF083",
-                      background: "#222222",
-                    },
-                  }}
-                >
-                  <WorkOutlineOutlinedIcon />
-                  <Typography
+                    <PeopleAltOutlinedIcon />
+                    <Typography
+                      sx={{
+                        fontSize: screenHeight >= 900 ? 16 : 14,
+                        fontFamily: "Trebuchet MS, sans-serif",
+                      }}
+                    >
+                      {t("sidebar.about")}
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="sidebar_second_item"
+                    onClick={() => navigate("/portfolio")}
                     sx={{
-                      fontSize: screenHeight >= 900 ? 16 : 14,
-                      fontFamily: "Trebuchet MS, sans-serif",
+                      background:
+                        location.pathname === "/portfolio"
+                          ? "#222222"
+                          : "#3e3e3e",
+                      color:
+                        location.pathname === "/portfolio"
+                          ? "orange"
+                          : "#B6B6B6",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: screenHeight >= 900 ? "117px" : "78px",
+                      gap: screenHeight >= 900 ? "10px" : "3px",
+                      cursor: "pointer",
+                      transition: "0.7s",
+                      "&:hover": {
+                        color: "orange",
+                        background: "#222222",
+                      },
                     }}
                   >
-                    {t("sidebar.portfolio")}
-                  </Typography>
-                </Box>
-                <Box
-                  className="sidebar_third_item"
-                  onClick={() => navigate("/services")}
-                  sx={{
-                    background:
-                      location.pathname === "/services" ? "#222222" : "#3e3e3e",
-                    color:
-                      location.pathname === "/services" ? "#FFF083" : "#B6B6B6",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "78px",
-                    gap: screenHeight >= 900 ? "10px" : "3px",
-                    cursor: "pointer",
-                    transition: "0.7s",
-                    "&:hover": {
-                      color: "#FFF083",
-                      background: "#222222",
-                    },
-                  }}
-                >
-                  <SettingsIcon />
-                  <Typography
+                    <WorkOutlineOutlinedIcon />
+                    <Typography
+                      sx={{
+                        fontSize: screenHeight >= 900 ? 16 : 14,
+                        fontFamily: "Trebuchet MS, sans-serif",
+                      }}
+                    >
+                      {t("sidebar.portfolio")}
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="sidebar_third_item"
+                    onClick={() => navigate("/services")}
                     sx={{
-                      fontSize: screenHeight >= 900 ? 16 : 14,
-                      fontFamily: "Trebuchet MS, sans-serif",
+                      background:
+                        location.pathname === "/services"
+                          ? "#222222"
+                          : "#3e3e3e",
+                      color:
+                        location.pathname === "/services"
+                          ? "orange"
+                          : "#B6B6B6",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: screenHeight >= 900 ? "117px" : "78px",
+                      gap: screenHeight >= 900 ? "10px" : "3px",
+                      cursor: "pointer",
+                      transition: "0.7s",
+                      "&:hover": {
+                        color: "orange",
+                        background: "#222222",
+                      },
                     }}
                   >
-                    {t("sidebar.services")}
-                  </Typography>
-                </Box>
-                <Box
-                  className="sidebar_fourth_item"
-                  onClick={() => navigate("/contact")}
-                  sx={{
-                    background:
-                      location.pathname === "/contact" ? "#222222" : "#3e3e3e",
-                    color:
-                      location.pathname === "/contact" ? "#FFF083" : "#B6B6B6",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "78px",
-                    gap: screenHeight >= 900 ? "10px" : "3px",
-                    cursor: "pointer",
-                    transition: "0.7s",
-                    "&:hover": {
-                      color: "#FFF083",
-                      background: "#222222",
-                    },
-                  }}
-                >
-                  <MailIcon />
-                  <Typography
+                    <SettingsIcon />
+                    <Typography
+                      sx={{
+                        fontSize: screenHeight >= 900 ? 16 : 14,
+                        fontFamily: "Trebuchet MS, sans-serif",
+                      }}
+                    >
+                      {t("sidebar.services")}
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="sidebar_fourth_item"
+                    onClick={() => navigate("/contact")}
                     sx={{
-                      fontSize: screenHeight >= 900 ? 16 : 14,
-                      fontFamily: "Trebuchet MS, sans-serif",
+                      background:
+                        location.pathname === "/contact"
+                          ? "#222222"
+                          : "#3e3e3e",
+                      color:
+                        location.pathname === "/contact" ? "orange" : "#B6B6B6",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: screenHeight >= 900 ? "117px" : "78px",
+                      gap: screenHeight >= 900 ? "10px" : "3px",
+                      cursor: "pointer",
+                      transition: "0.7s",
+                      "&:hover": {
+                        color: "orange",
+                        background: "#222222",
+                      },
                     }}
                   >
-                    {t("sidebar.contact")}
-                  </Typography>
-                </Box>
-                <Box
-                  className="sidebar_fifth_item"
-                  onClick={handleLanguageClick}
-                  sx={{
-                    background: showLanguage ? "#222222" : "#3e3e3e",
-                    color: showLanguage ? "#FFF083" : "#B6B6B6",
-                    display: "flex",
-                    borderRadius: "0px 0px 8px 8px",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: screenHeight >= 900 ? "117px" : "78px",
-                    gap: screenHeight >= 900 ? "10px" : "3px",
-                    cursor: "pointer",
-                    transition: "0.7s",
-                    "&:hover": {
-                      color: "#FFF083",
-                      background: "#222222",
-                    },
-                  }}
-                >
-                  <LanguageIcon />
-                  <Typography
+                    <MailIcon />
+                    <Typography
+                      sx={{
+                        fontSize: screenHeight >= 900 ? 16 : 14,
+                        fontFamily: "Trebuchet MS, sans-serif",
+                      }}
+                    >
+                      {t("sidebar.contact")}
+                    </Typography>
+                  </Box>
+                  <Box
+                    className="sidebar_fifth_item"
+                    onClick={handleLanguageClick}
                     sx={{
-                      fontSize: screenHeight >= 900 ? 16 : 14,
-                      fontFamily: "Trebuchet MS, sans-serif",
+                      background: showLanguage ? "#222222" : "#3e3e3e",
+                      color: showLanguage ? "orange" : "#B6B6B6",
+                      display: "flex",
+                      borderRadius: "0px 0px 8px 8px",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: screenHeight >= 900 ? "117px" : "78px",
+                      gap: screenHeight >= 900 ? "10px" : "3px",
+                      cursor: "pointer",
+                      transition: "0.7s",
+                      "&:hover": {
+                        color: "orange",
+                        background: "#222222",
+                      },
                     }}
                   >
-                    {t("sidebar.language")}
-                  </Typography>
-                </Box>
-              </Stack>
-            </Box>
-            {location.pathname === "/" ? null : <Social />}
+                    <LanguageIcon />
+                    <Typography
+                      sx={{
+                        fontSize: screenHeight >= 900 ? 16 : 14,
+                        fontFamily: "Trebuchet MS, sans-serif",
+                      }}
+                    >
+                      {t("sidebar.language")}
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Box>
+              {location.pathname === "/" ? null : <Social />}
+            </Stack>
           </Stack>
-        </Stack>
+        </Box>
         {/* sm and xs ui */}
         <Stack
           pr={3}

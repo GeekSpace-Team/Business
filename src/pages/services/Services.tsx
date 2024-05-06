@@ -214,76 +214,97 @@ const Services: FC = () => {
 
   return (
     <>
-      <Stack
+      <Box
         width="100%"
-        mr={3}
         sx={{
           display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
+          position: "relative",
         }}
       >
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          slidesPerView={1}
-          navigation
-          autoplay={{
-            delay: 3000,
-            pauseOnMouseEnter: true,
-          }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
-          style={{
-            width: "90%",
-          }}
-          speed={3000}
-          loop={true}
-        >
-          {data && serviceCards(data)}
-          <div className="prev"></div>
-          <div className="next"></div>
-        </Swiper>
         <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-          mt={screenHeight >= 900 ? 10 : 3}
+          width="100%"
+          sx={{
+            display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
+            position: "absolute",
+          }}
         >
-          <Button
-            onClick={() => navigate("/portfolio")}
-            startIcon={
-              <ArrowRightAltIcon
-                sx={{
-                  color: "#828282",
-                  transform: "rotate(180deg)",
-                  fontSize: "34px",
-                  width: "30px",
-                }}
-              />
-            }
-            sx={{
-              textTransform: "none",
-              color: "#828282",
-              fontWeight: 600,
-              fontFamily: "Trebuchet MS, sans-serif",
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            slidesPerView={1}
+            navigation
+            autoplay={{
+              delay: 3000,
+              pauseOnMouseEnter: true,
             }}
-          >
-            Portfolio
-          </Button>
-
-          <Divider orientation="vertical" />
-          <Button
-            onClick={() => navigate("/contact")}
-            endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-            sx={{
-              textTransform: "none",
-              color: "#828282",
-              fontWeight: 600,
-              fontFamily: "Trebuchet MS, sans-serif",
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log("slide change")}
+            style={{
+              width: "90%",
             }}
+            speed={5000}
+            loop={true}
           >
-            Contact Us
-          </Button>
+            {data && serviceCards(data)}
+            <div className="prev"></div>
+            <div className="next"></div>
+          </Swiper>
         </Stack>
+      </Box>
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
+        spacing={2}
+      >
+        <Button
+          onClick={() => navigate("/portfolio")}
+          startIcon={
+            <ArrowRightAltIcon
+              sx={{
+                color: "#828282",
+                transform: "rotate(180deg)",
+                fontSize: "34px",
+                width: "30px",
+              }}
+            />
+          }
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
+        >
+          Portfolio
+        </Button>
+
+        <Divider sx={{ width: "100px" }}>
+          <Typography
+            onClick={() => navigate("/")}
+            sx={{
+              textTransform: "none",
+              color: "#828282",
+              fontWeight: 600,
+              cursor: "pointer",
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
+          >
+            Home
+          </Typography>
+        </Divider>
+        <Button
+          onClick={() => navigate("/contact")}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          sx={{
+            textTransform: "none",
+            color: "#828282",
+            fontWeight: 600,
+            fontFamily: "Trebuchet MS, sans-serif",
+          }}
+        >
+          Contact Us
+        </Button>
       </Stack>
       <ServiceSx />
     </>

@@ -176,7 +176,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     />
                     <Typography
                       sx={{
-                        color: isSecondCardVisible ? "#E9E9E9" : "#fff083",
+                        color: isSecondCardVisible ? "#E9E9E9" : "orange",
                         fontWeight: 700,
                         fontSize: "29px",
                         fontFamily: "Trebuchet MS, sans-serif",
@@ -189,7 +189,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <>
                       <Typography
                         sx={{
-                          color: "#FFF083",
+                          color: "orange",
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
@@ -268,7 +268,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     />
                     <Typography
                       sx={{
-                        color: isFirstCardVisible ? "#E9E9E9" : "#fff083",
+                        color: isFirstCardVisible ? "#E9E9E9" : "orange",
                         fontSize: "29px",
                         fontWeight: 700,
                         fontFamily: "Trebuchet MS, sans-serif",
@@ -281,7 +281,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <>
                       <Typography
                         sx={{
-                          color: "#FFF083",
+                          color: "orange",
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
@@ -379,7 +379,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     />
                     <Typography
                       sx={{
-                        color: isFourthCardVisible ? "#E9E9E9" : "#fff083",
+                        color: isFourthCardVisible ? "#E9E9E9" : "orange",
                         fontSize: "29px",
                         fontWeight: 700,
                         fontFamily: "Trebuchet MS, sans-serif",
@@ -392,7 +392,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <>
                       <Typography
                         sx={{
-                          color: "#FFF083",
+                          color: "orange",
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
@@ -468,7 +468,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     />
                     <Typography
                       sx={{
-                        color: isThirdCardVisible ? "#E9E9E9" : "#fff083",
+                        color: isThirdCardVisible ? "#E9E9E9" : "orange",
                         fontSize: "29px",
                         fontFamily: "Trebuchet MS, sans-serif",
                         fontWeight: 700,
@@ -481,7 +481,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <>
                       <Typography
                         sx={{
-                          color: "#FFF083",
+                          color: "orange",
                           fontSize: screenHeight >= 900 ? "28px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,

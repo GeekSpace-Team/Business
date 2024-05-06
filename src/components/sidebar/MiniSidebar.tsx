@@ -64,7 +64,7 @@ const MiniSidebar: FC = () => {
             },
           }}
         >
-          {!showNavbar ? <MenuIcon /> : <CloseIcon sx={{ color: "#FFF083" }} />}
+          {!showNavbar ? <MenuIcon /> : <CloseIcon sx={{ color: "orange" }} />}
         </IconButton>
       </Stack>
       {showNavbar && (
@@ -87,7 +87,7 @@ const MiniSidebar: FC = () => {
             sx={{
               background:
                 location.pathname === "/about" ? "#222222" : "#3e3e3e",
-              color: location.pathname === "/about" ? "#FFF083" : "#B6B6B6",
+              color: location.pathname === "/about" ? "orange" : "#B6B6B6",
               borderRadius: "8px 8px 0px 0px",
               display: "flex",
               flexDirection: "column",
@@ -108,7 +108,7 @@ const MiniSidebar: FC = () => {
             sx={{
               background:
                 location.pathname === "/portfolio" ? "#222222" : "#3e3e3e",
-              color: location.pathname === "/portfolio" ? "#FFF083" : "#B6B6B6",
+              color: location.pathname === "/portfolio" ? "orange" : "#B6B6B6",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -128,7 +128,7 @@ const MiniSidebar: FC = () => {
             sx={{
               background:
                 location.pathname === "/services" ? "#222222" : "#3e3e3e",
-              color: location.pathname === "/services" ? "#FFF083" : "#B6B6B6",
+              color: location.pathname === "/services" ? "orange" : "#B6B6B6",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -148,7 +148,7 @@ const MiniSidebar: FC = () => {
             sx={{
               background:
                 location.pathname === "/contact" ? "#222222" : "#3e3e3e",
-              color: location.pathname === "/contact" ? "#FFF083" : "#B6B6B6",
+              color: location.pathname === "/contact" ? "orange" : "#B6B6B6",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -164,7 +164,7 @@ const MiniSidebar: FC = () => {
             onClick={handleLanguageClick}
             sx={{
               background: showLanguage ? "#222222" : "#3e3e3e",
-              color: showLanguage ? "#FFF083" : "#B6B6B6",
+              color: showLanguage ? "orange" : "#B6B6B6",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

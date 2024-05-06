@@ -30,7 +30,7 @@ const PortfolioDetail: FC = () => {
         }}
       >
         <Grid container spacing={7} mt={3}>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
+          <Grid item lg={7} md={7} sm={12} xs={12}>
             <Stack width="100%" pb={5}>
               <Card sx={{ borderRadius: "8px" }}>
                 <CardActionArea>
@@ -96,15 +96,15 @@ const PortfolioDetail: FC = () => {
               </Card>
             </Stack>
           </Grid>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
-            <Card sx={{ borderRadius: "8px", width: "90%", height: "60vh" }}>
+          <Grid item lg={5} md={5} sm={12} xs={12}>
+            <Card sx={{ borderRadius: "8px", width: "90%", height: "400px" }}>
               <CardActionArea>
                 <img
                   src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
                   alt=""
                   style={{
                     width: "100%",
-                    height: "60vh",
+                    height: "400px",
                   }}
                 />
               </CardActionArea>
