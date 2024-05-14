@@ -229,7 +229,7 @@ const Services: FC = () => {
           }}
         >
           <Swiper
-            modules={[Navigation, Autoplay]}
+            modules={[Autoplay, Navigation]}
             slidesPerView={1}
             navigation
             autoplay={{

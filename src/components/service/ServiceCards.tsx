@@ -170,7 +170,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                       // }
                       src="images/Frame 81.png"
                       style={{
-                        width: screenHeight >= 900 ? "167px" : "98px",
+                        width: screenHeight > 900 ? "" : "98px",
                       }}
                       alt="Frame 80.png"
                     />
@@ -190,7 +190,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                       <Typography
                         sx={{
                           color: "orange",
-                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          fontSize: screenHeight >= 900 ? "24px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
                           fontFamily: "Trebuchet MS, sans-serif",
@@ -262,7 +262,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <img
                       src="/images/Frame 81.png"
                       style={{
-                        width: screenHeight >= 900 ? "167px" : "98px",
+                        width: screenHeight > 900 ? "" : "98px",
                       }}
                       alt="Frame 80.png"
                     />
@@ -282,7 +282,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                       <Typography
                         sx={{
                           color: "orange",
-                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          fontSize: screenHeight >= 900 ? "24px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
                           fontFamily: "Trebuchet MS, sans-serif",
@@ -325,7 +325,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
             position: "absolute",
             width: "90%",
             display: "flex",
-            mt: screenHeight >= 900 ? 24 : 15.3,
+            mt: screenHeight >= 900 ? 17.5 : 15.3,
             alignItems: "center",
             ml: -0.5,
             justifyContent: "center",
@@ -373,7 +373,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <img
                       src="/images/Frame 81.png"
                       style={{
-                        width: screenHeight >= 900 ? "167px" : "98px",
+                        width: screenHeight > 900 ? "" : "98px",
                       }}
                       alt="Frame 80.png"
                     />
@@ -393,7 +393,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                       <Typography
                         sx={{
                           color: "orange",
-                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          fontSize: screenHeight >= 900 ? "24px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
                           fontFamily: "Trebuchet MS, sans-serif",
@@ -462,7 +462,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                     <img
                       src="/images/Frame 81.png"
                       style={{
-                        width: screenHeight >= 900 ? "167px" : "98px",
+                        width: screenHeight > 900 ? "" : "98px",
                       }}
                       alt="Frame 80.png"
                     />
@@ -482,7 +482,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                       <Typography
                         sx={{
                           color: "orange",
-                          fontSize: screenHeight >= 900 ? "28px" : "18px",
+                          fontSize: screenHeight >= 900 ? "24px" : "18px",
                           lineHeight: screenHeight >= 900 ? "48px" : "30px",
                           fontWeight: 500,
                           fontFamily: "Trebuchet MS, sans-serif",
