@@ -117,6 +117,7 @@ const ServiceSx: FC = () => {
           <Stack width="90%" spacing={2}>
             {ourserviceItems.map((item: ServiceData, index: number) => (
               <Box
+                key={`our_service_items_sx_key${index}`}
                 sx={{
                   position: "relative",
                   height: "auto",

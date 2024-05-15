@@ -108,15 +108,27 @@ const ServiceCards: FC<ServiceCardsProps> = ({
     switch (id) {
       case "firstCard":
         setIsSecondCardVisible(!isSecondCardVisible);
+        setIsFirstCardVisible(true);
+        setIsThirdCardVisible(true);
+        setIsFourthCardVisible(true);
+
         break;
       case "secondCard":
         setIsFirstCardVisible(!isFirstCardVisible);
+        setIsFourthCardVisible(true);
+        setIsThirdCardVisible(true);
+        setIsSecondCardVisible(true);
         break;
       case "thirdCard":
         setIsFourthCardVisible(!isFourthCardVisible);
+        setIsFirstCardVisible(true);
+        setIsSecondCardVisible(true);
+        setIsThirdCardVisible(true);
         break;
       case "fourthCard":
         setIsThirdCardVisible(!isThirdCardVisible);
+        setIsFirstCardVisible(true);
+        setIsSecondCardVisible(true);
         break;
       default:
         break;
@@ -215,9 +227,6 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                           endIcon={
                             <KeyboardDoubleArrowRightIcon className="leftArrow" />
                           }
-                          // onClick={() =>
-                          //   handleReadMore(`${data1.id}`, { state: { data1 } })
-                          // }
                           onClick={() => handleReadMore(data1.id, data1)}
                         >
                           Read More
