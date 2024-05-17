@@ -21,22 +21,6 @@ interface SizeMap {
   };
 }
 
-const imgWidth: SizeMap = {
-  lg: {
-    width: "60px",
-  },
-
-  md: {
-    width: "60px",
-  },
-  sm: {
-    width: "40px",
-  },
-  xs: {
-    width: "30px",
-  },
-};
-
 const sizeMap: SizeMap = {
   lg: {
     fontSize: "26px",
@@ -94,23 +78,19 @@ const Services: FC = () => {
 
   let size: string;
   let title: string;
-  let width: string;
+
   if (screenHeight >= 900) {
     size = "lg";
     title = "lg";
-    width = "lg";
   } else if (screenHeight >= 600) {
     size = "md";
     title = "md";
-    width = "md";
   } else if (screenHeight >= 400) {
     size = "sm";
     title = "sm";
-    width = "sm";
   } else {
     size = "xs";
     title = "xs";
-    width = "xs";
   }
 
   const serviceCards = (data: any) => {
@@ -180,21 +160,6 @@ const Services: FC = () => {
                     </Stack>
                   </Stack>
                 </Box>
-                <Stack
-                  sx={{
-                    position: "absolute",
-                    width: "100%",
-                    display: "flex",
-                    mt: { lg: -4, md: -4, sm: -3, xs: -2 },
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src="/images/Rectangle 14.png"
-                    style={{ ...imgWidth[width], zIndex: 110 }}
-                    alt="Rectangle 14"
-                  />
-                </Stack>
               </Box>
               <Box sx={{ height: "55%", mt: 1, width: "100%" }}>
                 <ServiceCards
@@ -233,15 +198,15 @@ const Services: FC = () => {
             slidesPerView={1}
             navigation
             autoplay={{
-              delay: 3000,
+              delay: 5000,
               pauseOnMouseEnter: true,
             }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
             style={{
-              width: "90%",
+              width: "95%",
             }}
-            speed={5000}
+            speed={1000}
             loop={true}
           >
             {data && serviceCards(data)}
@@ -262,7 +227,7 @@ const Services: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#828282",
+                color: "#fff",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -271,7 +236,7 @@ const Services: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -284,7 +249,7 @@ const Services: FC = () => {
             onClick={() => navigate("/")}
             sx={{
               textTransform: "none",
-              color: "#828282",
+              color: "#fff",
               fontWeight: 600,
               cursor: "pointer",
               fontFamily: "Trebuchet MS, sans-serif",
@@ -295,10 +260,10 @@ const Services: FC = () => {
         </Divider>
         <Button
           onClick={() => navigate("/contact")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

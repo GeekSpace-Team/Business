@@ -3,12 +3,6 @@ import { Box, Grid, Typography, Stack, Button } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { useNavigate } from "react-router-dom";
 
-interface SizeMap {
-  [key: string]: {
-    width?: string;
-  };
-}
-
 export type ServiceData = {
   id: number;
   attributes: {
@@ -52,22 +46,6 @@ type ServiceCardsProps = {
   data4: ServiceData;
 };
 
-const imgWidth: SizeMap = {
-  lg: {
-    width: "60px",
-  },
-
-  md: {
-    width: "60px",
-  },
-  sm: {
-    width: "40px",
-  },
-  xs: {
-    width: "30px",
-  },
-};
-
 const ServiceCards: FC<ServiceCardsProps> = ({
   data1,
   data2,
@@ -92,17 +70,6 @@ const ServiceCards: FC<ServiceCardsProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  let width;
-  if (screenHeight >= 900) {
-    width = "lg";
-  } else if (screenHeight >= 600) {
-    width = "md";
-  } else if (screenHeight >= 400) {
-    width = "sm";
-  } else {
-    width = "xs";
-  }
 
   const handleCardClick = (id: string) => {
     switch (id) {
@@ -156,7 +123,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="firstCard"
                   sx={{
-                    background: isSecondCardVisible ? "#828282" : "#3E3E3E",
+                    background: "rgba(10, 10, 14, 0.7)",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -249,7 +216,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="secondCard"
                   sx={{
-                    background: isFirstCardVisible ? "#828282" : "#3E3E3E",
+                    background: "rgba(10, 10, 14, 0.7)",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -328,24 +295,6 @@ const ServiceCards: FC<ServiceCardsProps> = ({
             )}
           </Grid>
         </Grid>
-
-        <Stack
-          sx={{
-            position: "absolute",
-            width: "90%",
-            display: "flex",
-            mt: screenHeight >= 900 ? 17.5 : 15.3,
-            alignItems: "center",
-            ml: -0.5,
-            justifyContent: "center",
-          }}
-        >
-          <img
-            src="/images/Rectangle 14.png"
-            style={{ ...imgWidth[width], zIndex: 10 }}
-            alt="Rectangle 14"
-          />
-        </Stack>
         <Grid item lg={6} md={6} sm={12} xs={12}>
           <Grid container spacing={2}>
             {isThirdCardVisible && data3 && (
@@ -360,7 +309,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="thirdCard"
                   sx={{
-                    background: isFourthCardVisible ? "#828282" : "#3E3E3E",
+                    background: "rgba(10, 10, 14, 0.7)",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
@@ -449,7 +398,7 @@ const ServiceCards: FC<ServiceCardsProps> = ({
                 <Box
                   id="fourthCard"
                   sx={{
-                    background: isThirdCardVisible ? "#828282" : "#3E3E3E",
+                    background: "rgba(10, 10, 14, 0.7)",
                     p: 2,
                     display: "flex",
                     flexDirection: "column",

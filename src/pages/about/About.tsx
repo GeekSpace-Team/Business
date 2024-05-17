@@ -168,6 +168,7 @@ const About: FC = () => {
               fontSize: screenHeight >= 900 ? "36px" : "30px",
               fontWeight: 700,
               fontFamily: "Trebuchet MS, sans-serif",
+              color: "#fff",
             }}
           >
             who we are
@@ -183,7 +184,9 @@ const About: FC = () => {
                   data-aos-delay={"500"}
                   key={item.id}
                   sx={{
-                    background: "#222222",
+                    background: "rgba(10, 10, 14, 0.7)",
+                    // boxShadow:
+                    //   "-1px -1px 20px 10px rgba(197, 196, 196, 0.2), 6px 6px 12px 2px rgba(0, 0, 0, 0.7)",
                     p: screenHeight >= 900 ? 4 : 2,
                     width: "90%",
                     height: "auto",
@@ -275,7 +278,7 @@ const About: FC = () => {
                         fontSize: screenHeight >= 900 ? "32px" : "26px",
                         fontWeight: 700,
                         lineHeight: screenHeight >= 900 ? "39px" : "30px",
-                        color: "#626262",
+                        color: "#fff",
                         width: { lg: "30%", md: "30%", sm: "100%", xs: "100%" },
                         fontFamily: "Trebuchet MS, sans-serif",
                         textAlign: {
@@ -293,7 +296,7 @@ const About: FC = () => {
                         fontSize: screenHeight >= 900 ? "20px" : "17px",
                         fontWeight: 600,
                         lineHeight: screenHeight >= 900 ? "25px" : "20px",
-                        color: "#626262",
+                        color: "#fff",
                         width: { lg: "70%", md: "70%", sm: "100%", xs: "100%" },
                         fontFamily: "Trebuchet MS, sans-serif",
                         textAlign: {
@@ -342,7 +345,7 @@ const About: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#828282",
+                color: "#fff",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -351,7 +354,7 @@ const About: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -362,10 +365,10 @@ const About: FC = () => {
         <Divider orientation="vertical" flexItem />
         <Button
           onClick={() => navigate("/portfolio")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

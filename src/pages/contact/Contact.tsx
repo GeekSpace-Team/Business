@@ -83,7 +83,7 @@ const Contact: FC = () => {
         >
           <Typography
             sx={{
-              color: "#222222",
+              color: "#fff",
               fontSize: {
                 lg: i18n.language === "ru" ? "33px" : "36px",
                 md: i18n.language === "ru" ? "33px" : "36px",
@@ -100,7 +100,7 @@ const Contact: FC = () => {
             <span
               data-aos="fade-left"
               data-aos-delay={"500"}
-              style={{ color: "#828282", marginLeft: "10px" }}
+              style={{ color: "#fff", marginLeft: "10px" }}
             >
               {t("contact.contactC")}
             </span>
@@ -124,7 +124,9 @@ const Contact: FC = () => {
               <form onSubmit={handleSubmit}>
                 <Box
                   sx={{
-                    background: "#828282",
+                    background: "rgba(10, 10, 14, 0.7)",
+                    boxShadow:
+                      "-1px -1px 20px 10px rgba(197, 196, 196, 0.2), 6px 6px 12px 2px rgba(0, 0, 0, 0.7)",
                     p: "35px 15px 35px 15px",
                     borderRadius: radius,
                     display: "flex",
@@ -224,7 +226,9 @@ const Contact: FC = () => {
             >
               <Box
                 sx={{
-                  background: "#828282",
+                  background: "rgba(10, 10, 14, 0.7)",
+                  boxShadow:
+                    "-1px -1px 20px 10px rgba(197, 196, 196, 0.2), 6px 6px 12px 2px rgba(0, 0, 0, 0.7)",
                   borderRadius: radius,
                   p: "15px 0px 15px 0px",
                   alignItems: "center",
@@ -342,7 +346,7 @@ const Contact: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#828282",
+                color: "#fff",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -351,7 +355,7 @@ const Contact: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -362,10 +366,10 @@ const Contact: FC = () => {
         <Divider orientation="vertical" flexItem />
         <Button
           onClick={() => navigate("/")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

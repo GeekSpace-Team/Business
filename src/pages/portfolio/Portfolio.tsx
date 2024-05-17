@@ -1,13 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import {
-  Stack,
-  Card,
-  CardMedia,
-  CardActionArea,
-  Typography,
-  Button,
-  Divider,
-} from "@mui/material";
+import { Stack, Typography, Button, Divider, Box } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -77,56 +69,70 @@ const Portfolio: FC = () => {
         height="100vh"
       >
         <Stack pt={5} mb={-7}>
-          <Typography
+          <Box
             sx={{
-              color: "#222222",
-              fontSize: "36px",
-              fontWeight: 700,
-              textAlign: "center",
-              fontFamily: "Trebuchet MS, sans-serif",
+              position: "relative",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            Prominent works of my business coaching
-          </Typography>
+            <Typography
+              sx={{
+                color: "#fff",
+                fontSize: "36px",
+                fontWeight: 700,
+                textAlign: "center",
+                fontFamily: "Trebuchet MS, sans-serif",
+                position: "absolute",
+              }}
+            >
+              Prominent works of my business coaching
+            </Typography>
+          </Box>
         </Stack>
-        <Stack width="90%" height="100%" justifyContent="center">
-          <Swiper
-            modules={[Autoplay, Navigation]}
-            spaceBetween={10}
-            slidesPerView={3}
-            navigation
-            autoplay={{
-              delay: 3000,
-              pauseOnMouseEnter: true,
+        <Box sx={{ position: "relative", height: "100vh" }}>
+          <Stack
+            width="100%"
+            height="100%"
+            sx={{
+              position: "absolute",
+              alignItems: "center",
+              display: "flex",
             }}
-            style={{
-              width: "90%",
-              paddingLeft: "5%",
-            }}
-            speed={5000}
-            loop={true}
+            justifyContent="center"
           >
-            {portfolioItems.map((item: PortfolioItem, index: number) => (
-              <SwiperSlide key={`portfolio_items_key${index}`}>
-                <Stack direction="row" alignItems="center">
-                  <Card
-                    sx={{
-                      background: activeIndex === index ? "#222222" : "#363636",
-                      borderRadius: "8px",
-                      minHeight: screenHeight >= 900 ? "600px" : "360px",
-                      width: "85%",
-                    }}
-                    onClick={() => toggleActive(index)}
-                  >
-                    <CardActionArea>
-                      <Stack p={3}>
-                        <CardMedia
-                          component="img"
-                          height={screenHeight >= 900 ? "350px" : "160px"}
-                          image={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
-                          alt="green iguana"
-                        />
-                      </Stack>
+            <Swiper
+              modules={[Autoplay, Navigation]}
+              spaceBetween={10}
+              slidesPerView={3}
+              navigation
+              autoplay={{
+                delay: 750,
+                pauseOnMouseEnter: true,
+              }}
+              style={{
+                width: "92%",
+                paddingLeft: "5%",
+              }}
+              speed={750}
+              loop={true}
+            >
+              {portfolioItems.map((item: PortfolioItem, index: number) => (
+                <SwiperSlide key={`portfolio_items_key${index}`}>
+                  <Stack direction="row" alignItems="center">
+                    <Box
+                      sx={{
+                        background: "rgba(10, 10, 14, 0.7)",
+                        minHeight: screenHeight >= 900 ? "600px" : "400px",
+                        width: "85%",
+                      }}
+                      onClick={() => toggleActive(index)}
+                    >
+                      <img
+                        style={{ width: "100%", height: "250px" }}
+                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
+                      />
                       <Stack p={3}>
                         <Typography
                           sx={{
@@ -185,15 +191,15 @@ const Portfolio: FC = () => {
                           </>
                         )}
                       </Stack>
-                    </CardActionArea>
-                  </Card>
-                </Stack>
-              </SwiperSlide>
-            ))}
-            <div className="prev"></div>
-            <div className="next"></div>
-          </Swiper>
-        </Stack>
+                    </Box>
+                  </Stack>
+                </SwiperSlide>
+              ))}
+              <div className="prev"></div>
+              <div className="next"></div>
+            </Swiper>
+          </Stack>
+        </Box>
       </Stack>
       <Stack
         direction="row"
@@ -207,7 +213,7 @@ const Portfolio: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#828282",
+                color: "#fff",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -216,7 +222,7 @@ const Portfolio: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -229,7 +235,7 @@ const Portfolio: FC = () => {
             onClick={() => navigate("/")}
             sx={{
               textTransform: "none",
-              color: "#828282",
+              color: "#fff",
               fontWeight: 600,
               cursor: "pointer",
               fontFamily: "Trebuchet MS, sans-serif",
@@ -240,10 +246,10 @@ const Portfolio: FC = () => {
         </Divider>
         <Button
           onClick={() => navigate("/services")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
           sx={{
             textTransform: "none",
-            color: "#828282",
+            color: "#fff",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

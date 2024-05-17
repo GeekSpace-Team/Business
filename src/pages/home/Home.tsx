@@ -133,7 +133,7 @@ const Home: FC = () => {
                       wrapper="span"
                       speed={30}
                       style={{
-                        color: "#222222",
+                        color: "#fff",
                         fontSize: "2.4em",
                         fontWeight: 900,
                         lineHeight: "2em",
@@ -145,7 +145,7 @@ const Home: FC = () => {
                       data-aos="fade-up"
                       data-aos-delay={"500"}
                       sx={{
-                        color: "#6B6B6B",
+                        color: "#fff",
                         fontSize: "16px",
                         fontWeight: 600,
                         lineHeight: "20px",

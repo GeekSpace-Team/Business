@@ -26,7 +26,7 @@ const Sidebar: FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSidebarVisible(!sidebarVisible);
-    }, 5000);
+    }, 500);
 
     return () => clearTimeout(timeout);
   }, [navigate]);
@@ -66,7 +66,7 @@ const Sidebar: FC = () => {
       <Stack
         width="100%"
         direction={{ lg: "row", md: "row", sm: "column", xs: "column" }}
-        spacing={screenHeight >= 900 ? 5 : 0}
+        spacing={screenHeight >= 900 ? 1 : 0}
       >
         <Box
           sx={{
@@ -99,7 +99,7 @@ const Sidebar: FC = () => {
                   <Tooltip title="Open Sidebar">
                     <IconButton
                       className="leftArrow"
-                      sx={{ width: "30px" }}
+                      sx={{ width: "30px", color: "#fff" }}
                       onClick={() => setSidebarVisible(true)}
                     >
                       <ArrowForwardIosIcon />
