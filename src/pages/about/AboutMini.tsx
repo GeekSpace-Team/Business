@@ -63,9 +63,10 @@ const AboutMini: FC = () => {
             fontSize: "24px",
             fontWeight: 700,
             fontFamily: "Trebuchet MS, sans-serif",
+            textTransform: "uppercase",
           }}
         >
-          WHO WE ARE
+          who we are
         </Typography>
         {contentData?.map((item) => (
           <>
