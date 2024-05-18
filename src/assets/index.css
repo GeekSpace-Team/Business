@@ -10,7 +10,7 @@ body {
   /* background: #e9e9e9; */
   overflow-x: hidden;
   font-family: Trebuchet MS, sans-serif;
-  background: url("./images/back.webp");
+  background-image: url("./images/back.webp");
   background-size: 100% 100%;
   background-position: cover;
   background-repeat: no-repeat;
