@@ -7,7 +7,7 @@ body {
   width: 100%;
   min-height: 100vh;
   font-family: InterRegular;
-  background: #e9e9e9;
+  /* background: #e9e9e9; */
   overflow-x: hidden;
   font-family: Trebuchet MS, sans-serif;
   background: url("./images/back.webp");
