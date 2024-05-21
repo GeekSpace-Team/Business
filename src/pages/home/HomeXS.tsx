@@ -14,9 +14,11 @@ import api from "../../api/api";
 import { useQuery } from "react-query";
 import LoadingHome from "../../components/loading/LoadingHome";
 import { useTranslation } from "react-i18next";
+import { TypeAnimation } from "react-type-animation";
 
 const HomeXS: FC = () => {
   const { i18n } = useTranslation();
+  const [animationKey, setAnimationKey] = useState(0);
 
   const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
 
@@ -47,6 +49,13 @@ const HomeXS: FC = () => {
 
     fetchData();
   }, [i18n.language]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimationKey((prevKey) => prevKey + 1);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const {
     refetch: fetchTexts,
@@ -79,20 +88,23 @@ const HomeXS: FC = () => {
       {(isHomeDataError || isImageDataError) && <div>Error fetching data</div>}
       {homeData && imageData && (
         <>
-          <Typography
-            sx={{
-              color: "#222222",
-              fontSize: "24px",
-              lineHeight: "30px",
-              textAlign: "center",
-              fontWeight: 700,
+          <TypeAnimation
+            key={animationKey}
+            sequence={[`${homeData.data[0].attributes.title}`]}
+            wrapper="span"
+            speed={30}
+            style={{
+              color: "#fff",
+              fontSize: "1.4em",
+              fontWeight: 900,
+              lineHeight: "2em",
+              width: "100%",
+              fontFamily: "Trebuchet MS, sans-serif",
             }}
-          >
-            {homeData.data[0].attributes.title}
-          </Typography>
+          />
           <Typography
             sx={{
-              color: "#6B6B6B",
+              color: "#fff",
               fontSize: "16px",
               lineHeight: "20px",
               textAlign: "center",

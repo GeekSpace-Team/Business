@@ -55,7 +55,7 @@ const Social: FC = () => {
                     data-aos-delay={`${socialMedia.id * 200}`}
                     src={iconUrl}
                     alt={title}
-                    style={{ width: 32, height: 32 }}
+                    style={{ width: 32, height: 32, color: "#fff" }}
                   />
                 </IconButton>
               </Tooltip>

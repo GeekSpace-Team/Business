@@ -59,7 +59,7 @@ const AboutMini: FC = () => {
         <Typography
           sx={{
             textAlign: "center",
-            color: "#222222",
+            color: "#fff",
             fontSize: "24px",
             fontWeight: 700,
             fontFamily: "Trebuchet MS, sans-serif",
@@ -80,7 +80,7 @@ const AboutMini: FC = () => {
                 >
                   <Box
                     sx={{
-                      background: "#222222",
+                      background: "rgba(10, 10, 14, 0.7)",
                       p: 1,
                       width: "92%",
                       borderRadius: "8px 0px 0px 8px",
@@ -159,7 +159,7 @@ const AboutMini: FC = () => {
                   ) : null}
                   <Typography
                     sx={{
-                      color: "#222222",
+                      color: "#fff",
                       fontSize: "20px",
                       fontWeight: 700,
                       lineHeight: "30px",
@@ -171,7 +171,7 @@ const AboutMini: FC = () => {
                   </Typography>
                   <Typography
                     sx={{
-                      color: "#222222",
+                      color: "#fff",
                       fontSize: "16px",
                       fontWeight: 600,
                       lineHeight: "25px",
@@ -198,7 +198,7 @@ const AboutMini: FC = () => {
             startIcon={
               <ArrowRightAltIcon
                 sx={{
-                  color: "#828282",
+                  color: "#fff",
                   transform: "rotate(180deg)",
                   fontSize: "34px",
                   width: "30px",
@@ -207,7 +207,7 @@ const AboutMini: FC = () => {
             }
             sx={{
               textTransform: "none",
-              color: "#828282",
+              color: "#fff",
               fontWeight: 600,
               fontFamily: "Trebuchet MS, sans-serif",
             }}
@@ -215,13 +215,13 @@ const AboutMini: FC = () => {
             Home
           </Button>
 
-          <Divider orientation="vertical" />
+          <Divider orientation="vertical" flexItem color="#fff" />
           <Button
             onClick={() => navigate("/portfolio")}
-            endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
+            endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
             sx={{
               textTransform: "none",
-              color: "#828282",
+              color: "#fff",
               fontWeight: 600,
               fontFamily: "Trebuchet MS, sans-serif",
             }}

@@ -11,10 +11,11 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "auto",
-  bgcolor: "#fff",
+  bgcolor: "rgba(10, 10, 14, 10)",
   boxShadow: 24,
   p: 4,
   borderRadius: "6px",
+  color: "#fff",
 };
 
 export default function LanguageModal() {
@@ -57,7 +58,7 @@ export default function LanguageModal() {
                 borderRadius: "8px",
                 cursor: "pointer",
                 "&:hover": {
-                  background: "#3e3e3e",
+                  background: "#1e1e1e",
                   color: "orange",
                 },
               }}
@@ -81,7 +82,7 @@ export default function LanguageModal() {
                 borderRadius: "8px",
                 cursor: "pointer",
                 "&:hover": {
-                  background: "#3e3e3e",
+                  background: "#1e1e1e",
                   color: "orange",
                 },
               }}
@@ -105,7 +106,7 @@ export default function LanguageModal() {
                 borderRadius: "8px",
                 cursor: "pointer",
                 "&:hover": {
-                  background: "#3e3e3e",
+                  background: "#1e1e1e",
                   color: "orange",
                 },
               }}

@@ -1,26 +1,17 @@
-import {
-  Box,
-  Button,
-  Divider,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FC, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useTranslation } from "react-i18next";
 import api from "../../api/api";
 import { useQuery } from "react-query";
 import LoadingHome from "../../components/loading/LoadingHome";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { PortfolioItem } from "../../types/type";
 
 const PortfolioMini: FC = () => {
-  const navigate = useNavigate();
   const { i18n } = useTranslation();
   const [showDescription, setShowDescription] = useState<number | null>(null);
 
@@ -63,7 +54,7 @@ const PortfolioMini: FC = () => {
         <Typography
           sx={{
             textAlign: "center",
-            color: "#222222",
+            color: "#fff",
             fontSize: "24px",
             fontWeight: 700,
             width: "70%",
@@ -82,24 +73,24 @@ const PortfolioMini: FC = () => {
           spaceBetween={10}
           slidesPerView={1}
           autoplay={{
-            delay: 3000,
+            delay: 2000,
             pauseOnMouseEnter: true,
           }}
           style={{
             width: "100%",
           }}
-          speed={5000}
+          speed={1000}
           loop={true}
         >
-          {portfolioItems.map((item: any, index: number) => (
+          {portfolioItems.map((item: PortfolioItem, index: number) => (
             <SwiperSlide key={`portfolio_items_mini_key${index}`}>
               <Box
                 sx={{
-                  background: showDescription === index ? "#222222" : "#828282",
+                  background: "rgba(10, 10, 14, 0.7)",
                   borderRadius: "8px",
-                  p: 3,
-                  width: "80%",
+                  width: "100%",
                   mr: 5,
+                  minHeight: "400px",
                 }}
               >
                 <img
@@ -116,6 +107,7 @@ const PortfolioMini: FC = () => {
                   direction="row"
                   justifyContent="space-between"
                   alignItems="center"
+                  p={3}
                 >
                   <Stack>
                     <Stack
@@ -132,7 +124,7 @@ const PortfolioMini: FC = () => {
                           fontFamily: "Trebuchet MS, sans-serif",
                         }}
                       >
-                        {item.attributes.title}
+                        {item.attributes.title.slice(0, 40)}...
                       </Typography>
                       <IconButton>
                         {showDescription === index ? (
@@ -170,50 +162,6 @@ const PortfolioMini: FC = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-      </Stack>
-
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        spacing={2}
-        sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
-      >
-        <Button
-          onClick={() => navigate("/about")}
-          startIcon={
-            <ArrowRightAltIcon
-              sx={{
-                color: "#828282",
-                transform: "rotate(180deg)",
-                fontSize: "34px",
-                width: "30px",
-              }}
-            />
-          }
-          sx={{
-            textTransform: "none",
-            color: "#828282",
-            fontWeight: 600,
-            fontFamily: "Trebuchet MS, sans-serif",
-          }}
-        >
-          About
-        </Button>
-
-        <Divider orientation="vertical" />
-        <Button
-          onClick={() => navigate("/services")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-          sx={{
-            textTransform: "none",
-            color: "#828282",
-            fontWeight: 600,
-            fontFamily: "Trebuchet MS, sans-serif",
-          }}
-        >
-          Services
-        </Button>
       </Stack>
     </>
   );

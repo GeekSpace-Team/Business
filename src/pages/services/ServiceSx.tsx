@@ -51,6 +51,8 @@ const ServiceSx: FC = () => {
         sx={{
           display: { lg: "none", md: "none", sm: "flex", xs: "flex" },
           flexDirection: "column",
+          height: "100%",
+          pb: 10,
         }}
       >
         <Stack direction="row" justifyContent="center">
@@ -90,27 +92,6 @@ const ServiceSx: FC = () => {
                 profitability and help the business grow.
               </Typography>
             </Stack>
-            <img
-              src="./images/Rectangle 14.png"
-              style={{
-                position: "absolute",
-                width: "45px",
-                bottom: -28,
-                left: -28,
-              }}
-              alt=""
-            />
-
-            <img
-              src="./images/Rectangle 14.png"
-              style={{
-                position: "absolute",
-                width: "45px",
-                bottom: -28,
-                right: -28,
-              }}
-              alt=""
-            />
           </Box>
         </Stack>
         <Stack spacing={5} direction="row" justifyContent="center">
@@ -122,9 +103,13 @@ const ServiceSx: FC = () => {
                   position: "relative",
                   height: "auto",
                   width: "100%",
-                  background: showDescription === index ? "#3e3e3e" : "#828282",
+                  background:
+                    showDescription === index
+                      ? "rgba(10, 10, 14, 0.7)"
+                      : "rgba(10, 10, 14, 0.8)",
                   transition: "background-color 0.3s",
                   cursor: "pointer",
+                  borderRadius: "8px",
                 }}
               >
                 <Box
@@ -190,84 +175,76 @@ const ServiceSx: FC = () => {
                     </>
                   )}
                 </Box>
-                <img
-                  src="./images/Rectangle 14.png"
-                  style={{
-                    position: "absolute",
-                    width: "45px",
-                    top: -28,
-                    left: -28,
-                  }}
-                  alt=""
-                />
-
-                <img
-                  src="./images/Rectangle 14.png"
-                  style={{
-                    position: "absolute",
-                    width: "45px",
-                    bottom: -28,
-                    right: -28,
-                  }}
-                  alt=""
-                />
-                <img
-                  src="./images/Rectangle 14.png"
-                  style={{
-                    position: "absolute",
-                    width: "45px",
-                    bottom: -28,
-                    left: -28,
-                  }}
-                  alt=""
-                />
-                <img
-                  src="./images/Rectangle 14.png"
-                  style={{
-                    position: "absolute",
-                    width: "45px",
-                    top: -28,
-                    right: -28,
-                  }}
-                  alt=""
-                />
               </Box>
             ))}
           </Stack>
         </Stack>
+      </Box>
+      <Box
+        sx={{
+          position: "relative",
+          width: "100%",
+          display: { lg: "none", md: "none", sm: "flex", xs: "flex" },
+        }}
+      >
         <Stack
           direction="row"
-          alignItems="center"
           justifyContent="center"
+          alignItems="center"
+          sx={{
+            position: "absolute",
+            bottom: "10%",
+            width: "100%",
+          }}
           spacing={2}
-          mt={3}
-          mb={3}
-          sx={{ display: { lg: "none", md: "none", sm: "flex", xs: "flex" } }}
         >
           <Button
             onClick={() => navigate("/portfolio")}
             startIcon={
               <ArrowRightAltIcon
                 sx={{
-                  color: "#828282",
+                  color: "#fff",
                   transform: "rotate(180deg)",
                   fontSize: "34px",
                   width: "30px",
                 }}
               />
             }
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            sx={{
+              textTransform: "none",
+              color: "#fff",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Previous
+            Portfolio
           </Button>
 
-          <Divider orientation="vertical" />
+          <Divider sx={{ width: "100px" }}>
+            <Typography
+              onClick={() => navigate("/")}
+              sx={{
+                textTransform: "none",
+                color: "#fff",
+                fontWeight: 600,
+                cursor: "pointer",
+                fontFamily: "Trebuchet MS, sans-serif",
+              }}
+            >
+              Home
+            </Typography>
+          </Divider>
           <Button
             onClick={() => navigate("/contact")}
-            endIcon={<ArrowRightAltIcon sx={{ color: "#828282" }} />}
-            sx={{ textTransform: "none", color: "#828282", fontWeight: 600 }}
+            endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
+            sx={{
+              textTransform: "none",
+              color: "#fff",
+              fontWeight: 600,
+              fontFamily: "Trebuchet MS, sans-serif",
+            }}
           >
-            Read more
+            Contact Us
           </Button>
         </Stack>
       </Box>

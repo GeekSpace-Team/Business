@@ -338,7 +338,12 @@ const Contact: FC = () => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
+        sx={{
+          position: "absolute",
+          bottom: "5%",
+          width: "100%",
+          display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
+        }}
         spacing={2}
       >
         <Button
