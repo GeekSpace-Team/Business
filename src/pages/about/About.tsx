@@ -168,7 +168,7 @@ const About: FC = () => {
               fontSize: screenHeight >= 900 ? "36px" : "30px",
               fontWeight: 700,
               fontFamily: "Trebuchet MS, sans-serif",
-              color: "#fff",
+              color: "orange",
             }}
           >
             who we are
@@ -337,12 +337,7 @@ const About: FC = () => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{
-          position: "absolute",
-          bottom: "5%",
-          width: "100%",
-          display: { lg: "block", md: "block", sm: "none", xs: "none" },
-        }}
+        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
         spacing={2}
       >
         <Button
@@ -350,7 +345,7 @@ const About: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#fff",
+                color: "orange",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -359,7 +354,7 @@ const About: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -370,10 +365,10 @@ const About: FC = () => {
         <Divider orientation="vertical" flexItem />
         <Button
           onClick={() => navigate("/portfolio")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "orange" }} />}
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

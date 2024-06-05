@@ -232,7 +232,7 @@ const Services: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#fff",
+                color: "orange",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -241,7 +241,7 @@ const Services: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -254,7 +254,7 @@ const Services: FC = () => {
             onClick={() => navigate("/")}
             sx={{
               textTransform: "none",
-              color: "#fff",
+              color: "orange",
               fontWeight: 600,
               cursor: "pointer",
               fontFamily: "Trebuchet MS, sans-serif",
@@ -265,10 +265,10 @@ const Services: FC = () => {
         </Divider>
         <Button
           onClick={() => navigate("/contact")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "orange" }} />}
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

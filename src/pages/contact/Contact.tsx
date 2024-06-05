@@ -351,7 +351,7 @@ const Contact: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#fff",
+                color: "orange",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -360,7 +360,7 @@ const Contact: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -371,10 +371,10 @@ const Contact: FC = () => {
         <Divider orientation="vertical" flexItem />
         <Button
           onClick={() => navigate("/")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "orange" }} />}
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

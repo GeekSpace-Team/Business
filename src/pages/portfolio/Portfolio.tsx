@@ -79,7 +79,7 @@ const Portfolio: FC = () => {
           >
             <Typography
               sx={{
-                color: "#fff",
+                color: "orange",
                 fontSize: "36px",
                 fontWeight: 700,
                 textAlign: "center",
@@ -213,7 +213,7 @@ const Portfolio: FC = () => {
           startIcon={
             <ArrowRightAltIcon
               sx={{
-                color: "#fff",
+                color: "orange",
                 transform: "rotate(180deg)",
                 fontSize: "34px",
                 width: "30px",
@@ -222,7 +222,7 @@ const Portfolio: FC = () => {
           }
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}
@@ -235,7 +235,7 @@ const Portfolio: FC = () => {
             onClick={() => navigate("/")}
             sx={{
               textTransform: "none",
-              color: "#fff",
+              color: "orange",
               fontWeight: 600,
               cursor: "pointer",
               fontFamily: "Trebuchet MS, sans-serif",
@@ -246,10 +246,10 @@ const Portfolio: FC = () => {
         </Divider>
         <Button
           onClick={() => navigate("/services")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
+          endIcon={<ArrowRightAltIcon sx={{ color: "orange" }} />}
           sx={{
             textTransform: "none",
-            color: "#fff",
+            color: "orange",
             fontWeight: 600,
             fontFamily: "Trebuchet MS, sans-serif",
           }}

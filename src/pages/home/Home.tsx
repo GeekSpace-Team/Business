@@ -133,7 +133,7 @@ const Home: FC = () => {
                       wrapper="span"
                       speed={30}
                       style={{
-                        color: "#fff",
+                        color: "orange",
                         fontSize: "2.4em",
                         fontWeight: 900,
                         lineHeight: "2em",

@@ -1,0 +1,1 @@
+import{i as r,j as t}from"./index-g64wfrjQ.js";import{r as a}from"./createSvgIcon-D-zL7oJl.js";var e={},o=r;Object.defineProperty(e,"__esModule",{value:!0});var i=e.default=void 0,u=o(a()),l=t;i=e.default=(0,u.default)((0,l.jsx)("path",{d:"M16.01 11H4v2h12.01v3L20 12l-3.99-4z"}),"ArrowRightAlt");export{i as d};
