@@ -120,7 +120,7 @@ const Sidebar: FC = () => {
               }}
             >
               <>
-                <Logo />
+                <Logo sidebarVisible={sidebarVisible} />
                 {location.pathname === "/" ? null : (
                   <Box
                     sx={{ height: screenHeight >= 900 ? "0px" : "50px" }}
