@@ -1,32 +1,34 @@
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { FC, lazy, Suspense } from "react";
+import { FC, lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoadingComponent from "../components/loading/LoadingComponent";
-import LoadingHome from "../components/loading/LoadingHome";
 import { LanguageProvider } from "../hooks/LanguageContext";
 import { ToastContainer } from "react-toastify";
-import PortfolioDetail from "../pages/portfolio/PortfolioDetail";
-import ServiceCardDetail from "../components/service/ServiceCardDetail";
+import LoadingComponent from "../components/loading/LoadingComponent";
+import LoadingHome from "../components/loading/LoadingHome";
 
-// import MusicPlayer from "../components/musicPlayer/MusicPlayer";
-
-// Import lazy-loaded components
-
+// Lazy-loaded components
 const Sidebar = lazy(() => import("../components/sidebar/Sidebar"));
 const Home = lazy(() => import("../pages/home/Home"));
 const About = lazy(() => import("../pages/about/About"));
 const Contact = lazy(() => import("../pages/contact/Contact"));
 const Portfolio = lazy(() => import("../pages/portfolio/Portfolio"));
 const Services = lazy(() => import("../pages/services/Services"));
+const PortfolioDetail = lazy(
+  () => import("../pages/portfolio/PortfolioDetail")
+);
+const ServiceCardDetail = lazy(
+  () => import("../components/service/ServiceCardDetail")
+);
 
 const RouteList: FC = () => {
-  // console.clear();
+  useEffect(() => {
+    Aos.init({
+      duration: 1800,
+      offset: 0,
+    });
+  }, []);
 
-  Aos.init({
-    duration: 1800,
-    offset: 0,
-  });
   return (
     <BrowserRouter>
       <LanguageProvider>
@@ -34,171 +36,72 @@ const RouteList: FC = () => {
           <Route
             path="/"
             element={
-              <Suspense
-                fallback={
-                  <div>
-                    <LoadingComponent />
-                  </div>
-                }
-              >
+              <Suspense fallback={<LoadingComponent />}>
                 <Sidebar />
               </Suspense>
             }
           >
-            <Route
-              index
-              element={
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "90vh",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <LoadingHome />
-                    </div>
-                  }
-                >
-                  <Home />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "90vh",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <LoadingComponent />
-                    </div>
-                  }
-                >
-                  <About />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "90vh",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <LoadingComponent />
-                    </div>
-                  }
-                >
-                  <Contact />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/portfolio"
-              element={
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "90vh",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <LoadingComponent />
-                    </div>
-                  }
-                >
-                  <Portfolio />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/services"
-              element={
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "90vh",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <LoadingComponent />
-                    </div>
-                  }
-                >
-                  <Services />
-                </Suspense>
-              }
-            />
+            <Route index element={<HomeFallback />} />
+            <Route path="/about" element={<AboutFallback />} />
+            <Route path="/contact" element={<ContactFallback />} />
+            <Route path="/portfolio" element={<PortfolioFallback />} />
+            <Route path="/services" element={<ServicesFallback />} />
             <Route
               path="/portfolio/:id"
-              element={
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "90vh",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <LoadingComponent />
-                    </div>
-                  }
-                >
-                  <PortfolioDetail />
-                </Suspense>
-              }
+              element={<PortfolioDetailFallback />}
             />
             <Route
               path="/services/:serviceId"
-              element={
-                <Suspense
-                  fallback={
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "90vh",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <LoadingComponent />
-                    </div>
-                  }
-                >
-                  <ServiceCardDetail />
-                </Suspense>
-              }
+              element={<ServiceCardDetailFallback />}
             />
           </Route>
         </Routes>
         <ToastContainer />
       </LanguageProvider>
-      {/* <MusicPlayer /> */}
     </BrowserRouter>
   );
 };
+
+const HomeFallback = () => (
+  <Suspense fallback={<LoadingHome />}>
+    <Home />
+  </Suspense>
+);
+
+const AboutFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <About />
+  </Suspense>
+);
+
+const ContactFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <Contact />
+  </Suspense>
+);
+
+const PortfolioFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <Portfolio />
+  </Suspense>
+);
+
+const ServicesFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <Services />
+  </Suspense>
+);
+
+const PortfolioDetailFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <PortfolioDetail />
+  </Suspense>
+);
+
+const ServiceCardDetailFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <ServiceCardDetail />
+  </Suspense>
+);
 
 export default RouteList;

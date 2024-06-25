@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import { Stack, Typography, Button, Divider, Box } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +18,10 @@ import { PortfolioItem } from "../../types/type";
 const Portfolio: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const [items, setItems] = useState<PortfolioItem[]>([]);
   const navigate = useNavigate();
   const { i18n } = useTranslation();
+  const swiperRef = useRef<any>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,15 +40,41 @@ const Portfolio: FC = () => {
     data: portfolioItems,
     isLoading,
     isError,
-  } = useQuery("portfolioItems", async () => {
-    const response = await api.get(
-      `/api/portfolios?populate=image&locale=${i18n.language}`
-    );
-    return response.data.data;
-  });
+  } = useQuery(
+    "portfolioItems",
+    async () => {
+      const response = await api.get(
+        `/api/portfolios?populate=image&locale=${i18n.language}`
+      );
+      return response.data.data;
+      console.log(portfolioItems.length);
+    },
+    {
+      onSuccess: (data) => {
+        setItems(data);
+      },
+    }
+  );
 
   const toggleActive = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
+    const centerIndex = Math.floor(items.length / 2);
+    if (index === centerIndex) {
+      setActiveIndex(activeIndex === index ? null : index); // Toggle the active state if the clicked item is already in the center
+      return;
+    }
+
+    const newItems = [...items];
+    [newItems[centerIndex], newItems[index]] = [
+      newItems[index],
+      newItems[centerIndex],
+    ];
+    setItems(newItems);
+    setActiveIndex(centerIndex);
+
+    if (swiperRef.current) {
+      swiperRef.current.autoplay.stop(); // Stop autoplay
+      swiperRef.current.slideTo(centerIndex); // Move Swiper to the center item
+    }
   };
 
   useEffect(() => {
@@ -117,8 +145,9 @@ const Portfolio: FC = () => {
               }}
               speed={750}
               loop={true}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-              {portfolioItems.map((item: PortfolioItem, index: number) => (
+              {items.map((item: PortfolioItem, index: number) => (
                 <SwiperSlide key={`portfolio_items_key${index}`}>
                   <Stack direction="row" alignItems="center">
                     <Box
@@ -126,6 +155,7 @@ const Portfolio: FC = () => {
                         background: "rgba(10, 10, 14, 0.7)",
                         minHeight: screenHeight >= 900 ? "600px" : "400px",
                         width: "85%",
+                        cursor: "pointer",
                       }}
                       onClick={() => toggleActive(index)}
                     >
@@ -144,10 +174,7 @@ const Portfolio: FC = () => {
                             fontFamily: "Trebuchet MS, sans-serif",
                           }}
                         >
-                          {activeIndex
-                            ? item.attributes.title
-                            : item.attributes.title.slice(0, 45)}
-                          ...
+                          {item.attributes.title}
                         </Typography>
                         {activeIndex === index && (
                           <>
@@ -179,11 +206,18 @@ const Portfolio: FC = () => {
                                 endIcon={
                                   <KeyboardDoubleArrowRightIcon className="leftArrow" />
                                 }
-                                onClick={() =>
-                                  navigate(`/portfolio/${item.id}`, {
-                                    state: { item },
-                                  })
-                                }
+                                // onClick={() =>
+                                //   navigate(`/portfolio/${item.id}`, {
+                                //     state: { item },
+                                //   })
+                                // }
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  window.open(
+                                    `/portfolio/${item.id}`,
+                                    "_blank"
+                                  );
+                                }}
                               >
                                 Read More
                               </Button>

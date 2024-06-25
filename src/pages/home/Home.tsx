@@ -1,60 +1,31 @@
 import { FC, useEffect, useState } from "react";
-import {
-  Box,
-  Card,
-  CardActionArea,
-  CardContent,
-  Grid,
-  IconButton,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
 import Social from "../../components/bottom-social/Social";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import HomeXS from "./HomeXS";
-import { useQuery } from "react-query";
-import { ImageData } from "../../types/type";
-import LoadingHome from "../../components/loading/LoadingHome";
-import api from "../../api/api";
-import { useTranslation } from "react-i18next";
 import { TypeAnimation } from "react-type-animation";
 import "./home.css";
+import {
+  displayLg,
+  typeAnimationStyle,
+  boxStyle,
+  homeItemsStyle,
+} from "../../common/style/commonStyle";
+import ArrowIcon from "./ArrowIcon";
+import HomeTypography from "./HomeTypography";
+import useSWR from "swr";
+import { useTranslation } from "react-i18next";
+import { HomeTitleData } from "../../types/type";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 const Home: FC = () => {
   const { i18n } = useTranslation();
   const [animationKey, setAnimationKey] = useState(0);
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-  const [backgroundImageUrl, setBackgroundImageUrl] = useState("");
+  const screenHeight = useSelector(
+    (state: RootState) => state.screenHeight.height
+  );
   const [showIcon, setShowIcon] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get(
-          `/api/banners?populate=*&locale=${i18n.language}`
-        );
-        const data = response.data.data;
-        const homeBanner = data.find(
-          (e: {
-            attributes: {
-              type: string;
-              image: { data: { attributes: { url: string } } };
-            };
-          }) => e.attributes.type === "home_banner"
-        );
-        if (homeBanner && homeBanner.attributes.image.data.attributes.url) {
-          setBackgroundImageUrl(
-            `http://95.85.121.153:1337${homeBanner.attributes.image.data.attributes.url}`
-          );
-        }
-      } catch (error) {
-        console.error("Error fetching background image:", error);
-      }
-    };
-
-    fetchData();
-  }, [i18n.language]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,56 +34,47 @@ const Home: FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenHeight(window.innerHeight);
-    };
+  const fetcher = async (url: string): Promise<HomeTitleData[]> => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return response.json();
+  };
 
-    window.addEventListener("resize", handleResize);
+  // Fetch data using SWR
+  const { data, error } = useSWR<HomeTitleData[]>(
+    "http://95.85.121.153:6856/data",
+    fetcher
+  );
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  // Filter data for home_title type
+  const filteredData = data?.filter((item) => item.type === "home_title");
 
-  const {
-    refetch: fetchTexts,
-    data: homeData,
-    isLoading: isHomeDataLoading,
-    isError: isHomeDataError,
-  } = useQuery("homeData", async () => {
-    const response = await api.get(`/api/title-texts?locale=${i18n.language}`);
-    return response.data;
-  });
+  // Handle loading state
+  if (!filteredData && !error) return <div>Loading...</div>;
 
-  const {
-    refetch: fetchBanners,
-    data: imageData,
-    isLoading: isImageDataLoading,
-    isError: isImageDataError,
-  } = useQuery("imageData", async () => {
-    const response = await api.get(
-      `/api/banners?populate=image&locale=${i18n.language}`
-    );
-    return response.data;
-  });
+  // Handle error state
+  if (error) return <div>Error: {error.message}</div>;
 
-  useEffect(() => {
-    fetchBanners();
-    fetchTexts();
-  }, [i18n.language]);
+  // Function to get text based on language
+  const getText = (
+    item: HomeTitleData,
+    field: "title" | "description" | "short"
+  ) => {
+    const lang = i18n.language;
+    return item[`${field}_${lang}` as keyof HomeTitleData] as string;
+  };
 
   return (
     <>
-      {(isHomeDataLoading || isImageDataLoading) && <LoadingHome />}
-      {(isHomeDataError || isImageDataError) && <div>Error fetching data</div>}
-      {homeData && imageData && (
+      {filteredData?.map((item) => (
         <>
           <Stack
             width="300%"
             height="100vh"
             sx={{
-              display: { lg: "block", md: "block", sm: "none", xs: "none" },
+              display: displayLg,
             }}
           >
             <Box>
@@ -129,32 +91,12 @@ const Home: FC = () => {
                   <Stack spacing={2}>
                     <TypeAnimation
                       key={animationKey}
-                      sequence={[`${homeData.data[0].attributes.title}`]}
+                      sequence={[getText(item, "title")]}
                       wrapper="span"
                       speed={30}
-                      style={{
-                        color: "orange",
-                        fontSize: "2.4em",
-                        fontWeight: 900,
-                        lineHeight: "2em",
-                        width: screenHeight >= 900 ? "60%" : "100%",
-                        fontFamily: "Trebuchet MS, sans-serif",
-                      }}
+                      style={typeAnimationStyle}
                     />
-                    <Typography
-                      data-aos="fade-up"
-                      data-aos-delay={"500"}
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                        fontWeight: 600,
-                        lineHeight: "20px",
-                        width: screenHeight >= 900 ? "60%" : "100%",
-                        fontFamily: "Trebuchet MS, sans-serif",
-                      }}
-                    >
-                      {homeData.data[0].attributes.short_description}
-                    </Typography>
+                    <HomeTypography text={getText(item, "description")} />
                     <Social />
                   </Stack>
                 </Grid>
@@ -162,78 +104,10 @@ const Home: FC = () => {
                   <Box
                     className="bounce"
                     sx={{
-                      width: "100%",
-                      height: "85vh",
-                      backgroundImage: `url(${backgroundImageUrl})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "0 50px",
-                      backgroundRepeat: "no-repeat",
-                      borderRadius: "8px",
-                      p: 1,
-                      display: "flex",
-                      alignItems: "flex-end",
+                      ...boxStyle,
+                      backgroundImage: `url(${item.asset.url})`,
                     }}
-                  >
-                    <Card
-                      data-aos="fade-left"
-                      data-aos-delay={"700"}
-                      sx={{
-                        width: "100%",
-                        height: "auto",
-                        p: 1,
-                        borderRadius: "8px",
-                        background: "#D9D9D9",
-                      }}
-                    >
-                      <CardActionArea>
-                        <CardContent>
-                          <Stack
-                            direction="row"
-                            justifyContent="space-between"
-                            sx={{ position: "relative" }}
-                          >
-                            <Typography
-                              sx={{
-                                color: "#222222",
-                                fontSize: "20px",
-                                fontWeight: 700,
-                                lineHeight: "30px",
-                                fontFamily: "Trebuchet MS, sans-serif",
-                              }}
-                            >
-                              Iskander <br /> Kerimov
-                            </Typography>
-                            <Typography
-                              sx={{
-                                color: "#676767",
-                                fontSize: "15px",
-                                fontWeight: 500,
-                                lineHeight: "18px",
-                                position: "absolute",
-                                pl: "40%",
-                                pt: "2%",
-                                fontFamily: "Trebuchet MS, sans-serif",
-                              }}
-                            >
-                              Business Couch <br /> with 7 years of experience
-                            </Typography>
-                            <IconButton>
-                              <ArrowRightAltIcon
-                                sx={{
-                                  color: "#828282",
-                                  transform: "rotate(320deg)",
-                                  fontSize: "34px",
-                                  width: "30px",
-                                  position: "absolute",
-                                  top: 0,
-                                }}
-                              />
-                            </IconButton>
-                          </Stack>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Box>
+                  ></Box>
                 </Grid>
               </Grid>
             </Box>
@@ -241,92 +115,50 @@ const Home: FC = () => {
           <Stack
             direction="row"
             spacing={1}
-            p={1}
             sx={{
-              position: "absolute",
-              bottom: 0,
+              ...homeItemsStyle,
               left: screenHeight >= 900 ? 60 : 50,
-              background: "#222222",
-              borderTopRightRadius: "8px",
-              borderTopLeftRadius: "8px",
               display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
-              alignItems: "center",
-              justifyContent: "center",
             }}
           >
-            {imageData.data.slice(1).map((item: ImageData) => (
-              <Box
-                // data-aos={`fade-down`}
-                // data-aos-delay={`${item.id * 200}`}
-                onMouseEnter={() => setShowIcon(true)}
-                onMouseLeave={() => setShowIcon(false)}
-                key={item.id}
-                sx={{
-                  background: "#D9D9D9",
-                  p: 1,
-                  borderRadius: "8px",
-                  // width: "200px",
-                }}
-              >
-                <Stack direction="row" spacing={3}>
-                  {item.attributes.image.data.attributes.formats.thumbnail
-                    .url && (
-                    <img
-                      style={{
-                        width: "120px",
-                        height: screenHeight >= 900 ? "110px" : "60px",
-                        borderRadius: "4px",
-                      }}
-                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
-                    />
-                  )}
-                  <Typography
-                    sx={{
-                      color: "#222222",
-                      fontSize: screenHeight >= 900 ? "18px" : "12px",
-                      lineHeight: screenHeight >= 900 ? 2 : 1.5,
-                      bottom: screenHeight >= 900 ? 5 : 0,
-                      width: screenHeight >= 900 ? "250px" : "150px",
-                      fontFamily: "Trebuchet MS, sans-serif",
-                    }}
-                  >
-                    {item.attributes.title.slice(0, 61)}...
-                  </Typography>
-                  {showIcon && (
-                    <IconButton
-                      sx={{
-                        width: screenHeight >= 900 ? "40px" : "30px",
-                        height: screenHeight >= 900 ? "40px" : "30px",
-                        top: 0,
-                        right: 0,
-                      }}
-                    >
-                      <ArrowRightAltIcon
-                        sx={{
-                          color: "#828282",
-                          transform: "rotate(320deg)",
-                          fontSize: screenHeight >= 900 ? "40px" : "34px",
-                          width: screenHeight >= 900 ? "30px" : "20px",
-                        }}
-                      />
-                    </IconButton>
-                  )}
-                </Stack>
-              </Box>
-            ))}
+            <Box
+              onMouseEnter={() => setShowIcon(true)}
+              onMouseLeave={() => setShowIcon(false)}
+              key={item.id}
+              sx={{
+                background: "#D9D9D9",
+                p: 1,
+                borderRadius: "8px",
+              }}
+            >
+              <Stack direction="row" spacing={3}>
+                <img
+                  style={{
+                    width: "120px",
+                    height: screenHeight >= 900 ? "110px" : "60px",
+                    borderRadius: "4px",
+                  }}
+                  src={item.asset.url}
+                />
+                <Typography
+                  sx={{
+                    color: "#222222",
+                    fontSize: screenHeight >= 900 ? "18px" : "12px",
+                    lineHeight: screenHeight >= 900 ? 2 : 1.5,
+                    bottom: screenHeight >= 900 ? 5 : 0,
+                    width: screenHeight >= 900 ? "250px" : "150px",
+                    fontFamily: "Trebuchet MS, sans-serif",
+                  }}
+                >
+                  {getText(item, "short").slice(0, 61)}...
+                </Typography>
+                {showIcon && <ArrowIcon />}
+              </Stack>
+            </Box>
           </Stack>
         </>
-      )}
-
-      <Box
-        sx={{
-          display: { md: "none", lg: "none", sm: "flex", xs: "flex" },
-          flexDirection: "column",
-          p: 3,
-        }}
-      >
-        <HomeXS />
-      </Box>
+      ))}
+      <HomeXS />
     </>
   );
 };

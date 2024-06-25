@@ -68,3 +68,25 @@ export interface PortfolioItem {
     };
   };
 }
+
+export interface HomeTitleData {
+  id: number;
+  title_tm: string;
+  title_ru: string;
+  title_en: string;
+  description_tm: string;
+  description_ru: string;
+  description_en: string;
+  short_tm: string;
+  short_ru: string;
+  short_en: string;
+  type: string;
+  url: string;
+  assetId: number;
+  asset: {
+    id: number;
+    url: string;
+    type: string;
+    blurhash: string;
+  };
+}

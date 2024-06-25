@@ -2,22 +2,23 @@ import { FC } from "react";
 import { useLocation } from "react-router-dom";
 import "./logo.css";
 
-interface LogoProps {
-  sidebarVisible: boolean;
-}
-
-const Logo: FC<LogoProps> = ({ sidebarVisible }) => {
+const Logo: FC = () => {
   const location = useLocation();
   return (
     <>
-      {/* <img
-        className="logoAnimation"
-        onClick={() => navigate("/")}
-        src="./images/logo.png"
+      <img
+        // onClick={() => navigate("/")}
+        src="/images/4.png"
         alt="logo"
-        style={{ display: location.pathname === "/" ? "block" : "none" }}
-      /> */}
-      <div
+        style={{
+          display: location.pathname === "/" ? "block" : "none",
+          width: 180,
+          height: 70,
+          marginTop: 10,
+          marginBottom: 10,
+        }}
+      />
+      {/* <div
         className="wrapper"
         style={{
           display: location.pathname === "/" ? "block" : "none",
@@ -29,7 +30,7 @@ const Logo: FC<LogoProps> = ({ sidebarVisible }) => {
             Iskander Kerimov
           </text>
         </svg>
-      </div>
+      </div> */}
     </>
   );
 };

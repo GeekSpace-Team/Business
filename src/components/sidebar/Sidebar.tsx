@@ -14,38 +14,28 @@ import MiniSidebar from "./MiniSidebar";
 import "../../pages/home/home.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 
 const Sidebar: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const screenHeight = useSelector(
+    (state: RootState) => state.screenHeight.height
+  );
   const [showLanguage, setShowLanguage] = useState(false);
   const [sidebarVisible, setSidebarVisible] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setSidebarVisible(!sidebarVisible);
+    setTimeout(() => {
+      setSidebarVisible(false);
     }, 500);
-
-    return () => clearTimeout(timeout);
   }, [navigate]);
 
   const handleLanguageClick = () => {
     setShowLanguage(!showLanguage);
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenHeight(window.innerHeight);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <>
@@ -100,7 +90,12 @@ const Sidebar: FC = () => {
                     <IconButton
                       className="leftArrow"
                       sx={{ width: "30px", color: "#fff" }}
-                      onClick={() => setSidebarVisible(true)}
+                      onClick={() => {
+                        setSidebarVisible(true);
+                        setTimeout(() => {
+                          setSidebarVisible(false);
+                        }, 7000);
+                      }}
                     >
                       <ArrowForwardIosIcon />
                     </IconButton>
@@ -120,7 +115,7 @@ const Sidebar: FC = () => {
               }}
             >
               <>
-                <Logo sidebarVisible={sidebarVisible} />
+                <Logo />
                 {location.pathname === "/" ? null : (
                   <Box
                     sx={{ height: screenHeight >= 900 ? "0px" : "50px" }}
