@@ -3,17 +3,17 @@ import Logo from "../logo/Logo";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Social from "../bottom-social/Social";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-import SettingsIcon from "@mui/icons-material/Settings";
-import MailIcon from "@mui/icons-material/Mail";
+// import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+// import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+// import SettingsIcon from "@mui/icons-material/Settings";
+// import MailIcon from "@mui/icons-material/Mail";
 import Language from "../../assets/language/Language";
 import { useTranslation } from "react-i18next";
 import LanguageIcon from "@mui/icons-material/Language";
 import MiniSidebar from "./MiniSidebar";
 import "../../pages/home/home.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+// import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { RootState } from "../../store";
 import { useSelector } from "react-redux";
 
@@ -25,11 +25,11 @@ const Sidebar: FC = () => {
     (state: RootState) => state.screenHeight.height
   );
   const [showLanguage, setShowLanguage] = useState(false);
-  const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      setSidebarVisible(false);
+      setSidebarVisible(true);
     }, 500);
   }, [navigate]);
 
@@ -156,7 +156,12 @@ const Sidebar: FC = () => {
                         },
                       }}
                     >
-                      <HomeOutlinedIcon />
+                      {/* <HomeOutlinedIcon /> */}
+                      <img
+                        src="/gif/icons8-home.gif.gif"
+                        alt=""
+                        style={{ width: "35px" }}
+                      />
                       <Typography
                         sx={{
                           fontSize: screenHeight >= 900 ? 16 : 14,
@@ -191,7 +196,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    <PeopleAltOutlinedIcon />
+                    {/* <PeopleAltOutlinedIcon /> */}
+                    <img
+                      src="/gif/icons8-about (1).gif.gif"
+                      alt=""
+                      style={{ width: "35px" }}
+                    />
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,
@@ -227,7 +237,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    <WorkOutlineOutlinedIcon />
+                    {/* <WorkOutlineOutlinedIcon /> */}
+                    <img
+                      src="/gif/icons8-briefcase.gif.gif"
+                      alt=""
+                      style={{ width: "35px" }}
+                    />
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,
@@ -263,7 +278,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    <SettingsIcon />
+                    {/* <SettingsIcon /> */}
+                    <img
+                      src="/gif/icons8-news (1).gif.gif"
+                      alt=""
+                      style={{ width: "35px" }}
+                    />
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,
@@ -297,7 +317,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    <MailIcon />
+                    {/* <MailIcon /> */}
+                    <img
+                      src="/gif/icons8-mail.gif (1).gif"
+                      alt=""
+                      style={{ width: "35px" }}
+                    />
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,

@@ -268,7 +268,7 @@ const About: FC = () => {
                   container
                   spacing={1}
                   mt={screenHeight >= 900 ? 5 : 2}
-                  width="94%"
+                  width="100%"
                   data-aos="fade-right"
                   data-aos-delay={"500"}
                 >
@@ -315,7 +315,7 @@ const About: FC = () => {
                       ?.url && (
                       <img
                         style={{
-                          width: "90%",
+                          width: "100%",
                           borderRadius: "8px",
                           height: screenHeight >= 900 ? "260px" : "180px",
                         }}

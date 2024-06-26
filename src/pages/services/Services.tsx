@@ -198,7 +198,7 @@ const Services: FC = () => {
             slidesPerView={1}
             navigation
             autoplay={{
-              delay: 5000,
+              delay: 750,
               pauseOnMouseEnter: true,
             }}
             onSwiper={(swiper) => console.log(swiper)}
