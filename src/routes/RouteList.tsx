@@ -14,9 +14,7 @@ const About = lazy(() => import("../pages/about/About"));
 const Contact = lazy(() => import("../pages/contact/Contact"));
 const Portfolio = lazy(() => import("../pages/portfolio/Portfolio"));
 const Services = lazy(() => import("../pages/services/Services"));
-const PortfolioDetail = lazy(
-  () => import("../pages/portfolio/PortfolioDetail")
-);
+
 const ServiceCardDetail = lazy(
   () => import("../components/service/ServiceCardDetail")
 );
@@ -46,10 +44,7 @@ const RouteList: FC = () => {
             <Route path="/contact" element={<ContactFallback />} />
             <Route path="/portfolio" element={<PortfolioFallback />} />
             <Route path="/services" element={<ServicesFallback />} />
-            <Route
-              path="/portfolio/:id"
-              element={<PortfolioDetailFallback />}
-            />
+
             <Route
               path="/services/:serviceId"
               element={<ServiceCardDetailFallback />}
@@ -89,12 +84,6 @@ const PortfolioFallback = () => (
 const ServicesFallback = () => (
   <Suspense fallback={<LoadingComponent />}>
     <Services />
-  </Suspense>
-);
-
-const PortfolioDetailFallback = () => (
-  <Suspense fallback={<LoadingComponent />}>
-    <PortfolioDetail />
   </Suspense>
 );
 

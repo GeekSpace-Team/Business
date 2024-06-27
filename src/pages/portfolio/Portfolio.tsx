@@ -4,21 +4,18 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import PortfolioMini from "./PortfolioMini";
-import { useQuery } from "react-query";
+import useSWR from "swr";
 import LoadingHome from "../../components/loading/LoadingHome";
 import { useTranslation } from "react-i18next";
-import api from "../../api/api";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { PortfolioItem } from "../../types/type";
 
 const Portfolio: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
-  const [items, setItems] = useState<PortfolioItem[]>([]);
+  const [items, setItems] = useState<any[]>([]);
   const navigate = useNavigate();
   const { i18n } = useTranslation();
   const swiperRef = useRef<any>(null);
@@ -35,31 +32,23 @@ const Portfolio: FC = () => {
     };
   }, []);
 
-  const {
-    refetch: fetchTexts,
-    data: portfolioItems,
-    isLoading,
-    isError,
-  } = useQuery(
-    "portfolioItems",
-    async () => {
-      const response = await api.get(
-        `/api/portfolios?populate=image&locale=${i18n.language}`
-      );
-      return response.data.data;
-      console.log(portfolioItems.length);
-    },
-    {
-      onSuccess: (data) => {
-        setItems(data);
-      },
-    }
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
+  const { data: portfolioItems, error } = useSWR(
+    "http://95.85.121.153:6856/data",
+    fetcher
   );
 
+  useEffect(() => {
+    if (portfolioItems) {
+      setItems(portfolioItems);
+    }
+  }, [portfolioItems, i18n.language]);
+
   const toggleActive = (index: number) => {
-    const centerIndex = Math.floor(items.length / 2);
+    const centerIndex = Math.floor(items.length / 3);
     if (index === centerIndex) {
-      setActiveIndex(activeIndex === index ? null : index); // Toggle the active state if the clicked item is already in the center
+      setActiveIndex(activeIndex === index ? null : index);
       return;
     }
 
@@ -72,30 +61,27 @@ const Portfolio: FC = () => {
     setActiveIndex(centerIndex);
 
     if (swiperRef.current) {
-      swiperRef.current.autoplay.stop(); // Stop autoplay
-      swiperRef.current.slideTo(centerIndex); // Move Swiper to the center item
+      swiperRef.current.autoplay.stop();
+      swiperRef.current.slideTo(centerIndex);
+    }
+
+    if (swiperRef.current) {
+      swiperRef.current.autoplay.play();
     }
   };
 
-  useEffect(() => {
-    fetchTexts();
-  }, [i18n.language]);
-
-  if (isLoading)
+  if (!portfolioItems) {
     return (
       <div style={{ width: "100%" }}>
         <LoadingHome />
       </div>
     );
-  if (isError) return <div>Error fetching data</div>;
+  }
+  if (error) return <div>Error fetching data</div>;
 
   return (
     <>
-      <Stack
-        width="100%"
-        sx={{ display: { lg: "flex", md: "flex", sm: "none", xs: "none" } }}
-        height="100vh"
-      >
+      <Stack width="100%" height="100vh">
         <Stack pt={5} mb={-7}>
           <Box
             sx={{
@@ -134,6 +120,11 @@ const Portfolio: FC = () => {
               modules={[Autoplay, Navigation]}
               spaceBetween={10}
               slidesPerView={3}
+              breakpoints={{
+                320: { slidesPerView: 1 },
+                600: { slidesPerView: 2 },
+                900: { slidesPerView: 3 },
+              }}
               navigation
               autoplay={{
                 delay: 750,
@@ -147,34 +138,34 @@ const Portfolio: FC = () => {
               loop={true}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-              {items.map((item: PortfolioItem, index: number) => (
+              {items.map((item: any, index: number) => (
                 <SwiperSlide key={`portfolio_items_key${index}`}>
                   <Stack direction="row" alignItems="center">
                     <Box
                       sx={{
                         background: "rgba(10, 10, 14, 0.7)",
-                        minHeight: screenHeight >= 900 ? "600px" : "400px",
+                        minHeight: screenHeight >= 900 ? "600px" : "300px",
                         width: "85%",
                         cursor: "pointer",
                       }}
                       onClick={() => toggleActive(index)}
                     >
                       <img
-                        style={{ width: "100%", height: "250px" }}
-                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
+                        style={{ width: "100%", height: "180px" }}
+                        src={item.asset.url}
                       />
                       <Stack p={3}>
                         <Typography
                           sx={{
                             color: activeIndex === index ? "orange" : "#E9E9E9",
-                            fontSize: screenHeight >= 900 ? "40px" : "24px",
+                            fontSize: screenHeight >= 900 ? "30px" : "24px",
                             lineHeight: screenHeight >= 900 ? "50px" : "33px",
                             fontWeight: 700,
                             width: "90%",
                             fontFamily: "Trebuchet MS, sans-serif",
                           }}
                         >
-                          {item.attributes.title}
+                          {item[`title_${i18n.language}`]}
                         </Typography>
                         {activeIndex === index && (
                           <>
@@ -188,8 +179,7 @@ const Portfolio: FC = () => {
                                 fontFamily: "Trebuchet MS, sans-serif",
                               }}
                             >
-                              {item.attributes.short_description.slice(0, 50)}
-                              ...
+                              {item[`short_${i18n.language}`].slice(0, 50)}...
                             </Typography>
                             <Stack
                               mt={2}
@@ -206,17 +196,9 @@ const Portfolio: FC = () => {
                                 endIcon={
                                   <KeyboardDoubleArrowRightIcon className="leftArrow" />
                                 }
-                                // onClick={() =>
-                                //   navigate(`/portfolio/${item.id}`, {
-                                //     state: { item },
-                                //   })
-                                // }
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  window.open(
-                                    `/portfolio/${item.id}`,
-                                    "_blank"
-                                  );
+                                  window.open(item.url, "_blank");
                                 }}
                               >
                                 Read More
@@ -291,7 +273,6 @@ const Portfolio: FC = () => {
           Our Service
         </Button>
       </Stack>
-      <PortfolioMini />
     </>
   );
 };

@@ -1,36 +1,49 @@
-import { FC, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { Box, Button, Divider } from "@mui/material";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import { useNavigate } from "react-router-dom";
-import api from "../../api/api";
-import { useQuery } from "react-query";
-import { ContentData } from "./About";
+import { Box } from "@mui/material";
+import useSWR from "swr";
 import LoadingComponent from "../../components/loading/LoadingComponent";
 import { useTranslation } from "react-i18next";
 
+interface ContentData {
+  id: number;
+  title_tm: string;
+  title_ru: string;
+  title_en: string;
+  description_tm: string;
+  description_ru: string;
+  description_en: string;
+  short_tm: string;
+  short_ru: string;
+  short_en: string;
+  type: string;
+  order: number;
+  url: string;
+  assetId: number;
+  created_at: string;
+  updated_at: string;
+  asset: {
+    id: number;
+    url: string;
+    type: string;
+    blurhash: string;
+  };
+}
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 const AboutMini: FC = () => {
-  const navigate = useNavigate();
   const { i18n } = useTranslation();
 
-  const fetchContentData = async () => {
-    const { data } = await api.get(
-      `/api/title-texts?locale=${i18n.language}&populate=image`
-    );
-    return data.data;
-  };
-
-  const {
-    refetch: fetchTexts,
-    data: contentData,
-    error,
-    isLoading,
-  } = useQuery<ContentData[], Error>("contentData", fetchContentData);
+  const { data, error, isLoading, mutate } = useSWR<ContentData[]>(
+    `http://95.85.121.153:6856/data`,
+    fetcher
+  );
 
   useEffect(() => {
-    fetchTexts();
-  }, [i18n.language]);
+    mutate();
+  }, [i18n.language, mutate]);
 
   if (isLoading)
     return (
@@ -46,6 +59,19 @@ const AboutMini: FC = () => {
       </div>
     );
   if (error) return <div>An error occurred: {error.message}</div>;
+
+  // const getTextByLanguage = (item: ContentData, key: string) => {
+  //   switch (i18n.language) {
+  //     case "tm":
+  //       return item[key + "_tm"];
+  //     case "ru":
+  //       return item[key + "_ru"];
+  //     case "en":
+  //       return item[key + "_en"];
+  //     default:
+  //       return item[key + "_en"];
+  //   }
+  // };
 
   return (
     <>
@@ -68,106 +94,48 @@ const AboutMini: FC = () => {
         >
           who we are
         </Typography>
-        {contentData?.map((item) => (
-          <>
-            {item.attributes.type === "about_us_title" && (
-              <>
-                <Stack
-                  direction="row"
-                  key={`about_mini`}
-                  width="100%"
-                  justifyContent="flex-end"
-                >
-                  <Box
-                    sx={{
-                      background: "rgba(10, 10, 14, 0.7)",
-                      p: 1,
-                      width: "92%",
-                      borderRadius: "8px 0px 0px 8px",
-                      color: "#E7EAFF",
-                    }}
-                  >
-                    {item.attributes.image?.data?.attributes?.formats?.medium
-                      ?.url ? (
-                      <img
-                        className="aboutImage"
-                        style={{
-                          width: "140px",
-                          height: "160px",
-                          borderRadius: "8px",
-                          marginRight: 10,
-                        }}
-                        src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
-                        alt={
-                          item.attributes.image.data.attributes
-                            .alternativeText || "Image"
-                        }
-                      />
-                    ) : null}
-                    <Typography
-                      sx={{
-                        color: "#fff",
-                        fontSize: "20px",
-                        fontWeight: 700,
-                        lineHeight: "30px",
-                        width: "80%",
-                        fontFamily: "Trebuchet MS, sans-serif",
-                      }}
-                    >
-                      {item.attributes.title}
-                    </Typography>
-                    <Typography
-                      sx={{
-                        color: "#fff",
-                        fontSize: "16px",
-                        fontWeight: 600,
-                        lineHeight: "25px",
-                        fontFamily: "Trebuchet MS, sans-serif",
-                      }}
-                    >
-                      {item.attributes.description}
-                    </Typography>
-                  </Box>
-                </Stack>
-              </>
-            )}
-            {item.attributes.type === "about_us_description" && (
-              <Stack p={2}>
+        {data?.map((item) => (
+          <React.Fragment key={item.id}>
+            {item.type === "about_title" && (
+              <Stack
+                direction="row"
+                key={`about_mini-${item.id}`}
+                width="100%"
+                justifyContent="flex-end"
+              >
                 <Box
                   sx={{
+                    background: "rgba(10, 10, 14, 0.7)",
                     p: 1,
                     width: "92%",
-                    height: "auto",
+                    borderRadius: "8px 0px 0px 8px",
+                    color: "#E7EAFF",
                   }}
                 >
-                  {item.attributes.image?.data?.attributes?.formats?.medium
-                    ?.url ? (
+                  {item.asset?.url && (
                     <img
-                      className="aboutImageRight"
+                      className="aboutImage"
                       style={{
                         width: "140px",
                         height: "160px",
                         borderRadius: "8px",
-                        marginLeft: 10,
+                        marginRight: 10,
                       }}
-                      src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.medium.url}`}
-                      alt={
-                        item.attributes.image.data.attributes.alternativeText ||
-                        "Image"
-                      }
+                      src={item.asset.url}
+                      alt="Image"
                     />
-                  ) : null}
+                  )}
                   <Typography
                     sx={{
                       color: "#fff",
                       fontSize: "20px",
                       fontWeight: 700,
                       lineHeight: "30px",
+                      width: "80%",
                       fontFamily: "Trebuchet MS, sans-serif",
-                      width: "50%",
                     }}
                   >
-                    {item.attributes.title}
+                    {/* {getTextByLanguage(item, "title")} */}
                   </Typography>
                   <Typography
                     sx={{
@@ -178,15 +146,63 @@ const AboutMini: FC = () => {
                       fontFamily: "Trebuchet MS, sans-serif",
                     }}
                   >
-                    {item.attributes.short_description}
+                    {/* {getTextByLanguage(item, "description")} */}
                   </Typography>
                 </Box>
               </Stack>
             )}
-          </>
+            {item.type === "about_description" && (
+              <Stack p={2}>
+                <Box
+                  sx={{
+                    p: 1,
+                    width: "92%",
+                    height: "auto",
+                  }}
+                >
+                  {item.asset?.url && (
+                    <img
+                      className="aboutImageRight"
+                      style={{
+                        width: "140px",
+                        height: "160px",
+                        borderRadius: "8px",
+                        marginLeft: 10,
+                      }}
+                      src={item.asset.url}
+                      alt="Image"
+                    />
+                  )}
+                  <Typography
+                    sx={{
+                      color: "#fff",
+                      fontSize: "20px",
+                      fontWeight: 700,
+                      lineHeight: "30px",
+                      fontFamily: "Trebuchet MS, sans-serif",
+                      width: "50%",
+                    }}
+                  >
+                    {/* {getTextByLanguage(item, "title")} */}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#fff",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      lineHeight: "25px",
+                      fontFamily: "Trebuchet MS, sans-serif",
+                    }}
+                  >
+                    {/* {getTextByLanguage(item, "short")} */}
+                  </Typography>
+                </Box>
+              </Stack>
+            )}
+          </React.Fragment>
         ))}
 
-        <Stack
+        {/* <Stack
           direction="row"
           alignItems="center"
           justifyContent="center"
@@ -228,7 +244,7 @@ const AboutMini: FC = () => {
           >
             Portfolio
           </Button>
-        </Stack>
+        </Stack> */}
       </Stack>
     </>
   );
