@@ -15,10 +15,6 @@ const Contact = lazy(() => import("../pages/contact/Contact"));
 const Portfolio = lazy(() => import("../pages/portfolio/Portfolio"));
 const Services = lazy(() => import("../pages/services/Services"));
 
-const ServiceCardDetail = lazy(
-  () => import("../components/service/ServiceCardDetail")
-);
-
 const RouteList: FC = () => {
   useEffect(() => {
     Aos.init({
@@ -44,11 +40,6 @@ const RouteList: FC = () => {
             <Route path="/contact" element={<ContactFallback />} />
             <Route path="/portfolio" element={<PortfolioFallback />} />
             <Route path="/services" element={<ServicesFallback />} />
-
-            <Route
-              path="/services/:serviceId"
-              element={<ServiceCardDetailFallback />}
-            />
           </Route>
         </Routes>
         <ToastContainer />
@@ -84,12 +75,6 @@ const PortfolioFallback = () => (
 const ServicesFallback = () => (
   <Suspense fallback={<LoadingComponent />}>
     <Services />
-  </Suspense>
-);
-
-const ServiceCardDetailFallback = () => (
-  <Suspense fallback={<LoadingComponent />}>
-    <ServiceCardDetail />
   </Suspense>
 );
 

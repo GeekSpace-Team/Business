@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
-import { ServiceData } from "../../components/service/ServiceCards";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ServiceData } from "../../components/service/ServiceCards";
 
 const ServiceCard = () => {
   const { i18n } = useTranslation();
