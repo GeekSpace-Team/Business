@@ -171,6 +171,49 @@ const Contact: FC = () => {
                     }}
                     required
                   />
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder={t("contact.number")}
+                    style={{
+                      background: "#DFDFDF",
+                      height: screenHeight >= 900 ? "55px" : "40px",
+                      borderRadius: "8px",
+                      paddingLeft: "15px",
+                      border: "none",
+                      outline: "none",
+                      fontWeight: 600,
+                      color: "#222222",
+                    }}
+                    required
+                  />
+                  <select
+                    name="phone"
+                    // value={formData.email}
+                    // onChange={handleChange}
+                    // placeholder={t("contact.number")}
+                    style={{
+                      background: "#DFDFDF",
+                      height: screenHeight >= 900 ? "55px" : "40px",
+                      borderRadius: "8px",
+                      paddingLeft: "15px",
+                      border: "none",
+                      outline: "none",
+                      fontWeight: 600,
+                      color: "#222222",
+                    }}
+                    required
+                  >
+                    <option value="" disabled>
+                      {t("contact.number")}
+                    </option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="other">Other</option>
+                  </select>
                   <textarea
                     name="text"
                     value={formData.text}
@@ -185,7 +228,7 @@ const Contact: FC = () => {
                     }}
                     id=""
                     cols={30}
-                    rows={screenHeight >= 900 ? 17 : 10}
+                    rows={screenHeight >= 900 ? 10 : 4}
                     placeholder={t("contact.message")}
                     required
                   ></textarea>

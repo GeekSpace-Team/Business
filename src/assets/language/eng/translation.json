@@ -19,6 +19,7 @@
     "contact": "Contact us",
     "contactC": "to strategize about your business",
     "success": "Message sent successfully",
-    "error": "Error sending message"
+    "error": "Error sending message",
+    "number": "Phone Number"
   }
 }

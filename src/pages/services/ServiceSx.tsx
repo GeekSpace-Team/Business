@@ -6,14 +6,16 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { FC, useEffect, useState } from "react";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
 import { ServiceData } from "../../components/service/ServiceCards";
 import axios from "axios";
-import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { useQuery } from "react-query";
+
+// icons
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { useTranslation } from "react-i18next";
 

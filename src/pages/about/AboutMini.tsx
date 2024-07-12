@@ -31,6 +31,10 @@ interface ContentData {
   };
 }
 
+type LanguageKey = "title" | "description" | "short";
+type LanguageSuffix = "_tm" | "_ru" | "_en";
+type TranslatableKeys = `${LanguageKey}${LanguageSuffix}`;
+
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const AboutMini: FC = () => {
@@ -60,18 +64,12 @@ const AboutMini: FC = () => {
     );
   if (error) return <div>An error occurred: {error.message}</div>;
 
-  // const getTextByLanguage = (item: ContentData, key: string) => {
-  //   switch (i18n.language) {
-  //     case "tm":
-  //       return item[key + "_tm"];
-  //     case "ru":
-  //       return item[key + "_ru"];
-  //     case "en":
-  //       return item[key + "_en"];
-  //     default:
-  //       return item[key + "_en"];
-  //   }
-  // };
+  const getTextByLanguage = (item: ContentData, key: LanguageKey) => {
+    const langSuffix: LanguageSuffix =
+      i18n.language === "tm" ? "_tm" : i18n.language === "ru" ? "_ru" : "_en";
+    const translatableKey = `${key}${langSuffix}` as TranslatableKeys;
+    return item[translatableKey];
+  };
 
   return (
     <>
@@ -135,7 +133,7 @@ const AboutMini: FC = () => {
                       fontFamily: "Trebuchet MS, sans-serif",
                     }}
                   >
-                    {/* {getTextByLanguage(item, "title")} */}
+                    {getTextByLanguage(item, "title")}
                   </Typography>
                   <Typography
                     sx={{
@@ -146,7 +144,7 @@ const AboutMini: FC = () => {
                       fontFamily: "Trebuchet MS, sans-serif",
                     }}
                   >
-                    {/* {getTextByLanguage(item, "description")} */}
+                    {getTextByLanguage(item, "description")}
                   </Typography>
                 </Box>
               </Stack>
@@ -183,7 +181,7 @@ const AboutMini: FC = () => {
                       width: "50%",
                     }}
                   >
-                    {/* {getTextByLanguage(item, "title")} */}
+                    {getTextByLanguage(item, "title")}
                   </Typography>
                   <Typography
                     sx={{
@@ -194,57 +192,13 @@ const AboutMini: FC = () => {
                       fontFamily: "Trebuchet MS, sans-serif",
                     }}
                   >
-                    {/* {getTextByLanguage(item, "short")} */}
+                    {getTextByLanguage(item, "short")}
                   </Typography>
                 </Box>
               </Stack>
             )}
           </React.Fragment>
         ))}
-
-        {/* <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-          mb={3}
-        >
-          <Button
-            onClick={() => navigate("/")}
-            startIcon={
-              <ArrowRightAltIcon
-                sx={{
-                  color: "#fff",
-                  transform: "rotate(180deg)",
-                  fontSize: "34px",
-                  width: "30px",
-                }}
-              />
-            }
-            sx={{
-              textTransform: "none",
-              color: "#fff",
-              fontWeight: 600,
-              fontFamily: "Trebuchet MS, sans-serif",
-            }}
-          >
-            Home
-          </Button>
-
-          <Divider orientation="vertical" flexItem color="#fff" />
-          <Button
-            onClick={() => navigate("/portfolio")}
-            endIcon={<ArrowRightAltIcon sx={{ color: "#fff" }} />}
-            sx={{
-              textTransform: "none",
-              color: "#fff",
-              fontWeight: 600,
-              fontFamily: "Trebuchet MS, sans-serif",
-            }}
-          >
-            Portfolio
-          </Button>
-        </Stack> */}
       </Stack>
     </>
   );

@@ -29,7 +29,7 @@ const Sidebar: FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setSidebarVisible(true);
+      setSidebarVisible(false);
     }, 500);
   }, [navigate]);
 
