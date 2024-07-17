@@ -20,8 +20,8 @@ const Serviceheader: React.FC<ServiceheaderProps> = ({ slide }) => {
         alt=""
       />
       <div className="texts">
-        <h1>{slide.title_en}</h1>
-        <p>{slide.description_en}</p>
+        <h1 dangerouslySetInnerHTML={{ __html: slide.title_en }}></h1>
+        <p dangerouslySetInnerHTML={{ __html: slide.description_en }}></p>
       </div>
     </div>
   );
