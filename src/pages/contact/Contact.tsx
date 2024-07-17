@@ -13,8 +13,24 @@ import { showError, showSuccess } from "../../components/alert/Alert";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { useNavigate } from "react-router-dom";
 
+interface FormData {
+  username: string;
+  email: string;
+  text: string;
+  phone: string;
+  theme: string;
+}
+
+interface Theme {
+  id: number;
+  title_tm: string;
+  title_ru: string;
+  title_en: string;
+}
+
 const Contact: FC = () => {
-  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const [screenHeight, setScreenHeight] = useState<number>(window.innerHeight);
+  const [themes, setThemes] = useState<Theme[]>([]);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -30,19 +46,36 @@ const Contact: FC = () => {
     };
   }, []);
 
-  const [formData, setFormData] = useState({
+  useEffect(() => {
+    const fetchThemes = async () => {
+      try {
+        const response = await axios.get("http://95.85.121.153:6856/data/");
+        setThemes(response.data);
+      } catch (error) {
+        console.error("Error fetching themes:", error);
+      }
+    };
+
+    fetchThemes();
+  }, []);
+
+  const [formData, setFormData] = useState<FormData>({
     username: "",
     email: "",
     text: "",
+    phone: "",
+    theme: "",
   });
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }
+    >
   ) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name as string]: value,
     }));
   };
 
@@ -60,6 +93,8 @@ const Contact: FC = () => {
         username: "",
         email: "",
         text: "",
+        phone: "",
+        theme: "",
       });
     } catch (error) {
       console.error("Error sending message:", error);
@@ -143,7 +178,12 @@ const Contact: FC = () => {
                     placeholder={t("contact.name")}
                     style={{
                       background: "#DFDFDF",
-                      height: screenHeight >= 900 ? "55px" : "40px",
+                      height:
+                        screenHeight >= 900
+                          ? "55px"
+                          : screenHeight >= 550
+                          ? "40px"
+                          : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -161,7 +201,12 @@ const Contact: FC = () => {
                     placeholder={t("contact.mail")}
                     style={{
                       background: "#DFDFDF",
-                      height: screenHeight >= 900 ? "55px" : "40px",
+                      height:
+                        screenHeight >= 900
+                          ? "55px"
+                          : screenHeight >= 550
+                          ? "40px"
+                          : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -174,12 +219,17 @@ const Contact: FC = () => {
                   <input
                     type="text"
                     name="phone"
-                    value={formData.email}
+                    value={formData.phone}
                     onChange={handleChange}
                     placeholder={t("contact.number")}
                     style={{
                       background: "#DFDFDF",
-                      height: screenHeight >= 900 ? "55px" : "40px",
+                      height:
+                        screenHeight >= 900
+                          ? "55px"
+                          : screenHeight >= 550
+                          ? "40px"
+                          : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -190,13 +240,17 @@ const Contact: FC = () => {
                     required
                   />
                   <select
-                    name="phone"
-                    // value={formData.email}
-                    // onChange={handleChange}
-                    // placeholder={t("contact.number")}
+                    name="theme"
+                    value={formData.theme}
+                    onChange={handleChange}
                     style={{
                       background: "#DFDFDF",
-                      height: screenHeight >= 900 ? "55px" : "40px",
+                      height:
+                        screenHeight >= 900
+                          ? "55px"
+                          : screenHeight >= 550
+                          ? "40px"
+                          : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -207,11 +261,13 @@ const Contact: FC = () => {
                     required
                   >
                     <option value="" disabled>
-                      {t("contact.number")}
+                      {t("contact.theme")}
                     </option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                    {themes.map((theme) => (
+                      <option key={theme.id} value={theme.title_en}>
+                        {theme.title_en}
+                      </option>
+                    ))}
                     <option value="other">Other</option>
                   </select>
                   <textarea
@@ -226,25 +282,24 @@ const Contact: FC = () => {
                       fontWeight: 600,
                       color: "#222222",
                     }}
-                    id=""
                     cols={30}
                     rows={screenHeight >= 900 ? 10 : 4}
                     placeholder={t("contact.message")}
                     required
                   ></textarea>
                   <Button
-                    sx={{
-                      background: " #222222",
-                      color: "orange",
-                      fontSize: "20px",
-                      fontWeight: 600,
-                      height: screenHeight >= 900 ? "55px" : "40px",
-                      borderRadius: radius,
-                      textTransform: "none",
-                      "&:hover": { background: " #222222" },
-                    }}
-                    variant="contained"
                     type="submit"
+                    sx={{
+                      background: "#222222",
+                      color: "#fff",
+                      fontWeight: 600,
+                      borderRadius: "8px",
+                      padding: "10px 15px",
+                      cursor: "pointer",
+                      "&:hover": {
+                        background: "#222222",
+                      },
+                    }}
                   >
                     {t("contact.send")}
                   </Button>

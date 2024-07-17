@@ -169,8 +169,8 @@ const Portfolio: FC = () => {
                               fontFamily: "Trebuchet MS, sans-serif",
                             }}
                           >
-                            {item[`title_${i18n.language}`]} / {activeIndex} /{" "}
-                            {index} / {}
+                            {item[`title_${i18n.language}`]} {activeIndex}
+                            {index}
                           </Typography>
                           {activeIndex === index && (
                             <>

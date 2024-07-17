@@ -1,92 +1,44 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
+import { useState } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-export type ServiceData = {
-  id: number;
-  attributes: {
-    title: string;
-    short_description: string;
-    description: string | null;
-    index: number;
-    url: string | null;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    locale: string;
-    icon: {
-      data: {
-        id: number;
-        attributes: {
-          name: string;
-          alternativeText: string | null;
-          caption: string | null;
-          width: number;
-          height: number;
-          provider_metadata: Record<string, unknown>;
-          hash: string;
-          ext: string;
-          mime: string;
-          size: number;
-          url: string;
-          previewUrl: string | null;
-          provider: string;
-          blurhash: string;
-        };
-      };
-    };
+interface Card {
+  id: string;
+  title_en: string;
+  short_en: string;
+  asset: {
+    url: string;
   };
-};
+}
 
-const ServiceCard = () => {
-  const { i18n } = useTranslation();
+interface ServiceCardProps {
+  cards: Card[];
+}
+
+const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
   const [showDescription, setShowDescription] = useState<number | null>(null);
 
   const handleClick = (index: number) => {
     setShowDescription(showDescription === index ? null : index);
   };
 
-  const {
-    refetch: fetchTexts,
-    data: ourserviceItems,
-    isLoading,
-    isError,
-  } = useQuery("ourserviceItems", async () => {
-    const response = await axios.get(
-      `http://95.85.121.153:1337/api/our-services?populate=icon&locale=${i18n.language}`
-    );
-    return response.data.data;
-  });
-
-  useEffect(() => {
-    fetchTexts();
-  }, [i18n.language]);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching data</div>;
-
   return (
     <Box
       sx={{
         height: "80vh",
         overflowY: "auto",
-        // Hide scrollbar for WebKit-based browsers
         "&::-webkit-scrollbar": {
           display: "none",
         },
-        // Hide scrollbar for Firefox
         scrollbarWidth: "none",
       }}
     >
       <Stack spacing={5} direction="row" justifyContent="center">
         <Stack width="90%" spacing={2}>
-          {ourserviceItems.map((item: ServiceData, index: number) => (
+          {cards.map((card, index) => (
             <Box
-              key={`our_service_items_sx_key${index}`}
+              key={card.id}
               sx={{
                 position: "relative",
                 height: "auto",
@@ -115,7 +67,7 @@ const ServiceCard = () => {
                 >
                   <img
                     style={{ width: "56px" }}
-                    src="./images/Frame 81.png"
+                    src={card.asset.url || "./images/Frame 81.png"}
                     alt=""
                   />
                   <Typography
@@ -124,7 +76,7 @@ const ServiceCard = () => {
                       color: showDescription === index ? "orange" : "#E9E9E9",
                     }}
                   >
-                    {item.attributes.title}
+                    {card.title_en}
                   </Typography>
                   <IconButton>
                     {showDescription === index ? (
@@ -145,7 +97,6 @@ const ServiceCard = () => {
                 {showDescription === index && (
                   <Stack direction="row" justifyContent="center">
                     <Typography
-                      key={index}
                       sx={{
                         color: "orange",
                         fontSize: "20px",
@@ -156,7 +107,7 @@ const ServiceCard = () => {
                         width: "95%",
                       }}
                     >
-                      {item.attributes.short_description}
+                      {card.short_en}
                     </Typography>
                   </Stack>
                 )}

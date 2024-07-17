@@ -73,6 +73,11 @@ const About: FC = () => {
 
   if (error) return <div>An error occurred: {error.message}</div>;
 
+  const getText = (item: ContentData, field: "title" | "description") => {
+    const lang = i18n.language;
+    return { __html: item[`${field}_${lang}` as keyof ContentData] as string };
+  };
+
   return (
     <>
       <Stack
@@ -157,13 +162,8 @@ const About: FC = () => {
                             xs: "center",
                           },
                         }}
-                      >
-                        {i18n.language === "en"
-                          ? item.title_en
-                          : i18n.language === "ru"
-                          ? item.title_ru
-                          : item.title_tm}
-                      </Typography>
+                        dangerouslySetInnerHTML={getText(item, "title")}
+                      />
                       <Typography
                         sx={{
                           fontSize: screenHeight >= 900 ? "20px" : "16px",
@@ -184,13 +184,8 @@ const About: FC = () => {
                             xs: "center",
                           },
                         }}
-                      >
-                        {i18n.language === "en"
-                          ? item.description_en
-                          : i18n.language === "ru"
-                          ? item.description_ru
-                          : item.description_tm}
-                      </Typography>
+                        dangerouslySetInnerHTML={getText(item, "description")}
+                      />
                     </Grid>
                   </Grid>
                 </Box>

@@ -63,7 +63,9 @@ const Home: FC = () => {
     field: "title" | "description" | "short"
   ) => {
     const lang = i18n.language;
-    return item[`${field}_${lang}` as keyof HomeTitleData] as string;
+    return {
+      __html: item[`${field}_${lang}` as keyof HomeTitleData] as string,
+    };
   };
 
   return (
@@ -91,12 +93,18 @@ const Home: FC = () => {
                   <Stack spacing={2}>
                     <TypeAnimation
                       key={animationKey}
-                      sequence={[getText(item, "title")]}
+                      sequence={[getText(item, "title").__html]}
                       wrapper="span"
                       speed={30}
                       style={typeAnimationStyle}
                     />
-                    <HomeTypography text={getText(item, "description")} />
+                    <HomeTypography
+                      text={
+                        <span
+                          dangerouslySetInnerHTML={getText(item, "description")}
+                        />
+                      }
+                    />
                     <Social />
                   </Stack>
                 </Grid>
@@ -149,9 +157,8 @@ const Home: FC = () => {
                     width: screenHeight >= 900 ? "250px" : "150px",
                     fontFamily: "Trebuchet MS, sans-serif",
                   }}
-                >
-                  {getText(item, "short").slice(0, 61)}...
-                </Typography>
+                  dangerouslySetInnerHTML={getText(item, "short")}
+                />
                 {showIcon && <ArrowIcon />}
               </Stack>
             </Box>

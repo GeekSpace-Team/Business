@@ -1,19 +1,45 @@
 import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import Serviceheader from "./Serviceheader";
 import ServiceCard from "./ServiceCard";
-
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-
-// import swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import { useNavigate } from "react-router-dom";
+import useSWR from "swr";
+import axios from "axios";
 
-const Services = () => {
+interface Slide {
+  id: string;
+  title_en: string;
+  description_en: string;
+  asset: {
+    url: string;
+  };
+  cards: Card[];
+}
+
+interface Card {
+  id: string;
+  title_en: string;
+  short_en: string;
+  asset: {
+    url: string;
+  };
+}
+
+const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+
+const Services: React.FC = () => {
   const navigate = useNavigate();
+  const { data, error } = useSWR<{ slides: Slide[] }>(
+    "http://95.85.121.153:6856/data/services",
+    fetcher
+  );
+
+  if (error) return <div>Error loading services</div>;
+  if (!data) return <div>Loading...</div>;
 
   return (
     <div style={{ width: "100%" }}>
@@ -39,41 +65,22 @@ const Services = () => {
             }}
             style={{
               width: "90%",
-              // paddingLeft: "5%",
             }}
             speed={750}
             loop={true}
           >
-            <SwiperSlide>
-              <Grid container mt={0.5} spacing={2}>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                  <Serviceheader />
+            {data.slides.map((slide) => (
+              <SwiperSlide key={slide.id}>
+                <Grid container mt={0.5} spacing={2}>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <Serviceheader slide={slide} />
+                  </Grid>
+                  <Grid item lg={6} md={6} sm={12} xs={12}>
+                    <ServiceCard cards={slide.cards} />
+                  </Grid>
                 </Grid>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                  <ServiceCard />
-                </Grid>
-              </Grid>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Grid container mt={0.5} spacing={2}>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                  <Serviceheader />
-                </Grid>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                  <ServiceCard />
-                </Grid>
-              </Grid>
-            </SwiperSlide>
-            <SwiperSlide>
-              <Grid container mt={0.5} spacing={2}>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                  <Serviceheader />
-                </Grid>
-                <Grid item lg={6} md={6} sm={12} xs={12}>
-                  <ServiceCard />
-                </Grid>
-              </Grid>
-            </SwiperSlide>
+              </SwiperSlide>
+            ))}
             <div className="prev"></div>
             <div className="next"></div>
           </Swiper>
