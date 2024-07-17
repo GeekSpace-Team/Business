@@ -46,23 +46,23 @@ const Portfolio: FC = () => {
   }, [portfolioItems, i18n.language]);
 
   const toggleActive = (index: number) => {
-    const centerIndex = Math.floor(items.length / 3);
-    if (index === centerIndex) {
-      setActiveIndex(activeIndex === index ? null : index);
-      return;
-    }
+    // const centerIndex = Math.floor(items.length / 3);
+    // if (index === centerIndex) {
+    //   setActiveIndex(activeIndex === index ? null : index);
+    //   return;
+    // }
 
-    const newItems = [...items];
-    [newItems[centerIndex], newItems[index]] = [
-      newItems[index],
-      newItems[centerIndex],
-    ];
-    setItems(newItems);
-    setActiveIndex(centerIndex);
+    // const newItems = [...items];
+    // [newItems[centerIndex], newItems[index]] = [
+    //   newItems[index],
+    //   newItems[centerIndex],
+    // ];
+    // setItems(newItems);
+    setActiveIndex(index);
 
     if (swiperRef.current) {
       swiperRef.current.autoplay.stop();
-      swiperRef.current.slideTo(centerIndex);
+      swiperRef.current.slideTo(index);
     }
 
     if (swiperRef.current) {
@@ -120,6 +120,7 @@ const Portfolio: FC = () => {
               modules={[Autoplay, Navigation]}
               spaceBetween={10}
               slidesPerView={3}
+              centeredSlides={true}
               breakpoints={{
                 320: { slidesPerView: 1 },
                 600: { slidesPerView: 2 },
@@ -135,82 +136,87 @@ const Portfolio: FC = () => {
                 paddingLeft: "5%",
               }}
               speed={750}
-              loop={true}
+              loop={false}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
-              {items.map((item: any, index: number) => (
-                <SwiperSlide key={`portfolio_items_key${index}`}>
-                  <Stack direction="row" alignItems="center">
-                    <Box
-                      sx={{
-                        background: "rgba(10, 10, 14, 0.7)",
-                        minHeight: screenHeight >= 900 ? "600px" : "300px",
-                        width: "85%",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => toggleActive(index)}
-                    >
-                      <img
-                        style={{ width: "100%", height: "180px" }}
-                        src={item.asset.url}
-                      />
-                      <Stack p={3}>
-                        <Typography
-                          sx={{
-                            color: activeIndex === index ? "orange" : "#E9E9E9",
-                            fontSize: screenHeight >= 900 ? "30px" : "24px",
-                            lineHeight: screenHeight >= 900 ? "50px" : "33px",
-                            fontWeight: 700,
-                            width: "90%",
-                            fontFamily: "Trebuchet MS, sans-serif",
-                          }}
-                        >
-                          {item[`title_${i18n.language}`]}
-                        </Typography>
-                        {activeIndex === index && (
-                          <>
-                            <Typography
-                              sx={{
-                                color: "#E9E9E9",
-                                fontSize: screenHeight >= 900 ? "30px" : "20px",
-                                lineHeight:
-                                  screenHeight >= 900 ? "40px" : "26px",
-                                fontWeight: 600,
-                                fontFamily: "Trebuchet MS, sans-serif",
-                              }}
-                            >
-                              {item[`short_${i18n.language}`].slice(0, 50)}...
-                            </Typography>
-                            <Stack
-                              mt={2}
-                              direction="row"
-                              justifyContent="flex-end"
-                            >
-                              <Button
+              {items
+                .filter((it) => it.type == "portfolia_item")
+                .map((item: any, index: number) => (
+                  <SwiperSlide key={`portfolio_items_key${index}`}>
+                    <Stack direction="row" alignItems="center">
+                      <Box
+                        sx={{
+                          background: "rgba(10, 10, 14, 0.7)",
+                          minHeight: screenHeight >= 900 ? "600px" : "300px",
+                          width: "85%",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => toggleActive(index)}
+                      >
+                        <img
+                          style={{ width: "100%", height: "180px" }}
+                          src={item.asset.url}
+                        />
+                        <Stack p={3}>
+                          <Typography
+                            sx={{
+                              color:
+                                activeIndex === index ? "orange" : "#E9E9E9",
+                              fontSize: screenHeight >= 900 ? "30px" : "24px",
+                              lineHeight: screenHeight >= 900 ? "50px" : "33px",
+                              fontWeight: 700,
+                              width: "90%",
+                              fontFamily: "Trebuchet MS, sans-serif",
+                            }}
+                          >
+                            {item[`title_${i18n.language}`]} / {activeIndex} /{" "}
+                            {index} / {}
+                          </Typography>
+                          {activeIndex === index && (
+                            <>
+                              <Typography
                                 sx={{
-                                  color: "#fff",
-                                  textTransform: "none",
+                                  color: "#E9E9E9",
+                                  fontSize:
+                                    screenHeight >= 900 ? "30px" : "20px",
+                                  lineHeight:
+                                    screenHeight >= 900 ? "40px" : "26px",
+                                  fontWeight: 600,
                                   fontFamily: "Trebuchet MS, sans-serif",
                                 }}
-                                className="moreButton"
-                                endIcon={
-                                  <KeyboardDoubleArrowRightIcon className="leftArrow" />
-                                }
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  window.open(item.url, "_blank");
-                                }}
                               >
-                                Read More
-                              </Button>
-                            </Stack>
-                          </>
-                        )}
-                      </Stack>
-                    </Box>
-                  </Stack>
-                </SwiperSlide>
-              ))}
+                                {item[`short_${i18n.language}`].slice(0, 50)}...
+                              </Typography>
+                              <Stack
+                                mt={2}
+                                direction="row"
+                                justifyContent="flex-end"
+                              >
+                                <Button
+                                  sx={{
+                                    color: "#fff",
+                                    textTransform: "none",
+                                    fontFamily: "Trebuchet MS, sans-serif",
+                                  }}
+                                  className="moreButton"
+                                  endIcon={
+                                    <KeyboardDoubleArrowRightIcon className="leftArrow" />
+                                  }
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    window.open(item.url, "_blank");
+                                  }}
+                                >
+                                  Read More
+                                </Button>
+                              </Stack>
+                            </>
+                          )}
+                        </Stack>
+                      </Box>
+                    </Stack>
+                  </SwiperSlide>
+                ))}
               <div className="prev"></div>
               <div className="next"></div>
             </Swiper>
