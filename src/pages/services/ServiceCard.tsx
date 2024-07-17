@@ -5,7 +5,42 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ServiceData } from "../../components/service/ServiceCards";
+
+export type ServiceData = {
+  id: number;
+  attributes: {
+    title: string;
+    short_description: string;
+    description: string | null;
+    index: number;
+    url: string | null;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string;
+    icon: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          alternativeText: string | null;
+          caption: string | null;
+          width: number;
+          height: number;
+          provider_metadata: Record<string, unknown>;
+          hash: string;
+          ext: string;
+          mime: string;
+          size: number;
+          url: string;
+          previewUrl: string | null;
+          provider: string;
+          blurhash: string;
+        };
+      };
+    };
+  };
+};
 
 const ServiceCard = () => {
   const { i18n } = useTranslation();
