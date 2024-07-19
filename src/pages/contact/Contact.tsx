@@ -49,14 +49,24 @@ const Contact: FC = () => {
     const fetchThemes = async () => {
       try {
         const response = await axios.get("http://95.85.121.153:6856/data/");
-        setThemes(response.data);
+        const filteredThemes = response.data
+          .filter((item: any) => item.type === "contact_theme")
+          .map((item: any) => ({
+            id: item.id,
+            title_tm: item.title_tm,
+            title_ru: item.title_ru,
+            title_en: item.title_en,
+          }));
+        setThemes(filteredThemes);
       } catch (error) {
         console.error("Error fetching themes:", error);
       }
     };
 
     fetchThemes();
-  }, []);
+  }, [i18n.language]); // Refetch themes when the language changes
+  // Refetch data when the language changes
+  // Add i18n.language as a dependency to refetch when language changes
 
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -101,9 +111,21 @@ const Contact: FC = () => {
     }
   };
 
-  const getThemeTitle = (theme: Theme) => {
-    const titleKey = `title_${i18n.language}` as keyof Theme;
-    return theme[titleKey];
+  const getThemeTitle = (theme: {
+    id: number;
+    title_tm: string;
+    title_ru: string;
+    title_en: string;
+  }) => {
+    switch (i18n.language) {
+      case "tm":
+        return theme.title_tm || theme.title_en; // Fallback to English if title_tm is missing
+      case "ru":
+        return theme.title_ru || theme.title_en; // Fallback to English if title_ru is missing
+      case "en":
+      default:
+        return theme.title_en || theme.title_tm; // Fallback to TM if title_en is missing
+    }
   };
 
   return (
@@ -268,12 +290,13 @@ const Contact: FC = () => {
                       Tema
                     </option>
                     {themes.map((theme) => (
-                      <option key={theme.id} value={getThemeTitle(theme)}>
+                      <option key={theme.id} value={theme.id}>
                         {getThemeTitle(theme)}
                       </option>
                     ))}
                     <option value="other">Other</option>
                   </select>
+
                   <textarea
                     name="text"
                     value={formData.text}
