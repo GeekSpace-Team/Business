@@ -1,7 +1,9 @@
-import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import { useNavigate } from "react-router-dom";
 
 interface Card {
   id: string;
@@ -18,6 +20,7 @@ interface ServiceCardProps {
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
   const [showDescription, setShowDescription] = useState<number | null>(null);
+  const navigate = useNavigate();
 
   const handleClick = (index: number) => {
     setShowDescription(showDescription === index ? null : index);
@@ -95,7 +98,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                   </IconButton>
                 </Stack>
                 {showDescription === index && (
-                  <Stack direction="row" justifyContent="center">
+                  <Stack justifyContent="center">
                     <Typography
                       sx={{
                         color: "orange",
@@ -109,6 +112,28 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                     >
                       {card.short_en}
                     </Typography>
+                    <Stack direction="row" p={4} justifyContent={"flex-end"}>
+                      <Button
+                        sx={{
+                          color: "#fff",
+                          textTransform: "none",
+                          fontFamily: "Trebuchet MS, sans-serif",
+                          width: "180px",
+                        }}
+                        className="moreButton"
+                        endIcon={
+                          <KeyboardDoubleArrowRightIcon className="leftArrow" />
+                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/services/${card.id}`, {
+                            state: { card },
+                          });
+                        }}
+                      >
+                        Read More
+                      </Button>
+                    </Stack>
                   </Stack>
                 )}
               </Box>

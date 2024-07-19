@@ -204,7 +204,9 @@ const Portfolio: FC = () => {
                                   }
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    window.open(item.url, "_blank");
+                                    navigate(`/portfolio/${item.id}`, {
+                                      state: { item },
+                                    });
                                   }}
                                 >
                                   Read More

@@ -14,6 +14,10 @@ const About = lazy(() => import("../pages/about/About"));
 const Contact = lazy(() => import("../pages/contact/Contact"));
 const Portfolio = lazy(() => import("../pages/portfolio/Portfolio"));
 const Services = lazy(() => import("../pages/services/Services"));
+const PortfolioDetail = lazy(
+  () => import("../pages/portfolio/PortfolioDetail")
+);
+const ServiceDetail = lazy(() => import("../pages/services/ServiceDetail"));
 
 const RouteList: FC = () => {
   useEffect(() => {
@@ -39,7 +43,12 @@ const RouteList: FC = () => {
             <Route path="/about" element={<AboutFallback />} />
             <Route path="/contact" element={<ContactFallback />} />
             <Route path="/portfolio" element={<PortfolioFallback />} />
+            <Route
+              path="/portfolio/:id"
+              element={<PortfolioDetailFallback />}
+            />
             <Route path="/services" element={<ServicesFallback />} />
+            <Route path="/services/:id" element={<ServiceDetailFallback />} />
           </Route>
         </Routes>
         <ToastContainer />
@@ -72,9 +81,21 @@ const PortfolioFallback = () => (
   </Suspense>
 );
 
+const PortfolioDetailFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <PortfolioDetail />
+  </Suspense>
+);
+
 const ServicesFallback = () => (
   <Suspense fallback={<LoadingComponent />}>
     <Services />
+  </Suspense>
+);
+
+const ServiceDetailFallback = () => (
+  <Suspense fallback={<LoadingComponent />}>
+    <ServiceDetail />
   </Suspense>
 );
 

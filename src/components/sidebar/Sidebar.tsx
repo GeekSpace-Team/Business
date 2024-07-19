@@ -3,19 +3,21 @@ import Logo from "../logo/Logo";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Social from "../bottom-social/Social";
-// import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-// import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
-// import SettingsIcon from "@mui/icons-material/Settings";
-// import MailIcon from "@mui/icons-material/Mail";
 import Language from "../../assets/language/Language";
 import { useTranslation } from "react-i18next";
 import LanguageIcon from "@mui/icons-material/Language";
 import MiniSidebar from "./MiniSidebar";
 import "../../pages/home/home.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-// import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import { RootState } from "../../store";
 import { useSelector } from "react-redux";
+
+// import Sidebar icons
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import WorkOutlineOutlinedIcon from "@mui/icons-material/WorkOutlineOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
+import MailIcon from "@mui/icons-material/Mail";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 
 const Sidebar: FC = () => {
   const location = useLocation();
@@ -156,12 +158,12 @@ const Sidebar: FC = () => {
                         },
                       }}
                     >
-                      {/* <HomeOutlinedIcon /> */}
-                      <img
+                      <HomeOutlinedIcon />
+                      {/* <img
                         src="/gif/icons8-home.gif.gif"
                         alt=""
                         style={{ width: "35px" }}
-                      />
+                      /> */}
                       <Typography
                         sx={{
                           fontSize: screenHeight >= 900 ? 16 : 14,
@@ -196,12 +198,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    {/* <PeopleAltOutlinedIcon /> */}
-                    <img
+                    <PeopleAltOutlinedIcon />
+                    {/* <img
                       src="/gif/icons8-about (1).gif.gif"
                       alt=""
                       style={{ width: "35px" }}
-                    />
+                    /> */}
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,
@@ -237,12 +239,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    {/* <WorkOutlineOutlinedIcon /> */}
-                    <img
+                    <WorkOutlineOutlinedIcon />
+                    {/* <img
                       src="/gif/icons8-briefcase.gif.gif"
                       alt=""
                       style={{ width: "35px" }}
-                    />
+                    /> */}
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,
@@ -278,12 +280,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    {/* <SettingsIcon /> */}
-                    <img
+                    <SettingsIcon />
+                    {/* <img
                       src="/gif/icons8-news (1).gif.gif"
                       alt=""
                       style={{ width: "35px" }}
-                    />
+                    /> */}
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,
@@ -317,12 +319,12 @@ const Sidebar: FC = () => {
                       },
                     }}
                   >
-                    {/* <MailIcon /> */}
-                    <img
+                    <MailIcon />
+                    {/* <img
                       src="/gif/icons8-mail.gif (1).gif"
                       alt=""
                       style={{ width: "35px" }}
-                    />
+                    /> */}
                     <Typography
                       sx={{
                         fontSize: screenHeight >= 900 ? 16 : 14,
