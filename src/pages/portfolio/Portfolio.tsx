@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const Portfolio: FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(2);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [items, setItems] = useState<any[]>([]);
   const navigate = useNavigate();
@@ -60,14 +60,14 @@ const Portfolio: FC = () => {
     // setItems(newItems);
     setActiveIndex(index);
 
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.stop();
-      swiperRef.current.slideTo(index);
-    }
+    // if (swiperRef.current) {
+    //   swiperRef.current.autoplay.stop();
+    //   swiperRef.current.slideTo(index);
+    // }
 
-    if (swiperRef.current) {
-      swiperRef.current.autoplay.play();
-    }
+    // if (swiperRef.current) {
+    //   swiperRef.current.autoplay.play();
+    // }
   };
 
   if (!portfolioItems) {
@@ -78,7 +78,6 @@ const Portfolio: FC = () => {
     );
   }
   if (error) return <div>Error fetching data</div>;
-
   return (
     <>
       <Stack width="100%" height="100vh">
@@ -126,17 +125,19 @@ const Portfolio: FC = () => {
                 600: { slidesPerView: 2 },
                 900: { slidesPerView: 3 },
               }}
+              slideToClickedSlide={true}
               navigation
               autoplay={{
-                delay: 750,
+                delay: 3050,
                 pauseOnMouseEnter: true,
               }}
+              cssMode={true}
               style={{
                 width: "92%",
                 paddingLeft: "5%",
               }}
               speed={750}
-              loop={false}
+              loop={true}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
               {items
@@ -185,7 +186,9 @@ const Portfolio: FC = () => {
                                   fontFamily: "Trebuchet MS, sans-serif",
                                 }}
                               >
-                                {item[`short_${i18n.language}`].slice(0, 50)}...
+                                {" "}
+                                {item[`short_${i18n.language}`].slice(0, 50)}
+                                ...
                               </Typography>
                               <Stack
                                 mt={2}

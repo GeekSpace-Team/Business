@@ -119,12 +119,12 @@ const Contact: FC = () => {
   }) => {
     switch (i18n.language) {
       case "tm":
-        return theme.title_tm || theme.title_en; // Fallback to English if title_tm is missing
+        return theme.title_tm || theme.title_en;
       case "ru":
-        return theme.title_ru || theme.title_en; // Fallback to English if title_ru is missing
+        return theme.title_ru || theme.title_en;
       case "en":
       default:
-        return theme.title_en || theme.title_tm; // Fallback to TM if title_en is missing
+        return theme.title_en || theme.title_tm;
     }
   };
 
@@ -290,7 +290,7 @@ const Contact: FC = () => {
                       {t("contact.thema")}
                     </option>
                     {themes.map((theme) => (
-                      <option key={theme.id} value={theme.id}>
+                      <option key={theme.id} value={getThemeTitle(theme)}>
                         {getThemeTitle(theme)}
                       </option>
                     ))}
