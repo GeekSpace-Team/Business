@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 interface Slide {
   id: string;
@@ -22,10 +23,27 @@ interface Slide {
 
 interface Card {
   id: string;
+  title_tm: string;
+  title_ru: string;
   title_en: string;
+  description_tm: string;
+  description_ru: string;
+  description_en: string;
+  short_tm: string;
+  short_ru: string;
   short_en: string;
+  type: string;
+  order: number;
+  url: string;
+  assetId: number;
+  parentId: number;
+  created_at: string;
+  updated_at: string;
   asset: {
+    id: number;
     url: string;
+    type: string;
+    blurhash: string;
   };
 }
 
@@ -33,6 +51,8 @@ const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const Services: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const { data, error } = useSWR<{ slides: Slide[] }>(
     "http://95.85.121.153:6856/data/services",
     fetcher
@@ -112,7 +132,7 @@ const Services: React.FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Portfolio
+          {t("sidebar.portfolio")}
         </Button>
 
         <Divider sx={{ width: "100px" }}>
@@ -126,7 +146,7 @@ const Services: React.FC = () => {
               fontFamily: "Trebuchet MS, sans-serif",
             }}
           >
-            Home
+            {t("sidebar.home")}
           </Typography>
         </Divider>
         <Button
@@ -139,7 +159,7 @@ const Services: React.FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Contact
+          {t("sidebar.contact")}
         </Button>
       </Stack>
     </div>

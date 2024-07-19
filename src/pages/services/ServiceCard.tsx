@@ -4,13 +4,31 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface Card {
   id: string;
+  title_tm: string;
+  title_ru: string;
   title_en: string;
+  description_tm: string;
+  description_ru: string;
+  description_en: string;
+  short_tm: string;
+  short_ru: string;
   short_en: string;
+  type: string;
+  order: number;
+  url: string;
+  assetId: number;
+  parentId: number;
+  created_at: string;
+  updated_at: string;
   asset: {
+    id: number;
     url: string;
+    type: string;
+    blurhash: string;
   };
 }
 
@@ -21,9 +39,20 @@ interface ServiceCardProps {
 const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
   const [showDescription, setShowDescription] = useState<number | null>(null);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const handleClick = (index: number) => {
     setShowDescription(showDescription === index ? null : index);
+  };
+
+  const getCardTitle = (card: Card) => {
+    const titleKey = `title_${i18n.language}` as keyof Card;
+    return card[titleKey] as unknown as string;
+  };
+
+  const getCardShortDescription = (card: Card) => {
+    const shortKey = `short_${i18n.language}` as keyof Card;
+    return card[shortKey] as unknown as string;
   };
 
   return (
@@ -79,7 +108,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                       color: showDescription === index ? "orange" : "#E9E9E9",
                     }}
                   >
-                    {card.title_en}
+                    {getCardTitle(card)}
                   </Typography>
                   <IconButton>
                     {showDescription === index ? (
@@ -110,7 +139,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                         width: "95%",
                       }}
                     >
-                      {card.short_en}
+                      {getCardShortDescription(card)}
                     </Typography>
                     <Stack direction="row" p={4} justifyContent={"flex-end"}>
                       <Button
@@ -131,7 +160,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                           });
                         }}
                       >
-                        Read More
+                        {t("common.read_more")}
                       </Button>
                     </Stack>
                   </Stack>

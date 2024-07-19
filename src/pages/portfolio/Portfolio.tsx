@@ -17,7 +17,7 @@ const Portfolio: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const [items, setItems] = useState<any[]>([]);
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const swiperRef = useRef<any>(null);
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const Portfolio: FC = () => {
                 position: "absolute",
               }}
             >
-              Prominent works of my business coaching
+              {t("portfolio.title")}
             </Typography>
           </Box>
         </Stack>
@@ -209,7 +209,7 @@ const Portfolio: FC = () => {
                                     });
                                   }}
                                 >
-                                  Read More
+                                  {t("common.read_more")}
                                 </Button>
                               </Stack>
                             </>
@@ -251,7 +251,7 @@ const Portfolio: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          About Us
+          {t("sidebar.about")}
         </Button>
 
         <Divider sx={{ width: "100px" }}>
@@ -265,7 +265,7 @@ const Portfolio: FC = () => {
               fontFamily: "Trebuchet MS, sans-serif",
             }}
           >
-            Home
+            {t("sidebar.home")}
           </Typography>
         </Divider>
         <Button
@@ -278,7 +278,7 @@ const Portfolio: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Our Service
+          {t("sidebar.services")}
         </Button>
       </Stack>
     </>

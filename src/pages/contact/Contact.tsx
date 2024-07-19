@@ -7,7 +7,6 @@ import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import PhoneEnabledOutlinedIcon from "@mui/icons-material/PhoneEnabledOutlined";
 import Social from "../../components/bottom-social/Social";
 import { useTranslation } from "react-i18next";
-import i18n from "../../assets/language/i18n";
 import axios from "axios";
 import { showError, showSuccess } from "../../components/alert/Alert";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -31,7 +30,7 @@ interface Theme {
 const Contact: FC = () => {
   const [screenHeight, setScreenHeight] = useState<number>(window.innerHeight);
   const [themes, setThemes] = useState<Theme[]>([]);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -100,6 +99,11 @@ const Contact: FC = () => {
       console.error("Error sending message:", error);
       showError(t("contact.error"));
     }
+  };
+
+  const getThemeTitle = (theme: Theme) => {
+    const titleKey = `title_${i18n.language}` as keyof Theme;
+    return theme[titleKey];
   };
 
   return (
@@ -261,11 +265,11 @@ const Contact: FC = () => {
                     required
                   >
                     <option value="" disabled>
-                      {t("contact.theme")}
+                      Tema
                     </option>
                     {themes.map((theme) => (
-                      <option key={theme.id} value={theme.title_en}>
-                        {theme.title_en}
+                      <option key={theme.id} value={getThemeTitle(theme)}>
+                        {getThemeTitle(theme)}
                       </option>
                     ))}
                     <option value="other">Other</option>
@@ -463,7 +467,7 @@ const Contact: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Our Service
+          {t("sidebar.services")}
         </Button>
 
         <Divider orientation="vertical" flexItem />
@@ -477,7 +481,7 @@ const Contact: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Home
+          {t("sidebar.home")}
         </Button>
       </Stack>
       <LanguageModal />

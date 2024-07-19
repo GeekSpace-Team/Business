@@ -21,5 +21,17 @@
     "success": "Hat üstünlikli ugradyldy",
     "error": "Hat ugratmakda ýalňyşlyk ýüze çykdy",
     "number": "Telefon Belgisi"
+  },
+
+  "about": {
+    "title": "Biz Kim"
+  },
+
+  "portfolio": {
+    "title": "Biznes maslahatçymyň aýratyn işleriniň jemleri"
+  },
+
+  "common": {
+    "read_more": "Has giňişleýin"
   }
 }

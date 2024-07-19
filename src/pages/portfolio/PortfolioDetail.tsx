@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const PortfolioDetail: FC = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const item = location.state?.item;
 
@@ -49,7 +49,7 @@ const PortfolioDetail: FC = () => {
         spacing={2}
       >
         <Button
-          onClick={() => navigate("/portfolio")}
+          onClick={() => navigate("/about")}
           startIcon={
             <ArrowRightAltIcon
               sx={{
@@ -67,7 +67,7 @@ const PortfolioDetail: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Portfolio
+          {t("sidebar.about")}
         </Button>
 
         <Divider sx={{ width: "100px" }}>
@@ -81,7 +81,7 @@ const PortfolioDetail: FC = () => {
               fontFamily: "Trebuchet MS, sans-serif",
             }}
           >
-            Home
+            {t("sidebar.home")}
           </Typography>
         </Divider>
         <Button
@@ -94,7 +94,7 @@ const PortfolioDetail: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Our Service
+          {t("sidebar.services")}
         </Button>
       </Stack>
     </>

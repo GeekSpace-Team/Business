@@ -37,7 +37,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const About: FC = () => {
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
   const navigate = useNavigate();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { data: contentData, error } = useSWR<ContentData[]>(
     "http://95.85.121.153:6856/data",
@@ -106,7 +106,7 @@ const About: FC = () => {
               color: "orange",
             }}
           >
-            who we are
+            {t("about.title")}
           </Typography>
         </Box>
 
@@ -220,7 +220,7 @@ const About: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Home
+          {t("sidebar.home")}
         </Button>
 
         <Divider orientation="vertical" flexItem />
@@ -234,7 +234,7 @@ const About: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Portfolio
+          {t("sidebar.portfolio")}
         </Button>
       </Stack>
       <AboutMini />

@@ -47,7 +47,7 @@ const Language: FC<{ setShowLanguage: (show: boolean) => void }> = ({
           <Stack
             spacing={screenHeight >= 900 ? 2 : 1}
             sx={{ cursor: "pointer" }}
-            onClick={() => changeLanguage("tk", "Trukmenistan")}
+            onClick={() => changeLanguage("tm", "Trukmenistan")}
           >
             <img
               src={tmFlag}

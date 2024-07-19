@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const ServiceDetail: FC = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const card = location.state?.card;
 
@@ -36,11 +36,11 @@ const ServiceDetail: FC = () => {
         direction="row"
         justifyContent="center"
         alignItems="center"
-        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
+        sx={{ position: "absolute", bottom: "3%", width: "100%" }}
         spacing={2}
       >
         <Button
-          onClick={() => navigate("/services")}
+          onClick={() => navigate("/portfolio")}
           startIcon={
             <ArrowRightAltIcon
               sx={{
@@ -58,7 +58,7 @@ const ServiceDetail: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Our Service
+          {t("sidebar.portfolio")}
         </Button>
 
         <Divider sx={{ width: "100px" }}>
@@ -72,7 +72,7 @@ const ServiceDetail: FC = () => {
               fontFamily: "Trebuchet MS, sans-serif",
             }}
           >
-            Home
+            {t("sidebar.home")}
           </Typography>
         </Divider>
         <Button
@@ -85,7 +85,7 @@ const ServiceDetail: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          Contact
+          {t("sidebar.contact")}
         </Button>
       </Stack>
     </div>

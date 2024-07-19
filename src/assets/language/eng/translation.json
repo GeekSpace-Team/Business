@@ -21,5 +21,17 @@
     "success": "Message sent successfully",
     "error": "Error sending message",
     "number": "Phone Number"
+  },
+
+  "about": {
+    "title": "Who we are"
+  },
+
+  "portfolio": {
+    "title": "Prominent works of my business coaching"
+  },
+
+  "common": {
+    "read_more": "Read More"
   }
 }
