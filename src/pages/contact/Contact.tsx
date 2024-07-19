@@ -287,14 +287,14 @@ const Contact: FC = () => {
                     required
                   >
                     <option value="" disabled>
-                      Tema
+                      {t("contact.thema")}
                     </option>
                     {themes.map((theme) => (
                       <option key={theme.id} value={theme.id}>
                         {getThemeTitle(theme)}
                       </option>
                     ))}
-                    <option value="other">Other</option>
+                    <option value="other">{t("contact.other")}</option>
                   </select>
 
                   <textarea
