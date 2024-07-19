@@ -49,7 +49,7 @@ const PortfolioDetail: FC = () => {
         spacing={2}
       >
         <Button
-          onClick={() => navigate("/about")}
+          onClick={() => navigate("/portfolio")}
           startIcon={
             <ArrowRightAltIcon
               sx={{
@@ -67,7 +67,7 @@ const PortfolioDetail: FC = () => {
             fontFamily: "Trebuchet MS, sans-serif",
           }}
         >
-          {t("sidebar.about")}
+          {t("sidebar.portfolio")}
         </Button>
 
         <Divider sx={{ width: "100px" }}>
