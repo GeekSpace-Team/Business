@@ -58,15 +58,22 @@ const Portfolio: FC = () => {
     //   newItems[centerIndex],
     // ];
     // setItems(newItems);
+    swiperRef.current.autoplay.stop();
     setActiveIndex(index);
 
+    setTimeout(() => {
+      swiperRef.current.autoplay.start();
+      setActiveIndex(-1);
+      // alert("done");
+    }, 10000);
+
     // if (swiperRef.current) {
-    //   swiperRef.current.autoplay.stop();
+    //
     //   swiperRef.current.slideTo(index);
     // }
 
     // if (swiperRef.current) {
-    //   swiperRef.current.autoplay.play();
+    //
     // }
   };
 
@@ -78,6 +85,7 @@ const Portfolio: FC = () => {
     );
   }
   if (error) return <div>Error fetching data</div>;
+
   return (
     <>
       <Stack width="100%" height="100vh">
@@ -128,7 +136,7 @@ const Portfolio: FC = () => {
               slideToClickedSlide={true}
               navigation
               autoplay={{
-                delay: 3050,
+                delay: 5000,
                 pauseOnMouseEnter: true,
               }}
               cssMode={true}
@@ -136,7 +144,7 @@ const Portfolio: FC = () => {
                 width: "92%",
                 paddingLeft: "5%",
               }}
-              speed={750}
+              speed={1000}
               loop={true}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
@@ -186,9 +194,7 @@ const Portfolio: FC = () => {
                                   fontFamily: "Trebuchet MS, sans-serif",
                                 }}
                               >
-                                {" "}
-                                {item[`short_${i18n.language}`].slice(0, 50)}
-                                ...
+                                {item[`short_${i18n.language}`].slice(0, 50)}...
                               </Typography>
                               <Stack
                                 mt={2}
