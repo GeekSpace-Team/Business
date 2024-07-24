@@ -144,7 +144,7 @@ const Portfolio: FC = () => {
                 width: "92%",
                 paddingLeft: "5%",
               }}
-              speed={1000}
+              speed={5000}
               loop={true}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
             >
