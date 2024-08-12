@@ -94,7 +94,7 @@ const PortfolioMini: FC = () => {
                 }}
               >
                 <img
-                  src={`http://95.85.121.153:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
+                  src={`http://216.250.13.150:1337${item.attributes.image.data.attributes.formats.thumbnail.url}`}
                   style={{
                     width: "100%",
                     height: "260px",

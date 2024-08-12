@@ -48,7 +48,7 @@ const Contact: FC = () => {
   useEffect(() => {
     const fetchThemes = async () => {
       try {
-        const response = await axios.get("http://95.85.121.153:6856/data/");
+        const response = await axios.get("http://216.250.13.150:6856/data/");
         const filteredThemes = response.data
           .filter((item: any) => item.type === "contact_theme")
           .map((item: any) => ({
@@ -92,10 +92,13 @@ const Contact: FC = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://95.85.121.153:6426/send-mail", {
-        to_mail: "microsoft7779@gmail.com",
-        ...formData,
-      });
+      const response = await axios.post(
+        "http://216.250.13.150:6426/send-mail",
+        {
+          to_mail: "microsoft7779@gmail.com",
+          ...formData,
+        }
+      );
       console.log("Message sent successfully:", response.data);
       showSuccess(t("contact.success"));
       setFormData({

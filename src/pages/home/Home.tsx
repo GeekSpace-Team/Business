@@ -44,7 +44,7 @@ const Home: FC = () => {
 
   // Fetch data using SWR
   const { data, error } = useSWR<HomeTitleData[]>(
-    "http://95.85.121.153:6856/data",
+    "http://216.250.13.150:6856/data",
     fetcher
   );
 

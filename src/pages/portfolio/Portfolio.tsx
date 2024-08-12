@@ -35,7 +35,7 @@ const Portfolio: FC = () => {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const { data: portfolioItems, error } = useSWR(
-    "http://95.85.121.153:6856/data",
+    "http://216.250.13.150:6856/data",
     fetcher
   );
 

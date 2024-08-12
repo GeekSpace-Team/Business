@@ -54,7 +54,7 @@ const Services: React.FC = () => {
   const { t } = useTranslation();
 
   const { data, error } = useSWR<{ slides: Slide[] }>(
-    "http://95.85.121.153:6856/data/services",
+    "http://216.250.13.150:6856/data/services",
     fetcher
   );
 

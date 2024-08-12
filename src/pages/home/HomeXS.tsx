@@ -39,7 +39,7 @@ const HomeXS: FC = () => {
         );
         if (homeBanner && homeBanner.attributes.image.data.attributes.url) {
           setBackgroundImageUrl(
-            `http://95.85.121.153:1337${homeBanner.attributes.image.data.attributes.url}`
+            `http://216.250.13.150:1337${homeBanner.attributes.image.data.attributes.url}`
           );
         }
       } catch (error) {

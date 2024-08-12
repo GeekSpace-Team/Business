@@ -41,7 +41,7 @@ const AboutMini: FC = () => {
   const { i18n } = useTranslation();
 
   const { data, error, isLoading, mutate } = useSWR<ContentData[]>(
-    `http://95.85.121.153:6856/data`,
+    `http://216.250.13.150:6856/data`,
     fetcher
   );
 
