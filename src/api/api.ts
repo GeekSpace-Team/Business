@@ -3,7 +3,7 @@ import axios from "axios";
 export const fetchTitleTexts = async () => {
   try {
     const response = await axios.get(
-      "http://216.250.13.150:1337/api/title-texts"
+      "http://216.250.13.150:6856/api/title-texts"
     );
     return response.data.data;
   } catch (error) {
@@ -11,7 +11,7 @@ export const fetchTitleTexts = async () => {
   }
 };
 
-const API_URL = "http://216.250.13.150:1337";
+const API_URL = "http://216.250.13.150:6856";
 
 const api = axios.create({
   baseURL: API_URL,

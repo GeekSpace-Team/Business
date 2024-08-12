@@ -23,7 +23,7 @@ const Social: FC = () => {
     "socialMediaData",
     async () => {
       const response = await axios.get(
-        "http://216.250.13.150:1337/api/social-medias?populate=icon"
+        "http://216.250.13.150:6856/api/social-medias?populate=icon"
       );
       return response.data.data;
     }
@@ -45,7 +45,7 @@ const Social: FC = () => {
         {data.map((socialMedia) => {
           const { title, url, icon } = socialMedia.attributes;
           // Corrected the iconUrl construction
-          const iconUrl = `http://216.250.13.150:1337${icon?.data.attributes.url}`;
+          const iconUrl = `http://216.250.13.150:6856${icon?.data.attributes.url}`;
           if (title && url && icon?.data.attributes.url) {
             return (
               <Tooltip key={socialMedia.id} title={title}>
