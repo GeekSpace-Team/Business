@@ -412,7 +412,7 @@ const Contact: FC = () => {
                         color: "#E9E9E9",
                       }}
                     >
-                      iskakerim@gmail.com
+                      info@ikmaslahat.com
                     </Typography>
                   </Stack>
                   <Stack spacing={1}>
