@@ -40,7 +40,7 @@ const About: FC = () => {
   const { t, i18n } = useTranslation();
 
   const { data: contentData, error } = useSWR<ContentData[]>(
-    "http://216.250.13.150:6856/data",
+    "https://ikmaslahat.com/api/data/",
     fetcher
   );
 

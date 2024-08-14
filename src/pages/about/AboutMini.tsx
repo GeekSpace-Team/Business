@@ -41,7 +41,7 @@ const AboutMini: FC = () => {
   const { i18n } = useTranslation();
 
   const { data, error, isLoading, mutate } = useSWR<ContentData[]>(
-    `http://216.250.13.150:6856/data`,
+    `https://ikmaslahat.com/api/data`,
     fetcher
   );
 

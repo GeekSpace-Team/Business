@@ -54,7 +54,7 @@ const Services: React.FC = () => {
   const { t } = useTranslation();
 
   const { data, error } = useSWR<{ slides: Slide[] }>(
-    "http://216.250.13.150:6856/data/services",
+    "https://ikmaslahat.com/api/data/services",
     fetcher
   );
 

@@ -39,7 +39,7 @@ const HomeXS: FC = () => {
         );
         if (homeBanner && homeBanner.attributes.image.data.attributes.url) {
           setBackgroundImageUrl(
-            `http://216.250.13.150:6856${homeBanner.attributes.image.data.attributes.url}`
+            `https://ikmaslahat.com/api/data${homeBanner.attributes.image.data.attributes.url}`
           );
         }
       } catch (error) {

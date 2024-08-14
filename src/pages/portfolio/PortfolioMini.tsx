@@ -94,7 +94,7 @@ const PortfolioMini: FC = () => {
                 }}
               >
                 <img
-                  src={`http://216.250.13.150:6856${item.attributes.image.data.attributes.formats.thumbnail.url}`}
+                  src={`https://ikmaslahat.com/api/data${item.attributes.image.data.attributes.formats.thumbnail.url}`}
                   style={{
                     width: "100%",
                     height: "260px",

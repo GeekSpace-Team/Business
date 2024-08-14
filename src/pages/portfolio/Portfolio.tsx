@@ -35,7 +35,7 @@ const Portfolio: FC = () => {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const { data: portfolioItems, error } = useSWR(
-    "http://216.250.13.150:6856/data",
+    "https://ikmaslahat.com/api/data",
     fetcher
   );
 

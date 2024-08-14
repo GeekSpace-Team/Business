@@ -3,7 +3,7 @@ import axios from "axios";
 export const fetchTitleTexts = async () => {
   try {
     const response = await axios.get(
-      "http://216.250.13.150:6856/api/title-texts"
+      "https://ikmaslahat.com/api/data/api/title-texts"
     );
     return response.data.data;
   } catch (error) {
@@ -11,7 +11,7 @@ export const fetchTitleTexts = async () => {
   }
 };
 
-const API_URL = "http://216.250.13.150:6856";
+const API_URL = "https://ikmaslahat.com/api/data";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -46,7 +46,7 @@ export interface DataResponse {
 }
 
 export async function fetchData(): Promise<DataResponse> {
-  const response = await fetch("http://216.250.13.150:6856/data");
+  const response = await fetch("https://ikmaslahat.com/api/data");
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }

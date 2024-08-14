@@ -44,7 +44,7 @@ const Home: FC = () => {
 
   // Fetch data using SWR
   const { data, error } = useSWR<HomeTitleData[]>(
-    "http://216.250.13.150:6856/data",
+    "https://ikmaslahat.com/api/data/",
     fetcher
   );
 

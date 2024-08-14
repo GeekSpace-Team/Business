@@ -48,7 +48,7 @@ const Contact: FC = () => {
   useEffect(() => {
     const fetchThemes = async () => {
       try {
-        const response = await axios.get("http://216.250.13.150:6856/data/");
+        const response = await axios.get("https://ikmaslahat.com/api/data/");
         const filteredThemes = response.data
           .filter((item: any) => item.type === "contact_theme")
           .map((item: any) => ({

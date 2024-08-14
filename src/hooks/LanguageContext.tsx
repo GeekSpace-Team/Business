@@ -39,13 +39,13 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({
 
   const sendLocaleToBackend = async (locale: string) => {
     try {
-      await axios.post("http://216.250.13.150:6856/api/title-texts", {
+      await axios.post("https://ikmaslahat.com/api/data/api/title-texts", {
         locale,
       });
       console.log("Locale sent to backend:", locale);
 
       const response = await axios.get(
-        `http://216.250.13.150:6856/api/title-texts`
+        `https://ikmaslahat.com/api/data/api/title-texts`
       );
       const data: TextData[] = response.data.data;
 
