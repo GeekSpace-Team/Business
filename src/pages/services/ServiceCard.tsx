@@ -5,6 +5,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import "../../common/style/service.css";
 
 interface Card {
   id: string;
@@ -58,7 +59,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
   return (
     <Box
       sx={{
-        height: "80vh",
+        height: { lg: "80vh", md: "80vh", sm: "60vh", xs: "30vh" },
         overflowY: "auto",
         "&::-webkit-scrollbar": {
           display: "none",
@@ -66,7 +67,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
         scrollbarWidth: "none",
       }}
     >
-      <Stack spacing={5} direction="row" justifyContent="center">
+      <Stack
+        spacing={{ lg: 5, md: 5, sm: 3, xs: 0 }}
+        direction="row"
+        justifyContent="center"
+      >
         <Stack width="90%" spacing={2}>
           {cards.map((card, index) => (
             <Box
@@ -98,19 +103,29 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                   p={3}
                 >
                   <img
-                    style={{ width: "56px" }}
+                    className="service-card-icon"
+                    // style={{ width: "56px" }}
                     src={card.asset.url || "./images/Frame 81.png"}
                     alt=""
                   />
                   <Typography
-                    variant="h5"
+                    className="service-card-title"
                     sx={{
                       color: showDescription === index ? "orange" : "#E9E9E9",
                     }}
                   >
                     {getCardTitle(card)}
                   </Typography>
-                  <IconButton>
+                  <IconButton
+                    sx={{
+                      display: {
+                        lg: "flex",
+                        md: "flex",
+                        sm: "none",
+                        xs: "none",
+                      },
+                    }}
+                  >
                     {showDescription === index ? (
                       <ExpandLessIcon
                         sx={{
@@ -131,9 +146,19 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                     <Typography
                       sx={{
                         color: "orange",
-                        fontSize: "20px",
+                        fontSize: {
+                          lg: "20px",
+                          md: "20px",
+                          sm: "18px",
+                          xs: "15px",
+                        },
                         fontWeight: 600,
-                        lineHeight: "30px",
+                        lineHeight: {
+                          lg: "30px",
+                          md: "30px",
+                          sm: "25px",
+                          xs: "23px",
+                        },
                         textAlign: "center",
                         mb: 3,
                         width: "95%",

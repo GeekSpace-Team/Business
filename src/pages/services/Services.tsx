@@ -72,7 +72,12 @@ const Services: React.FC = () => {
             alignItems: "center",
             display: "flex",
           }}
-          justifyContent="center"
+          justifyContent={{
+            lg: "center",
+            md: "center",
+            sm: "flex-start",
+            xs: "flex-start",
+          }}
         >
           <Swiper
             modules={[Autoplay, Navigation]}

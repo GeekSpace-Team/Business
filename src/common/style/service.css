@@ -22,3 +22,39 @@
   color: aliceblue;
   flex-direction: column;
 }
+
+@media only screen and (max-width: 768px) {
+  .serviceHeaderContainer {
+    height: 40vh;
+  }
+
+  .texts {
+    gap: 5px;
+  }
+
+  .texts h1 {
+    font-size: 18px;
+  }
+
+  .texts p {
+    font-size: 14px;
+  }
+}
+
+.service-card-icon {
+  width: 56px;
+}
+
+.service-card-title {
+  font-size: 22px;
+}
+
+@media only screen and (max-width: 768px) {
+  .service-card-title {
+    font-size: 14px;
+  }
+
+  .service-card-icon {
+    width: 36px;
+  }
+}

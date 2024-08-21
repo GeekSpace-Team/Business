@@ -2,13 +2,10 @@ import { FC, useEffect, useState } from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
 import Social from "../../components/bottom-social/Social";
-import HomeXS from "./HomeXS";
 import { TypeAnimation } from "react-type-animation";
 import "./home.css";
 import {
-  displayLg,
   typeAnimationStyle,
-  boxStyle,
   homeItemsStyle,
 } from "../../common/style/commonStyle";
 import ArrowIcon from "./ArrowIcon";
@@ -71,55 +68,77 @@ const Home: FC = () => {
   return (
     <>
       {filteredData?.map((item) => (
-        <>
-          <Stack
-            width="300%"
-            height="100vh"
-            sx={{
-              display: displayLg,
-            }}
-          >
-            <Box>
-              <Box
-                sx={{
-                  background: "#E9E9E9",
-                  borderRadius: "8px",
-                }}
-              >
-                <LanguageModal />
-              </Box>
-              <Grid container spacing={10} pt={2} alignItems="center">
-                <Grid item lg={7} md={7} sm={12} xs={12}>
-                  <Stack spacing={2}>
-                    <TypeAnimation
-                      key={animationKey}
-                      sequence={[getText(item, "title").__html]}
-                      wrapper="span"
-                      speed={30}
-                      style={typeAnimationStyle}
-                    />
-                    <HomeTypography
-                      text={
-                        <span
-                          dangerouslySetInnerHTML={getText(item, "description")}
-                        />
-                      }
-                    />
-                    <Social />
-                  </Stack>
-                </Grid>
-                <Grid item lg={5} pr="3%" md={5} sm={12} xs={12}>
-                  <Box
-                    className="bounce"
-                    sx={{
-                      ...boxStyle,
-                      backgroundImage: `url(${item.asset.url})`,
-                    }}
-                  ></Box>
-                </Grid>
-              </Grid>
+        <Stack
+          width="100%"
+          height="100vh"
+          sx={{
+            display: "block",
+          }}
+          key={item.id}
+        >
+          <Box>
+            <Box
+              sx={{
+                background: "#E9E9E9",
+                borderRadius: "8px",
+                mb: { xs: 2, sm: 2 },
+              }}
+            >
+              <LanguageModal />
             </Box>
-          </Stack>
+            <Grid
+              container
+              spacing={{ md: 10, lg: 10, sm: 5, xs: 0 }}
+              pt={2}
+              p={{ lg: 0, md: 0, sm: 3, xs: 3 }}
+              alignItems="center"
+            >
+              <Grid item lg={7} md={7} sm={12} xs={12}>
+                <Stack spacing={2}>
+                  <TypeAnimation
+                    key={animationKey}
+                    sequence={[getText(item, "title").__html]}
+                    wrapper="span"
+                    speed={30}
+                    style={{
+                      ...typeAnimationStyle,
+                      fontSize: "2.2rem",
+                    }}
+                  />
+                  <HomeTypography
+                    text={
+                      <span
+                        dangerouslySetInnerHTML={getText(item, "description")}
+                      />
+                    }
+                  />
+                  <Social />
+                </Stack>
+              </Grid>
+              <Grid
+                item
+                lg={5}
+                pr={{ lg: "3%", md: "3%", sm: 0, xs: 0 }}
+                md={5}
+                sm={12}
+                xs={12}
+              >
+                <Box
+                  className="bounce"
+                  sx={{
+                    backgroundImage: `url(${item.asset.url})`,
+                    width: { lg: "100%", md: "100%", sm: "90%", xs: "90%" },
+                    height: { lg: "85vh", md: "85vh", sm: "60vh", xs: "50vh" },
+                    backgroundSize: "cover",
+                    backgroundPosition: "0 50px",
+                    backgroundRepeat: "no-repeat",
+                    borderRadius: "8px",
+                    p: 1,
+                  }}
+                ></Box>
+              </Grid>
+            </Grid>
+          </Box>
           <Stack
             direction="row"
             spacing={1}
@@ -151,10 +170,16 @@ const Home: FC = () => {
                 <Typography
                   sx={{
                     color: "#222222",
-                    fontSize: screenHeight >= 900 ? "18px" : "12px",
+                    fontSize: {
+                      lg: screenHeight >= 900 ? "18px" : "12px",
+                      xs: "12px",
+                    },
                     lineHeight: screenHeight >= 900 ? 2 : 1.5,
                     bottom: screenHeight >= 900 ? 5 : 0,
-                    width: screenHeight >= 900 ? "250px" : "150px",
+                    width: {
+                      lg: screenHeight >= 900 ? "250px" : "150px",
+                      xs: "150px",
+                    },
                     fontFamily: "Trebuchet MS, sans-serif",
                   }}
                   dangerouslySetInnerHTML={getText(item, "short")}
@@ -163,9 +188,8 @@ const Home: FC = () => {
               </Stack>
             </Box>
           </Stack>
-        </>
+        </Stack>
       ))}
-      <HomeXS />
     </>
   );
 };

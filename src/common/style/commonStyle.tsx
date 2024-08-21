@@ -13,8 +13,8 @@ export const bgColor: backgroundColor = {
 export const displayLg = {
   lg: "block",
   md: "block",
-  sm: "none",
-  xs: "none",
+  sm: "flex",
+  xs: "flex",
 };
 
 export const typeAnimationStyle = {
@@ -28,10 +28,10 @@ export const typeAnimationStyle = {
 
 export const homeTypographyStyle = {
   color: "#fff",
-  fontSize: "16px",
-  fontWeight: 600,
-  lineHeight: "30px",
-  width: "80%", // Adjust as needed
+  fontSize: { lg: "16px", md: "16px", sm: "15px", xs: "14px" },
+  fontWeight: { lg: 600, md: 600, sm: 500, xs: 400 },
+  lineHeight: { lg: "30px", md: "30px", sm: "25px", xs: "22px" },
+  width: { md: "80%", lg: "80%", sm: "100%", xs: "100%" },
   fontFamily: "Trebuchet MS, sans-serif",
 };
 
