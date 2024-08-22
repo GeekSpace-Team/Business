@@ -1,27 +1,36 @@
+import { useTranslation } from "react-i18next";
 import "../../common/style/service.css";
 
 interface ServiceheaderProps {
   slide: {
-    title_en: string;
-    description_en: string;
-    asset: {
-      url: string;
-    };
+    asset: { url: string };
+    [key: string]: any; // Allows dynamic access to title and description keys
   };
 }
 
 const Serviceheader: React.FC<ServiceheaderProps> = ({ slide }) => {
+  const { i18n } = useTranslation();
+
+  // Dynamic keys for title and description
+  const titleKey = `title_${i18n.language}`;
+  const descriptionKey = `description_${i18n.language}`;
+
   return (
     <div className="serviceHeaderContainer">
       <img
         src={
           slide.asset.url || "/images/Default_Role_of_Corporate_Trainer_3.jpg"
         }
-        alt=""
+        alt="Service Header"
       />
       <div className="texts">
-        <h1 dangerouslySetInnerHTML={{ __html: slide.title_en }}></h1>
-        <p dangerouslySetInnerHTML={{ __html: slide.description_en }}></p>
+        <h1>{slide[titleKey]}</h1>
+
+        <p
+          dangerouslySetInnerHTML={{
+            __html: slide[descriptionKey],
+          }}
+        ></p>
       </div>
     </div>
   );

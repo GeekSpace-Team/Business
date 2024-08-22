@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,22 +16,40 @@ const ServiceDetail: FC = () => {
   }
   return (
     <div>
-      <Typography sx={{ color: "orange", marginBottom: 3 }} variant="h2">
-        {card[`title_${i18n.language}`]}
-      </Typography>
+      <Box p={{ lg: 0, md: 0, sm: 3, xs: 3 }}>
+        <Typography
+          sx={{
+            color: "orange",
+            marginBottom: 3,
+            fontSize: { lg: "45px", md: "45px", sm: "35px", xs: "25px" },
+            marginTop: 5,
+          }}
+        >
+          {card[`title_${i18n.language}`]}
+        </Typography>
 
-      <Grid container mt={3} spacing={5}>
-        <Grid item lg={4} md={4} sm={6} xs={12}>
-          <img
-            src={card.asset.url}
-            alt={card.title_en}
-            style={{ width: "100%", height: "50vh" }}
-          />
+        <Grid container mt={3} spacing={{ lg: 5, md: 5, sm: 3, xs: 1 }}>
+          <Grid
+            item
+            lg={4}
+            md={4}
+            sm={6}
+            xs={12}
+            sx={{ height: { lg: "50vh", md: "50vh", sm: "30vh", xs: "20vh" } }}
+          >
+            <img
+              src={card.asset.url}
+              alt={card.title_en}
+              style={{ width: "100%", height: "100%" }}
+            />
+          </Grid>
+          <Grid item lg={8} md={8} sm={6} mt={5} xs={12}>
+            <Typography color="#fff">
+              {card[`short_${i18n.language}`]}
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item lg={8} md={8} sm={6} mt={5} xs={12}>
-          <Typography color="#fff">{card[`short_${i18n.language}`]}</Typography>
-        </Grid>
-      </Grid>
+      </Box>
       <Stack
         direction="row"
         justifyContent="center"

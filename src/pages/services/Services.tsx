@@ -19,6 +19,7 @@ interface Slide {
     url: string;
   };
   cards: Card[];
+  slide: Card[];
 }
 
 interface Card {

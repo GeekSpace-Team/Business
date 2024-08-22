@@ -18,15 +18,28 @@ const PortfolioDetail: FC = () => {
   return (
     <>
       <Box p={4}>
-        <Typography sx={{ color: "orange", marginBottom: 3 }} variant="h2">
+        <Typography
+          sx={{
+            color: "orange",
+            marginBottom: 3,
+            fontSize: { lg: "45px", md: "45px", sm: "35px", xs: "25px" },
+          }}
+        >
           {item[`title_${i18n.language}`]}
         </Typography>
         <Grid container width="100%" spacing={5}>
-          <Grid item lg={6} md={6} sm={12} xs={12}>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            sm={12}
+            xs={12}
+            sx={{ height: { lg: "50vh", md: "50vh", sm: "30vh", xs: "20vh" } }}
+          >
             <img
               src={item.asset.url}
               alt={item.title_en}
-              style={{ width: "100%", height: "50vh" }}
+              style={{ width: "100%", height: "100%" }}
             />
           </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -35,7 +48,7 @@ const PortfolioDetail: FC = () => {
               variant="body1"
               mt={2}
               dangerouslySetInnerHTML={{
-                __html: item[`description_${i18n.language}`],
+                __html: item[`short_${i18n.language}`],
               }}
             />
           </Grid>

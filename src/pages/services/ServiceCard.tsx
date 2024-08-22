@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../common/style/service.css";
 
-interface Card {
+export interface Card {
   id: string;
   title_tm: string;
   title_ru: string;
@@ -159,7 +159,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                           sm: "25px",
                           xs: "23px",
                         },
-                        textAlign: "center",
+                        // textAlign: "center",
                         mb: 3,
                         width: "95%",
                       }}
