@@ -1,12 +1,6 @@
 import { useTranslation } from "react-i18next";
 import "../../common/style/service.css";
-
-interface ServiceheaderProps {
-  slide: {
-    asset: { url: string };
-    [key: string]: any; // Allows dynamic access to title and description keys
-  };
-}
+import { ServiceheaderProps } from "./types/serviceTypeAndInterface";
 
 const Serviceheader: React.FC<ServiceheaderProps> = ({ slide }) => {
   const { i18n } = useTranslation();

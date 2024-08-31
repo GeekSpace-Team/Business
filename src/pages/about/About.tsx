@@ -6,31 +6,7 @@ import AboutMini from "./AboutMini";
 import useSWR from "swr";
 import LoadingComponent from "../../components/loading/LoadingComponent";
 import { useTranslation } from "react-i18next";
-
-export interface ContentData {
-  id: number;
-  title_tm: string;
-  title_ru: string;
-  title_en: string;
-  description_tm: string;
-  description_ru: string;
-  description_en: string;
-  short_tm: string;
-  short_ru: string;
-  short_en: string;
-  type: "about_title";
-  order: number;
-  url: string;
-  assetId: number;
-  created_at: string;
-  updated_at: string;
-  asset: {
-    id: number;
-    url: string;
-    type: "image";
-    blurhash: string;
-  };
-}
+import { ContentData } from "./types/typesAndInterface";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -80,10 +56,9 @@ const About: FC = () => {
 
   return (
     <>
-      <Stack
+      <Box
         sx={{
           width: "300%",
-          height: "auto",
           display: { lg: "block", md: "block", sm: "none", xs: "none" },
         }}
       >
@@ -110,19 +85,25 @@ const About: FC = () => {
           </Typography>
         </Box>
 
-        <>
+        <div
+          style={{
+            height: "80vh",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "auto",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
           {contentData?.map((item) => (
             <>
               {item.type === "about_title" && (
                 <Box
-                  data-aos="fade-left"
-                  data-aos-delay={"500"}
                   key={`about_data-${item.id}`}
                   sx={{
                     background: "rgba(10, 10, 14, 0.7)",
                     p: screenHeight >= 900 ? 4 : 2,
                     width: "90%",
-                    height: "auto",
                     borderRadius: "8px 0px 0px 8px",
                     mt: screenHeight >= 900 ? 5 : 2,
                   }}
@@ -192,8 +173,8 @@ const About: FC = () => {
               )}
             </>
           ))}
-        </>
-      </Stack>
+        </div>
+      </Box>
       <Stack
         direction="row"
         justifyContent="center"

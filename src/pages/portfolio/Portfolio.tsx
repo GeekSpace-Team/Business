@@ -1,6 +1,5 @@
 import { FC, useState, useEffect, useRef } from "react";
-import { Stack, Typography, Button, Divider, Box } from "@mui/material";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { Stack, Typography, Button, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
@@ -11,6 +10,8 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 
 import "swiper/css";
 import "swiper/css/navigation";
+import PortfolioNavigation from "./components/PortfolioNavigation";
+import PortfolioHeader from "./components/PortfolioHeader";
 
 const Portfolio: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(2);
@@ -46,18 +47,6 @@ const Portfolio: FC = () => {
   }, [portfolioItems, i18n.language]);
 
   const toggleActive = (index: number) => {
-    // const centerIndex = Math.floor(items.length / 3);
-    // if (index === centerIndex) {
-    //   setActiveIndex(activeIndex === index ? null : index);
-    //   return;
-    // }
-
-    // const newItems = [...items];
-    // [newItems[centerIndex], newItems[index]] = [
-    //   newItems[index],
-    //   newItems[centerIndex],
-    // ];
-    // setItems(newItems);
     swiperRef.current.autoplay.stop();
     setActiveIndex(index);
 
@@ -66,15 +55,6 @@ const Portfolio: FC = () => {
       setActiveIndex(-1);
       // alert("done");
     }, 10000);
-
-    // if (swiperRef.current) {
-    //
-    //   swiperRef.current.slideTo(index);
-    // }
-
-    // if (swiperRef.current) {
-    //
-    // }
   };
 
   if (!portfolioItems) {
@@ -89,29 +69,7 @@ const Portfolio: FC = () => {
   return (
     <>
       <Stack width="100%" height="100vh">
-        <Stack pt={5} mb={-7}>
-          <Box
-            sx={{
-              position: "relative",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Typography
-              sx={{
-                color: "orange",
-                fontSize: "36px",
-                fontWeight: 700,
-                textAlign: "center",
-                fontFamily: "Trebuchet MS, sans-serif",
-                position: "absolute",
-              }}
-            >
-              {t("portfolio.title")}
-            </Typography>
-          </Box>
-        </Stack>
+        <PortfolioHeader />
         <Box sx={{ position: "relative", height: "100vh" }}>
           <Stack
             width="100%"
@@ -163,7 +121,7 @@ const Portfolio: FC = () => {
                         onClick={() => toggleActive(index)}
                       >
                         <img
-                          style={{ width: "100%", height: "180px" }}
+                          style={{ width: "100%", height: "150px" }}
                           src={item.asset.url}
                         />
                         <Stack p={3}>
@@ -171,23 +129,31 @@ const Portfolio: FC = () => {
                             sx={{
                               color:
                                 activeIndex === index ? "orange" : "#E9E9E9",
-                              fontSize: screenHeight >= 900 ? "30px" : "24px",
+                              fontSize: {
+                                lg: "26px",
+                                md: "22px",
+                                sm: "20px",
+                                xs: "18px",
+                              },
                               lineHeight: screenHeight >= 900 ? "50px" : "33px",
                               fontWeight: 700,
                               width: "90%",
                               fontFamily: "Trebuchet MS, sans-serif",
                             }}
                           >
-                            {item[`title_${i18n.language}`]} {activeIndex}
-                            {index}
+                            {item[`title_${i18n.language}`]}
                           </Typography>
                           {activeIndex === index && (
                             <>
                               <Typography
                                 sx={{
                                   color: "#E9E9E9",
-                                  fontSize:
-                                    screenHeight >= 900 ? "30px" : "20px",
+                                  fontSize: {
+                                    lg: "22px",
+                                    md: "20px",
+                                    sm: "18px",
+                                    xs: "16px",
+                                  },
                                   lineHeight:
                                     screenHeight >= 900 ? "40px" : "26px",
                                   fontWeight: 600,
@@ -213,9 +179,12 @@ const Portfolio: FC = () => {
                                   }
                                   onClick={(e) => {
                                     e.stopPropagation();
-                                    navigate(`/portfolio/${item.id}`, {
-                                      state: { item },
-                                    });
+                                    navigate(
+                                      `/portfolio/${item.title_en.replace(/ /g, "-")}`,
+                                      {
+                                        state: { item },
+                                      }
+                                    );
                                   }}
                                 >
                                   {t("common.read_more")}
@@ -233,62 +202,7 @@ const Portfolio: FC = () => {
             </Swiper>
           </Stack>
         </Box>
-      </Stack>
-      <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ position: "absolute", bottom: "5%", width: "100%" }}
-        spacing={2}
-      >
-        <Button
-          onClick={() => navigate("/about")}
-          startIcon={
-            <ArrowRightAltIcon
-              sx={{
-                color: "orange",
-                transform: "rotate(180deg)",
-                fontSize: "34px",
-                width: "30px",
-              }}
-            />
-          }
-          sx={{
-            textTransform: "none",
-            color: "orange",
-            fontWeight: 600,
-            fontFamily: "Trebuchet MS, sans-serif",
-          }}
-        >
-          {t("sidebar.about")}
-        </Button>
-
-        <Divider sx={{ width: "100px" }}>
-          <Typography
-            onClick={() => navigate("/")}
-            sx={{
-              textTransform: "none",
-              color: "orange",
-              fontWeight: 600,
-              cursor: "pointer",
-              fontFamily: "Trebuchet MS, sans-serif",
-            }}
-          >
-            {t("sidebar.home")}
-          </Typography>
-        </Divider>
-        <Button
-          onClick={() => navigate("/services")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "orange" }} />}
-          sx={{
-            textTransform: "none",
-            color: "orange",
-            fontWeight: 600,
-            fontFamily: "Trebuchet MS, sans-serif",
-          }}
-        >
-          {t("sidebar.services")}
-        </Button>
+        <PortfolioNavigation />
       </Stack>
     </>
   );

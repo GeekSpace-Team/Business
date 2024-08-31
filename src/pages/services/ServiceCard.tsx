@@ -6,36 +6,7 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../common/style/service.css";
-
-export interface Card {
-  id: string;
-  title_tm: string;
-  title_ru: string;
-  title_en: string;
-  description_tm: string;
-  description_ru: string;
-  description_en: string;
-  short_tm: string;
-  short_ru: string;
-  short_en: string;
-  type: string;
-  order: number;
-  url: string;
-  assetId: number;
-  parentId: number;
-  created_at: string;
-  updated_at: string;
-  asset: {
-    id: number;
-    url: string;
-    type: string;
-    blurhash: string;
-  };
-}
-
-interface ServiceCardProps {
-  cards: Card[];
-}
+import { ServiceCardProps, Card } from "./types/serviceTypeAndInterface";
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
   const [showDescription, setShowDescription] = useState<number | null>(null);
@@ -102,20 +73,22 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                   alignItems="center"
                   p={3}
                 >
-                  <img
-                    className="service-card-icon"
-                    // style={{ width: "56px" }}
-                    src={card.asset.url || "./images/Frame 81.png"}
-                    alt=""
-                  />
-                  <Typography
-                    className="service-card-title"
-                    sx={{
-                      color: showDescription === index ? "orange" : "#E9E9E9",
-                    }}
-                  >
-                    {getCardTitle(card)}
-                  </Typography>
+                  <Stack direction="row" spacing={3} alignItems="center">
+                    <img
+                      className="service-card-icon"
+                      // style={{ width: "56px" }}
+                      src={card.asset.url || "./images/Frame 81.png"}
+                      alt=""
+                    />
+                    <Typography
+                      className="service-card-title"
+                      sx={{
+                        color: showDescription === index ? "orange" : "#E9E9E9",
+                      }}
+                    >
+                      {getCardTitle(card)}
+                    </Typography>
+                  </Stack>
                   <IconButton
                     sx={{
                       display: {
@@ -142,13 +115,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                   </IconButton>
                 </Stack>
                 {showDescription === index && (
-                  <Stack justifyContent="center">
+                  <Stack justifyContent="center" p={3}>
                     <Typography
                       sx={{
                         color: "orange",
                         fontSize: {
-                          lg: "20px",
-                          md: "20px",
+                          lg: "18px",
+                          md: "18px",
                           sm: "18px",
                           xs: "15px",
                         },
@@ -180,9 +153,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                         }
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate(`/services/${card.id}`, {
-                            state: { card },
-                          });
+                          navigate(
+                            `/services/${card.title_en.replace(/ /g, "-")}}`,
+                            {
+                              state: { card },
+                            }
+                          );
                         }}
                       >
                         {t("common.read_more")}

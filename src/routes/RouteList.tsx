@@ -44,11 +44,14 @@ const RouteList: FC = () => {
             <Route path="/contact" element={<ContactFallback />} />
             <Route path="/portfolio" element={<PortfolioFallback />} />
             <Route
-              path="/portfolio/:id"
+              path="/portfolio/:title_en"
               element={<PortfolioDetailFallback />}
             />
             <Route path="/services" element={<ServicesFallback />} />
-            <Route path="/services/:id" element={<ServiceDetailFallback />} />
+            <Route
+              path="/services/:title_en"
+              element={<ServiceDetailFallback />}
+            />
           </Route>
         </Routes>
         <ToastContainer />

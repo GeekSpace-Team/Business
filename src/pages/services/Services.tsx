@@ -10,43 +10,7 @@ import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
-
-interface Slide {
-  id: string;
-  title_en: string;
-  description_en: string;
-  asset: {
-    url: string;
-  };
-  cards: Card[];
-  slide: Card[];
-}
-
-interface Card {
-  id: string;
-  title_tm: string;
-  title_ru: string;
-  title_en: string;
-  description_tm: string;
-  description_ru: string;
-  description_en: string;
-  short_tm: string;
-  short_ru: string;
-  short_en: string;
-  type: string;
-  order: number;
-  url: string;
-  assetId: number;
-  parentId: number;
-  created_at: string;
-  updated_at: string;
-  asset: {
-    id: number;
-    url: string;
-    type: string;
-    blurhash: string;
-  };
-}
+import { Slide } from "./types/serviceTypeAndInterface";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -86,7 +50,7 @@ const Services: React.FC = () => {
             slidesPerView={1}
             navigation
             autoplay={{
-              delay: 3500,
+              disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
             style={{
