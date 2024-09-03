@@ -92,13 +92,10 @@ const Contact: FC = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://216.250.13.150:6426/send-mail",
-        {
-          to_mail: "microsoft7779@gmail.com",
-          ...formData,
-        }
-      );
+      const response = await axios.post("https://ikmaslahat.com/send-mail", {
+        to_mail: "microsoft7779@gmail.com",
+        ...formData,
+      });
       console.log("Message sent successfully:", response.data);
       showSuccess(t("contact.success"));
       setFormData({
@@ -211,8 +208,8 @@ const Contact: FC = () => {
                         screenHeight >= 900
                           ? "55px"
                           : screenHeight >= 550
-                          ? "40px"
-                          : "30px",
+                            ? "40px"
+                            : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -234,8 +231,8 @@ const Contact: FC = () => {
                         screenHeight >= 900
                           ? "55px"
                           : screenHeight >= 550
-                          ? "40px"
-                          : "30px",
+                            ? "40px"
+                            : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -257,8 +254,8 @@ const Contact: FC = () => {
                         screenHeight >= 900
                           ? "55px"
                           : screenHeight >= 550
-                          ? "40px"
-                          : "30px",
+                            ? "40px"
+                            : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
@@ -278,8 +275,8 @@ const Contact: FC = () => {
                         screenHeight >= 900
                           ? "55px"
                           : screenHeight >= 550
-                          ? "40px"
-                          : "30px",
+                            ? "40px"
+                            : "30px",
                       borderRadius: "8px",
                       paddingLeft: "15px",
                       border: "none",
