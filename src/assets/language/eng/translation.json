@@ -21,7 +21,7 @@
     "success": "Message sent successfully",
     "error": "Error sending message",
     "number": "Phone Number",
-    "thema": "Thema",
+    "thema": "Subject",
     "other": "Other"
   },
 
