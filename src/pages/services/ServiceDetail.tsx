@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
@@ -7,7 +7,16 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 const ServiceDetail: FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
-  const card = location.state?.card;
+  const [card, setCard] = useState(location.state?.card || null);
+
+  useEffect(() => {
+    if (!card) {
+      const storedCard = sessionStorage.getItem("selectedCard");
+      if (storedCard) {
+        setCard(JSON.parse(storedCard));
+      }
+    }
+  }, [card]);
 
   const navigate = useNavigate();
 

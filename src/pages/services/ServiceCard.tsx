@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../common/style/service.css";
 import { ServiceCardProps, Card } from "./types/serviceTypeAndInterface";
@@ -14,7 +13,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   loopCount,
 }) => {
   const [showDescription, setShowDescription] = useState<number | null>(null);
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
   // Function to handle click and toggle description
@@ -42,6 +40,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     // Reset showDescription when either currentSlide changes or we loop around
     setShowDescription(null);
   }, [currentSlide, loopCount]);
+
+  const handleNavigate = (card: Card) => {
+    sessionStorage.setItem("selectedCard", JSON.stringify(card));
+    window.open(`/services/${card.title_en.replace(/ /g, "-")}`, "_blank");
+  };
 
   return (
     <Box
@@ -167,12 +170,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                         }
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate(
-                            `/services/${card.title_en.replace(/ /g, "-")}`,
-                            {
-                              state: { card },
-                            }
-                          );
+                          handleNavigate(card);
                         }}
                       >
                         {t("common.read_more")}

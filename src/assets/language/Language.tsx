@@ -21,6 +21,7 @@ const Language: FC<{ setShowLanguage: (show: boolean) => void }> = ({
   const changeLanguage = (lng: string, selectedLanguage: string) => {
     i18n.changeLanguage(lng);
     handleLanguageSelect(selectedLanguage);
+    localStorage.setItem("selectedLanguage", lng);
   };
 
   useEffect(() => {
