@@ -1,5 +1,5 @@
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -8,24 +8,40 @@ import { useTranslation } from "react-i18next";
 import "../../common/style/service.css";
 import { ServiceCardProps, Card } from "./types/serviceTypeAndInterface";
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  cards,
+  currentSlide,
+  loopCount,
+}) => {
   const [showDescription, setShowDescription] = useState<number | null>(null);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
+  // Function to handle click and toggle description
   const handleClick = (index: number) => {
-    setShowDescription(showDescription === index ? null : index);
+    if (showDescription === index) {
+      setShowDescription(null);
+    } else {
+      setShowDescription(index);
+    }
   };
 
+  // Function to get card title based on language
   const getCardTitle = (card: Card) => {
     const titleKey = `title_${i18n.language}` as keyof Card;
     return card[titleKey] as unknown as string;
   };
 
+  // Function to get card short description based on language
   const getCardShortDescription = (card: Card) => {
     const shortKey = `short_${i18n.language}` as keyof Card;
     return card[shortKey] as unknown as string;
   };
+
+  useEffect(() => {
+    // Reset showDescription when either currentSlide changes or we loop around
+    setShowDescription(null);
+  }, [currentSlide, loopCount]);
 
   return (
     <Box
@@ -76,7 +92,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                   <Stack direction="row" spacing={3} alignItems="center">
                     <img
                       className="service-card-icon"
-                      // style={{ width: "56px" }}
                       src={card.asset.url || "./images/Frame 81.png"}
                       alt=""
                     />
@@ -132,7 +147,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                           sm: "25px",
                           xs: "23px",
                         },
-                        // textAlign: "center",
                         mb: 3,
                         width: "95%",
                       }}
@@ -154,7 +168,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ cards }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           navigate(
-                            `/services/${card.title_en.replace(/ /g, "-")}}`,
+                            `/services/${card.title_en.replace(/ /g, "-")}`,
                             {
                               state: { card },
                             }

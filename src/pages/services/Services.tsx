@@ -1,27 +1,44 @@
-import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import Serviceheader from "./Serviceheader";
 import ServiceCard from "./ServiceCard";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import axios from "axios";
-import { useTranslation } from "react-i18next";
 import { Slide } from "./types/serviceTypeAndInterface";
+import ServiceNavigation from "./components/ServiceNavigation";
+import { useState } from "react";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const Services: React.FC = () => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-
   const { data, error } = useSWR<{ slides: Slide[] }>(
     "https://ikmaslahat.com/api/data/services",
     fetcher
   );
+
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [loopCount, setLoopCount] = useState<number>(0);
+
+  // Function to handle slide change
+  const handleSlideChange = (swiper: any) => {
+    const newSlideIndex = swiper.activeIndex;
+
+    if (swiper.isEnd && newSlideIndex === 0) {
+      // We've looped back to the start
+      setLoopCount(loopCount + 1);
+    } else if (
+      swiper.isBeginning &&
+      newSlideIndex === swiper.slides.length - 1
+    ) {
+      // We've looped back to the end
+      setLoopCount(loopCount + 1);
+    }
+
+    setCurrentSlide(newSlideIndex);
+  };
 
   if (error) return <div>Error loading services</div>;
   if (!data) return <div>Loading...</div>;
@@ -50,6 +67,7 @@ const Services: React.FC = () => {
             slidesPerView={1}
             navigation
             autoplay={{
+              delay: 5000,
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
@@ -58,6 +76,7 @@ const Services: React.FC = () => {
             }}
             speed={750}
             loop={true}
+            onSlideChange={handleSlideChange} // Set the slide change handler
           >
             {data.slides.map((slide) => (
               <SwiperSlide key={slide.id}>
@@ -66,7 +85,11 @@ const Services: React.FC = () => {
                     <Serviceheader slide={slide} />
                   </Grid>
                   <Grid item lg={6} md={6} sm={12} xs={12}>
-                    <ServiceCard cards={slide.cards} />
+                    <ServiceCard
+                      cards={slide.cards}
+                      currentSlide={currentSlide}
+                      loopCount={loopCount}
+                    />
                   </Grid>
                 </Grid>
               </SwiperSlide>
@@ -76,62 +99,7 @@ const Services: React.FC = () => {
           </Swiper>
         </Stack>
       </Box>
-      <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ position: "absolute", bottom: "3%", width: "100%" }}
-        spacing={2}
-      >
-        <Button
-          onClick={() => navigate("/portfolio")}
-          startIcon={
-            <ArrowRightAltIcon
-              sx={{
-                color: "orange",
-                transform: "rotate(180deg)",
-                fontSize: "34px",
-                width: "30px",
-              }}
-            />
-          }
-          sx={{
-            textTransform: "none",
-            color: "orange",
-            fontWeight: 600,
-            fontFamily: "Trebuchet MS, sans-serif",
-          }}
-        >
-          {t("sidebar.portfolio")}
-        </Button>
-
-        <Divider sx={{ width: "100px" }}>
-          <Typography
-            onClick={() => navigate("/")}
-            sx={{
-              textTransform: "none",
-              color: "orange",
-              fontWeight: 600,
-              cursor: "pointer",
-              fontFamily: "Trebuchet MS, sans-serif",
-            }}
-          >
-            {t("sidebar.home")}
-          </Typography>
-        </Divider>
-        <Button
-          onClick={() => navigate("/contact")}
-          endIcon={<ArrowRightAltIcon sx={{ color: "orange" }} />}
-          sx={{
-            textTransform: "none",
-            color: "orange",
-            fontWeight: 600,
-            fontFamily: "Trebuchet MS, sans-serif",
-          }}
-        >
-          {t("sidebar.contact")}
-        </Button>
-      </Stack>
+      <ServiceNavigation />
     </div>
   );
 };

@@ -1,28 +1,19 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
 import Social from "../../components/bottom-social/Social";
 import { TypeAnimation } from "react-type-animation";
 import "./home.css";
-import {
-  typeAnimationStyle,
-  homeItemsStyle,
-} from "../../common/style/commonStyle";
-import ArrowIcon from "./ArrowIcon";
+import { typeAnimationStyle } from "../../common/style/commonStyle";
 import HomeTypography from "./HomeTypography";
 import useSWR from "swr";
 import { useTranslation } from "react-i18next";
 import { HomeTitleData } from "../../types/type";
-import { RootState } from "../../store";
-import { useSelector } from "react-redux";
+import SocialCards from "./components/SocialCards";
 
 const Home: FC = () => {
   const { i18n } = useTranslation();
   const [animationKey, setAnimationKey] = useState(0);
-  const screenHeight = useSelector(
-    (state: RootState) => state.screenHeight.height
-  );
-  const [showIcon, setShowIcon] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -139,55 +130,7 @@ const Home: FC = () => {
               </Grid>
             </Grid>
           </Box>
-          <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-              ...homeItemsStyle,
-              left: screenHeight >= 900 ? 60 : 50,
-              display: { lg: "flex", md: "flex", sm: "none", xs: "none" },
-            }}
-          >
-            <Box
-              onMouseEnter={() => setShowIcon(true)}
-              onMouseLeave={() => setShowIcon(false)}
-              key={item.id}
-              sx={{
-                background: "#D9D9D9",
-                p: 1,
-                borderRadius: "8px",
-              }}
-            >
-              <Stack direction="row" spacing={3}>
-                <img
-                  style={{
-                    width: "120px",
-                    height: screenHeight >= 900 ? "110px" : "60px",
-                    borderRadius: "4px",
-                  }}
-                  src={item.asset.url}
-                />
-                <Typography
-                  sx={{
-                    color: "#222222",
-                    fontSize: {
-                      lg: screenHeight >= 900 ? "18px" : "12px",
-                      xs: "12px",
-                    },
-                    lineHeight: screenHeight >= 900 ? 2 : 1.5,
-                    bottom: screenHeight >= 900 ? 5 : 0,
-                    width: {
-                      lg: screenHeight >= 900 ? "250px" : "150px",
-                      xs: "150px",
-                    },
-                    fontFamily: "Trebuchet MS, sans-serif",
-                  }}
-                  dangerouslySetInnerHTML={getText(item, "short")}
-                />
-                {showIcon && <ArrowIcon />}
-              </Stack>
-            </Box>
-          </Stack>
+          <SocialCards />
         </Stack>
       ))}
     </>

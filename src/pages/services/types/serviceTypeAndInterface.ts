@@ -70,4 +70,7 @@ export interface ServiceheaderProps {
 
 export interface ServiceCardProps {
   cards: Card[];
+  currentSlide?: number;
+  loopCount: number;
+  isActive?: boolean;
 }

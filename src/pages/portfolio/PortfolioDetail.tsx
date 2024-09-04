@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -7,9 +7,20 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 const PortfolioDetail: FC = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
-  const item = location.state?.item;
-
   const navigate = useNavigate();
+
+  // Initialize the state for the item
+  const [item, setItem] = useState(location.state?.item || null);
+
+  // Retrieve the item from sessionStorage if not passed via state
+  useEffect(() => {
+    if (!item) {
+      const storedItem = sessionStorage.getItem("portfolioItem");
+      if (storedItem) {
+        setItem(JSON.parse(storedItem));
+      }
+    }
+  }, [item]);
 
   if (!item) {
     return <div>No data available</div>;

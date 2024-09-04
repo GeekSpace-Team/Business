@@ -1,4 +1,3 @@
-// ArrowIcon.tsx
 import { FC } from "react";
 import { IconButton } from "@mui/material";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";

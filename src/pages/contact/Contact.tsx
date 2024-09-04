@@ -50,13 +50,28 @@ const Contact: FC = () => {
       try {
         const response = await axios.get("https://ikmaslahat.com/api/data/");
         const filteredThemes = response.data
-          .filter((item: any) => item.type === "contact_theme")
-          .map((item: any) => ({
-            id: item.id,
-            title_tm: item.title_tm,
-            title_ru: item.title_ru,
-            title_en: item.title_en,
-          }));
+          .filter(
+            (item: {
+              type: string;
+              id: number;
+              title_tm: string;
+              title_ru: string;
+              title_en: string;
+            }) => item.type === "contact_theme"
+          )
+          .map(
+            (item: {
+              id: number;
+              title_tm: string;
+              title_ru: string;
+              title_en: string;
+            }) => ({
+              id: item.id,
+              title_tm: item.title_tm,
+              title_ru: item.title_ru,
+              title_en: item.title_en,
+            })
+          );
         setThemes(filteredThemes);
       } catch (error) {
         console.error("Error fetching themes:", error);

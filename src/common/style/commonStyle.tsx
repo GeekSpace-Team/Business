@@ -80,7 +80,6 @@ export const arrowIconStyle = {
   fontSize: "34px",
   width: "30px",
   position: "absolute",
-  top: 0,
 };
 
 export const homeItemsStyle = {
