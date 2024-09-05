@@ -108,7 +108,7 @@ const Contact: FC = () => {
 
     try {
       const response = await axios.post("https://ikmaslahat.com/send-mail", {
-        to_mail: "microsoft7779@gmail.com",
+        to_mail: "info@ikmaslahat.com",
         ...formData,
       });
       console.log("Message sent successfully:", response.data);
@@ -169,13 +169,13 @@ const Contact: FC = () => {
               fontWeight: 700,
               textAlign: "center",
             }}
-            data-aos="fade-right"
-            data-aos-delay={"500"}
+            // data-aos="fade-right"
+            // data-aos-delay={"500"}
           >
             {t("contact.contact")}
             <span
-              data-aos="fade-left"
-              data-aos-delay={"500"}
+              // data-aos="fade-left"
+              // data-aos-delay={"500"}
               style={{ color: "#fff", marginLeft: "10px" }}
             >
               {t("contact.contactC")}
@@ -190,8 +190,8 @@ const Contact: FC = () => {
             sm={12}
             xs={12}
             mb={3}
-            data-aos="fade-up"
-            data-aos-delay={"500"}
+            // data-aos="fade-up"
+            // data-aos-delay={"500"}
           >
             <Stack
               pl={{ lg: 5, md: 5, sm: 3, xs: 3 }}
@@ -355,8 +355,8 @@ const Contact: FC = () => {
             md={6}
             sm={12}
             xs={12}
-            data-aos="fade-down"
-            data-aos-delay={"500"}
+            // data-aos="fade-down"
+            // data-aos-delay={"500"}
           >
             <Stack
               spacing={2}

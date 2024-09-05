@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 
 import "swiper/css";
 import "swiper/css/navigation";
+import { swiperStyle } from "../../../utils/swiper";
 
 const SocialCards: FC = () => {
   const { i18n } = useTranslation();
@@ -53,15 +54,8 @@ const SocialCards: FC = () => {
         slidesPerView={2}
         navigation
         style={{
-          width: "650px",
+          ...swiperStyle,
           position: "absolute",
-          bottom: 0,
-          background: "#222222",
-          borderTopRightRadius: "8px",
-          borderTopLeftRadius: "8px",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "10px",
         }}
         speed={1000}
         loop={true}

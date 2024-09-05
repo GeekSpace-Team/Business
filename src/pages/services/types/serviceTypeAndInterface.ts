@@ -73,4 +73,7 @@ export interface ServiceCardProps {
   currentSlide?: number;
   loopCount: number;
   isActive?: boolean;
+  handleClick: (index: number) => void;
+  showDescription: number | null;
+  // setIsCardActive: (active: boolean) => void;
 }

@@ -28,7 +28,7 @@ const PortfolioDetail: FC = () => {
 
   return (
     <>
-      <Box p={4}>
+      <Box p={4} className="webgl">
         <Typography
           sx={{
             color: "orange",

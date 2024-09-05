@@ -92,3 +92,9 @@ export const homeItemsStyle = {
   justifyContent: "center",
   p: 1,
 };
+
+export const homeItemsStyleXS = {
+  background: "#222222",
+  borderTopRightRadius: "8px",
+  borderTopLeftRadius: "8px",
+};

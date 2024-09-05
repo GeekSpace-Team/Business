@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { Box, Grid, Stack } from "@mui/material";
+import { Box, Grid, Stack, Hidden } from "@mui/material";
 import LanguageModal from "../../assets/language/LanguageModal";
 import Social from "../../components/bottom-social/Social";
 import { TypeAnimation } from "react-type-animation";
@@ -10,6 +10,7 @@ import useSWR from "swr";
 import { useTranslation } from "react-i18next";
 import { HomeTitleData } from "../../types/type";
 import SocialCards from "./components/SocialCards";
+import SocialCardXS from "./components/SocialCardXS";
 
 const Home: FC = () => {
   const { i18n } = useTranslation();
@@ -130,7 +131,14 @@ const Home: FC = () => {
               </Grid>
             </Grid>
           </Box>
-          <SocialCards />
+          <Box>
+            <Hidden lgDown>
+              <SocialCards />
+            </Hidden>
+            <Hidden lgUp>
+              <SocialCardXS />
+            </Hidden>
+          </Box>
         </Stack>
       ))}
     </>

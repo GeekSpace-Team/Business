@@ -9,11 +9,15 @@ import useSWR from "swr";
 import axios from "axios";
 import { Slide } from "./types/serviceTypeAndInterface";
 import ServiceNavigation from "./components/ServiceNavigation";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
 const Services: React.FC = () => {
+  const [showDescription, setShowDescription] = useState<number | null>(null);
+  const [autoplayDelay, setAutoplayDelay] = useState<number | null>(5000); // Default 5 seconds
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null); // To track timeout for closing description
+
   const { data, error } = useSWR<{ slides: Slide[] }>(
     "https://ikmaslahat.com/api/data/services",
     fetcher
@@ -21,8 +25,33 @@ const Services: React.FC = () => {
 
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [loopCount, setLoopCount] = useState<number>(0);
+  const swiperRef = useRef<any>(null); // Ref to control swiper programmatically
 
-  // Function to handle slide change
+  useEffect(() => {
+    setShowDescription(null);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current); // Clear any previous timeouts when slide changes
+    setAutoplayDelay(5000); // Reset autoplay delay back to default
+  }, [currentSlide, loopCount]);
+
+  const handleClick = (index: number) => {
+    if (showDescription === index) {
+      // Close the description
+      setShowDescription(null);
+      setAutoplayDelay(5000); // Reset autoplay delay to default when closing
+    } else {
+      // Open the description and stop autoplay temporarily
+      setShowDescription(index);
+      setAutoplayDelay(10000); // Set delay to 10 seconds after clicking
+
+      // Close the description after 10 seconds and move to the next slide
+      if (timeoutRef.current) clearTimeout(timeoutRef.current); // Clear any previous timeouts
+      timeoutRef.current = setTimeout(() => {
+        setShowDescription(null);
+        swiperRef.current?.slideNext(); // Move to the next slide after timeout
+      }, 10000); // 10 seconds delay
+    }
+  };
+
   const handleSlideChange = (swiper: any) => {
     const newSlideIndex = swiper.activeIndex;
 
@@ -62,12 +91,13 @@ const Services: React.FC = () => {
           }}
         >
           <Swiper
+            ref={swiperRef}
             modules={[Autoplay, Navigation]}
             spaceBetween={10}
             slidesPerView={1}
             navigation
             autoplay={{
-              delay: 5000,
+              delay: autoplayDelay ?? 5000, // Use dynamic delay for autoplay
               disableOnInteraction: false,
               pauseOnMouseEnter: true,
             }}
@@ -89,6 +119,8 @@ const Services: React.FC = () => {
                       cards={slide.cards}
                       currentSlide={currentSlide}
                       loopCount={loopCount}
+                      handleClick={handleClick}
+                      showDescription={showDescription}
                     />
                   </Grid>
                 </Grid>

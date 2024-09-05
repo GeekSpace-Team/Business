@@ -9,7 +9,9 @@ body {
   font-family: InterRegular;
   /* background: #e9e9e9; */
   overflow-x: hidden;
-  font-family: Trebuchet MS, sans-serif;
+  font-family:
+    Trebuchet MS,
+    sans-serif;
   /* background-image: url("/images/back.webp");
   background-size: 100% 100%;
   background-position: cover;
@@ -29,7 +31,9 @@ body {
 * {
   padding: 0;
   margin: 0;
-  font-family: Trebuchet MS, sans-serif;
+  font-family:
+    Trebuchet MS,
+    sans-serif;
 }
 
 .aboutImage {
@@ -87,4 +91,21 @@ body {
 
 .sidebar {
   transition: transform 0.5s ease-in-out;
+}
+
+.swiper-width {
+  position: absolute;
+  bottom: 0;
+  background-color: #222222;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .swiper-width {
+    width: 100%;
+  }
 }

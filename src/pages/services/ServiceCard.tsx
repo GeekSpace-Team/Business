@@ -1,5 +1,4 @@
 import { Box, Button, IconButton, Stack, Typography } from "@mui/material";
-import { useState, useEffect } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
@@ -9,20 +8,10 @@ import { ServiceCardProps, Card } from "./types/serviceTypeAndInterface";
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
   cards,
-  currentSlide,
-  loopCount,
+  showDescription,
+  handleClick,
 }) => {
-  const [showDescription, setShowDescription] = useState<number | null>(null);
   const { t, i18n } = useTranslation();
-
-  // Function to handle click and toggle description
-  const handleClick = (index: number) => {
-    if (showDescription === index) {
-      setShowDescription(null);
-    } else {
-      setShowDescription(index);
-    }
-  };
 
   // Function to get card title based on language
   const getCardTitle = (card: Card) => {
@@ -35,11 +24,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
     const shortKey = `short_${i18n.language}` as keyof Card;
     return card[shortKey] as unknown as string;
   };
-
-  useEffect(() => {
-    // Reset showDescription when either currentSlide changes or we loop around
-    setShowDescription(null);
-  }, [currentSlide, loopCount]);
 
   const handleNavigate = (card: Card) => {
     sessionStorage.setItem("selectedCard", JSON.stringify(card));
